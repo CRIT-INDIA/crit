@@ -1,55 +1,37 @@
 "use client";
 
 import { motion } from "motion/react";
-import { cn } from "@/lib/utils";
+import { cn } from "../../lib/utils";
 import { motion as framerMotion } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
 
 export const ThreeDMarquee = ({ className }) => {
   const images = [
-    "https://assets.aceternity.com/cloudinary_bkp/3d-card.png",
-    "https://assets.aceternity.com/animated-modal.png",
-    "https://assets.aceternity.com/animated-testimonials.webp",
-    "https://assets.aceternity.com/cloudinary_bkp/Tooltip_luwy44.png",
-    "https://assets.aceternity.com/github-globe.png",
-    "https://assets.aceternity.com/glare-card.png",
-    "https://assets.aceternity.com/layout-grid.png",
-    "https://assets.aceternity.com/flip-text.png",
-    "https://assets.aceternity.com/hero-highlight.png",
-    "https://assets.aceternity.com/carousel.webp",
-    "https://assets.aceternity.com/placeholders-and-vanish-input.png",
-    "https://assets.aceternity.com/shooting-stars-and-stars-background.png",
-    "https://assets.aceternity.com/signup-form.png",
-    "https://assets.aceternity.com/cloudinary_bkp/stars_sxle3d.png",
-    "https://assets.aceternity.com/spotlight-new.webp",
-    "https://assets.aceternity.com/cloudinary_bkp/Spotlight_ar5jpr.png",
-    "https://assets.aceternity.com/cloudinary_bkp/Parallax_Scroll_pzlatw_anfkh7.png",
-    "https://assets.aceternity.com/tabs.png",
-    "https://assets.aceternity.com/cloudinary_bkp/Tracing_Beam_npujte.png",
-    "https://assets.aceternity.com/cloudinary_bkp/typewriter-effect.png",
-    "https://assets.aceternity.com/glowing-effect.webp",
-    "https://assets.aceternity.com/hover-border-gradient.png",
-    "https://assets.aceternity.com/cloudinary_bkp/Infinite_Moving_Cards_evhzur.png",
-    "https://assets.aceternity.com/cloudinary_bkp/Lamp_hlq3ln.png","https://assets.aceternity.com/tabs.png",
-    "https://assets.aceternity.com/cloudinary_bkp/Tracing_Beam_npujte.png",
-    "https://assets.aceternity.com/cloudinary_bkp/typewriter-effect.png",
-    "https://assets.aceternity.com/glowing-effect.webp",
-    "https://assets.aceternity.com/hover-border-gradient.png",
-    "https://assets.aceternity.com/cloudinary_bkp/Infinite_Moving_Cards_evhzur.png",
-    "https://assets.aceternity.com/cloudinary_bkp/Lamp_hlq3ln.png","https://assets.aceternity.com/tabs.png",
-    "https://assets.aceternity.com/cloudinary_bkp/Tracing_Beam_npujte.png",
-    "https://assets.aceternity.com/cloudinary_bkp/typewriter-effect.png",
-    "https://assets.aceternity.com/glowing-effect.webp",
-    "https://assets.aceternity.com/hover-border-gradient.png",
-    "https://assets.aceternity.com/cloudinary_bkp/Infinite_Moving_Cards_evhzur.png",
-    "https://assets.aceternity.com/cloudinary_bkp/Lamp_hlq3ln.png",
-    "https://assets.aceternity.com/macbook-scroll.png",
-    "https://assets.aceternity.com/cloudinary_bkp/Meteors_fye3ys.png",
-    "https://assets.aceternity.com/cloudinary_bkp/Moving_Border_yn78lv.png",
-    "https://assets.aceternity.com/multi-step-loader.png",
-    "https://assets.aceternity.com/vortex.png",
-    "https://assets.aceternity.com/wobble-card.png",
-    "https://assets.aceternity.com/world-map.webp",
+    "https://res.cloudinary.com/duz9xipfm/image/upload/v1750677689/image1_bbzq2l.png",
+    "https://res.cloudinary.com/duz9xipfm/image/upload/v1750677687/image2_c40kmk.png",
+    "https://res.cloudinary.com/duz9xipfm/image/upload/v1750677687/image9_rewxiz.png",
+    "https://res.cloudinary.com/duz9xipfm/image/upload/v1750677686/image5_xoxy2g.png",
+    "https://res.cloudinary.com/duz9xipfm/image/upload/v1750677686/image4_kldmkq.png",
+    "https://res.cloudinary.com/duz9xipfm/image/upload/v1750677686/image7_bpq7lg.png",
+    "https://res.cloudinary.com/duz9xipfm/image/upload/v1750677686/image8_p02tqp.png",
+    "https://res.cloudinary.com/duz9xipfm/image/upload/v1750677686/image6_vm27bv.png",
+    "https://res.cloudinary.com/duz9xipfm/image/upload/v1750912642/bigstock-153437726_ybobwd.jpg",
+    "https://res.cloudinary.com/duz9xipfm/image/upload/v1751344095/image_w8niqw.jpg",
+    "https://res.cloudinary.com/duz9xipfm/image/upload/v1751344095/image_1_fgf2ck.jpg",
+    "https://res.cloudinary.com/duz9xipfm/image/upload/v1751344095/image_2_vimfg0.jpg",
+    "https://res.cloudinary.com/duz9xipfm/image/upload/v1751344095/image_3_jfnwiv.jpg",
+    "https://res.cloudinary.com/duz9xipfm/image/upload/v1751284251/image_2_koxpg4.png",
+    "https://res.cloudinary.com/duz9xipfm/image/upload/v1750677689/image1_bbzq2l.png",
+    "https://res.cloudinary.com/duz9xipfm/image/upload/v1750677687/image2_c40kmk.png",
+    "https://res.cloudinary.com/duz9xipfm/image/upload/v1750677687/image9_rewxiz.png",
+    "https://res.cloudinary.com/duz9xipfm/image/upload/v1750677686/image5_xoxy2g.png",
+    "https://res.cloudinary.com/duz9xipfm/image/upload/v1750677686/image4_kldmkq.png",
+    "https://res.cloudinary.com/duz9xipfm/image/upload/v1750912642/bigstock-153437726_ybobwd.jpg",
+    "https://res.cloudinary.com/duz9xipfm/image/upload/v1750677689/image1_bbzq2l.png",
+    "https://res.cloudinary.com/duz9xipfm/image/upload/v1750677687/image2_c40kmk.png",
+    "https://res.cloudinary.com/duz9xipfm/image/upload/v1750677687/image9_rewxiz.png",
+    "https://res.cloudinary.com/duz9xipfm/image/upload/v1750677686/image5_xoxy2g.png",
+    "https://res.cloudinary.com/duz9xipfm/image/upload/v1750677686/image4_kldmkq.png",
   ];
 
   // Split the images array into 4 equal parts
@@ -68,17 +50,18 @@ export const ThreeDMarquee = ({ className }) => {
   }, [images.length]);
 
   return (
-    <div className="relative w-full h-screen min-h-screen overflow-hidden" style={{ backgroundColor: '#0c1c3c' }}>
+    
+    <div className="relative w-full h-* m-auto min-h-[500px] sm:min-h-[100px] md:min-h-[700px] overflow-hidden max-w-[1800px] mb-10" style={{ backgroundColor: '#0c1c3c' }}>
       {/* Overlayed Content */}
-      <div className="flex items-center justify-start min-h-screen w-full z-20 relative" >
+      <div className="flex items-center m-auto justify-start min-h-* max-w-[1800px] z-9 relative px-4">
         <motion.div
-          className="w-full max-w-lg md:max-w-2xl lg:max-w-3xl px-4 ml-2 sm:ml-8 md:ml-16 lg:ml-32 flex flex-col items-start justify-center py-8 md:py-0"
+          className="w-full max-w-lg md:max-w-xl lg:max-w-2xl px-4 ml-2 sm:ml-8 md:ml-12 lg:ml-24 flex flex-col items-start justify-center"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
         >
           <motion.h1
-            className="text-2xl sm:text-4xl md:text-5xl font-bold text-white leading-tight mb-6 text-left"
+            className="text-xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-100 leading-tight mb-1 md:mb-6 text-left opacity-100 pt-50"
             variants={itemVariants}
           >
             Transforming<br />
@@ -86,29 +69,28 @@ export const ThreeDMarquee = ({ className }) => {
             <span className="text-red-700">SAP Excellence</span>
           </motion.h1>
           <motion.p
-            className="text-lg md:text-l text-gray-200 mb-8 max-w-2xl text-left"
+            className="text-base md:text-lg text-gray-200 mb-6 md:mb-8 max-w-xl text-left"
             variants={itemVariants}
           >
             Empower your enterprise with CritIndia's comprehensive SAP implementation and support services. We deliver tailored solutions that drive innovation and growth.
           </motion.p>
-          <motion.div className="flex flex-wrap gap-4 mb-10 justify-start" variants={itemVariants}>
+          <motion.div className="flex flex-wrap gap-3 md:gap-4 justify-start" variants={itemVariants}>
             <a
-              href="#demo"
-              className="flex items-center gap-2 px-4 sm:px-6 md:px-8 py-2 sm:py-3 rounded-full font-semibold bg-gradient-to-r from-blue-500 to-blue-700 text-white shadow-lg hover:from-blue-600 hover:to-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all duration-200 text-base md:text-lg active:scale-95"
+              href=""
+              className="flex items-center gap-2 px-3 sm:px-4 md:px-6 py-2 rounded-full font-semibold bg-gradient-to-r from-blue-500 to-blue-700 text-white shadow-lg hover:from-blue-600 hover:to-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all duration-200 text-sm md:text-base active:scale-95"
               style={{ pointerEvents: 'auto' }}
             >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="13" rx="2" /><path d="M16 2v4M8 2v4M3 10h18" /></svg>
+              <svg className="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="13" rx="2" /><path d="M16 2v4M8 2v4M3 10h18" /></svg>
               Schedule a Demo
             </a>
             <a
               href="#solutions"
-              className="flex items-center gap-2 px-4 sm:px-6 md:px-8 py-2 sm:py-3 rounded-full font-semibold bg-white/10 border border-gray-400/30 text-white backdrop-blur-md hover:bg-white/20 hover:border-gray-200/50 transition-all duration-200 text-base md:text-lg active:scale-95 shadow-md"
+              className="flex items-center gap-2 px-3 sm:px-4 md:px-6 py-2 rounded-full font-semibold bg-white/10 border border-gray-400/30 text-white backdrop-blur-md hover:bg-white/20 hover:border-gray-200/50 transition-all duration-200 text-sm md:text-base active:scale-95 shadow-md"
               style={{ pointerEvents: 'auto' }}
             >
-              
               View Solutions
-              <svg xmlns="http://www.w3.org/2000/svg" fill="white" width="24" height="24"><path d="M7.293 4.707 14.586 12l-7.293 7.293 1.414 1.414L17.414 12 8.707 3.293 7.293 4.707z"/></svg>
-              </a>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="white" width="20" height="20" className="w-4 h-4 md:w-5 md:h-5"><path d="M7.293 4.707 14.586 12l-7.293 7.293 1.414 1.414L17.414 12 8.707 3.293 7.293 4.707z"/></svg>
+            </a>
           </motion.div>
         </motion.div>
       </div>
@@ -118,18 +100,27 @@ export const ThreeDMarquee = ({ className }) => {
           style={{
             transform: "rotateX(55deg) rotateY(0deg) rotateZ(-45deg)",
           }}
-          className="w-full h-full grid origin-top-left grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-8 lg:gap-16 transform-3d">
+          className="w-full h-full grid origin-top-left grid-cols-3 sm:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-4 lg:gap-8 transform-3d">
           {chunks.map((subarray, colIndex) => {
             // Unique duration and direction for each column
-            const durations = [22, 28, 24, 30];
-            const direction = colIndex % 2 === 0 ? -1 : 1;
+            const durations = [84, 196, 88, 90];
+            let direction = colIndex % 2 === 0 ? -1 : 1;
+            let animateY, initialY;
+            if (colIndex === 1) {
+              // Make 2nd row seamless by reversing and offsetting
+              initialY = -stackHeights[colIndex];
+              animateY = [initialY, 0];
+            } else {
+              initialY = 0;
+              animateY = [0, direction * stackHeights[colIndex]];
+            }
             return (
               <motion.div
                 key={colIndex + "marquee"}
-                className="flex flex-col items-start gap-16"
+                className="flex flex-col items-start gap-3 sm:gap-8 lg:gap-16 w-full"
                 ref={stackRefs[colIndex]}
                 animate={{
-                  y: [0, direction * stackHeights[colIndex]],
+                  y: animateY,
                 }}
                 transition={{
                   duration: durations[colIndex % durations.length],
@@ -137,11 +128,11 @@ export const ThreeDMarquee = ({ className }) => {
                   repeatType: "loop",
                   ease: "linear"
                 }}
-                style={{ willChange: "transform" }}
+                style={{ willChange: "transform", y: initialY }}
               >
                 <GridLineVertical className="-left-4" offset="80px" />
                 {[...subarray, ...subarray].map((image, imageIndex) => (
-                  <div className="relative" key={imageIndex + image}>
+                  <div className="relative w-full" key={imageIndex + image}>
                     <GridLineHorizontal className="-top-4" offset="20px" />
                     <motion.img
                       whileHover={{
@@ -154,7 +145,7 @@ export const ThreeDMarquee = ({ className }) => {
                       key={imageIndex + image}
                       src={image}
                       alt={`Image ${imageIndex + 1}`}
-                      className="aspect-[970/700] object-cover opacity-40 w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg h-auto"
+                      className="aspect-[970/700] object-cover opacity-40 w-full h-auto rounded-xl shadow-md max-h-[80px] sm:max-h-[120px] md:max-h-[180px]"
                       width={970}
                       height={700} />
                   </div>
@@ -166,6 +157,7 @@ export const ThreeDMarquee = ({ className }) => {
       </div>
     </div>
   );
+  <Navbar />
 };
 
 const GridLineHorizontal = ({

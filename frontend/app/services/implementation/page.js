@@ -1,9 +1,15 @@
+import Image from "next/image";
+import ServiceBlock from "../../components/ui/ServiceBlock";
+
 export default function Implementation() {
     return (
-      <main className="p-6">
-        <h1 className="text-2xl font-bold">SAP Implementation Services</h1>
-        <p className="mt-2">Comprehensive setup of SAP modules tailored to your business.</p>
-      </main>
+    <div className="relative min-h-*">
+      <div className="flex-1 w-full bg-[#0c1c3c] text-white pt-28 sm:pt-32 pb-20 sm:pb-24 md:pb-32">
+        <div className="max-w-[90rem] mx-auto px-4 sm:px-6 md:px-8">
+          <ServiceBlock />
+         </div>
+      </div>
+    </div>
     );
   }
   
