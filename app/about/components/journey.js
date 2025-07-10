@@ -269,8 +269,8 @@ const Journey = () => {
                             }`} style={{ transitionDelay: `${index * 800 + 1400}ms` }}>
                               
                               {/* Professional Card */}
-                              <div className={`relative bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl p-4 md:p-8 border transition-all duration-300 group cursor-pointer 
-                                ${index === activeStory ? 'scale-105 shadow-2xl border-cyan-400 z-20' : 'border-white/20'} 
+                              <div className={`relative bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl p-4 md:p-8 border transition-all duration-500 group cursor-pointer 
+                                ${index === activeStory ? 'scale-105 shadow-2xl border-cyan-400' : 'border-white/20'} 
                                 hover:scale-105 hover:shadow-2xl hover:border-cyan-400`}
                               >
                                 
