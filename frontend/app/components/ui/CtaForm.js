@@ -414,7 +414,7 @@ export default function CritIndiaCtaForm({ onClose }) {
                 
                 <div>
                   <h2 className="text-xl font-bold">Get Expert SAP Consultation</h2>
-                  <p className="text-red-100 text-xs">Transform your business with CRIT India's SAP excellence</p>
+                  <p className="text-red-100 text-xs">Transform your business with CRIT India SAP excellence</p>
                 </div>
               </div>
             </div>

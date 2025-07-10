@@ -72,7 +72,7 @@ export const ThreeDMarquee = ({ className }) => {
             className="text-base md:text-lg text-gray-200 mb-6 md:mb-8 max-w-xl text-left"
             variants={itemVariants}
           >
-            Empower your enterprise with CritIndia's comprehensive SAP implementation and support services. We deliver tailored solutions that drive innovation and growth.
+            Empower your enterprise with CritIndia comprehensive SAP implementation and support services. We deliver tailored solutions that drive innovation and growth.
           </motion.p>
           <motion.div className="flex flex-wrap gap-3 md:gap-4 justify-start" variants={itemVariants}>
             <a

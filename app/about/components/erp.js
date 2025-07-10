@@ -769,7 +769,7 @@ export default function ERPImplementationDiagram() {
                   const infoCardTop = size * 0.01;
                   const infoCardHeight = size * 0.8;
                   const infoCardBottom = infoCardTop + infoCardHeight;
-                  // Use these for the polygon's right corners:
+                  
                   <polygon
                     points={`
                       0,${size*0.34}

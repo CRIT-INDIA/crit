@@ -186,7 +186,7 @@ const SAPProductPage = () => {
             </div>
           </div>
           <div className="mb-7">
-            <h4 className="text-lg font-bold text-white font-[Nunito] mb-3">What You'll Learn</h4>
+            <h4 className="text-lg font-bold text-white font-[Nunito] mb-3">What You Will Learn</h4>
             <div className="space-y-2">
               {product.features.map((feature, idx) => (
                 <div key={idx} className="flex items-center gap-3">
