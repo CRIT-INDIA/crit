@@ -51,7 +51,7 @@ const transition = {
   restSpeed: 0.001,
 };
 
-const MenuItem = ({ setActive, active, item, href, pathname, children }) => {
+const MenuItem = ({ setActive, active, item, href, pathname, children, textClass }) => {
   const isHovered = active === item;
   const isCurrentPage = pathname === href;
   const hasDropdown = item === "Products" || item === "Services";
@@ -66,8 +66,8 @@ const MenuItem = ({ setActive, active, item, href, pathname, children }) => {
         transition={{ duration: 0.3 }}
         className={`cursor-pointer text-lg px-2 font-mono relative transition-all duration-200
           before:content-[''] before:absolute before:left-1/2 before:-translate-x-1/2 before:-bottom-0.5 before:w-0 before:h-px before:bg-white before:transition-all before:duration-300
-          hover:before:w-full hover:text-white
-          ${isCurrentPage ? 'text-white !hover:text-white' : 'text-gray-300'}`}
+          hover:before:w-full hover:text-gray-500
+          ${isCurrentPage ? 'text-white !hover:text-black' : 'text-white'}`}
       >
         <span className="inline-flex items-center gap-1 relative">
           {item}
@@ -289,7 +289,7 @@ const Navbar = () => {
   }, [isMobileMenuOpen]);
 
   return (
-    <nav className="fixed top-3 left-1/2 -translate-x-1/2 z-50 w-[100vw] max-w-7xl backdrop-blur-xl shadow-2xl px-6 py-3 flex items-center justify-between rounded-full">
+    <nav className="fixed top-3 left-1/2 -translate-x-1/2 z-50 w-[100vw] max-w-7xl bg-black/50 backdrop-blur-xl shadow-2xl px-6 py-3 flex items-center justify-between rounded-full">
       {/* Logo and Brand */}
       <a href="/" className="flex items-center space-x-2">
       <div className="flex items-center">
@@ -308,7 +308,7 @@ const Navbar = () => {
 
       {/* Hamburger Icon (Mobile Only) */}
       <button
-        className="lg:hidden flex items-center justify-center p-0.5 rounded-md text-white bg-[#0c1c3c]/80 hover:bg-[#0c1c3c] focus:outline-none focus:ring-2 focus:ring-blue-500 z-50"
+        className="lg:hidden flex items-center justify-center p-0.5 rounded-md text-black bg-white hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 z-50"
         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         aria-label="Toggle menu"
         aria-expanded={isMobileMenuOpen}
@@ -325,9 +325,9 @@ const Navbar = () => {
       </button>
 
       {/* Desktop Menu (hidden on mobile) */}
-      <div className="flex-1 flex items-center justify-center gap-8 hidden lg:flex ">
-        <MenuItem setActive={setActive} active={active} item="Home" href="/" pathname={pathname} />
-        <MenuItem setActive={setActive} active={active} item="Products" href="/products" pathname={pathname}>
+      <div className="flex-1 items-center justify-center gap-8 hidden lg:flex ">
+        <MenuItem setActive={setActive} active={active} item="Home" href="/" pathname={pathname} textClass="text-black hover:text-gray-700" />
+        <MenuItem setActive={setActive} active={active} item="Products" href="/products" pathname={pathname} textClass="text-black hover:text-gray-700">
           {active === "Products" && (
             <div className="bg-[#0c1c3c]/95 shadow-lg rounded-xl p-2 min-w-[400px]">
               <div className="grid grid-cols-2 gap-2">
@@ -344,7 +344,7 @@ const Navbar = () => {
             </div>
           )}
         </MenuItem>
-        <MenuItem setActive={setActive} active={active} item="Services" href="/services" pathname={pathname}>
+        <MenuItem setActive={setActive} active={active} item="Services" href="/services" pathname={pathname} textClass="text-black hover:text-gray-700">
           {active === "Services" && (
             <div className="bg-[#0c1c3c]/95 shadow-lg rounded-xl p-2 min-w-[400px]">
               <div className="grid grid-cols-2 gap-2">
@@ -361,15 +361,15 @@ const Navbar = () => {
             </div>
           )}
         </MenuItem>
-        <MenuItem setActive={setActive} active={active} item="Careers" href="/careers" pathname={pathname} />
-        <MenuItem setActive={setActive} active={active} item="About" href="/about" pathname={pathname} />
-        <MenuItem setActive={setActive} active={active} item="Contact" href="/contact" pathname={pathname} />
+        <MenuItem setActive={setActive} active={active} item="Career" href="/career" pathname={pathname} textClass="text-black hover:text-gray-700" />
+        <MenuItem setActive={setActive} active={active} item="About" href="/about" pathname={pathname} textClass="text-black hover:text-gray-700" />
+        <MenuItem setActive={setActive} active={active} item="Contact" href="/contact" pathname={pathname} textClass="text-black hover:text-gray-700" />
       </div>
 
       {/* Get Consultation Button (desktop only) */}
       <button
         onClick={() => setShowCtaForm(true)}
-        className="hidden lg:block rounded-full px-5 py-2 font-semibold text-[#0c1c3c] bg-gray-100 shadow-lg border border-white/20 hover:brightness-110 hover:scale-105 transition-all duration-200 text-base relative overflow-hidden transmit-bar cursor-pointer"
+        className="hidden lg:block rounded-full px-5 py-2 font-semibold text-black bg-gray-100 shadow-lg border border-white/20 hover:brightness-110 hover:scale-105 transition-all duration-200 text-base relative overflow-hidden transmit-bar cursor-pointer"
       >
         <span className="relative z-10">Get Consultation</span>
       </button>
@@ -398,12 +398,14 @@ const Navbar = () => {
               </svg>
             </button>
           </div>
+
           {/* Menu Items */}
           <nav className="flex-1 min-h-0 overflow-y-auto px-4 py-6 flex flex-col gap-2">
             <a href="/" className="block text-white text-base sm:text-lg md:text-xl font-semibold rounded px-4 py-3 hover:bg-white/10 transition" onClick={() => setIsMobileMenuOpen(false)}>Home</a>
-            <a href="/careers" className="block text-white text-base sm:text-lg md:text-xl font-semibold rounded px-4 py-3 hover:bg-white/10 transition" onClick={() => setIsMobileMenuOpen(false)}>Careers</a>
+            <a href="/career" className="block text-white text-base sm:text-lg md:text-xl font-semibold rounded px-4 py-3 hover:bg-white/10 transition" onClick={() => setIsMobileMenuOpen(false)}>Career</a>
             <a href="/about" className="block text-white text-base sm:text-lg md:text-xl font-semibold rounded px-4 py-3 hover:bg-white/10 transition" onClick={() => setIsMobileMenuOpen(false)}>About</a>
             <a href="/contact" className="block text-white text-base sm:text-lg md:text-xl font-semibold rounded px-4 py-3 hover:bg-white/10 transition" onClick={() => setIsMobileMenuOpen(false)}>Contact</a>
+            
             <div className="my-3 border-t border-white/10" />
             {/* Expandable Products */}
             <button

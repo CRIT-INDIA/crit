@@ -1,219 +1,218 @@
-import React from 'react';
-import { Linkedin, Twitter, Youtube, Facebook } from 'lucide-react';
+import { ArrowRight, Linkedin, Twitter, Youtube, Facebook, MapPin, Phone, Mail } from "lucide-react";
 
-export default function Footer() {
+const ModernFooter = () => {
+  const socialLinks = [
+    { name: "Linkedin", icon: Linkedin, href: "#" },
+    { name: "Twitter", icon: Twitter, href: "#" },
+    { name: "Youtube", icon: Youtube, href: "#" },
+    { name: "Facebook", icon: Facebook, href: "#" }
+  ];
+
+  const footerSections = [
+    {
+      title: "SAP Services",
+      links: [
+        { name: "SAP Implementation", href: "#" },
+        { name: "SAP RollOut", href: "#" },
+        { name: "SAP Support", href: "#" },
+        { name: "SAP Upgrade", href: "#" },
+        { name: "SAP Integration", href: "#" },
+        { name: "SAP Migration", href: "#" },
+        { name: "SAP Automation", href: "#" },
+        { name: "SAP Testing", href: "#" }
+      ]
+    },
+    {
+      title: "Our Products",
+      links: [
+        { name: "SAP S/4HANA", href: "#" },
+        { name: "SAP ARIBA", href: "#" },
+        { name: "SAP SuccessFactors", href: "#" },
+        { name: "SAP HYBRIS", href: "#" },
+        { name: "SAP Business Object", href: "#" },
+        { name: "SAP Concur", href: "#" }
+      ]
+    },
+    {
+      title: "Company",
+      links: [
+        { name: "About Us", href: "#" },
+        { name: "Our Team", href: "#" },
+        { name: "Careers", href: "#" },
+        { name: "Case Studies", href: "#" },
+        { name: "News & Events", href: "#" },
+        { name: "Contact", href: "#" },
+        { name: "Blogs", href: "#" }
+      ]
+    },
+    {
+      title: "Get in Touch",
+      isContact: true,
+      contactInfo: {
+        address: "1st Floor, 101, Police, Wireless Colony, Vishal Nagar, Pimple Nilakh Pune, Pimpri-Chinchwad, Maharashtra 411027",
+        phone: "+91 89560 01555",
+        email: "info@critindia.com"
+      }
+    }
+  ];
+
   return (
-    <footer className="relative bg-[#0c1c3c] text-white overflow-visible">
-      <div className="relative z-10 px-6 py-16">
-        <div className="max-w-7xl mx-auto">
-          
-          {/* Main Content Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-12">
-            
-            {/* Company Brand Section */}
-            <div className="lg:col-span-4">
-              <div>
-                {/* Logo and Brand */}
-                <div className="flex items-center mb-8">
-                  <div className="relative group">
-                    <div className="w-16 h-16 rounded-xl flex items-center justify-center mr-6 transform transition-all duration-500 shadow-lg overflow-hidden">
-                      <img
-                        src="https://res.cloudinary.com/dujw4np0d/image/upload/v1751005553/CRIT-3D_cpzr1n.png"
-                        alt="CRIT 3D Logo"
-                        className="w-full h-full object-contain"
-                      />
-                    </div>
-                  </div>
-                  <div>
-                    <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-2 tracking-tight">
-                      Connecting Roots IT 
-                    </h1>
-                    <p className="text-[#3B82F6] text-sm font-medium">SAP Excellence Partner</p>
-                  </div>
-                </div>
-                
-                {/* Mission Statement */}
-                <div className="mb-8">
-                  <h1 className="text-xl sm:text-xl md:text-xl font-semibold mb-4 text-[#3B82F6] transition-colors duration-300">Transforming Business Through Technology</h1>
-                  <p className="text-gray-300 leading-relaxed text-md">
-                    Empowering enterprises with comprehensive SAP implementation and support services. 
-                    We deliver tailored solutions that drive innovation and sustainable growth.
-                  </p>
-                </div>
-                
-                {/* Social Media */}
-                <div className="flex space-x-4">
-                  {[
-                    { name: 'LinkedIn', icon: Linkedin, link: 'https://www.linkedin.com/company/connecting-root/' },
-                    { name: 'Twitter', icon: Twitter, link: 'https://x.com/critindia' },
-                    { name: 'YouTube', icon: Youtube },
-                    { name: 'Facebook', icon: Facebook, link: 'https://www.facebook.com/critindia' }
-                  ].map((social, index) => (
-                    <a
-                      key={social.name}
-                      href={social.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-12 h-12 bg-[#3B82F6] rounded-xl flex items-center justify-center cursor-pointer transform transition-all duration-300"
-                      style={{animationDelay: `${index * 0.1}s`}}
-                      aria-label={`Follow us on ${social.name}`}
-                    >
-                      <social.icon className="w-5 h-5 text-white" />
-                    </a>
-                  ))}
-                </div>
-              </div>
-            </div>
-            
-            {/* Navigation Links */}
-            <div className="lg:col-span-6">
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
-                
-                {/* SAP Services Column */}
-                <div className="group">
-                  <h1 className="text-xl sm:text-2xl md:text-2xl font-bold mb-6 text-[#3B82F6] transition-colors duration-300 relative cursor-pointer">
-                    SAP Services
-                  </h1>
-                  <div className="space-y-3">
-                    {[
-                      { name: 'SAP Implementation', path: '/services/implementation' },
-                      { name: 'SAP RollOut', path: '/services/rollout' },
-                      { name: 'SAP Support', path: '/services/support' },
-                      { name: 'SAP Upgrade', path: '/services/upgrade' },
-                      { name: 'SAP Integration', path: '/services/integration' },
-                      { name: 'SAP Migration', path: '/services/migration' },                   
-                      { name: 'SAP Automation', path: '/services/automation' },
-                      { name: 'SAP Testing', path: '/services/testing' },
-                    ].map((service, index) => (
-                      <a
-                        key={service.name}
-                        href={service.path}
-                        className=" text-gray-300 flex items-center group/link "
-                        
-                      >
-                        <div className="w-2 h-2 rounded-full mr-3 transform scale-0 transition-all duration-300"></div>
-                        <span className="relative text-sm">
-                          {service.name}
-                          </span>
-                      </a>
-                    ))}
-                  </div>
-                </div>
- 
-                {/* Our Products Column */}
-                <div className="group">
-                  <h1 className="text-xl sm:text-2xl md:text-2xl font-bold mb-6 text-[#3B82F6] transition-colors duration-300 relative cursor-pointer">
-                    Our Products
-                  </h1>
-                  <div className="space-y-3">
-                    {[
-                      { name: 'SAP S/4HANA', path: '/products/sap-s4hana' },
-                      { name: 'SAP ARIBA', path: '/products/sap-ariba' },
-                      { name: 'SAP SuccessFactors', path: '/products/success-factors' },
-                      { name: 'SAP HYBRIS', path: '/products/sap-hybris' },
-                      { name: 'SAP Business Object', path: '/products/business-object' },
-                      { name: 'SAP Concur', path: '/products/sap-concur' },
-                    ].map((product, index) => (
-                      <a
-                        key={product.name}
-                        href={product.path}
-                        className=" text-gray-300 flex items-center"
-                        
-                      >
-                        <div className="w-2 h-2 rounded-full mr-3 "></div>
-                        <span className="relative text-sm">
-                          {product.name}
-                          <span className="absolute bottom-0 left-0 w-0 h-px transition-all"></span>
-                        </span>
-                      </a>
-                    ))}
-                  </div>
-                </div>
+    <footer className="relative bg-footer-bg min-h-screen overflow-hidden pt-10">
+      {/* Floating geometric shapes */}
+      <div className="absolute inset-0 pointer-events-none">
+        {/* Main central device mockup */}
+        <div className="absolute top-8 left-1/2 transform -translate-x-1/2 w-64 h-40 bg-white/30 rounded-2xl animate-float border-2 border-orange-500/50 opacity-50">
+          <div className="absolute top-4 right-4 w-4 h-4 bg-orange-500 rounded-full animate-pulse"></div>
+          <div className="absolute bottom-6 left-6 w-8 h-8 bg-white/40 rounded-lg border border-orange-500/50 opacity-90"></div>
+        </div>
+        
+        {/* Floating circles */}
+       
+        <div className="absolute top-32 right-24 w-6 h-6 bg-shape-tertiary rounded-full animate-float"></div>
+        <div className="absolute top-20 right-1/4 w-3 h-3 bg-orange-500/50 rounded-full animate-pulse-slow"></div>
+        <div className="absolute bottom-1/3 left-20 w-5 h-5 bg-shape-secondary rounded-full animate-float"></div>
+        
+        {/* Geometric shapes */}
+        <div className="absolute top-24 left-1/3 w-6 h-6 border-2 border-orange-500/50 rotate-45 animate-float-"></div>
+        <div className="absolute bottom-1/2 right-16 w-4 h-4 border border-shape-tertiary animate-float"></div>
+        <div className="absolute top-1/3 right-1/3 w-8 h-8 border-2 border-orange-500/50 rounded-lg animate-float-delayed"></div>
+      </div>
 
-                {/* Company Column */}
-                <div className="group">
-                  <h1 className="text-xl sm:text-2xl md:text-2xl font-bold mb-6 text-[#3B82F6] transition-colors duration-300 relative cursor-pointer">
-                    Company
-                  </h1>
-                  <div className="space-y-3">
-                    {[
-                      { name: 'About Us', path: '/about' },
-                      { name: 'Our Team', path: '/team' },
-                      { name: 'Careers', path: '/career' },
-                      { name: 'Case Studies', path: '/case-studies' },
-                      { name: 'News & Events', path: '/news-events' },
-                      { name: 'Contact', path: '/contact' },
-                      { name: 'Blogs', path: '/blogs' }
-                    ].map((link, index) => (
-                      <a
-                        key={link.name}
-                        href={link.path}
-                        className=" text-gray-300 flex items-center group/link "
-                        
-                      >
-                        <div className="w-2 h-2 rounded-full mr-3"></div>
-                        <span className="relative text-sm">
-                          {link.name}
-                         </span>
-                      </a>
-                    ))}
-                  </div>
+      
+
+      <div className="relative z-10 container mx-auto px-6 py-16">
+        {/* Main Content Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 mb-16">
+          {/* Company Info - Left Side */}
+          <div className="lg:col-span-2 space-y-6">
+            <div className="space-y-2">
+              <div className="flex items-start space-x-3">
+                <img 
+                  src="https://res.cloudinary.com/dujw4np0d/image/upload/v1752048521/CRIT-3D_gk4ygq.png" 
+                  alt="CRIT Logo" 
+                  className="w-16 h-16 object-contain flex-shrink-0"
+                />
+                <div className="space-y-1">
+                  <h2 className="text-2xl font-bold text-footer-heading">Connecting Roots IT</h2>
+                  <p className="text-base text-blue-600 ">SAP Excellence Partner</p>
                 </div>
               </div>
             </div>
             
-            {/* Contact & Newsletter */}
-            <div className="lg:col-span-2 group">
-              <h1 className="text-xl sm:text-2xl md:text-2xl font-bold mb-6 text-[#3B82F6] transition-colors duration-300 relative cursor-pointer">
-                Get in Touch
-              </h1>
-              
-              {/* Contact Info */}
-              <div className="space-y-2 mb-5">
-                {[
-                  { icon: '📍', text: '1st Floor,101, Police, Wireless Colony,Vishal Nagar, Pimple Nilakh Pune, Pimpri-Chinchwad, Maharashtra 411027', delay: '0s' },
-                  { icon: '📞', text: '+91 89560 01555', delay: '0.1s' },
-                  { icon: '✉️', text: 'info@critindia.com', delay: '0.2s' }
-                ].map((contact, index) => (
-                  <div key={index} 
-                       className="flex items-center text-gray-300 transition-all duration-500 cursor-pointer transform hover:translate-x-2 hover:scale-105"
-                       style={{animationDelay: contact.delay}}>
-                    <span className="text-lg mr-4 transform transition-transform duration-300 hover:rotate-12">{contact.icon}</span>
-                    <span className="text-sm">{contact.text}</span>
-                  </div>
-                ))}
-              </div>
+            <div className="space-y-4">
+              <h3 className="text-base font-semibold text-red-500">Transforming Business Through Technology</h3>
+              <p className="text-gray-400 text-base leading-relaxed">
+                Empowering enterprises with comprehensive SAP implementation and support services. We deliver
+                tailored solutions that drive innovation and sustainable growth.
+              </p>
+            </div>
+
+            {/* Social Media Icons */}
+            <div className="flex space-x-4 pt-4">
+              {socialLinks.map((social) => (
+                <a
+                  key={social.name}
+                  href={social.href}
+                  className="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center hover:bg-blue-500 transition-all duration-300 relative 
+                    before:absolute before:inset-0 before:-m-1 before:bg-blue-400/20 before:rounded-lg before:blur-sm before:opacity-60"
+                  style={{
+                    filter: "drop-shadow(0 0 15px rgba(59, 130, 246, 0.3))",
+                  }}
+                >
+                  <social.icon className="w-5 h-5 text-white relative z-10 " />
+                </a>
+              ))}
             </div>
           </div>
 
-          {/* Bottom Bar */}
-          <div className="border-t border-gray-800 pt-8">
-            <div className="flex flex-col lg:flex-row justify-between items-center gap-6">
+          {/* Footer Links Grid - Right Side */}
+          <div className="lg:col-span-3 grid grid-cols-1 md:grid-cols-3 gap-8">
+            {footerSections.map((section) => (
+              <div key={section.title} className="space-y-6">
+                {section.isContact ? (
+                  <>
               
-              {/* Copyright */}
-              <div className="text-gray-400 text-sm hover:text-white transition-colors duration-300">
-                © {new Date().getFullYear()} CRIT India. All rights reserved. | Transforming Business Through SAP Excellence
+                  </>
+                ) : (
+                  <>
+                    <h3 className="text-[1.15rem] font-semibold text-red-500 tracking-wider">
+                      {section.title}
+                    </h3>
+                    <ul className="space-y-3">
+                      {section.links.map((link) => (
+                        <li key={link.name}>
+                          <a
+                            href={link.href}
+                            className="text-gray-400 hover:text-orange-500 transition-colors duration-300 text-base"
+                          >
+                            {link.name}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </>
+                )}
               </div>
-              
-              {/* Legal Links */}
-              <div className="flex flex-wrap justify-center gap-6 text-sm">
-                {[
-                  'Privacy Policy',
-                  'Terms of Service',
-                  'Sitemap'
-                ].map((link, index) => (
-                  <a key={link}
-                     href="#"
-                     className="text-gray-400 transition-all duration-300 relative group/legal"
-                     style={{animationDelay: `${index * 0.1}s`}}>
-                    {link}
-                  </a>
-                ))}
-              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Horizontal divider */}
+        <div className="border-t border-gray-700 my-8"></div>
+
+        {/* Get in Touch title */}
+        <h3 className="text-base font-semibold text-red-500 tracking-wider  mb-4">Get in Touch</h3>
+
+        {/* Get in Touch row */}
+        <div className="flex flex-col md:flex-row md:items-center md:space-x-8 space-y-4 md:space-y-0">
+          <div className="flex items-center space-x-3">
+          
+            <div className="flex flex-col">
+              <span className="flex items-center">
+                <MapPin className="w-4 h-4 text-orange-500 mr-2" />
+                <span className="text-gray-400 text-base">{footerSections.find(section => section.isContact).contactInfo.address}</span>
+              </span>
+              <span className="flex items-center mt-2">
+                <Phone className="w-4 h-4 text-orange-500 mr-2" />
+                <a href={`tel:${footerSections.find(section => section.isContact).contactInfo.phone}`} className="text-gray-400 hover:text-orange-500 transition-colors duration-100 text-base">
+                  {footerSections.find(section => section.isContact).contactInfo.phone}
+                </a>
+              </span>
+              <span className="flex items-center mt-1">
+                <Mail className="w-4 h-4 text-orange-500 mr-2" />
+                <a href={`mailto:${footerSections.find(section => section.isContact).contactInfo.email}`} className="text-gray-400 hover:text-orange-500 transition-colors duration-300 text-base">
+                  {footerSections.find(section => section.isContact).contactInfo.email}
+                </a>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        {/* Copyright */}
+        <div className="border-t border-border/20 pt-12">
+          <div className="flex flex-col items-center space-y-4">
+            <p className="text-footer-text text-xs text-center">
+              © 2025 CRIT India. All rights reserved. | Transforming Business Through SAP Excellence
+            </p>
+            <div className="flex space-x-6">
+              <a href="#" className="text-footer-text hover:text-footer-link-hover text-xs transition-colors duration-300">
+                Privacy Policy
+              </a>
+              <a href="#" className="text-footer-text hover:text-footer-link-hover text-xs transition-colors duration-300">
+                Terms of Service
+              </a>
+              <a href="#" className="text-footer-text hover:text-footer-link-hover text-xs transition-colors duration-300">
+                Sitemap
+              </a>
             </div>
           </div>
         </div>
       </div>
+
+      {/* Gradient overlay for depth */}
+      <div className="absolute inset-0 bg-gradient-to-t from-footer-bg via-transparent to-transparent pointer-events-none"></div>
     </footer>
   );
-}
+};
+
+export default ModernFooter;

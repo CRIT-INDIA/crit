@@ -3,13 +3,10 @@ import React from 'react';
 const MovingClientsSection = () => {
   // Client data matching the style from your image
   const clients = [
-    { name: 'WYscale', logo: 'https://img.icons8.com/color/96/w.png' },
-    { name: 'TonGYM', logo: 'https://img.icons8.com/color/96/t.png' },
-    { name: 'Client 3', logo: 'https://img.icons8.com/color/96/google-logo.png' },
-    { name: 'BT', logo: 'https://img.icons8.com/color/96/b.png' },
+    { name: 'Google', logo: 'https://img.icons8.com/color/96/google-logo.png' },
     { name: 'Microsoft', logo: 'https://img.icons8.com/color/96/microsoft.png' },
-    { name: 'Apple', logo: 'https://img.icons8.com/ios-filled/96/mac-os.png' },
-    { name: 'Amazon', logo: 'https://img.icons8.com/color/96/amazon.png' },
+    { name: 'Apple', logo: 'https://res.cloudinary.com/duz9xipfm/image/upload/v1753178491/Apple_logo_grey.svg_m7dsoq.png' },
+    { name: 'Amazon', logo: 'https://res.cloudinary.com/duz9xipfm/image/upload/v1753178786/Amazon-Logo-White-PNG-Pic_m8kupd.png' },
     { name: 'Meta', logo: 'https://img.icons8.com/color/96/meta.png' },
   ];
 
@@ -47,43 +44,21 @@ const MovingClientsSection = () => {
       `}</style>
       <div className="text-center">
       <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 inline-block relative">
-    <span className="text-white">Our </span>
-    <span className="text-blue-500">Clients</span>
-    <svg 
-      className="absolute -bottom-2 left-1/2 transform -translate-x-1/2" 
-      width="100%" 
-      height="4" 
-      viewBox="0 0 200 4"
-      preserveAspectRatio="none"
-    >
-      <defs>
-        <linearGradient id="underlineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" stopColor="#ffffff" stopOpacity="0.2"/>
-          <stop offset="50%" stopColor="#ffffff" stopOpacity="1"/>
-          <stop offset="100%" stopColor="#60a5fa" stopOpacity="0.8"/>
-        </linearGradient>
-      </defs>
-      <rect 
-        x="0" 
-        y="0" 
-        width="200" 
-        height="4" 
-        fill="url(#underlineGradient)"
-        rx="2"
-      />
-    </svg>
+    <span className="text-black">Our </span>
+    <span className="text-red-500">Clients</span>
+    <svg className="mx-auto my-0" style={{marginTop: '-4px'}} width="120" height="18" viewBox="0 0 180 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10 18 Q 70 8, 170 14" stroke="#dc2626" strokeWidth="4" strokeLinecap="round" fill="none"/>
+            <path d="M25 21 Q 100 15, 160 18" stroke="#dc2626" strokeWidth="2" strokeLinecap="round" fill="none"/>
+          </svg>
    </h1>      </div>
 
-      <div className="w-full bg-gray-100 rounded-lg">
+      <div className="w-full bg-[#00203F] drop-shadow-lg rounded-lg p-2">
         <div className="flex gap-8 md:gap-12">
           {/* Left side - Title */}
           
           
           {/* Right side - Moving Clients Container */}
           <div className="flex-grow relative overflow-hidden group">
-            {/* Gradient overlays for smooth fade effect */}
-            <div className="absolute left-0 top-0 w-16 h-full bg-gradient-to-r from-white to-transparent z-10 pointer-events-none"></div>
-            <div className="absolute right-0 top-0 w-16 h-full bg-gradient-to-l from-white to-transparent z-10 pointer-events-none"></div>
             
             {/* Scrolling Container */}
             <div className="flex items-center animate-marquee">
@@ -96,9 +71,10 @@ const MovingClientsSection = () => {
                     <img
                       src={client.logo}
                       alt={`${client.name} logo`}
-                      className="max-h-12 w-auto object-contain opacity-80 hover:opacity-100 transition-all duration-300"
-                    />
-                  </div>
+                      className="max-h-12 w-auto object-contain opacity-90 hover:opacity-100 transition-all duration-300"
+                    /> </div>
+                    <div className="w-full text-center text-xs text-white font-medium pb-2">{client.name}</div>
+                  
                 </div>
               ))}
             </div>

@@ -1,11 +1,7 @@
 'use client';
 
-import dynamic from 'next/dynamic';
 import Image from 'next/image';
-
-const ServiceBlock = dynamic(() => import('../../components/ui/ServiceBlock'), {
-  ssr: false,
-});
+import ServiceBlock from '../../components/ui/ServiceBlock';
 
 export default function Implementation() {
   return (

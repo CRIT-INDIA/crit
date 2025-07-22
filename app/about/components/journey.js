@@ -79,7 +79,7 @@ const Journey = () => {
       storyBeats.forEach((_, index) => {
         setTimeout(() => {
           setVisibleBeats(prev => [...prev, index]);
-        }, index * 200); // 400ms delay between each item
+        }, index * 100); // 100ms delay between each item
       });
     }
   }, [timelineVisible]);
@@ -102,7 +102,7 @@ const Journey = () => {
   };
 
   return (
-    <section className="relative min-h-screen overflow-hidden pt-10">
+    <section className="relative min-h-* overflow-hidden pt-10">
       
 
           
@@ -113,8 +113,8 @@ const Journey = () => {
             className={`transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
           >
             <div className="text-center mb-16">
-              <h2 className="text-4xl font-bold text-white mb-4">Our Journey</h2>
-              <p className="text-xl text-slate-300 max-w-3xl mx-auto">
+              <h2 className="text-5xl font-bold text-gray-900 mb-4">Our Journey</h2>
+              <p className="text-xl text-gray-700 max-w-3xl mx-auto">
                 From a bold vision to industry leadership - discover the milestones that shaped our success
               </p>
             </div>
@@ -128,13 +128,13 @@ const Journey = () => {
               {/* Professional Timeline Container */}
               <div className="relative">
                 {/* Animated Timeline Line */}
-                <div className="absolute left-1/2 transform -translate-x-1/2 w-1 bg-slate-700 rounded-full h-full">
+                <div className="absolute left-1/2 transform -translate-x-1/2 w-1 bg-red-600 rounded-full h-full">
                   <div 
-                    className={`w-full bg-gradient-to-b from-blue-500 via-cyan-400 to-purple-500 rounded-full transition-all duration-200 ease-out ${
+                    className={`w-full bg-gradient-to-b from-red-600 via-cyan-500 to-purple-600 rounded-full transition-all duration-200 ease-out ${
                       timelineInView ? 'h-full' : 'h-0'
                     }`}
                     style={{
-                      transitionDelay: '800ms'
+                      transitionDelay: '300ms'
                     }}
                   />
                 </div>
@@ -151,7 +151,7 @@ const Journey = () => {
                             : 'opacity-0 translate-y-12'
                         }`}
                         style={{
-                          transitionDelay: `${index * 200 + 200}ms`
+                          transitionDelay: `${index * 100 + 100}ms`
                         }}
                       >
                         {/* Timeline Node - Desktop */}
@@ -161,13 +161,13 @@ const Journey = () => {
                           }`}>
                             {index === activeStory && (
                               <div className="absolute inset-0 rounded-full animate-pulse">
-                                <div className={`w-16 h-16 md:w-24 md:h-24 bg-gradient-to-r ${beat.color} rounded-full opacity-20 blur-md`} />
+                                <div className={`w-16 h-16 md:w-24 md:h-24 bg-red-100 rounded-full opacity-30 blur-md`} />
                               </div>
                             )}
-                            <div className={`relative w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br ${beat.color} rounded-full flex items-center justify-center shadow-2xl border-4 transition-all duration-200 ${
+                            <div className={`relative w-16 h-16 md:w-20 md:h-20 bg-red-600 rounded-full flex items-center justify-center shadow-2xl border-4 transition-all duration-200 ${
                               index === activeStory 
-                                ? 'border-white/60 shadow-3xl' 
-                                : 'border-white/30'
+                                ? 'border-red-400 shadow-3xl' 
+                                : 'border-gray-200'
                             }`}>
                               <div className="absolute inset-0 bg-white/10 rounded-full backdrop-blur-sm" />
                               <div className={`relative transition-all duration-300 ${
@@ -176,7 +176,7 @@ const Journey = () => {
                                 {beat.icon}
                               </div>
                             </div>
-                            <div className={`absolute -bottom-8 left-1/2 transform -translate-x-1/2 px-2 md:px-3 py-1 bg-gradient-to-r ${beat.color} rounded-full text-white text-xs md:text-sm font-bold shadow-lg`}>
+                            <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 px-2 md:px-3 py-1 bg-red-600 rounded-full text-white text-xs md:text-sm font-bold shadow-lg">
                               {beat.year}
                             </div>
                           </div>
@@ -192,15 +192,15 @@ const Journey = () => {
                               visibleBeats.includes(index) 
                                 ? 'opacity-100 translate-x-0' 
                                 : index % 2 === 0 ? 'opacity-0 translate-x-8' : 'opacity-0 -translate-x-8'
-                            }`} style={{ transitionDelay: `${index * 100 + 200}ms` }}>
+                            }`} style={{ transitionDelay: `${index * 50 + 100}ms` }}>
                               
                               {/* Professional Title */}
-                              <h3 className="text-base md:text-2xl font-bold text-white mb-2 md:mb-4 leading-tight">
+                              <h3 className="text-base md:text-2xl font-bold text-gray-900 mb-2 md:mb-4 leading-tight">
                                 {beat.title}
                               </h3>
                               
                               {/* Enhanced Description */}
-                              <p className="text-slate-300 text-sm md:text-md leading-relaxed mb-4 md:mb-6">
+                              <p className="text-gray-700 text-sm md:text-md leading-relaxed mb-4 md:mb-6">
                                 {beat.description}
                               </p>
                               
@@ -266,50 +266,49 @@ const Journey = () => {
                               visibleBeats.includes(index) 
                                 ? 'opacity-100 translate-x-0' 
                                 : index % 2 === 0 ? 'opacity-0 -translate-x-8' : 'opacity-0 translate-x-8'
-                            }`} style={{ transitionDelay: `${index * 800 + 1400}ms` }}>
+                            }`} style={{ transitionDelay: `${index * 200 + 400}ms` }}>
                               
                               {/* Professional Card */}
-                              <div className={`relative bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl p-4 md:p-8 border transition-all duration-500 group cursor-pointer 
-                                ${index === activeStory ? 'scale-105 shadow-2xl border-cyan-400' : 'border-white/20'} 
-                                hover:scale-105 hover:shadow-2xl hover:border-cyan-400`}
+                              <div className="relative bg-white rounded-2xl p-4 md:p-8 border border-gray-200 shadow-md group cursor-pointer 
+                                ${index === activeStory ? 'scale-105 shadow-2xl border-red-400' : 'border-gray-200'} 
+                                hover:scale-105 hover:shadow-2xl"
                               >
                                 
                                 {/* Card Header */}
                                 <div className="flex items-center gap-4 mb-6">
-                                  <div className={`w-12 h-12 bg-gradient-to-r ${beat.color} rounded-xl flex items-center justify-center`}>
+                                  <div className="w-12 h-12 bg-red-600 rounded-xl flex items-center justify-center">
                                     <div className="w-6 h-6 text-white">
                                       {beat.icon}
                                     </div>
                                   </div>
                                   <div>
-                                    <h4 className="text-lg font-semibold text-white">Milestone {index + 1}</h4>
-                                    <p className="text-sm text-slate-400">Transformation Phase</p>
+                                    <h4 className="text-lg font-semibold text-gray-900">Milestone {index + 1}</h4>
+                                    <p className="text-sm text-gray-600">Transformation Phase</p>
                                   </div>
                                 </div>
-                                
                                 
                                 {/* Key Stats */}
                                 <div className="grid grid-cols-2 gap-4">
                                   <div className="text-center">
-                                    <div className="text-2xl font-bold text-white mb-1">
+                                    <div className="text-2xl font-bold text-gray-900 mb-1">
                                       {index === 0 ? '5' : index === 1 ? '50' : index === 2 ? '150' : '200'}+
                                     </div>
-                                    <div className="text-xs text-slate-400">
+                                    <div className="text-xs text-gray-600">
                                       {index === 0 ? 'Team Members' : index === 1 ? 'Happy Clients' : index === 2 ? 'Projects' : 'Success Stories'}
                                     </div>
                                   </div>
                                   <div className="text-center">
-                                    <div className="text-2xl font-bold text-white mb-1">
+                                    <div className="text-2xl font-bold text-gray-900 mb-1">
                                       {index === 0 ? '1' : index === 1 ? '3' : index === 2 ? '5' : '11'}
                                     </div>
-                                    <div className="text-xs text-slate-400">
+                                    <div className="text-xs text-gray-600">
                                       {index === 0 ? 'Office' : index === 1 ? 'Offices' : index === 2 ? 'Countries' : 'Years Strong'}
                                     </div>
                                   </div>
                                 </div>
                                 
                                 {/* Hover overlay */}
-                                <div className={`absolute inset-0 bg-gradient-to-r ${beat.color} rounded-2xl opacity-0 group-hover:opacity-5 transition-opacity duration-300 pointer-events-none`} />
+                                <div className="absolute inset-0 bg-red-50 rounded-2xl opacity-0 transition-opacity duration-300 pointer-events-none" />
                               </div>
                             </div>
                           </div>
@@ -322,26 +321,26 @@ const Journey = () => {
                 <div className="block md:hidden">
                   <div className="relative flex flex-col items-center py-4 space-y-8">
                     {/* Vertical line */}
-                    <div className="absolute left-1/2 top-0 bottom-0 w-1 bg-slate-700 rounded-full" style={{ transform: 'translateX(-50%)' }} />
+                    <div className="absolute left-1/2 top-0 bottom-0 w-1 bg-red-600 rounded-full" style={{ transform: 'translateX(-50%)' }} />
                     {storyBeats.map((beat, index) => (
                       <div key={index} className="relative w-full flex flex-col items-center">
                         {/* Timeline Node - Mobile */}
                         <div className="z-10 mb-2">
-                          <div className={`relative w-12 h-12 bg-gradient-to-br ${beat.color} rounded-full flex items-center justify-center shadow-2xl border-4 border-white/30`}>
+                          <div className="relative w-12 h-12 bg-red-600 rounded-full flex items-center justify-center shadow-2xl border-4 border-gray-200">
                             <div className="absolute inset-0 bg-white/10 rounded-full backdrop-blur-sm" />
                             <div className="relative text-white">
                               {beat.icon}
                             </div>
                           </div>
-                          <div className={`absolute left-1/2 transform -translate-x-1/2 mt-2 px-2 py-1 bg-gradient-to-r ${beat.color} rounded-full text-white text-xs font-bold shadow-lg`}>
+                          <div className="absolute left-1/2 transform -translate-x-1/2 mt-2 px-2 py-1 bg-red-600 rounded-full text-white text-xs font-bold shadow-lg">
                             {beat.year}
                           </div>
                         </div>
                         {/* Content Card - Mobile */}
                         <div className="w-full mt-2 mb-4">
-                          <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl p-4 border border-white/20">
-                            <h3 className="text-base font-bold text-white mb-2 leading-tight text-center">{beat.title}</h3>
-                            <p className="text-slate-300 text-sm leading-relaxed mb-2 text-center">{beat.description}</p>
+                          <div className="bg-white rounded-2xl p-4 border border-gray-200">
+                            <h3 className="text-base font-bold text-gray-900 mb-2 leading-tight text-center">{beat.title}</h3>
+                            <p className="text-gray-700 text-sm leading-relaxed mb-2 text-center">{beat.description}</p>
                             {/* Key Achievement Metrics (optional, can be stacked or inline) */}
                           </div>
                         </div>
@@ -353,8 +352,8 @@ const Journey = () => {
                 {/* Timeline End Marker */}
                 <div className={`absolute left-1/2 transform -translate-x-1/2 bottom-0 transition-all duration-700 ${
                   timelineInView ? 'opacity-100' : 'opacity-0'
-                }`} style={{ transitionDelay: '3000ms' }}>
-                  <div className="w-6 h-6 bg-gradient-to-r from-cyan-400 to-purple-400 rounded-full border-2 border-white/50" />
+                }`} style={{ transitionDelay: '1200ms' }}>
+                  <div className="w-6 h-6 bg-red-600 rounded-full border-2 border-gray-200" />
                 </div>
               </div>
             </div>

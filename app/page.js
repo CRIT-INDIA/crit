@@ -5,9 +5,8 @@ import SAPServices3DShowcase from "./components/ui/risewithsap";
 import WhatSetsUsApart from "./components/ui/whatsetsusapart";
 import ContactForm from './components/ui/ContactForm';
 import Navbar from "./components/ui/Navbar";
-import { ServicesHeader } from "./components/ui/ServicesHeader";
-import { ServicesGrid } from "./components/ui/ServicesGrid";
-import ProductSection from "./components/ui/products";
+import ServicesGrid from "./components/ui/ServicesGrid";
+import DesignClassesSection from "./components/ui/products";
 import GrowingSection from "./components/ui/growingsection";
 import Capabilities from "./components/ui/capabilities";
 import FeaturedClients from "./components/ui/FeaturedClients";
@@ -18,7 +17,7 @@ import MovingClientsSection from "./components/ui/clients"
 
 export default function Home() {
   return (
-    <div className="relative overflow-hidden max-w-[1800px] w-full mx-auto bg-gradient-to-br from-[#081020] via-[#0d1a34] to-[#1a3468] bg-fixed">
+    <div className="relative overflow-hidden max-w-[1800px] w-full mx-auto bg-gradient-to-br from-white to-red-50">
       {/* Full-width hero section */}
       <div className="relative h-* min-h-[400px] overflow-hidden">
         <ThreeDMarquee />
@@ -36,11 +35,10 @@ export default function Home() {
         
         
         <div className="relative">
-          <ServicesHeader />
           <ServicesGrid mobileLimit={2} />
         </div>
         <div className="relative">
-          <ProductSection />
+          <DesignClassesSection />
         </div>
         <div className="relative">
           <FeaturedClients />

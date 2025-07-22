@@ -134,25 +134,24 @@ export default function Home() {
         <div className="flex flex-col items-center lg:items-start justify-center">
           {/* Logo + Title section - optional, can uncomment and add logo if desired */}
           {/* <Image src="/logo.svg" width={180} height={100} alt="Logo" className="mb-8" />*/}
-          <h1 className="text-4xl md:text-5xl font-extrabold text-white text-center lg:text-left mb-4">
+          <h1 className="text-4xl md:text-5xl font-extrabold text-black text-center lg:text-left mb-4">
             LEARN MORE<br /> ABOUT OUR <br />
-            <span className="text-[#dd5087]">PRODUCTS</span> {/* Using your original red color */}
+            <span className="text-red-600">PRODUCTS</span> {/* Using your original red color */}
           </h1>
         </div>
         {/* Right: Product Grid */}
         {/* Keeping lg:grid-cols-4 as per your provided code */}
         <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {/* SAP S/4HANA card - spans 2 rows */}
-          <a
-            href={"/products/" + services[0].slug}
-            className="service-card card-hover-gradient group relative bg-white border border-[#d9dbe7] flex flex-col h-full items-center shadow rounded-2xl transition-all duration-400 min-h-[200px] p-4 md:p-7 row-span-2 col-span-1 max-w-xs w-[90%] mx-auto focus:outline-none overflow-hidden hover:border-[#dd5087] hover:ring-2 hover:ring-[#dd5087] hover:z-20 transform translate-y-0 hover:-translate-y-2 hover:transition-transform hover:duration-500 hover:ease-in-out"
+          <div
+            className="service-card card-hover-gradient group relative bg-white border border-[#d9dbe7] flex flex-col h-full items-center shadow rounded-2xl transition-all duration-400 min-h-[200px] p-4 md:p-7 row-span-2 col-span-1 max-w-xs w-[90%] mx-auto focus:outline-none overflow-hidden hover:z-20 transform translate-y-0 hover:-translate-y-2 hover:transition-transform hover:duration-500 hover:ease-in-out"
             style={{ gridRow: "span 2 / span 2" }}
           >
             <div className="flex flex-col justify-end items-center mt-auto mb-1 transition-transform duration-500 ease-in-out group-hover:-translate-y-2">
-              <div className="mb-2 text-[#dd5087] group-hover:text-[#dd5087] group-hover:drop-shadow-xl transition-all duration-500 ease-in-out group-hover:scale-105">
+              <div className="mb-2 text-red-600 group-hover:text-red-600 group-hover:drop-shadow-xl transition-all duration-500 ease-in-out group-hover:scale-105">
                 {React.cloneElement(services[0].icon, { className: 'w-12 h-12' })}
               </div>
-              <h4 className="text-[#dd5087] group-hover:text-[#dd5087] text-[0.95rem] font-extrabold text-center mb-0 leading-tight uppercase transition-colors duration-500 ease-in-out">
+              <h4 className="text-red-600 group-hover:text-red-600 text-lg font-bold text-center mb-0 leading-tight uppercase transition-colors duration-500 ease-in-out">
                 {services[0].name}
               </h4>
               <div className="text-[#292359] group-hover:text-white/90 text-[0.7rem] text-center uppercase font-bold opacity-80 tracking-wide mb-1 transition-colors duration-500 ease-in-out">
@@ -162,34 +161,33 @@ export default function Home() {
                 {services[0].description}
               </div>
             </div>
-          </a>
+          </div>
           {/* Other cards */}
           {services.slice(1).map((service, i) => {
             const isBusinessObjects = service.name === "SAP BusinessObjects";
             return (
-              <a
+              <div
                 key={service.name}
-                href={"/products/" + service.slug}
-                className={`service-card card-hover-gradient group rounded-2xl bg-white border border-[#d9dbe7] flex flex-col h-full items-center shadow transition-all duration-600 p-3 md:p-7 max-w-xs w-[90%] mx-auto focus:outline-none overflow-hidden hover:border-[#dd5087] hover:ring-2 hover:ring-[#dd5087] transform translate-y-0 hover:-translate-y-2 hover:transition-transform hover:duration-500 hover:ease-in-out ${
+                className={`service-card card-hover-gradient group rounded-2xl bg-white border border-[#d9dbe7] flex flex-col h-full items-center shadow transition-all duration-600 p-3 md:p-7 max-w-xs w-[90%] mx-auto focus:outline-none overflow-hidden transform translate-y-0 hover:-translate-y-2 hover:transition-transform hover:duration-500 hover:ease-in-out ${
                   isBusinessObjects ? "row-span-2 col-span-1" : ""
                 }`}
                 style={isBusinessObjects ? { gridRow: "span 2 / span 2" } : {}}
               >
                 <div className="flex flex-col justify-end items-center mt-auto mb-1 transition-transform duration-500 ease-linear group-hover:-translate-y-2">
-                  <div className="mb-2 text-[#dd5087] group-hover:text-[#dd5087] group-hover:drop-shadow-xl transition-all duration-500 ease-in-out">
+                  <div className="mb-2 text-red-600 group-hover:text-red-600 group-hover:drop-shadow-xl transition-all duration-500 ease-in-out">
                     {React.cloneElement(service.icon, { className: 'w-12 h-12' })}
                   </div>
-                  <h4 className="text-[#dd5087] group-hover:text-[#dd5087] text-[0.95rem] font-extrabold text-center mb-0 leading-tight uppercase transition-colors duration-500 ease-in-out">
+                  <h4 className="text-red-600 group-hover:text-red-600 text-lg font-bold text-center mb-0 leading-tight uppercase transition-colors duration-500 ease-in-out">
                     {service.name}
                   </h4>
-                  <div className="text-[#292359] group-hover:text-white/90 text-[0.7rem] text-center uppercase font-bold opacity-80 tracking-wide mb-1 transition-colors duration-500 ease-in-out">
+                  <div className="text-[#292359]  group-hover:text-white/90 text-[0.7rem] text-center uppercase font-bold opacity-80 tracking-wide mb-1 transition-colors duration-500 ease-in-out">
                     {service.tagline}
                   </div>
                   <div className="service-desc text-[#777094] group-hover:text-white/85 text-xs font-medium mt-1 text-center leading-snug">
                     {service.description}
                   </div>
                 </div>
-              </a>
+              </div>
             );
           })}
         </div>
@@ -201,10 +199,10 @@ export default function Home() {
           transition: stroke 0.25s;
         }
         .service-card:hover .lucide {
-          stroke: #dd5087;
+          stroke: #ef4444;
         }
         .service-card:hover h4, .service-card:hover .tagline {
-          color: #dd5087 !important;
+          color: #fff !important;
         }
         .service-desc {
           opacity: 0;

@@ -422,32 +422,32 @@ export default function CritIndiaCtaForm({ onClose }) {
           <div className="flex flex-col lg:flex-row">
             {/* Left Side - Benefits */}
             <div className="w-full lg:w-2/5 p-2 sm:p-4 bg-gradient-to-b from-slate-800 to-slate-900 text-white">
-              <h3 className="text-xs sm:text-base font-semibold mb-2 sm:mb-3 text-blue-400">Why Choose CRIT India?</h3>
+              <h3 className="text-xs sm:text-base font-semibold mb-2 sm:mb-3 text-red-500">Why Choose CRIT India?</h3>
               <div className="space-y-2 mb-2 sm:mb-3">
                 <div className="flex items-start gap-2">
-                  <Users className="text-blue-400 mt-0.5 flex-shrink-0" size={14} />
+                  <Users className="text-red-500 mt-0.5 flex-shrink-0" size={14} />
                   <div>
-                    <h4 className="font-medium text-blue-300 text-xs">500+ Enterprise Clients</h4>
+                    <h4 className="font-medium text-red-400 text-xs">500+ Enterprise Clients</h4>
                     <p className="text-xs text-gray-400">Trusted by leading businesses</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-2">
-                  <Award className="text-blue-400 mt-0.5 flex-shrink-0" size={14} />
+                  <Award className="text-red-500 mt-0.5 flex-shrink-0" size={14} />
                   <div>
-                    <h4 className="font-medium text-blue-300 text-xs">Proven SAP Expertise</h4>
+                    <h4 className="font-medium text-red-400 text-xs">Proven SAP Expertise</h4>
                     <p className="text-xs text-gray-400">15+ years experience</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-2">
-                  <Globe className="text-blue-400 mt-0.5 flex-shrink-0" size={14} />
+                  <Globe className="text-red-500 mt-0.5 flex-shrink-0" size={14} />
                   <div>
-                    <h4 className="font-medium text-blue-300 text-xs">Global Reach</h4>
+                    <h4 className="font-medium text-red-400 text-xs">Global Reach</h4>
                     <p className="text-xs text-gray-400">Multiple countries support</p>
                   </div>
                 </div>
               </div>
               <div className="bg-slate-700 rounded p-2 border border-slate-600">
-                <p className="text-xs text-blue-300 font-medium mb-1">Free Consultation:</p>
+                <p className="text-xs text-red-400 font-medium mb-1">Free Consultation:</p>
                 <ul className="text-xs text-gray-300 space-y-0">
                   <li>• Readiness assessment</li>
                   <li>• Solution roadmap</li>
@@ -467,7 +467,7 @@ export default function CritIndiaCtaForm({ onClose }) {
                 </div>
               ) : (
                 <form className="space-y-2.5" onSubmit={handleSubmit} autoComplete="off">
-                  <h3 className="text-xs sm:text-base font-semibold text-blue-400 mb-2 sm:mb-3">Schedule Your Free Consultation</h3>
+                  <h3 className="text-xs sm:text-base font-semibold text-red-500 mb-2 sm:mb-3">Schedule Your Free Consultation</h3>
                   {/* Name & Email Row */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                     <div>
@@ -572,7 +572,7 @@ export default function CritIndiaCtaForm({ onClose }) {
                   {/* Submit Button */}
                   <button
                     type="submit"
-                    className="w-full bg-blue-400/20 border border-blue-400 hover:bg-blue-500/30 hover:border-blue-600 text-blue-300 hover:text-white font-semibold py-2.5 rounded transition-all duration-200 transform hover:scale-[1.01] shadow-md text-sm backdrop-blur-md"
+                    className="w-full bg-red-500/20 border border-red-500 hover:bg-red-600/30 hover:border-red-600 text-red-400 hover:text-white font-semibold py-2.5 rounded transition-all duration-200 transform hover:scale-[1.01] shadow-md text-sm backdrop-blur-md"
                   >
                     Get Your Free SAP Consultation
                   </button>

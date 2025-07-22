@@ -75,7 +75,7 @@ const ConnectWithUs = () => {
                 <a
                   key={index}
                   href="#"
-                  className={`bg-[#232f3e] transition-all duration-300 transform hover:scale-105 rounded-xl p-4 sm:p-5 flex items-center space-x-4 shadow-lg`}
+                  className={`bg-black transition-all duration-300 transform hover:scale-105 rounded-xl p-4 sm:p-5 flex items-center space-x-4 shadow-lg`}
                   onMouseEnter={() => setHoveredIndex(index)}
                   onMouseLeave={() => setHoveredIndex(null)}
                   style={

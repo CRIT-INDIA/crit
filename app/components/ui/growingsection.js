@@ -1,285 +1,413 @@
-'use client'
+import React, { useState, useEffect, useRef } from 'react';
+import { TrendingUp, TrendingDown, Users, ShoppingCart, Calendar, Eye, Code, Award, Briefcase, Settings } from 'lucide-react';
 
-import { useState, useEffect, useRef } from 'react'
-import { motion, useInView, useAnimation } from 'framer-motion'
-import Image from 'next/image'
-
-const GrowingSection = () => {
-  const [counters, setCounters] = useState({
+function MetricsDesktopView() {
+  const [animatedValues, setAnimatedValues] = useState({
+    years: 0,
     projects: 0,
-    team: 0,
     clients: 0,
-    success: 0
-  })
+    technologies: 0
+  });
 
-  const sectionRef = useRef(null)
-  const isInView = useInView(sectionRef, { once: true, threshold: 0.3 })
-  const controls = useAnimation()
+  const targetValues = {
+    years: 11,
+    projects: 600,
+    clients: 200,
+    technologies: 75
+  };
 
-  // Animated counter function
-  const animateCounter = (key, target, duration = 2000) => {
-    const increment = target / (duration / 16)
-    let current = 0
-    
+  const metrics = [
+    {
+      id: 'years',
+      label: 'Years of Success',
+      value: animatedValues.years,
+      target: targetValues.years,
+      format: (val) => `${Math.floor(val)}+`,
+      change: '11+ years and counting',
+      trend: 'up',
+      icon: Calendar,
+      color: 'from-red-500 to-red-600',
+      bgColor: 'bg-red-50',
+      textColor: 'text-red-700'
+    },
+    {
+      id: 'projects',
+      label: 'Projects Under Our Belt',
+      value: animatedValues.projects,
+      target: targetValues.projects,
+      format: (val) => `${Math.floor(val)}+`,
+      change: 'Growing portfolio',
+      trend: 'up',
+      icon: Briefcase,
+      color: 'from-red-500 to-red-600',
+      bgColor: 'bg-red-50',
+      textColor: 'text-red-700'
+    },
+    {
+      id: 'clients',
+      label: 'Clients',
+      value: animatedValues.clients,
+      target: targetValues.clients,
+      format: (val) => `${Math.floor(val)}+`,
+      change: 'Trusted partnerships',
+      trend: 'up',
+      icon: Users,
+      color: 'from-red-500 to-red-600',
+      bgColor: 'bg-red-50',
+      textColor: 'text-red-600'
+    },
+    {
+      id: 'technologies',
+      label: 'Technologies',
+      value: animatedValues.technologies,
+      target: targetValues.technologies,
+      format: (val) => `${Math.floor(val)}+`,
+      change: 'Cutting-edge stack',
+      trend: 'up',
+      icon: Settings,
+      color: 'from-red-500 to-red-600',
+      bgColor: 'bg-red-50',
+      textColor: 'text-red-600'
+    }
+  ];
+
+  // Track which metric is animating
+  const animatingRef = useRef({ years: false, projects: false, clients: false, technologies: false });
+
+  // Helper to animate a single metric from 0 to total
+  const animateMetric = (metricId, target) => {
+    if (animatedValues[metricId] === target || animatingRef.current[metricId]) return;
+    animatingRef.current[metricId] = true;
+    const duration = 2000;
+    const steps = 60;
+    const interval = duration / steps;
+    let current = 0;
+    let step = 0;
+    const increment = target / steps;
     const timer = setInterval(() => {
-      current += increment
-      if (current >= target) {
-        current = target
-        clearInterval(timer)
+      step++;
+      current = Math.min(current + increment, target);
+      setAnimatedValues(prev => ({ ...prev, [metricId]: current }));
+      if (step >= steps) {
+        clearInterval(timer);
+        setAnimatedValues(prev => ({ ...prev, [metricId]: target }));
+        animatingRef.current[metricId] = false;
       }
+    }, interval);
+  };
+
+  // On mount, set all values to total
+  useEffect(() => {
+    setAnimatedValues({ ...targetValues });
+    // eslint-disable-next-line
+  }, []);
+
+  return (
+    <div className="w-full max-w-7xl mx-auto pt-2 pb-18 px-8 ">
+      <div className="mb-12 text-center">
+         <h2 className={`text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 md:mb-6 transition-all duration-1000 inline-block relative`}>
+    <span className="text-black"> We are </span>
+    <span className="text-red-500">Growing</span>
+    <svg className="mx-auto my-0" style={{marginTop: '-4px'}} width="160" height="18" viewBox="0 0 220 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M5 18 Q 110 8, 215 14" stroke="#dc2626" strokeWidth="4" strokeLinecap="round" fill="none"/>
+  <path d="M15 21 Q 120 15, 200 18" stroke="#dc2626" strokeWidth="2" strokeLinecap="round" fill="none"/>
+</svg>
+     </h2>
+      </div>
+
+      <div className="relative">
+        {/* Connecting lines background */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <svg className="w-full h-full opacity-18">
+            <defs>
+              <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="#3b82f6" />
+                <stop offset="50%" stopColor="#8b5cf6" />
+                <stop offset="100%" stopColor="#f59e0b" />
+              </linearGradient>
+            </defs>
+            <path
+              d="M 0,120 Q 300,80 600,120 T 1200,120"
+              stroke="black"
+              strokeWidth="3"
+              fill="none"
+              className="animate-pulse"
+            />
+            <path
+              d="M 0,240 Q 300,280 600,240 T 1200,240"
+              stroke="black"
+              strokeWidth="3"
+              fill='none'
+              className="animate-pulse"
+              style={{ animationDelay: '1s' }}
+            />
+            {/* Additional lines for 3rd and 4th cards */}
+            <path
+              d="M 0,360 Q 300,320 600,360 T 1200,360"
+              stroke="black"
+              strokeWidth="2"
+              fill="none"
+              className="animate-pulse"
+              style={{ animationDelay: '0.5s' }}
+            />
+            <path
+              d="M 0,480 Q 300,520 600,480 T 1200,480"
+              stroke="black"
+              strokeWidth="2"
+              fill="none"
+              className="animate-pulse"
+              style={{ animationDelay: '1.5s' }}
+            />
+          </svg>
+        </div>
+
+        {/* Metrics display */}
+        <div className="relative z-10 space-y-4">
+          {metrics.map((metric, index) => {
+            const Icon = metric.icon;
+            const isEven = index % 2 === 0;
+            
+            return (
+              <div
+                key={metric.id}
+                className={`flex items-center ${isEven ? 'justify-start' : 'justify-end'} w-full`}
+              >
+                <div
+                  className={`relative group transition-all duration-700 hover:scale-105 ${
+                    isEven ? 'animate-slideInLeft' : 'animate-slideInRight'
+                  } w-120`}
+                  style={{
+                    animationDelay: `${index * 200}ms`,
+                    animationFillMode: 'both'
+                  }}
+                  onMouseEnter={() => animateMetric(metric.id, metric.target)}
+                >
+                  {/* Floating background blur */}
+                  <div className="absolute -inset-2 bg-white rounded-3xl blur-xl opacity-30 group-hover:opacity-50 transition-opacity duration-300"></div>
+                  
+                  {/* Main container */}
+                  <div className="relative flex items-center gap-6 p-3 bg-black/70 text-white backdrop-blur-sm rounded-2xl border border-white/20 shadow-lg hover:shadow-xl transition-all duration-300">
+                    {/* Icon section */}
+                    <div className="flex-shrink-0 bg-red-50 p-4 rounded-2xl">
+                        <div className="bg-red-600 p-3 rounded-xl">
+                          <Icon className="w-8 h-8 text-white" />
+                        </div>
+                      </div>
+                    
+                    {/* Content section */}
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-baseline gap-4 mb-2">
+                        <h3 className="text-lg font-semibold text-white">{metric.label}</h3>
+                        <div className="text-sm font-medium text-gray-200">
+                          {metric.change}
+                        </div>
+                      </div>
+                      
+                      <div className="text-3xl font-bold text-white mb-1">
+                        {metric.format(animatedValues[metric.id])}
+                      </div>
+                      
+                      {/* Progress bar */}
+                      <div className="w-full bg-red-700 rounded-full h-2 overflow-hidden">
+                        <div
+                          className={`h-full bg-gradient-to-r from-red-500 to-red-600 transition-all duration-1000 ease-out`}
+                          style={{
+                            width: `${(animatedValues[metric.id] / metric.target) * 100}%`
+                          }}
+                        ></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
       
-      setCounters(prev => ({
-        ...prev,
-        [key]: Math.floor(current)
-      }))
-    }, 16)
-  }
+      <style jsx>{`
+        @keyframes slideInLeft {
+          from {
+            opacity: 0;
+            transform: translateX(-100px);
+          }
+          to {
+            opacity: 1;
+            transform: translateX(0);
+          }
+        }
+        
+        @keyframes slideInRight {
+          from {
+            opacity: 0;
+            transform: translateX(100px);
+          }
+          to {
+            opacity: 1;
+            transform: translateX(0);
+          }
+        }
+        
+        .animate-slideInLeft {
+          animation: slideInLeft 0.8s ease-out;
+        }
+        
+        .animate-slideInRight {
+          animation: slideInRight 0.8s ease-out;
+        }
+      `}</style>
+    </div>
+  );
+}
+
+// Mobile version (existing GrowingSection)
+import { Rocket, Layers, Building2, Settings2 } from 'lucide-react';
+
+const GrowingSectionMobile = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const [counters, setCounters] = useState({
+    years: 0,
+    projects: 0,
+    clients: 0,
+    technologies: 0
+  });
+
+  const targets = {
+    years: 11,
+    projects: 600,
+    clients: 200,
+    technologies: 75
+  };
 
   useEffect(() => {
-    if (isInView) {
-      controls.start('visible')
-      // Start counters with delays
-      setTimeout(() => animateCounter('projects', 11), 800)
-      setTimeout(() => animateCounter('team', 600), 1000)
-      setTimeout(() => animateCounter('clients', 200), 1200)
-      setTimeout(() => animateCounter('success', 75), 1400)
-    }
-  }, [isInView, controls])
-
-  const containerVariants = {
-    hidden: {},
-    visible: {
-      transition: {
-        staggerChildren: 0.2
-      }
-    }
-  }
-
-  const itemVariants = {
-    hidden: {
-      opacity: 0,
-      y: 50
-    },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.8,
-        ease: [0.4, 0, 0.2, 1]
-      }
-    }
-  }
+    setIsVisible(true);
+    const animateCounters = () => {
+      const duration = 2000;
+      const steps = 50;
+      const interval = duration / steps;
+      let currentStep = 0;
+      const timer = setInterval(() => {
+        currentStep++;
+        const progress = currentStep / steps;
+        setCounters({
+          years: Math.floor(targets.years * progress),
+          projects: Math.floor(targets.projects * progress),
+          clients: Math.floor(targets.clients * progress),
+          technologies: Math.floor(targets.technologies * progress)
+        });
+        if (currentStep >= steps) {
+          clearInterval(timer);
+          setCounters(targets);
+        }
+      }, interval);
+    };
+    const timer = setTimeout(animateCounters, 500);
+    return () => clearTimeout(timer);
+  }, []);
 
   const stats = [
     {
+      icon: <Rocket className="w-7 h-7 text-white" />,
+      key: 'years',
+      label: "Years of Success",
+      suffix: "+",
+      sub: "11+ years and counting"
+    },
+    {
+      icon: <Layers className="w-7 h-7 text-white" />,
       key: 'projects',
-      label: 'Years of Success',
-      suffix: '+',
-      growth: '11+ years and counting',
-      icon: <Image 
-        src="https://res.cloudinary.com/dujw4np0d/image/upload/v1750939192/rocket_jwq1o9.png"
-        alt="Rocket icon"
-        width={40}
-        height={40}
-        className="mx-auto"
-      />
+      label: "Projects Under Our Belt",
+      suffix: "+",
+      sub: "Growing portfolio"
     },
     {
-      key: 'team',
-      label: 'Projects Under Our Belt',
-      suffix: '+',
-      growth: 'Growing portfolio',
-      icon: <Image 
-        src="https://res.cloudinary.com/dujw4np0d/image/upload/v1750939414/layers_i3vavi.png"
-        alt="Layers icon"
-        width={40}
-        height={40}
-        className="mx-auto"
-      />
-    },
-    {
+      icon: <Building2 className="w-7 h-7 text-white" />,
       key: 'clients',
-      label: 'Clients',
-      suffix: '+',
-      growth: 'Trusted partnerships',
-      icon: <Image 
-        src="https://res.cloudinary.com/dujw4np0d/image/upload/v1750940007/client_zgml9v.png"
-        alt="Clients icon"
-        width={40}
-        height={40}
-        className="mx-auto"
-      />
+      label: "Clients",
+      suffix: "+",
+      sub: "Trusted partnerships"
     },
     {
-      key: 'success',
-      label: 'Technologies',
-      suffix: '+',
-      growth: 'Cutting-edge stack',
-      icon: <Image 
-        src="https://res.cloudinary.com/dujw4np0d/image/upload/v1750941176/techno_tda1t6.png"
-        alt="Technology icon"
-        width={40}
-        height={40}
-        className="mx-auto"
-      />
+      icon: <Settings2 className="w-7 h-7 text-white" />,
+      key: 'technologies',
+      label: "Technologies",
+      suffix: "+",
+      sub: "Cutting-edge stack"
     }
-  ]
+  ];
 
   return (
-    <section 
-      ref={sectionRef}
-      className="relative min-h-* overflow-hidden"
-    >
-      <style jsx global>{`
-  @keyframes border-shine {
-    0% {
-      background-position: 0% 50%;
-    }
-    50% {
-      background-position: 100% 50%;
-    }
-    100% {
-      background-position: 0% 50%;
-    }
-  }
-  .shine-border {
-    position: relative;
-  }
-  .shine-border::before {
-    content: '';
-    position: absolute;
-    inset: -1px;
-    z-index: -1;
-    background: linear-gradient(
-      45deg,
-      transparent,
-      transparent,
-      rgba(59, 130, 246, 0.1),  /* blue-500 */
-      rgba(37, 99, 235, 0.2),   /* blue-600 */
-      rgba(59, 130, 246, 0.1),
-      transparent,
-      transparent
-    );
-    background-size: 200% 200%;
-    animation: border-shine 4s linear infinite;
-    border-radius: 0.75rem;
-  }
-`}</style>
-
-     
-
-      {/* Floating Elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        {[...Array(5)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-2 h-2 rounded-full"
-            animate={{
-              y: [-20, -100],
-              x: [0, 50],
-              opacity: [0, 1, 0]
-            }}
-            transition={{
-              duration: 8,
-              repeat: Infinity,
-              delay: i * 1.5,
-              ease: "easeInOut"
-            }}
-            style={{
-              left: `${20 + i * 15}%`,
-              top: '100%'
-            }}
-          />
-        ))}
-      </div>
-
-      <div className="relative z-10 container mx-auto px-4 flex items-center">
-        <motion.div 
-          className="w-full max-w-5xl mx-auto text-center"
-          variants={containerVariants}
-          initial="hidden"
-          animate={controls}
-        >
-          {/* Main Title */}
-          <motion.div variants={itemVariants} className="mb-6">
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 inline-block relative">
-    <span className="text-white">We Are </span>
-    <span className="text-blue-500">Growing</span>
-    <svg 
-      className="absolute -bottom-2 left-1/2 transform -translate-x-1/2" 
-      width="100%" 
-      height="4" 
-      viewBox="0 0 200 4"
-      preserveAspectRatio="none"
-    >
-      <defs>
-        <linearGradient id="underlineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" stopColor="#60a5fa" stopOpacity="0.8"/>
-          <stop offset="30%" stopColor="#3b82f6" stopOpacity="1"/>
-          <stop offset="70%" stopColor="#1d4ed8" stopOpacity="1"/>
-          <stop offset="100%" stopColor="#ffffff" stopOpacity="0.9"/>
-        </linearGradient>
-      </defs>
-      <rect 
-        x="0" 
-        y="0" 
-        width="200" 
-        height="4" 
-        fill="url(#underlineGradient)"
-        rx="2"
-      />
-    </svg>
-  </h1>
-          </motion.div>
-
-          {/* Subtitle */}
-          
-
-          {/* Stats Grid */}
-          <motion.div 
-            variants={containerVariants}
-            className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-10"
-          >
-            {stats.map((stat, index) => (
-              <motion.div
-                key={stat.key}
-                variants={itemVariants}
-                className="shine-border group relative bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-xl p-4 hover:bg-slate-800/70 transition-all duration-500 hover:scale-105"
-              >
-                {/* Card glow effect */}
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 to-emerald-500/5 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                
-                <div className="relative z-10">
-                  <div className="text-2xl mb-2 h-8 flex items-center justify-center">{stat.icon}</div>
-                  <div className="text-3xl md:text-4xl font-bold mb-1">
-                    <span className="bg-gradient-to-r from-blue-400 to-emerald-400 bg-clip-text text-transparent">
-                      {counters[stat.key]}{stat.suffix}
-                    </span>
-                  </div>
-                  <div className="text-slate-300 text-base font-medium mb-2">
-                    {stat.label}
-                  </div>
-                  <div className="flex items-center justify-center text-xs text-blue-400">
-                    <motion.div
-                      className="w-0 h-0 border-l-2 border-r-2 border-b-2 border-transparent border-b-blue-400 mr-1"
-                      animate={{ y: [0, -2, 0] }}
-                      transition={{ duration: 2, repeat: Infinity }}
-                    />
-                    {stat.growth}
-                  </div>
-                </div>
-              </motion.div>
+    <div className="w-full max-w-md mx-auto relative overflow-hidden min-h-screen flex flex-col block md:hidden bg-gradient-to-br from-[#0A1624] to-[#16243A] px-4 sm:px-6 py-8 sm:py-12">
+      <div className="flex-1 flex flex-col justify-center">
+        <div className={`text-center mb-8 transition-all duration-1000 ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-90'}`}>
+          <div className="relative inline-block">
+            <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full flex items-center justify-center mb-6 relative" style={{ backgroundColor: '#2ec8fa' }}>
+              <TrendingUp className="w-8 h-8 sm:w-10 sm:h-10 text-white" />
+              <div className="absolute inset-0 rounded-full animate-ping border-2 bg-gradient-to-r from-blue-400 to-emerald-400" style={{ WebkitMaskImage: 'radial-gradient(white, black)', borderColor: 'transparent', boxShadow: '0 0 0 4px rgba(46,200,250,0.08)', animationDuration: '2.5s' }}></div>
+              <div className="absolute inset-0 rounded-full animate-ping bg-gradient-to-r from-blue-400 to-emerald-400" style={{ animationDelay: '2s', WebkitMaskImage: 'radial-gradient(white, black)', borderColor: 'transparent', boxShadow: '0 0 0 4px rgba(46,200,250,0.08)', animationDuration: '2.5s' }}></div>
+            </div>
+          </div>
+          <h1 className="text-3xl sm:text-4xl font-black text-white leading-tight">WE ARE</h1>
+          <h2 className="text-4xl sm:text-5xl font-black mt-2 animate-pulse bg-gradient-to-r from-blue-400 to-emerald-400 bg-clip-text text-transparent">GROWING</h2>
+        </div>
+        <div className={`mb-8 transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+          <div className="flex items-end justify-center h-20 sm:h-24 space-x-2">
+            {[30, 50, 70, 90, 100].map((height, i) => (
+              <div
+                key={i}
+                className="flex-1 max-w-8 rounded-t-lg animate-pulse"
+                style={{
+                  height: `${height}%`,
+                  backgroundColor: '#2ec8fa',
+                  animationDelay: `${i * 0.3}s`,
+                  animationDuration: '2s'
+                }}
+              />
             ))}
-          </motion.div>
-
-          
-          
-        </motion.div>
+          </div>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          {stats.map((stat, index) => (
+            <div 
+              key={index}
+              className={`transition-all duration-700 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'} bg-[#16243A] rounded-xl p-4 flex flex-col justify-between h-full`}
+              style={{ transitionDelay: `${index * 200 + 500}ms` }}
+            >
+              <div className="flex items-center justify-between mb-2">
+                <div className="flex items-center space-x-3">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center" style={{ backgroundColor: '#2ec8fa' }}>
+                    {stat.icon}
+                  </div>
+                  <span className="text-white text-base sm:text-lg font-bold">{stat.label}</span>
+                </div>
+                <span className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-blue-400 to-emerald-400 bg-clip-text text-transparent">
+                  {counters[stat.key]}{stat.suffix}
+                </span>
+              </div>
+              <div className="w-full bg-gray-800 rounded-full h-2 overflow-hidden">
+                <div 
+                  className="h-full rounded-full transition-all duration-1000 ease-out bg-gradient-to-r from-blue-400 to-emerald-400"
+                  style={{ width: `${(counters[stat.key] / targets[stat.key]) * 100}%` }}
+                />
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
+    </div>
+  );
+};
 
-      {/* Bottom gradient fade */}
-       </section>
-  )
-}
+const GrowingSection = () => (
+  <>
+    <div className="hidden md:block">
+      <MetricsDesktopView />
+    </div>
+    <div className="block md:hidden">
+      <GrowingSectionMobile />
+    </div>
+  </>
+);
 
-export default GrowingSection
+export default GrowingSection;

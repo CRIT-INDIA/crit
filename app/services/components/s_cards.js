@@ -471,26 +471,21 @@ const ServicesGrid = () => {
       `}</style>
 
       <section className="extension-showcase">
-      <div className="relative z-10 text-center sm:mb-12 px-4 sm:px-1">
-      <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 inline-block relative">
-    <span className="text-black">Our </span>
-    <span className="text-red-500">Services</span>
-   <svg className="mx-auto my-0" style={{marginTop: '-4px'}} width="160" height="18" viewBox="0 0 220 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <path d="M5 18 Q 110 8, 215 14" stroke="#dc2626" strokeWidth="4" strokeLinecap="round" fill="none"/>
-  <path d="M15 21 Q 120 15, 200 18" stroke="#dc2626" strokeWidth="2" strokeLinecap="round" fill="none"/>
-</svg>
-  </h1>
-      <p className="text-base sm:text-lg text-black max-w-3xl mx-auto px-2 sm:px-0">
-        Comprehensive SAP solutions tailored to transform your business operations and drive digital excellence
-      </p>
-    </div>
         {/* Decorative Elements */}
         <div className="absolute top-20 right-20 w-32 h-32 bg-red-500/10 rounded-full blur-3xl" />
         <div className="absolute bottom-20 left-20 w-40 h-40 bg-red-400/10 rounded-full blur-3xl" />
         <div className="absolute top-1/2 left-1/4 w-24 h-24 bg-red-300/10 rounded-full blur-2xl" />
         
         <div className="container">
-          
+          <div className="header-section">
+            <h2 className="section-title">
+              There's a <span className="gradient-text">SAP Service</span> for Everything.
+            </h2>
+            <p className="section-subtitle">
+              Access your SAP systems instantly. From analytics to logistics, 
+              manage your entire SAP landscape without leaving your keyboard.
+            </p>
+          </div>
 
           <div className="filter-container">
             <div className="category-filters">

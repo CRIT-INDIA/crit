@@ -67,7 +67,7 @@ export default function ContactSection() {
                   ref={el => letterRefs.current[i] = el}
                   className={`transition-colors duration-200`}
                   style={{
-                    color: (barPos > 0 && i < barPos) ? "#2563eb" : "#fff",
+                    color: (barPos > 0 && i < barPos) ? "red" : "black",
                     position: "relative",
                     zIndex: 1,
                     fontWeight: "bold",
@@ -86,7 +86,7 @@ export default function ContactSection() {
                   top: "50%",
                   height: "70%",
                   width: "6px",
-                  background: "#2563eb",
+                  background: "red",
                   zIndex: 2,
                   borderRadius: "3px",
                   transform: "translateY(-50%)",
@@ -97,11 +97,11 @@ export default function ContactSection() {
           </div>
           {/* Main text */}
           <div className="space-y-6">
-            <p className="text-white/90 text-base sm:text-lg lg:text-xl leading-relaxed font-light">
+            <span className="text-black text-base sm:text-lg lg:text-xl leading-relaxed font-light">
               Thank you for taking the time to learn more about{' '}
-              <span className="text-blue-400 font-semibold">CRIT INDIA</span>{' '}
+              <span className="text-red-600 font-semibold">CRIT INDIA</span>{' '}
               complete the form with inform business requirements our industry exports will get in touch with you
-            </p>
+            </span>
           </div>
         </div>
         {/* Right side - Interactive contact icons */}
@@ -140,12 +140,12 @@ export default function ContactSection() {
                           {/* Icon background with glow */}
                           <div className={`absolute inset-0 rounded-full transition-all duration-300 ${
                             hoveredIcon === item.id ? 'scale-125 shadow-[0_0_24px_8px_rgba(255,255,255,0.7)]' : 'scale-100 shadow-[0_0_16px_4px_rgba(255,255,255,0.4)]'
-                          }`} style={{ background: '#2563EB', border: '2px solid #2563EB' }}>
+                          }`} style={{ background: 'red', border: '2px solid #2563EB' }}>
                           </div>
                           {/* Icon */}
                           <div className="absolute inset-0 flex items-center justify-center">
                             <item.icon 
-                              className={`w-5 h-5 sm:w-6 sm:h-6 lg:w-6 lg:h-6 transition-all duration-300 text-white ${
+                              className={`w-5 h-5 sm:w-6 sm:h-6 lg:w-6 lg:h-6 transition-all duration-300 text-white cursor-pointer ${
                                 hoveredIcon === item.id ? 'scale-110' : ''
                               }`} 
                               style={{ filter: hoveredIcon === item.id ? 'drop-shadow(0 0 12px #fff)' : 'drop-shadow(0 0 6px #fff)' }}
@@ -191,7 +191,7 @@ export default function ContactSection() {
               </div>
             </div>
             {/* Outer ring animation */}
-            <div className="absolute inset-0 w-44 h-44 sm:w-60 sm:h-60 lg:w-72 lg:h-72 border-4 border-blue-400/20 rounded-full animate-spin" style={{ animationDuration: '20s' }}>
+            <div className="absolute inset-0 w-44 h-44 sm:w-60 sm:h-60 lg:w-72 lg:h-72 border-4 border-black/10 rounded-full animate-spin" style={{ animationDuration: '20s' }}>
               <div className="absolute w-2 h-2 bg-blue-400 rounded-full -top-1 left-1/2 transform -translate-x-1/2" />
             </div>
           </div>

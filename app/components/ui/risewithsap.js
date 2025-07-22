@@ -95,7 +95,7 @@ const SAPServices3DShowcase = () => {
     
     timeoutRef.current = setTimeout(() => {
       setIsUserInteracting(false);
-    }, 8000);
+    }, 500);
   }, []);
 
   // Effect for auto-rotation
@@ -203,34 +203,14 @@ const SAPServices3DShowcase = () => {
   <h2 className={`text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 md:mb-6 transition-all duration-1000 inline-block relative ${
     hasBeenVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
   }`}>
-    <span className="text-white"> Rise With </span>
-    <span className="text-blue-500">SAP</span>
-    <svg
-      className="absolute -bottom-2 left-1/2 transform -translate-x-1/2"
-      width="100%"
-      height="4"
-      viewBox="0 0 200 4"
-      preserveAspectRatio="none"
-    >
-      <defs>
-        <linearGradient id="underlineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" stopColor="#60a5fa" stopOpacity="0.8"/>
-          <stop offset="30%" stopColor="#3b82f6" stopOpacity="1"/>
-          <stop offset="70%" stopColor="#1d4ed8" stopOpacity="1"/>
-          <stop offset="100%" stopColor="#ffffff" stopOpacity="0.9"/>
-        </linearGradient>
-      </defs>
-      <rect
-        x="0"
-        y="0"
-        width="200"
-        height="4"
-        fill="url(#underlineGradient)"
-        rx="2"
-      />
-    </svg>
-  </h2>
-  <p className={`text-base md:text-md text-gray-300 max-w-xl mx-auto leading-relaxed transition-all duration-1000 delay-300 px-4 ${
+    <span className="text-black"> Rise With </span>
+    <span className="text-red-500">SAP</span>
+    <svg className="mx-auto my-0" style={{marginTop: '-4px'}} width="160" height="18" viewBox="0 0 220 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M5 18 Q 110 8, 215 14" stroke="#dc2626" strokeWidth="4" strokeLinecap="round" fill="none"/>
+  <path d="M15 21 Q 120 15, 200 18" stroke="#dc2626" strokeWidth="2" strokeLinecap="round" fill="none"/>
+</svg>
+     </h2>
+  <p className={`text-base md:text-md text-gray-800 max-w-xl mx-auto leading-relaxed transition-all duration-1000 delay-300 px-4 ${
     hasBeenVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
     }`}>
     RISE with SAP is a program that aims to assist businesses in making the transition to intelligent enterprise. It is a comprehensive approach to digital transformation.

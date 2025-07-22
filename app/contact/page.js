@@ -1,19 +1,21 @@
-import ContactForm from "./contactform-c";
-import ConnectWithUs from "./connect";
-import ContactSection from "./contactus";
+'use client';
+import ContactForm from "./components/contactform-c";
+import ConnectWithUs from "./components/connect";
+import ContactSection from "./components/contactus";
+import "./contactus.css";
 
-export default function Contact() {
+export default function ContactPage() {
   return (
     <>
-    <div className="bg-gradient-to-br from-[#081020] via-[#0d1a34] to-[#1a3468] text-white font-inter overflow-hidden bg-fixed">
-    <ContactSection />
-    <div>
+      <section className="hero-section bg-gradient-to-br from-white to-red-50" bg-fixed>
+        <ContactSection />
       
-      <ContactForm />
-      <ConnectWithUs />
+        <div>
+          <ContactForm />
+          <ConnectWithUs />
+        </div>
+        </section>
       
-      </div>
-    </div>
     </>
   );
 }

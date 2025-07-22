@@ -63,15 +63,15 @@ export const ThreeDMarquee = ({ className }) => {
           animate="visible"
         >
           <motion.h1
-            className="text-3xl sm:text-4xl md:text-4xl lg:text-5xl font-bold text-gray-100 leading-tight mb-1 md:mb-6 text-left opacity-100 pt-50"
+            className="text-3xl sm:text-4xl md:text-4xl lg:text-5xl font-bold text-black/80 leading-tight mb-1 md:mb-6 text-left opacity-100 pt-50"
             variants={itemVariants}
           >
             Transforming<br />
             Business Through<br />
-            <span className="text-red-700">SAP Excellence</span>
+            <span className="text-red-500">SAP Excellence</span>
           </motion.h1>
           <motion.p
-            className="text-base md:text-lg text-gray-200 mb-6 md:mb-8 max-w-xl text-left"
+            className="text-base md:text-lg text-black mb-6 md:mb-8 max-w-xl text-left"
             variants={itemVariants}
           >
             Empower your enterprise with CritIndia's comprehensive SAP implementation and support services. We deliver tailored solutions that drive innovation and growth.
@@ -80,7 +80,7 @@ export const ThreeDMarquee = ({ className }) => {
             <a
               href="#"
               onClick={e => { e.preventDefault(); setShowCtaForm(true); }}
-              className="flex items-center gap-2 px-3 sm:px-4 md:px-6 py-2 rounded-full font-semibold bg-gradient-to-r from-blue-500 to-blue-700 text-white shadow-lg hover:from-blue-600 hover:to-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all duration-200 text-sm md:text-base active:scale-95"
+              className="flex items-center gap-2 px-3 sm:px-4 md:px-6 py-2 rounded-full font-semibold bg-gradient-to-r from-red-500 to-red-700 text-white shadow-lg hover:scale-105 hover:from-red-600 hover:to-red-800 focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all duration-200 text-sm md:text-base active:scale-95"
               style={{ pointerEvents: 'auto' }}
             >
               <svg className="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="13" rx="2" /><path d="M16 2v4M8 2v4M3 10h18" /></svg>
@@ -88,14 +88,18 @@ export const ThreeDMarquee = ({ className }) => {
             </a>
             <a
               href="#solutions"
-              className="flex items-center gap-2 px-3 sm:px-4 md:px-6 py-2 rounded-full font-semibold bg-white/10 border border-gray-400/30 text-white backdrop-blur-md hover:bg-white/20 hover:border-gray-200/50 transition-all duration-200 text-sm md:text-base active:scale-95 shadow-md"
+              className="flex items-center gap-2 px-3 sm:px-4 md:px-6 py-2 hover:scale-105 rounded-full font-semibold bg-white/10 border border-gray-400/30 text-black/80 backdrop-blur-md hover:bg-white/20 hover:border-gray-200/50 transition-all duration-200 text-sm md:text-base active:scale-95 shadow-md"
               style={{ pointerEvents: 'auto' }}
             >
               View Solutions
-              <svg xmlns="http://www.w3.org/2000/svg" fill="white" width="20" height="20" className="w-4 h-4 md:w-5 md:h-5"><path d="M7.293 4.707 14.586 12l-7.293 7.293 1.414 1.414L17.414 12 8.707 3.293 7.293 4.707z"/></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="black" width="20" height="20" className="w-4 h-4 md:w-5 md:h-5"><path d="M7.293 4.707 14.586 12l-7.293 7.293 1.414 1.414L17.414 12 8.707 3.293 7.293 4.707z"/></svg>
             </a>
+            
+            
           </motion.div>
+          
         </motion.div>
+        
       </div>
       {/* Marquee Background */}
       <div className="absolute inset-0 z-0 w-full h-full">

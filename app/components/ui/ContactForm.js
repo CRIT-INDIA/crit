@@ -390,68 +390,48 @@ export default function ContactForm() {
 
   return (
     <div>
-      <div className="min-h-* bg-no-repeat bg-cover bg-center relative m-auto max-w-full">
+      <div className="min-h-* bg-no-repeat bg-cover bg-center relative m-auto max-w-full pb-20">
         <div className="container mx-auto px-2 sm:px-4 lg:px-6 py-3 sm:py-4 lg:py-6">
           {/* Main Heading */}
           <div className="text-center mb-6 sm:mb-8 pt-6 sm:pt-8">
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 inline-block relative">
-    <span className="text-white">Get In Touch With </span>
-    <span className="text-blue-500">Connecting Roots</span>
-    <svg 
-      className="absolute -bottom-2 left-1/2 transform -translate-x-1/2" 
-      width="100%" 
-      height="4" 
-      viewBox="0 0 200 4"
-      preserveAspectRatio="none"
-    >
-      <defs>
-        <linearGradient id="underlineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" stopColor="#60a5fa" stopOpacity="0.8"/>
-          <stop offset="30%" stopColor="#3b82f6" stopOpacity="1"/>
-          <stop offset="70%" stopColor="#1d4ed8" stopOpacity="1"/>
-          <stop offset="100%" stopColor="#ffffff" stopOpacity="0.9"/>
-        </linearGradient>
-      </defs>
-      <rect 
-        x="0" 
-        y="0" 
-        width="200" 
-        height="4" 
-        fill="url(#underlineGradient)"
-        rx="2"
-      />
-    </svg>
+    <span className="text-black">Get In Touch With </span>
+    <span className="text-red-500">Connecting Roots</span>
+    <svg className="mx-auto my-0" style={{marginTop: '-4px'}} width="160" height="18" viewBox="0 0 220 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M5 18 Q 110 8, 215 14" stroke="#dc2626" strokeWidth="4" strokeLinecap="round" fill="none"/>
+  <path d="M15 21 Q 120 15, 200 18" stroke="#dc2626" strokeWidth="2" strokeLinecap="round" fill="none"/>
+</svg>
   </h1>
           </div>
           <div className="max-w-6xl mx-auto flex flex-col lg:flex-row gap-4 sm:gap-6 lg:gap-8 items-start relative z-10 w-full">
             {/* Left Side - Contact Information */}
             <div className="w-full lg:w-5/12 space-y-4">
               {/* Call Us Section */}
-              <div className="backdrop-blur-md border border-white/10 rounded-md p-3 sm:p-4 lg:p-5 shadow-sm transition-all duration-300 hover:border-white/20 hover:shadow-md hover:scale-[1.02] hover:bg-white/5">
-                <h3 className="text-base sm:text-lg lg:text-xl font-semibold mb-2 flex items-center gap-2 text-white">
-                  <span className="bg-white/10 p-1.5 rounded-md transition-colors duration-300 group-hover:bg-white/20">
-                    <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+              <div className="backdrop-blur-md border bg-black/10 border-white/10 rounded-md p-3 sm:p-4 lg:p-5 shadow-sm transition-all duration-300 hover:border-white/20 hover:shadow-md hover:scale-[1.02] hover:bg-white/5">
+                <h3 className="text-base sm:text-lg lg:text-xl font-semibold mb-2 flex items-center gap-2 text-black">
+                  <span className="bg-black/10 p-1.5 rounded-md transition-colors duration-300 group-hover:bg-white/20">
+                    <svg className="w-4 h-4 text-black" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
                     </svg>
                   </span>
                   CALL US
                 </h3>
                 <div className="pl-6 lg:pl-8">
-                  <p className="text-gray-300 text-sm">+91 90040 02941</p>
+                  <p className="text-gray-800 text-sm">+91 90040 02941</p>
                 </div>
               </div>
               {/* Location Section */}
-              <div className="backdrop-blur-md border border-white/10 rounded-md p-3 sm:p-4 lg:p-5 shadow-sm transition-all duration-300 hover:border-white/20 hover:shadow-md hover:scale-[1.02] hover:bg-white/5">
-                <h3 className="text-base sm:text-lg lg:text-xl font-semibold mb-2 flex items-center gap-2 text-white">
+              <div className="backdrop-blur-md border bg-black/10 border-white/10 rounded-md p-3 sm:p-4 lg:p-5 shadow-sm transition-all duration-300 hover:border-white/20 hover:shadow-md hover:scale-[1.02] hover:bg-white/5">
+                <h3 className="text-base sm:text-lg lg:text-xl font-semibold mb-2 flex items-center gap-2 text-black">
                   <span className="bg-white/10 p-1.5 rounded-md transition-colors duration-300 group-hover:bg-white/20">
-                    <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-4 h-4 text-black" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
                     </svg>
                   </span>
                   LOCATION
                 </h3>
                 <div className="pl-6 lg:pl-8">
-                  <p className="text-gray-300 text-sm">
+                  <p className="text-gray-800 text-sm">
                     1st Floor,101, Police, Wireless Colony,<br />
                     Vishal Nagar, Pimple Nilakh,<br />
                     Pune, Pimpri-Chinchwad,<br />
@@ -461,11 +441,11 @@ export default function ContactForm() {
                 </div>
               </div>
               {/* Map Section */}
-              <div className="backdrop-blur-md border border-white/10 rounded-md p-3 sm:p-4 lg:p-5 shadow-sm transition-all duration-300 hover:border-white/20 hover:shadow-md">
+              <div className="backdrop-blur-md border bg-black/10 border-white/10 rounded-md p-3 sm:p-4 lg:p-5 shadow-sm transition-all duration-300 hover:border-white/20 hover:shadow-md">
                 <div>
-                  <h3 className="text-base sm:text-lg lg:text-xl font-semibold mb-2 flex items-center gap-2 text-white">
+                  <h3 className="text-base sm:text-lg lg:text-xl font-semibold mb-2 flex items-center gap-2 text-black">
                     <span className="bg-white/10 p-1.5 rounded-md transition-colors duration-300 group-hover:bg-white/20">
-                      <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-4 h-4 text-black" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M20.5 3l-.16.03L15 5.1 9 3 3.36 4.9c-.21.07-.36.25-.36.48V20.5c0 .28.22.5.5.5l.16-.03L9 18.9l6 2.1 5.64-1.9c.21-.07.36-.25.36-.48V3.5c0-.28-.22-.5-.5-.5zM10 5.47l4 1.4v11.66l-4-1.4V5.47zm-5 .99l3-1.01v11.7l-3 1.16V6.46zm14 11.08l-3 1.01V6.86l3-1.16v11.84z"/>
                       </svg>
                     </span>
@@ -511,9 +491,9 @@ export default function ContactForm() {
               </div>
             </div>
             {/* Right Side - Form Section */}
-            <div className="w-full lg:w-7/12 backdrop-blur-md border border-white/10 rounded-md p-4 sm:p-6 lg:p-8">
-              <h2 className="text-[#428CFF] text-lg sm:text-xl lg:text-2xl font-bold mb-2 sm:mb-3 lg:mb-4">GET IN TOUCH</h2>
-              <p className="text-gray-300 mb-3 sm:mb-4 lg:mb-5 text-sm">Hey! We are looking forward to start a project with you!</p>
+            <div className="w-full lg:w-7/12 backdrop-blur-md border bg-black/10 border-white/10 rounded-md p-4 sm:p-6 lg:p-8">
+              <h2 className="text-red-600 text-lg sm:text-xl lg:text-2xl font-bold mb-2 sm:mb-3 lg:mb-4">GET IN TOUCH</h2>
+              <p className="text-gray-800 mb-3 sm:mb-4 lg:mb-5 text-sm">Hey! We are looking forward to start a project with you!</p>
               <form onSubmit={handleSubmit} className="space-y-2 sm:space-y-3 lg:space-y-4 p-1 sm:p-2 lg:p-3">
                 {/* Name Input */}
                 <div>
@@ -623,7 +603,7 @@ export default function ContactForm() {
                 <button
                   type="submit"
                   disabled={isSubmitted}
-                  className={`w-full sm:w-auto ${isSubmitted ? 'bg-green-500 cursor-not-allowed' : 'bg-[#428CFF]/80 hover:bg-[#428CFF]'} text-white px-3 sm:px-4 lg:px-6 py-2 sm:py-2.5 lg:py-3 rounded-md transition-colors text-xs sm:text-sm flex items-center justify-center gap-2 cursor-pointer`}
+                  className={`w-full sm:w-auto ${isSubmitted ? 'bg-green-500 cursor-not-allowed' : 'bg-red-700/80 hover:bg-red-900'} text-white px-3 sm:px-4 lg:px-6 py-2 sm:py-2.5 lg:py-3 rounded-md transition-colors text-xs sm:text-sm flex items-center justify-center gap-2 cursor-pointer`}
                 >
                   {isSubmitted ? (
                     <>

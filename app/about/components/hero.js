@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { SparklesIcon, ChartBarIcon, UserGroupIcon, LightBulbIcon } from '@heroicons/react/24/outline';
 import CountUp from 'react-countup';
 import { useInView } from 'react-intersection-observer';
+import { PointerHighlight } from './pointer-highlighter';
 
 const AboutUsHero = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -75,57 +76,84 @@ const AboutUsHero = () => {
   }, [timelineVisible]);
 
   return (
-    <div
-        className="relative w-full bg-no-repeat bg-cover overflow-hidden"
-        style={{ 
-          backgroundImage:
-            "linear-gradient(rgba(10,22,36,0.7),rgba(10,22,36,0.7)), url('https://res.cloudinary.com/dujw4np0d/image/upload/v1751703287/image_2_qzxt24.png')",
-        }}
+    <div className="relative w-full min-h-[100vh] md:min-h-[100vh] lg:min-h-[70vh] xl:min-h-[60vh] overflow-hidden pt-20">
+      {/* Video Background */}
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="absolute inset-0 w-full h-full object-cover object-center"
+        style={{ zIndex: 0 }}
       >
-    <section className="relative min-h-* overflow-hidden pt-30">
+        <source 
+          src="https://res.cloudinary.com/duz9xipfm/video/upload/v1752208306/Office_Stock_Footage_-_People_Working_As_A_Team___Group_Meeting___Business_Footage_Free_Download_vkppj8.webm" 
+          type="video/webm" 
+        />
+        {/* Fallback for browsers that don't support webm */}
+        <source 
+          src="https://res.cloudinary.com/duz9xipfm/video/upload/v1752208306/Office_Stock_Footage_-_People_Working_As_A_Team___Group_Meeting___Business_Footage_Free_Download_vkppj8.webm" 
+          type="video/mp4" 
+        />
+      </video>
       
+      {/* Overlay */}
+      <div 
+        className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/80"
+        style={{ zIndex: 1 }}
+      ></div>
 
-      <div className="relative z-10 container mx-auto px-4 py-12">
-        <div className="text-center max-w-6xl mx-auto">
-          
-        
-          {/* Unique About Us Header */}
-          <div className={`transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-            <div className="inline-flex items-center gap-3 mb-6">
-              <h1 className="text-4xl md:text-6xl font-black text-white">
-                About The{' '}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 animate-gradient-x">
-                   Connecting Roots IT
-                </span>
-              </h1>
-            </div>
+      <section className="relative min-h-[100vh] lg:min-h-[70vh] xl:min-h-[60vh] flex items-center justify-center overflow-hidden px-4" style={{ zIndex: 2 }}>
+        <div className="relative z-10 container mx-auto py-8 md:py-10 lg:py-12">
+          <div className="text-center max-w-6xl mx-auto">
             
-            </div>
+          
+            {/* Unique About Us Header */}
+            <div className={`transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+              <div className="inline-flex items-center gap-3 mb-6">
+                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white">
+                  About The{' '}
+                  
+                  <PointerHighlight
+        rectangleClassName="dark:bg-neutral-700 border-neutral-300 dark:border-neutral-600"
+        pointerClassName="text-yellow-500"
+      >
 
-          {/* Mission Statement */}
-          <div className={`transition-all pt-10 duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-            <div className="bg-black/10 backdrop-blur-md rounded-3xl p-8 mb-12 border border-cyan-400/30 max-w-4xl mx-auto">
-              <div className="flex items-center justify-center mb-4">
-                <div className="flex gap-2">
-                  <div className="w-3 h-3 bg-red-400 rounded-full"></div>
-                  <div className="w-3 h-3 bg-yellow-400 rounded-full"></div>
-                  <div className="w-3 h-3 bg-green-400 rounded-full"></div>
-                </div>
+                    <span className="relative z-10 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 animate-gradient-x">
+                      Connecting Roots IT
+                    </span>
+                  </PointerHighlight>
+                  
+                </h1>
               </div>
               
-              <p className="text-lg md:text-lg text-white leading-relaxed">
-                We{' '}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-700 font-bold">
-                  Challenge 
-                </span>{' '}
-                the notion that enterprise software has to be boring, overly complex, or frustrating. We believe every SAP system should be efficient, user-friendly, and a true asset to your business.
-              </p>
+              </div>
+
+            {/* Mission Statement */}
+            <div className={`transition-all pt-10 duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+              <div className="bg-black/15 backdrop-blur-lg rounded-2xl md:rounded-2xl p-6 md:p-8 mb-8 md:mb-12 border border-cyan-400/30 max-w-4xl mx-auto">
+                <div className="flex items-center justify-center mb-6">
+                  <div className="flex gap-2">
+                    <div className="w-3 h-3 bg-red-400 rounded-full"></div>
+                    <div className="w-3 h-3 bg-yellow-400 rounded-full"></div>
+                    <div className="w-3 h-3 bg-green-400 rounded-full"></div>
+                  </div>
+                </div>
+                
+                <p className="text-base sm:text-lg md:text-xl text-white leading-relaxed">
+                &quot;We{' '}
+                  <span className="italic text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-700 font-bold">
+                    Challenge 
+                  </span>{' '}
+                  the notion that enterprise software has to be boring, overly complex, or frustrating. We believe every SAP system should be efficient, user-friendly, and a true asset to your business.
+                  &quot;
+                </p>
+              </div>
+            </div>
             </div>
           </div>
-          </div>
-        </div>
-      
-    </section>
+        
+      </section>
     </div>
   );
 };

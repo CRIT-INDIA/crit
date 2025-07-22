@@ -20,9 +20,11 @@ const WhyChooseUs = () => {
   ];
 
   return (
-    <div className="text-white flex items-center w-full px-2 py-8 sm:px-4 sm:py-12 lg:px-10 lg:py-20">
+    <div className="text-black flex items-center w-full px-2 py-8 sm:px-4 sm:py-12 lg:px-10 lg:py-20">
       <div className="max-w-7xl mx-auto w-full px-0 sm:px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+        
+          
           {/* Left side - Office Image */}
           <div className="relative w-full mb-8 lg:mb-0">
             <div className="rounded-none sm:rounded-xl overflow-hidden">
@@ -44,7 +46,7 @@ const WhyChooseUs = () => {
             <div>
               <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-tight">
                 Why Choose{' '}
-                <span className="text-blue-400">Connecting Roots IT</span>{' '}
+                <span className="text-red-500">Connecting Roots IT</span>{' '}
               </h1>
             </div>
 
@@ -53,16 +55,16 @@ const WhyChooseUs = () => {
                 <div key={index} className="flex sm:flex-row items-start gap-2 sm:gap-4">
                   {/* Blue checkmark */}
                   <div className="flex-shrink-0 mt-1">
-                    <div className="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center">
+                    <div className="w-6 h-6 bg-red-500 rounded-full flex items-center justify-center">
                       <Check className="w-4 h-4 text-white stroke-2" />
                     </div>
                   </div>
                   
                   <div className="flex-1 space-y-1 sm:space-y-2">
-                    <h1 className="text-lg sm:text-xl md:text-2xl font-semibold text-white">
+                    <h1 className="text-lg sm:text-xl md:text-2xl font-semibold text-black">
                       {feature.title}
                     </h1>
-                    <p className="text-gray-300 text-sm sm:text-base md:text-lg leading-relaxed">
+                    <p className="text-gray-700 text-sm sm:text-base md:text-lg leading-relaxed">
                       {feature.description}
                     </p>
                   </div>

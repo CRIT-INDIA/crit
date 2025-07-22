@@ -202,7 +202,7 @@ export default function ERPImplementationDiagram() {
   ];
 
   return (
-    <div className="w-full min-h-* flex items-center justify-center pt-15">
+    <div className="w-full min-h-* flex items-center justify-center p-15  bg-black">
       {isMobile ? (
           <div style={{
           display: 'flex', 

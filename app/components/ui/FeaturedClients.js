@@ -1,39 +1,21 @@
 'use client';
 
+
 import React from 'react';
 import { Building, Factory, Hospital } from 'lucide-react';
 
 const FeaturedClients = () => {
   return (
-    <div className="text-white font-sans py-12 min-h-*">
+    <div className="font-sans py-12 min-h-*">
+      <div className="absolute top-0 left-0 w-full h-full opacity-10"></div>
       <div className="container mx-auto px-4 max-w-7xl text-center">
         <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 inline-block relative">
-    <span className="text-white">Featured </span>
-    <span className="text-blue-500">Clients</span>
-    <svg 
-      className="absolute -bottom-2 left-1/2 transform -translate-x-1/2" 
-      width="100%" 
-      height="4" 
-      viewBox="0 0 200 4"
-      preserveAspectRatio="none"
-    >
-      <defs>
-        <linearGradient id="underlineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" stopColor="#60a5fa" stopOpacity="0.8"/>
-          <stop offset="30%" stopColor="#3b82f6" stopOpacity="1"/>
-          <stop offset="70%" stopColor="#1d4ed8" stopOpacity="1"/>
-          <stop offset="100%" stopColor="#ffffff" stopOpacity="0.9"/>
-        </linearGradient>
-      </defs>
-      <rect 
-        x="0" 
-        y="0" 
-        width="200" 
-        height="4" 
-        fill="url(#underlineGradient)"
-        rx="2"
-      />
-    </svg>
+    <span className="text-black">Featured </span>
+    <span style={{color: '#C8102E'}}>Clients</span>
+   <svg className="mx-auto my-0" style={{marginTop: '-4px'}} width="160" height="18" viewBox="0 0 220 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M5 18 Q 110 8, 215 14" stroke="#C8102E" strokeWidth="4" strokeLinecap="round" fill="none"/>
+  <path d="M15 21 Q 120 15, 200 18" stroke="#A50034" strokeWidth="2" strokeLinecap="round" fill="none"/>
+</svg>
   </h1>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
@@ -44,15 +26,15 @@ const FeaturedClients = () => {
           ].map((client, index) => (
             <div 
               key={index} 
-              className="group bg-slate-800/50 p-6 sm:p-8 rounded-lg transform-gpu transition-all duration-500 hover:translate-y-[-10px] hover:shadow-xl hover:shadow-red-600/50 cursor-pointer"
+              className="group bg-[#fff0f0] p-6 sm:p-8 rounded-lg transform-gpu transition-all duration-500 hover:translate-y-[-10px] hover:shadow-xl hover:shadow-[#F8BABA] cursor-pointer"
             >
-              <div className="w-16 h-16 sm:w-20 sm:h-20 bg-slate-700 flex items-center justify-center mb-4 sm:mb-6 transform-gpu transition-transform duration-500 ">
-                <client.icon className="text-red-400 w-6 h-6 sm:w-8 sm:h-8" />
+              <div className="w-16 h-16 sm:w-20 sm:h-20 bg-[#F8BABA] flex items-center justify-center mb-4 sm:mb-6 transform-gpu transition-transform duration-500 ">
+                <client.icon className="text-[#A50034] w-6 h-6 sm:w-8 sm:h-8" />
               </div>
-              <h3 className="font-serif text-xl sm:text-2xl mb-3 text-blue-400">
+              <h3 className="font-serif text-xl sm:text-2xl mb-3 text-black">
                 {client.title}
               </h3>
-              <p className="text-gray-400 group-hover:text-white transition-colors text-sm sm:text-base">
+              <p className="text-[#4A4A4A] group-hover:text-black transition-colors text-sm sm:text-base">
                 {client.description}
               </p>
             </div>
