@@ -2,10 +2,10 @@ import { ArrowRight, Linkedin, Twitter, Youtube, Facebook, MapPin, Phone, Mail }
 
 const ModernFooter = () => {
   const socialLinks = [
-    { name: "Linkedin", icon: Linkedin, href: "#" },
+    { name: "Linkedin", icon: Linkedin, href: "https://www.linkedin.com/company/connecting-root/" },
     { name: "Twitter", icon: Twitter, href: "#" },
     { name: "Youtube", icon: Youtube, href: "#" },
-    { name: "Facebook", icon: Facebook, href: "#" }
+    { name: "Facebook", icon: Facebook, href: "https://www.facebook.com/people/Connecting-Roots-IT-Consulting-Services/100057630001672/" }
   ];
 
   const footerSections = [
@@ -50,14 +50,14 @@ const ModernFooter = () => {
       isContact: true,
       contactInfo: {
         address: "1st Floor, 101, Police, Wireless Colony, Vishal Nagar, Pimple Nilakh Pune, Pimpri-Chinchwad, Maharashtra 411027",
-        phone: "+91 89560 01555",
+        phone: "+91 7773954892",
         email: "info@critindia.com"
       }
     }
   ];
 
   return (
-    <footer className="relative bg-footer-bg min-h-screen overflow-hidden pt-10">
+    <footer className="relative bg-black min-h-screen overflow-hidden pt-10">
       {/* Floating geometric shapes */}
       <div className="absolute inset-0 pointer-events-none">
         {/* Main central device mockup */}
@@ -113,10 +113,10 @@ const ModernFooter = () => {
                 <a
                   key={social.name}
                   href={social.href}
-                  className="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center hover:bg-blue-500 transition-all duration-300 relative 
-                    before:absolute before:inset-0 before:-m-1 before:bg-blue-400/20 before:rounded-lg before:blur-sm before:opacity-60"
+                  className="w-12 h-12 bg-red-600 rounded-lg flex items-center justify-center hover:bg-red-800 transition-all duration-300 relative 
+                    before:absolute before:inset-0 before:-m-1 before:bg-red-400/20 before:rounded-lg before:blur-sm before:opacity-60"
                   style={{
-                    filter: "drop-shadow(0 0 15px rgba(59, 130, 246, 0.3))",
+                    filter: "drop-shadow(0 0 5px rgba(59, 130, 246, 0.3))",
                   }}
                 >
                   <social.icon className="w-5 h-5 text-white relative z-10 " />

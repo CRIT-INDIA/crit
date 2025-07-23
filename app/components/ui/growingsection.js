@@ -338,59 +338,61 @@ const GrowingSectionMobile = () => {
   ];
 
   return (
-    <div className="w-full max-w-md mx-auto relative overflow-hidden min-h-screen flex flex-col block md:hidden bg-gradient-to-br from-[#0A1624] to-[#16243A] px-4 sm:px-6 py-8 sm:py-12">
+    <div className="w-full max-w-md mx-auto relative overflow-hidden min-h-screen flex flex-col block md:hidden px-4 sm:px-6 py-8 sm:py-12 bg-gradient-to-br from-red-50 to-white">
       <div className="flex-1 flex flex-col justify-center">
         <div className={`text-center mb-8 transition-all duration-1000 ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-90'}`}>
           <div className="relative inline-block">
-            <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full flex items-center justify-center mb-6 relative" style={{ backgroundColor: '#2ec8fa' }}>
+            <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full flex items-center justify-center mb-6 relative bg-gradient-to-br from-red-600 to-red-800">
               <TrendingUp className="w-8 h-8 sm:w-10 sm:h-10 text-white" />
-              <div className="absolute inset-0 rounded-full animate-ping border-2 bg-gradient-to-r from-blue-400 to-emerald-400" style={{ WebkitMaskImage: 'radial-gradient(white, black)', borderColor: 'transparent', boxShadow: '0 0 0 4px rgba(46,200,250,0.08)', animationDuration: '2.5s' }}></div>
-              <div className="absolute inset-0 rounded-full animate-ping bg-gradient-to-r from-blue-400 to-emerald-400" style={{ animationDelay: '2s', WebkitMaskImage: 'radial-gradient(white, black)', borderColor: 'transparent', boxShadow: '0 0 0 4px rgba(46,200,250,0.08)', animationDuration: '2.5s' }}></div>
+              <div className="absolute inset-0 rounded-full animate-ping border-2 bg-gradient-to-r from-red-500 to-red-700" style={{ WebkitMaskImage: 'radial-gradient(white, black)', borderColor: 'transparent', boxShadow: '0 0 0 4px rgba(220, 38, 38, 0.1)', animationDuration: '2.5s' }}></div>
+              <div className="absolute inset-0 rounded-full animate-ping bg-gradient-to-r from-red-500 to-red-700" style={{ animationDelay: '2s', WebkitMaskImage: 'radial-gradient(white, black)', borderColor: 'transparent', boxShadow: '0 0 0 4px rgba(220, 38, 38, 0.1)', animationDuration: '2.5s' }}></div>
             </div>
           </div>
-          <h1 className="text-3xl sm:text-4xl font-black text-white leading-tight">WE ARE</h1>
-          <h2 className="text-4xl sm:text-5xl font-black mt-2 animate-pulse bg-gradient-to-r from-blue-400 to-emerald-400 bg-clip-text text-transparent">GROWING</h2>
+          <h1 className="text-3xl sm:text-4xl font-black text-gray-900 leading-tight">WE ARE</h1>
+          <h2 className="text-4xl sm:text-5xl font-black mt-2 text-red-700">GROWING</h2>
         </div>
         <div className={`mb-8 transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
           <div className="flex items-end justify-center h-20 sm:h-24 space-x-2">
             {[30, 50, 70, 90, 100].map((height, i) => (
               <div
                 key={i}
-                className="flex-1 max-w-8 rounded-t-lg animate-pulse"
+                className="flex-1 max-w-6 rounded-t-lg animate-pulse"
                 style={{
                   height: `${height}%`,
-                  backgroundColor: '#2ec8fa',
+                  background: 'linear-gradient(to top, #dc2626, #ef4444)',
                   animationDelay: `${i * 0.3}s`,
-                  animationDuration: '2s'
+                  animationDuration: '2s',
+                  opacity: 0.8
                 }}
               />
             ))}
           </div>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {stats.map((stat, index) => (
             <div 
               key={index}
-              className={`transition-all duration-700 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'} bg-[#16243A] rounded-xl p-4 flex flex-col justify-between h-full`}
+              className={`transition-all duration-700 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'} bg-white rounded-xl p-4 flex flex-col justify-between h-full shadow-md hover:shadow-lg border border-red-100`}
               style={{ transitionDelay: `${index * 200 + 500}ms` }}
             >
               <div className="flex items-center justify-between mb-2">
                 <div className="flex items-center space-x-3">
-                  <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center" style={{ backgroundColor: '#2ec8fa' }}>
-                    {stat.icon}
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center bg-red-100">
+                    {React.cloneElement(stat.icon, { className: "w-5 h-5 sm:w-6 sm:h-6 text-red-700" })}
                   </div>
-                  <span className="text-white text-base sm:text-lg font-bold">{stat.label}</span>
+                  <span className="text-gray-900 text-base sm:text-lg font-semibold">{stat.label}</span>
                 </div>
-                <span className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-blue-400 to-emerald-400 bg-clip-text text-transparent">
+                <span className="text-xl sm:text-2xl font-bold text-red-700">
                   {counters[stat.key]}{stat.suffix}
                 </span>
               </div>
-              <div className="w-full bg-gray-800 rounded-full h-2 overflow-hidden">
+              <div className="w-full bg-gray-100 rounded-full h-1.5 overflow-hidden">
                 <div 
-                  className="h-full rounded-full transition-all duration-1000 ease-out bg-gradient-to-r from-blue-400 to-emerald-400"
+                  className="h-full rounded-full transition-all duration-1000 ease-out bg-gradient-to-r from-red-600 to-red-500"
                   style={{ width: `${(counters[stat.key] / targets[stat.key]) * 100}%` }}
                 />
               </div>
+              <p className="text-xs text-gray-500 mt-1">{stat.sub}</p>
             </div>
           ))}
         </div>

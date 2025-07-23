@@ -114,7 +114,7 @@ export default function ProfessionalJobApplicationForm() {
   }
 
   return (
-    <div className="min-h-screen relative overflow-hidden" style={{ backgroundColor: '#0C1C3C' }}>
+    <div className="min-h-screen relative overflow-hidden">
       {/* Professional Dynamic Background Effects */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         {/* Enhanced Corporate Grid Pattern */}

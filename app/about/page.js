@@ -8,7 +8,7 @@ import Journey from "./components/journey";
 
 export default function AboutPage() {
   return (
-    <div className="min-h-* bg-white">
+    <div className="min-h-* bg-[#fff5f5]">
       <TechHero />
       <div className="relative min-h-*">
         <Journey />

@@ -10,7 +10,7 @@ export default function Services() {
   }, []);
 
   return (
-    <div className="relative bg-gradient-to-br from-white to-red-50">
+    <div className="relative bg-[#fff5f5]">
       {/* Background Pattern */}
       <div className="absolute inset-0 bg-grid-red-500/[0.05] bg-[size:50px_50px]" />
       

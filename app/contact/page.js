@@ -7,7 +7,7 @@ import "./contactus.css";
 export default function ContactPage() {
   return (
     <>
-      <section className="hero-section bg-gradient-to-br from-white to-red-50" bg-fixed>
+      <section className="hero-section bg-[#fff5f5]" bg-fixed>
         <ContactSection />
       
         <div>

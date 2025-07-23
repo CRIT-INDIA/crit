@@ -25,12 +25,12 @@ export default function RootLayout({ children }) {
         <link rel="icon" href="https://res.cloudinary.com/dujw4np0d/image/upload/v1751005553/CRIT-3D_cpzr1n.png" type="image/png" />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col bg-[#fff5f5]`}
       >
-        <div className="relative bg-[#0c1c3c]">
-        <Navbar />
+        <div className="relative">
+          <Navbar />
         </div>
-        <div className="flex-1 flex flex-col">
+        <div className="flex-1 flex flex-col max-w-[1800px] w-full mx-auto">
           {children}
         </div>
         <Footer />

@@ -387,24 +387,25 @@ export default function CritIndiaCtaForm({ onClose }) {
   if (!visible) return null;
 
   const currentCountry = getCurrentCountry();
-  const phoneInputClass = `w-full px-3 py-2 rounded border bg-slate-800 text-white placeholder-gray-400 focus:outline-none transition-colors text-sm ${
+  const phoneInputClass = `w-full px-3 py-2 rounded-lg border bg-white text-gray-900 placeholder-gray-500 focus:outline-none transition-all duration-200 text-sm shadow-sm ${
     phoneValidationState === 'valid' 
-      ? 'border-green-500 focus:border-green-400' 
+      ? 'border-green-500 focus:border-green-600 focus:ring-2 focus:ring-green-200' 
       : phoneValidationState === 'invalid' 
-        ? 'border-red-500 focus:border-red-400' 
-        : 'border-slate-600 focus:border-blue-500'
+        ? 'border-red-500 focus:border-red-600 focus:ring-2 focus:ring-red-200' 
+        : 'border-gray-300 focus:border-red-500 focus:ring-2 focus:ring-red-100'
   }`;
 
   return (
     <>
       <ModalPortal>
-      <div className="fixed inset-0 z-50 flex justify-center items-center p-1 sm:p-3 bg-black/60 backdrop-blur-sm">
-        <div className="cta-modal-content w-full max-w-[98vw] sm:max-w-2xl max-h-[95vh] overflow-y-auto h-fit bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 rounded-xl shadow-2xl border border-blue-800 animate-in slide-in-from-bottom-4 duration-500 ease-out relative">
+      <div className="fixed inset-0 z-50 flex justify-center items-center p-1 sm:p-3 bg-black/70 backdrop-blur-sm">
+        <div className="cta-modal-content w-full max-w-[98vw] sm:max-w-2xl max-h-[95vh] overflow-y-auto h-fit bg-white rounded-2xl shadow-2xl border border-gray-200 animate-in slide-in-from-bottom-4 duration-500 ease-out relative">
+
           {/* Header Section */}
-          <div className="sticky top-0 z-20 p-2 sm:p-4 text-white bg-gradient-to-r from-[#1B2433] to-[#0974C7]">
+          <div className="sticky top-0 z-20 p-2 sm:p-4 text-white bg-gradient-to-r from-gray-600 to-gray-700 rounded-t-2xl">
             <button
               onClick={handleClose}
-              className="absolute top-2 right-2 sm:top-3 sm:right-3 text-white hover:text-red-200 transition-all duration-200 hover:scale-110 hover:rotate-90"
+              className="absolute top-2 right-2 sm:top-3 sm:right-3 text-white hover:text-red-100 transition-all duration-200 hover:scale-110 hover:rotate-90"
               aria-label="Close consultation form"
             >
               <X size={20} />
@@ -413,7 +414,7 @@ export default function CritIndiaCtaForm({ onClose }) {
               <div className="flex items-center gap-2 sm:gap-3 mb-1">
                 <div>
                   <h2 className="text-base sm:text-xl font-bold">Get Expert SAP Consultation</h2>
-                  <p className="text-red-100 text-xs">Transform your business with CRIT India's SAP excellence</p>
+                  <p className="text-gray-100 text-xs">Transform your business with CRIT India's SAP excellence</p>
                 </div>
               </div>
             </div>
@@ -421,34 +422,34 @@ export default function CritIndiaCtaForm({ onClose }) {
 
           <div className="flex flex-col lg:flex-row">
             {/* Left Side - Benefits */}
-            <div className="w-full lg:w-2/5 p-2 sm:p-4 bg-gradient-to-b from-slate-800 to-slate-900 text-white">
-              <h3 className="text-xs sm:text-base font-semibold mb-2 sm:mb-3 text-red-500">Why Choose CRIT India?</h3>
+            <div className="w-full lg:w-2/5 p-2 sm:p-4 bg-gradient-to-b from-gray-200 to-gray-100">
+              <h3 className="text-xs sm:text-base font-semibold mb-2 sm:mb-3 text-black">Why Choose CRIT India?</h3>
               <div className="space-y-2 mb-2 sm:mb-3">
                 <div className="flex items-start gap-2">
-                  <Users className="text-red-500 mt-0.5 flex-shrink-0" size={14} />
+                  <Users className="text-black mt-0.5 flex-shrink-0" size={14} />
                   <div>
-                    <h4 className="font-medium text-red-400 text-xs">500+ Enterprise Clients</h4>
-                    <p className="text-xs text-gray-400">Trusted by leading businesses</p>
+                    <h4 className="font-medium text-gray-900 text-xs">500+ Enterprise Clients</h4>
+                    <p className="text-xs text-gray-600">Trusted by leading businesses</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-2">
-                  <Award className="text-red-500 mt-0.5 flex-shrink-0" size={14} />
+                  <Award className="text-black mt-0.5 flex-shrink-0" size={14} />
                   <div>
-                    <h4 className="font-medium text-red-400 text-xs">Proven SAP Expertise</h4>
-                    <p className="text-xs text-gray-400">15+ years experience</p>
+                    <h4 className="font-medium text-gray-900 text-xs">Proven SAP Expertise</h4>
+                    <p className="text-xs text-gray-600">15+ years experience</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-2">
-                  <Globe className="text-red-500 mt-0.5 flex-shrink-0" size={14} />
+                  <Globe className="text-black mt-0.5 flex-shrink-0" size={14} />
                   <div>
-                    <h4 className="font-medium text-red-400 text-xs">Global Reach</h4>
-                    <p className="text-xs text-gray-400">Multiple countries support</p>
+                    <h4 className="font-medium text-gray-900 text-xs">Global Reach</h4>
+                    <p className="text-xs text-gray-600">Multiple countries support</p>
                   </div>
                 </div>
               </div>
-              <div className="bg-slate-700 rounded p-2 border border-slate-600">
-                <p className="text-xs text-red-400 font-medium mb-1">Free Consultation:</p>
-                <ul className="text-xs text-gray-300 space-y-0">
+              <div className="bg-white rounded-lg p-2 border border-red-200 shadow-sm">
+                <p className="text-xs text-black font-medium mb-1">Free Consultation:</p>
+                <ul className="text-xs text-gray-600 space-y-0">
                   <li>• Readiness assessment</li>
                   <li>• Solution roadmap</li>
                   <li>• Timeline & cost estimate</li>
@@ -457,17 +458,17 @@ export default function CritIndiaCtaForm({ onClose }) {
             </div>
 
             {/* Right Side - Form */}
-            <div className="w-full lg:w-3/5 p-2 sm:p-4 bg-slate-900 text-white">
+            <div className="w-full lg:w-3/5 p-2 sm:p-4 bg-gray-50">
               {submitted ? (
                 <div className="text-center py-6">
-                  <CheckCircle className="text-green-400 mx-auto mb-2" size={40} />
-                  <h3 className="text-base sm:text-lg font-bold text-green-400 mb-1">Thank You!</h3>
-                  <p className="text-gray-300 mb-2 text-xs sm:text-sm">Our SAP specialists will contact you within 24 hours.</p>
-                  <p className="text-xs text-gray-400">This window will close automatically...</p>
+                  <CheckCircle className="text-green-500 mx-auto mb-2" size={40} />
+                  <h3 className="text-base sm:text-lg font-bold text-green-600 mb-1">Thank You!</h3>
+                  <p className="text-gray-700 mb-2 text-xs sm:text-sm">Our SAP specialists will contact you within 24 hours.</p>
+                  <p className="text-xs text-gray-500">This window will close automatically...</p>
                 </div>
               ) : (
                 <form className="space-y-2.5" onSubmit={handleSubmit} autoComplete="off">
-                  <h3 className="text-xs sm:text-base font-semibold text-red-500 mb-2 sm:mb-3">Schedule Your Free Consultation</h3>
+                  <h3 className="text-xs sm:text-base font-semibold text-black mb-2 sm:mb-3">Schedule Your Free Consultation</h3>
                   {/* Name & Email Row */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                     <div>
@@ -477,9 +478,9 @@ export default function CritIndiaCtaForm({ onClose }) {
                         placeholder="Full Name *"
                         value={formData.name}
                         onChange={handleChange}
-                        className="w-full px-3 py-2 rounded border border-slate-600 bg-slate-800 text-white placeholder-gray-400 focus:border-blue-500 focus:outline-none transition-colors text-sm"
+                        className="w-full px-3 py-2 rounded-lg border border-gray-300 bg-white text-gray-900 placeholder-gray-500 focus:border-red-500 focus:outline-none focus:ring-2 focus:ring-red-100 transition-all duration-200 text-sm shadow-sm"
                       />
-                      {errors.name && <p className="text-red-400 text-xs mt-0.5">{errors.name}</p>}
+                      {errors.name && <p className="text-red-600 text-xs mt-0.5">{errors.name}</p>}
                     </div>
                     <div>
                       <input
@@ -488,9 +489,9 @@ export default function CritIndiaCtaForm({ onClose }) {
                         placeholder="Business Email *"
                         value={formData.email}
                         onChange={handleChange}
-                        className="w-full px-3 py-2 rounded border border-slate-600 bg-slate-800 text-white placeholder-gray-400 focus:border-blue-500 focus:outline-none transition-colors text-sm"
+                        className="w-full px-3 py-2 rounded-lg border border-gray-300 bg-white text-gray-900 placeholder-gray-500 focus:border-red-500 focus:outline-none focus:ring-2 focus:ring-red-100 transition-all duration-200 text-sm shadow-sm"
                       />
-                      {errors.email && <p className="text-red-400 text-xs mt-0.5">{errors.email}</p>}
+                      {errors.email && <p className="text-red-600 text-xs mt-0.5">{errors.email}</p>}
                     </div>
                   </div>
                   {/* Company */}
@@ -501,7 +502,7 @@ export default function CritIndiaCtaForm({ onClose }) {
                       placeholder="Company Name"
                       value={formData.company}
                       onChange={handleChange}
-                      className="w-full px-3 py-2 rounded border border-slate-600 bg-slate-800 text-white placeholder-gray-400 focus:border-blue-500 focus:outline-none transition-colors text-sm"
+                      className="w-full px-3 py-2 rounded-lg border border-gray-300 bg-white text-gray-900 placeholder-gray-500 focus:border-red-500 focus:outline-none focus:ring-2 focus:ring-red-100 transition-all duration-200 text-sm shadow-sm"
                     />
                   </div>
                   {/* Phone with Country */}
@@ -511,10 +512,10 @@ export default function CritIndiaCtaForm({ onClose }) {
                         name="countryCode"
                         value={formData.countryCode}
                         onChange={handleChange}
-                        className="bg-slate-800 border border-slate-600 text-white px-2 py-2 rounded focus:border-blue-500 focus:outline-none text-sm"
+                        className="bg-white border border-gray-300 text-gray-900 px-2 py-2 rounded-lg focus:border-red-500 focus:outline-none focus:ring-2 focus:ring-red-100 text-sm shadow-sm"
                       >
                         {countryOptions.map((c) => (
-                          <option key={c.code} value={c.code} className="bg-slate-800">
+                          <option key={c.code} value={c.code} className="bg-white">
                             {c.name} ({c.code})
                           </option>
                         ))}
@@ -534,11 +535,11 @@ export default function CritIndiaCtaForm({ onClose }) {
                       </div>
                     </div>
                     {currentCountry && (
-                      <p className="text-xs text-gray-400">
+                      <p className="text-xs text-gray-600">
                         Format: {currentCountry.formatExample} ({currentCountry.placeholder})
                       </p>
                     )}
-                    {errors.phone && <p className="text-red-400 text-xs">{errors.phone}</p>}
+                    {errors.phone && <p className="text-red-600 text-xs">{errors.phone}</p>}
                   </div>
                   {/* Service Selection */}
                   <div>
@@ -546,16 +547,16 @@ export default function CritIndiaCtaForm({ onClose }) {
                       name="service"
                       value={formData.service}
                       onChange={handleChange}
-                      className="w-full px-3 py-2 rounded border border-slate-600 bg-slate-800 text-white focus:border-blue-500 focus:outline-none text-sm"
+                      className="w-full px-3 py-2 rounded-lg border border-gray-300 bg-white text-gray-900 focus:border-red-500 focus:outline-none focus:ring-2 focus:ring-red-100 text-sm shadow-sm"
                     >
                       <option value="">Select Service Interest *</option>
                       {serviceOptions.map((service) => (
-                        <option key={service} value={service} className="bg-slate-800">
+                        <option key={service} value={service} className="bg-white">
                           {service}
                         </option>
                       ))}
                     </select>
-                    {errors.service && <p className="text-red-400 text-xs mt-0.5">{errors.service}</p>}
+                    {errors.service && <p className="text-red-600 text-xs mt-0.5">{errors.service}</p>}
                   </div>
                   {/* Message */}
                   <div>
@@ -565,18 +566,18 @@ export default function CritIndiaCtaForm({ onClose }) {
                       value={formData.message}
                       onChange={handleChange}
                       rows="2"
-                      className="w-full px-3 py-2 rounded border border-slate-600 bg-slate-800 text-white placeholder-gray-400 focus:border-blue-500 focus:outline-none transition-colors resize-none text-sm"
+                      className="w-full px-3 py-2 rounded-lg border border-gray-300 bg-white text-gray-900 placeholder-gray-500 focus:border-red-500 focus:outline-none focus:ring-2 focus:ring-red-100 transition-all duration-200 resize-none text-sm shadow-sm"
                     />
-                    {errors.message && <p className="text-red-400 text-xs mt-0.5">{errors.message}</p>}
+                    {errors.message && <p className="text-red-600 text-xs mt-0.5">{errors.message}</p>}
                   </div>
                   {/* Submit Button */}
                   <button
                     type="submit"
-                    className="w-full bg-red-500/20 border border-red-500 hover:bg-red-600/30 hover:border-red-600 text-red-400 hover:text-white font-semibold py-2.5 rounded transition-all duration-200 transform hover:scale-[1.01] shadow-md text-sm backdrop-blur-md"
+                    className="w-full bg-gray-600 hover:bg-gray-800 text-white font-semibold py-2.5 rounded-lg transition-all duration-200 transform hover:scale-[1.01] shadow-lg hover:shadow-xl text-sm"
                   >
                     Get Your Free SAP Consultation
                   </button>
-                  <p className="text-xs text-gray-400 text-center mt-1">
+                  <p className="text-xs text-gray-600 text-center mt-1">
                     By submitting this form, you agree to our privacy policy and terms of service.
                   </p>
                 </form>

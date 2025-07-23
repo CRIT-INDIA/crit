@@ -47,12 +47,16 @@ const ConnectWithUs = () => {
     <div className="py-16 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-12">
-          <h2 className="text-3xl sm:text-5xl font-bold text-white mb-2">
-            Follow{' '}
-            <span className="text-blue-400 shadow-2xl font-bold">Our Socials</span>
-          </h2>
-        </div>
+        <div className="text-center mb-6 sm:mb-8 pt-6 sm:pt-8">
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 inline-block relative">
+    <span className="text-black">Follow </span>
+    <span className="text-red-500">Our Socials</span>
+    <svg className="mx-auto my-0" style={{marginTop: '-4px'}} width="160" height="18" viewBox="0 0 220 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M5 18 Q 110 8, 215 14" stroke="#dc2626" strokeWidth="4" strokeLinecap="round" fill="none"/>
+  <path d="M15 21 Q 120 15, 200 18" stroke="#dc2626" strokeWidth="2" strokeLinecap="round" fill="none"/>
+</svg>
+  </h1>
+          </div>
  
         {/* Main Content */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
@@ -75,12 +79,12 @@ const ConnectWithUs = () => {
                 <a
                   key={index}
                   href="#"
-                  className={`bg-black transition-all duration-300 transform hover:scale-105 rounded-xl p-4 sm:p-5 flex items-center space-x-4 shadow-lg`}
+                  className={`bg-black/30 transition-all duration-300 transform hover:scale-105 rounded-xl p-4 sm:p-5 flex items-center space-x-4 shadow-lg`}
                   onMouseEnter={() => setHoveredIndex(index)}
                   onMouseLeave={() => setHoveredIndex(null)}
                   style={
                     hoveredIndex === index
-                      ? { boxShadow: '0 0 20px 4px #2563eb' }
+                      ? { boxShadow: '0 0 10px 1px' }
                       : {}
                   }
                 >
@@ -115,8 +119,8 @@ const ConnectWithUs = () => {
         </div>
  
         {/* Bottom Text */}
-        <div className="text-center mt-12 font-bold text-2xl">
-          <p className="text-lg sm:text-2xl text-gray-300">
+        <div className="text-center mt-12 font-bold text-black text-2xl">
+          <p className="text-lg sm:text-2xl">
             Think{' '}
             <span className="text-red-500 font-bold">SAP</span>
             , Think{' '}

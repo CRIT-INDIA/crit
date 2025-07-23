@@ -94,11 +94,11 @@ const CareerPage = () => {
   };
 
   return (
-    <div className="min-h-screen p-20" style={{ backgroundColor: '#0C1C3C', color: 'white' }}>
+    <div className="min-h-screen p-4 sm:p-8 md:p-12">
       {/* Hero Section */}
-      <section className="px-2 sm:px-4 py-6">
+      <section className="px-2 sm:px-4 py-6 pt-20">
         <div className="max-w-5xl mx-auto">
-          <div className="bg-gradient-to-br from-purple-600/20 via-blue-600/20 to-teal-600/20 rounded-2xl p-4 sm:p-6 text-center relative overflow-hidden">
+          <div className="bg-gray-300 rounded-2xl p-6 sm:p-8 text-center relative overflow-hidden border border-red-100 shadow-sm">
             {/* Exploding Beams SVG Burst */}
             <style jsx>{`
 @keyframes moveGradient {
@@ -165,18 +165,18 @@ const CareerPage = () => {
               </g>
               <circle cx="170" cy="170" r="60" fill="#6366f1" fillOpacity="0.12" />
             </svg>
-            <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 via-blue-500/10 to-teal-500/10 rounded-2xl"></div>
+            <div className="absolute inset-0 bg-gradient-to-br from-red-50/80 via-blue-50/80 to-red-50/80 rounded-2xl"></div>
             <div className="absolute top-0 right-0 w-48 h-48 bg-white/5 rounded-full blur-2xl transform translate-x-16 -translate-y-16"></div>
             <div className="absolute bottom-0 left-0 w-48 h-48 bg-white/5 rounded-full blur-2xl transform -translate-x-16 translate-y-16"></div>
             
-            <div className="relative z-10">
-              <h2 className="text-2xl md:text-3xl font-bold mb-4">
+            <div className="relative z-10 ">
+              <h2 className="text-2xl md:text-3xl text-black font-bold mb-4">
                 Looking for the Best IT Job?
               </h2>
-              <p className="text-base md:text-lg mb-4 text-white/90 max-w-2xl mx-auto leading-relaxed">
+              <p className="text-base md:text-lg mb-4 text-gray-700 max-w-2xl mx-auto leading-relaxed">
                 Join a team that thrives on innovation, creativity, and collaboration. At Codetentacles, we empower individuals to grow while building solutions that make an impact. Discover your next big opportunity today!
               </p>
-              <button className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 text-white px-4 py-2 rounded-full hover:bg-white/20 transition-all duration-300 font-semibold text-sm linkedin-btn">
+              <button className="inline-flex items-center gap-2 bg-red-600 text-white px-6 py-2.5 rounded-full hover:bg-red-700 transition-all duration-300 font-medium text-sm shadow-sm hover:shadow-md linkedin-btn">
                 <span>Visit us on LinkedIn</span>
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" className="text-blue-500 linkedin-logo"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-10h3v10zm-1.5-11.268c-.966 0-1.75-.784-1.75-1.75s.784-1.75 1.75-1.75 1.75.784 1.75 1.75-.784 1.75-1.75 1.75zm15.5 11.268h-3v-5.604c0-1.337-.025-3.063-1.868-3.063-1.868 0-2.154 1.459-2.154 2.968v5.699h-3v-10h2.881v1.367h.041c.401-.761 1.379-1.563 2.838-1.563 3.036 0 3.6 2.001 3.6 4.601v5.595z"/></svg>
               </button>
@@ -192,38 +192,38 @@ const CareerPage = () => {
             {jobListings.map((job, idx) => (
               <div 
                 key={job.id} 
-                className="bg-gray-800/50 rounded-xl p-6 border border-gray-800 hover:border-gray-700 transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/10"
+                className="bg-white rounded-xl p-6 border border-gray-200 hover:border-red-200 transition-all duration-300 hover:shadow-lg hover:shadow-red-100/50"
               >
                 <div className="flex justify-between items-start mb-4">
-                  <h3 className="text-xl font-bold text-white">{job.title}</h3>
-                  <span className="bg-purple-600/20 text-purple-300 px-3 py-1 rounded-full text-xs font-medium">
+                  <h3 className="text-2xl font-bold text-gray-900">{job.title}</h3>
+                  <span className="bg-red-100 text-red-700 px-3 py-1 rounded-full text-xs font-medium">
                     {job.type}
                   </span>
                 </div>
                 
                 <div className="space-y-3 mb-4">
-                  <div className="flex items-center gap-2 text-gray-300">
-                    <MapPin size={16} className="text-gray-400" />
-                    <span className="text-white text-sm">{job.location}</span>
+                  <div className="flex items-center gap-2 text-gray-700">
+                    <MapPin size={16} className="text-black" />
+                    <span className="text-black text-md">{job.location}</span>
                   </div>
                   
-                  <div className="flex items-center gap-2 text-gray-300">
-                    <Briefcase size={16} className="text-gray-400" />
-                    <span className="text-white text-sm">{job.experience}</span>
+                  <div className="flex items-center gap-2 text-gray-700">
+                    <Briefcase size={16} className="text-black" />
+                    <span className="text-black text-md">{job.experience}</span>
                   </div>
                   
-                  <div className="flex items-center gap-2 text-gray-300">
-                    <DollarSign size={16} className="text-gray-400" />
-                    <span className="text-white text-sm font-medium">{job.salary}</span>
+                  <div className="flex items-center gap-2 text-gray-700">
+                    <DollarSign size={16} className="text-black" />
+                    <span className="text-black text-md">{job.salary}</span>
                   </div>
                   
-                  <div className="flex items-start gap-2 text-gray-300">
-                    <User size={16} className="text-gray-400 mt-1" />
+                  <div className="flex items-start gap-2 text-gray-700">
+                    <User size={16} className="text-black mt-1" />
                     <div>
-                      <span className="font-medium text-sm text-gray-300">Skills</span>
+                      <span className="font-medium text-sm text-gray-700">Skills</span>
                       <div className="mt-1 flex flex-wrap gap-1">
                         {job.skills.slice(0, 3).map((skill, index) => (
-                          <span key={index} className="bg-gray-700/50 text-white text-xs px-2 py-1 rounded">
+                          <span key={index} className="bg-red-50 text-red-700 text-xs px-2 py-1 rounded border border-red-100">
                             {skill}
                           </span>
                         ))}
@@ -235,7 +235,7 @@ const CareerPage = () => {
                   </div>
                 </div>
 
-                <p className="text-gray-300 text-sm mb-4 line-clamp-2">
+                <p className="text-gray-600 text-sm mb-4 line-clamp-2">
                   {job.description}
                 </p>
 
@@ -243,7 +243,7 @@ const CareerPage = () => {
                 <div className="mb-4">
                   <button 
                     onClick={() => handleLearnMore(job)}
-                    className="text-blue-400 hover:text-blue-300 text-sm font-medium transition-colors duration-200 flex items-center gap-1"
+                    className="text-red-600 hover:text-red-700 text-sm font-medium transition-colors duration-200 flex items-center gap-1"
                   >
                     Learn More →
                   </button>
@@ -251,7 +251,7 @@ const CareerPage = () => {
 
                 <div className="flex justify-center">
                   <button
-                    className="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-4 py-2 rounded-full hover:from-purple-700 hover:to-blue-700 transition-all duration-300 flex items-center justify-center gap-1 font-semibold text-xs mx-auto text-xs min-w-[110px]"
+                    className="bg-gradient-to-r from-red-600 to-red-700 text-white px-6 py-2.5 rounded-full hover:from-red-700 hover:to-red-800 transition-all duration-300 flex items-center justify-center gap-1 font-medium text-sm mx-auto min-w-[130px] shadow-sm hover:shadow-md"
                     style={{ fontSize: '0.85rem', padding: '0.5rem 1.2rem' }}
                     onClick={() => router.push('/career/apply')}
                   >
@@ -268,13 +268,13 @@ const CareerPage = () => {
       {/* Job Details Modal */}
       {showModal && selectedJob && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 modal-overlay">
-          <div className="absolute inset-0 bg-black/60" onClick={closeModal}></div>
-          <div className="relative bg-gray-900 rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
-            <div className="sticky top-0 bg-gray-900 rounded-t-2xl p-6 border-b border-gray-700">
+          <div className="absolute inset-0 bg-black/50" onClick={closeModal}></div>
+          <div className="relative bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl">
+            <div className="sticky top-0 bg-white rounded-t-2xl p-6 border-b border-gray-200">
               <div className="flex justify-between items-start">
                 <div>
-                  <h2 className="text-2xl font-bold text-white mb-2">{selectedJob.title}</h2>
-                  <div className="flex items-center gap-4 text-gray-300 text-sm">
+                  <h2 className="text-2xl font-bold text-gray-900 mb-2">{selectedJob.title}</h2>
+                  <div className="flex items-center gap-4 text-gray-600 text-sm">
                     <span className="flex items-center gap-1">
                       <MapPin size={16} />
                       {selectedJob.location}
@@ -406,10 +406,10 @@ const CareerPage = () => {
       )}
 
       {/* Stay Ahead of Opportunities Section */}
-      <section className="px-2 sm:px-5 py-7 sm:py-11" style={{ backgroundColor: '#0C1C3C' }}>
+      <section className="px-2 sm:px-5 py-7 sm:py-11">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-8 sm:mb-12">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6 relative inline-block">
+            <h2 className="text-black text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6 relative inline-block">
               Stay Ahead of Opportunities
               <svg
                 className="absolute -bottom-5 left-0 w-full"
@@ -437,7 +437,7 @@ const CareerPage = () => {
                 />
               </svg>
             </h2>
-            <p className="text-base sm:text-lg text-gray-300 max-w-3xl mx-auto">
+            <p className="text-gray-700 text-base sm:text-lg text-gray-300 max-w-3xl mx-auto">
               Didn't find the right role? No worries! Submit your details, and we'll contact you when a matching position becomes available.
             </p>
           </div>
@@ -463,7 +463,7 @@ const CareerPage = () => {
                   viewBox="0 0 400 400"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
-                  style={{ opacity: 0.18 }}
+                  style={{ opacity: 0.98 }}
                 >
                   <path>
                     <animate attributeName="d" dur="8s" repeatCount="indefinite"
@@ -473,7 +473,7 @@ const CareerPage = () => {
                   </path>
                 </svg>
                 {/* Card overlay and content */}
-                <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 via-blue-500/10 to-teal-500/10 rounded-2xl z-10"></div>
+                <div className="absolute inset-0 bg-gradient-to-br from-gray-500/10 via-gray-700/10 to-gray-900/10 rounded-2xl z-10"></div>
                 <div className="relative z-20 text-center w-full">
                   <Player
                     autoplay
@@ -492,11 +492,11 @@ const CareerPage = () => {
             </div>
 
             {/* Right Side - Form */}
-            <div className="bg-gray-800/50 rounded-2xl p-4 sm:p-8 border border-gray-700 h-full">
+            <div className="bg-black/10 rounded-2xl p-4 sm:p-8 border h-full">
               <form className="space-y-4 sm:space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-white font-medium mb-2">
+                    <label className="block text-black font-medium mb-2">
                       Full Name <span className="text-red-500">*</span>
                     </label>
                     <input
@@ -506,7 +506,7 @@ const CareerPage = () => {
                     />
                   </div>
                   <div>
-                    <label className="block text-white font-medium mb-2">
+                    <label className="block text-black font-medium mb-2">
                       Desired Position <span className="text-red-500">*</span>
                     </label>
                     <input
@@ -519,7 +519,7 @@ const CareerPage = () => {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-white font-medium mb-2">
+                    <label className="block text-black font-medium mb-2">
                       Experience <span className="text-red-500">*</span>
                     </label>
                     <input
@@ -529,7 +529,7 @@ const CareerPage = () => {
                     />
                   </div>
                   <div>
-                    <label className="block text-white font-medium mb-2">
+                    <label className="block text-black font-medium mb-2">
                       Current CTC <span className="text-red-500">*</span>
                     </label>
                     <input
@@ -542,7 +542,7 @@ const CareerPage = () => {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-white font-medium mb-2">
+                    <label className="block text-black font-medium mb-2">
                       Write a message <span className="text-red-500">*</span>
                     </label>
                     <textarea
@@ -552,7 +552,7 @@ const CareerPage = () => {
                     ></textarea>
                   </div>
                   <div>
-                    <label className="block text-white font-medium mb-2">
+                    <label className="block text-black font-medium mb-2">
                       Upload Your CV <span className="text-red-500">*</span>
                     </label>
                     <div
@@ -574,7 +574,7 @@ const CareerPage = () => {
                         <svg className="w-12 h-12 text-gray-400 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
                         </svg>
-                        <p className="text-white font-medium">{selectedFile ? selectedFile.name : 'Upload file'}</p>
+                        <p className="text-black font-medium">{selectedFile ? selectedFile.name : 'Upload file'}</p>
                         <p className="text-gray-400 text-sm mt-1">PDF, DOC, DOCX (Max 5MB)</p>
                       </div>
                     </div>

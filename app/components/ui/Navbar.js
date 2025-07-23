@@ -53,8 +53,22 @@ const transition = {
 
 const MenuItem = ({ setActive, active, item, href, pathname, children, textClass }) => {
   const isHovered = active === item;
-  const isCurrentPage = pathname === href;
+  
+  // Improved active page detection
+  const normalizePathname = (path) => {
+    if (!path) return '/';
+    // Remove trailing slash except for root
+    return path === '/' ? '/' : path.replace(/\/$/, '');
+  };
+  
+  const normalizedPathname = normalizePathname(pathname);
+  const normalizedHref = normalizePathname(href);
+  const isCurrentPage = normalizedPathname === normalizedHref;
+  
   const hasDropdown = item === "Products" || item === "Services";
+  
+  // Debug logging
+  console.log(`MenuItem ${item}: pathname="${pathname}" -> "${normalizedPathname}", href="${href}" -> "${normalizedHref}", isCurrentPage=${isCurrentPage}`);
   return (
     <div 
       onMouseEnter={() => setActive(item)} 
@@ -65,9 +79,8 @@ const MenuItem = ({ setActive, active, item, href, pathname, children, textClass
         href={href}
         transition={{ duration: 0.3 }}
         className={`cursor-pointer text-lg px-2 font-mono relative transition-all duration-200
-          before:content-[''] before:absolute before:left-1/2 before:-translate-x-1/2 before:-bottom-0.5 before:w-0 before:h-px before:bg-white before:transition-all before:duration-300
-          hover:before:w-full hover:text-gray-500
-          ${isCurrentPage ? 'text-white !hover:text-black' : 'text-white'}`}
+          hover:text-red-700
+          ${isCurrentPage ? 'font-sans text-red-600 hover:!text-red-700' : 'text-white'}`}
       >
         <span className="inline-flex items-center gap-1 relative">
           {item}
@@ -102,7 +115,7 @@ const MenuItem = ({ setActive, active, item, href, pathname, children, textClass
             <motion.div
               transition={transition}
               layoutId="active"
-              className="bg-white dark:bg-black backdrop-blur-sm rounded-2xl overflow-hidden border border-black/[0.2] dark:border-white/[0.2] shadow-xl min-w-[180px] min-h-[40px] flex items-center justify-center mt-2"
+              className="bg-red-500 dark:bg-black backdrop-blur-sm rounded-2xl overflow-hidden border border-black/[0.2] dark:border-white/[0.2] shadow-xl min-w-[180px] min-h-[40px] flex items-center justify-center mt-2"
             >
               {/* Dropdown content can go here */}
               {children}
@@ -308,7 +321,7 @@ const Navbar = () => {
 
       {/* Hamburger Icon (Mobile Only) */}
       <button
-        className="lg:hidden flex items-center justify-center p-0.5 rounded-md text-black bg-white hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 z-50"
+        className="lg:hidden flex items-center justify-center p-1 rounded-md text-black bg-black/30 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 z-50"
         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         aria-label="Toggle menu"
         aria-expanded={isMobileMenuOpen}
@@ -381,7 +394,7 @@ const Navbar = () => {
 
       {/* Mobile Menu Overlay */}
       {isMobileMenuOpen && (
-        <div className="fixed inset-0 z-[100] bg-[#0c1c3c]/95 backdrop-blur-lg flex flex-col h-screen lg:hidden px-1 py-1">
+        <div className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-lg flex flex-col h-screen lg:hidden px-1 py-1">
           {/* Top Bar */}
           <div className="flex items-center justify-between px-2 py-2 border-b border-white/10">
             <div className="flex items-center gap-2">
@@ -466,7 +479,7 @@ const Navbar = () => {
           <div className="px-4 pb-6">
             <button
               onClick={() => { setShowCtaForm(true); setIsMobileMenuOpen(false); }}
-              className="w-full rounded-full px-6 py-3 font-semibold text-white bg-gradient-to-r from-[#5062B9] via-[#3A4BA2] to-[#1B2859] shadow-lg border border-white/20 hover:brightness-110 hover:scale-105 transition-all duration-200 text-base"
+              className="w-full rounded-full px-6 py-3 font-semibold text-white bg-gradient-to-r from-red-600 via-red-700 to-red-800 shadow-lg border border-white/20 hover:brightness-110 hover:scale-105 transition-all duration-200 text-base"
             >
               Get Consultation
             </button>

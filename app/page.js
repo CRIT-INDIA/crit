@@ -17,7 +17,7 @@ import MovingClientsSection from "./components/ui/clients"
 
 export default function Home() {
   return (
-    <div className="relative overflow-hidden max-w-[1800px] w-full mx-auto bg-gradient-to-br from-white to-red-50">
+    <div className="relative overflow-hidden max-w-[1800px] w-full mx-auto bg-[#fff5f5]">
       {/* Full-width hero section */}
       <div className="relative h-* min-h-[400px] overflow-hidden">
         <ThreeDMarquee />

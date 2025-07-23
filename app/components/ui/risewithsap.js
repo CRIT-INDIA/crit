@@ -197,7 +197,8 @@ const SAPServices3DShowcase = () => {
         </div>
       )}
 
-      <div className="container mx-auto px-4 md:px-6 relative z-10">
+      
+<div className="container mx-auto px-4 md:px-6 relative z-10">
         {/* Section Header */}
         <div className="text-center mb-8 md:mb-16">
   <h2 className={`text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 md:mb-6 transition-all duration-1000 inline-block relative ${

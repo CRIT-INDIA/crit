@@ -395,39 +395,44 @@ export default function ContactForm() {
         <div className="container mx-auto px-2 sm:px-4 lg:px-6 py-3 sm:py-4 lg:py-6">
           {/* Main Heading */}
           <div className="text-center mb-6 sm:mb-8 pt-6 sm:pt-8">
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 ">
-              Get In Touch with Connecting Roots
-            </h1>
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 inline-block relative">
+    <span className="text-black">Get In Touch With </span>
+    <span className="text-red-500">Connecting Roots</span>
+    <svg className="mx-auto my-0" style={{marginTop: '-4px'}} width="160" height="18" viewBox="0 0 220 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M5 18 Q 110 8, 215 14" stroke="#dc2626" strokeWidth="4" strokeLinecap="round" fill="none"/>
+  <path d="M15 21 Q 120 15, 200 18" stroke="#dc2626" strokeWidth="2" strokeLinecap="round" fill="none"/>
+</svg>
+  </h1>
           </div>
           <div className="max-w-6xl mx-auto flex flex-col lg:flex-row gap-4 sm:gap-6 lg:gap-8 items-start relative z-10 w-full">
             {/* Left Side - Contact Information */}
             <div className="w-full lg:w-5/12 space-y-4">
               {/* Call Us Section */}
-              <div className="backdrop-blur-md border border-black/10 bg-white/5 rounded-md p-3 sm:p-4 lg:p-5 shadow-sm transition-all duration-300 hover:border-white/20 hover:shadow-md hover:scale-[1.02] hover:bg-white/5">
-                <h3 className="text-base sm:text-lg lg:text-xl font-semibold mb-2 flex items-center gap-2 text-white">
-                  <span className="bg-white/10 p-1.5 rounded-md transition-colors duration-300 group-hover:bg-white/20">
-                    <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+              <div className="backdrop-blur-md border border-black/10 bg-black/10 rounded-md p-3 sm:p-4 lg:p-5 shadow-sm transition-all duration-300 hover:border-white/20 hover:shadow-md hover:scale-[1.02] hover:bg-black/15">
+                <h3 className="text-base sm:text-lg lg:text-xl font-semibold mb-2 flex items-center gap-2 text-black">
+                  <span className="bg-black/10 p-1.5 rounded-md transition-colors duration-300 group-hover:bg-white/20">
+                    <svg className="w-4 h-4 text-black" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
                     </svg>
                   </span>
                   CALL US
                 </h3>
                 <div className="pl-6 lg:pl-8">
-                  <p className="text-white text-sm">+91 90040 02941</p>
+                  <p className="text-gray-800 text-sm">+91 90040 02941</p>
                 </div>
               </div>
               {/* Location Section */}
-              <div className="backdrop-blur-md border border-black/10 bg-black rounded-md p-3 sm:p-4 lg:p-5 shadow-sm transition-all duration-300 hover:border-white/20 hover:shadow-md hover:scale-[1.02] hover:bg-white/5">
-                <h3 className="text-base sm:text-lg lg:text-xl font-semibold mb-2 flex items-center gap-2 text-white">
-                  <span className="bg-white/10 p-1.5 rounded-md transition-colors duration-300 group-hover:bg-white/20">
-                    <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+              <div className="backdrop-blur-md border border-black/10 bg-black/10 rounded-md p-3 sm:p-4 lg:p-5 shadow-sm transition-all duration-300 hover:border-white/20 hover:shadow-md hover:scale-[1.02] hover:bg-black/15">
+                <h3 className="text-base sm:text-lg lg:text-xl font-semibold mb-2 flex items-center gap-2 text-black">
+                  <span className="bg-black/10 p-1.5 rounded-md transition-colors duration-300 group-hover:bg-white/20">
+                    <svg className="w-4 h-4 text-black" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
                     </svg>
                   </span>
                   LOCATION
                 </h3>
                 <div className="pl-6 lg:pl-8">
-                  <p className="text-white text-sm">
+                  <p className="text-black text-sm">
                     1st Floor,101, Police, Wireless Colony,<br />
                     Vishal Nagar, Pimple Nilakh,<br />
                     Pune, Pimpri-Chinchwad,<br />
@@ -436,10 +441,10 @@ export default function ContactForm() {
                   
                 </div>
               </div>
-              <div className="backdrop-blur-md border border-black/10 bg-black rounded-md p-3 sm:p-4 lg:p-5 shadow-sm transition-all duration-300 hover:border-white/20 hover:shadow-md hover:scale-[1.02] hover:bg-white/5">
-                <h3 className="text-base sm:text-lg lg:text-xl font-semibold mb-2 flex items-center gap-2 text-white">
-                  <span className="bg-white/10 p-1.5 rounded-md transition-colors duration-300 group-hover:bg-white/20">
-                    <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+              <div className="backdrop-blur-md border border-black/10 bg-black/10 rounded-md p-3 sm:p-4 lg:p-5 shadow-sm transition-all duration-300 hover:border-white/20 hover:shadow-md hover:scale-[1.02] hover:bg-black/15">
+                <h3 className="text-base sm:text-lg lg:text-xl font-semibold mb-2 flex items-center gap-2 text-black">
+                  <span className="bg-black/10 p-1.5 rounded-md transition-colors duration-300 group-hover:bg-white/20">
+                    <svg className="w-4 h-4 text-black" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                       <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" />
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6v6l4 2" />
                     </svg>
@@ -447,7 +452,7 @@ export default function ContactForm() {
                   Working Hours
                 </h3>
                 <div className="pl-6 lg:pl-8">
-                  <p className="text-gray-300 text-sm">
+                  <p className="text-black text-sm">
                     Monday - Saturday: 9:00 AM - 6:00 PM<br />
                     Sunday: Closed
                   </p>
@@ -455,17 +460,17 @@ export default function ContactForm() {
                 </div>
               </div>
 
-              <div className="backdrop-blur-md border border-black/10 bg-black rounded-md p-3 sm:p-4 lg:p-5 shadow-sm transition-all duration-300 hover:border-white/20 hover:shadow-md hover:scale-[1.02] hover:bg-white/5">
-                <h3 className="text-base sm:text-lg lg:text-xl font-semibold mb-2 flex items-center gap-2 text-white">
-                  <span className="bg-white/10 p-1.5 rounded-md transition-colors duration-300 group-hover:bg-white/20">
-                    <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+              <div className="backdrop-blur-md border border-black/10 bg-black/10 rounded-md p-3 sm:p-4 lg:p-5 shadow-sm transition-all duration-300 hover:border-white/20 hover:shadow-md hover:scale-[1.02] hover:bg-black/15">
+                <h3 className="text-base sm:text-lg lg:text-xl font-semibold mb-2 flex items-center gap-2 text-black">
+                  <span className="bg-black/10 p-1.5 rounded-md transition-colors duration-300 group-hover:bg-white/20">
+                    <svg className="w-4 h-4 text-black" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
                     </svg>
                   </span>
                   Email Us
                 </h3>
                 <div className="pl-6 lg:pl-8">
-                  <p className="text-gray-300 text-sm">
+                  <p className="text-black text-sm">
                   info@critindia.com
                   </p>
                   
@@ -473,9 +478,9 @@ export default function ContactForm() {
               </div>
             </div>
             {/* Right Side - Form Section */}
-            <div className="w-full lg:w-7/12 backdrop-blur-3xl bg-black border border-black/10 rounded-md p-4 sm:p-6 lg:p-8">
+            <div className="w-full lg:w-7/12 backdrop-blur-3xl bg-black/10 border border-black/10 rounded-md p-4 sm:p-6 lg:p-8">
               <h2 className="text-[#428CFF] text-lg sm:text-xl lg:text-2xl font-bold mb-2 sm:mb-3 lg:mb-4">GET IN TOUCH</h2>
-              <p className="text-gray-300 mb-3 sm:mb-4 lg:mb-5 text-sm">Hey! We are looking forward to start a project with you!</p>
+              <p className="text-black mb-3 sm:mb-4 lg:mb-5 text-sm">Hey! We are looking forward to start a project with you!</p>
               <form onSubmit={handleSubmit} className="space-y-2 sm:space-y-3 lg:space-y-4 p-1 sm:p-2 lg:p-3">
                 {/* Name Input */}
                 <div>
@@ -485,7 +490,7 @@ export default function ContactForm() {
                     value={formData.name}
                     onChange={handleChange}
                     placeholder="Enter your Name"
-                    className={`w-full p-2 sm:p-2.5 lg:p-3 bg-gray-100 border border-transparent rounded-md focus:outline-none focus:border-[#428CFF] text-xs sm:text-sm ${errors.name ? 'border-red-500' : ''}`}
+                    className={`w-full p-2 sm:p-2.5 lg:p-3 bg-gray-50 border border-transparent rounded-md focus:outline-none focus:border-[#428CFF] text-xs sm:text-sm ${errors.name ? 'border-red-500' : ''}`}
                     required
                   />
                   {errors.name && (
@@ -500,7 +505,7 @@ export default function ContactForm() {
                     value={formData.email}
                     onChange={handleChange}
                     placeholder="Enter a valid email address"
-                    className={`w-full p-2 sm:p-2.5 lg:p-3 bg-gray-100 border border-transparent rounded-md focus:outline-none focus:border-[#428CFF] text-xs sm:text-sm ${errors.email ? 'border-red-500' : ''}`}
+                    className={`w-full p-2 sm:p-2.5 lg:p-3 bg-gray-50 border border-transparent rounded-md focus:outline-none focus:border-[#428CFF] text-xs sm:text-sm ${errors.email ? 'border-red-500' : ''}`}
                     required
                   />
                   {errors.email && (
@@ -515,7 +520,7 @@ export default function ContactForm() {
                     value={formData.companyName}
                     onChange={handleChange}
                     placeholder="Enter your Company Name"
-                    className={`w-full p-2 sm:p-2.5 lg:p-3 bg-gray-100 border border-transparent rounded-md focus:outline-none focus:border-[#428CFF] text-xs sm:text-sm ${errors.companyName ? 'border-red-500' : ''}`}
+                    className={`w-full p-2 sm:p-2.5 lg:p-3 bg-gray-50 border border-transparent rounded-md focus:outline-none focus:border-[#428CFF] text-xs sm:text-sm ${errors.companyName ? 'border-red-500' : ''}`}
                   />
                   {errors.companyName && (
                     <p className="text-red-500 text-xs mt-0.5">{errors.companyName}</p>
@@ -527,7 +532,7 @@ export default function ContactForm() {
                     name="countryCode"
                     value={formData.countryCode}
                     onChange={handleChange}
-                    className="w-full sm:w-28 lg:w-32 p-2 sm:p-2.5 lg:p-3 bg-gray-100 border border-transparent rounded-md focus:outline-none focus:border-[#428CFF] text-xs sm:text-sm"
+                    className="w-full sm:w-28 lg:w-32 p-2 sm:p-2.5 lg:p-3 bg-gray-50 border border-transparent rounded-md focus:outline-none focus:border-[#428CFF] text-xs sm:text-sm"
                   >
                     {countryPhoneCodes.map((country) => (
                       <option key={country.code} value={country.code}>
@@ -543,7 +548,7 @@ export default function ContactForm() {
                     value={formData.phoneNumber}
                     onChange={handlePhoneChange}
                     placeholder={formData.countryCode}
-                    className={`w-full sm:flex-1 p-2 sm:p-2.5 lg:p-3 bg-gray-100 border border-transparent rounded-md focus:outline-none focus:border-[#428CFF] text-xs sm:text-sm ${errors.phoneNumber ? 'border-red-500' : ''}`}
+                    className={`w-full sm:flex-1 p-2 sm:p-2.5 lg:p-3 bg-gray-50 border border-transparent rounded-md focus:outline-none focus:border-[#428CFF] text-xs sm:text-sm ${errors.phoneNumber ? 'border-red-500' : ''}`}
                   />
                 </div>
                 {errors.phoneNumber && (
@@ -555,7 +560,7 @@ export default function ContactForm() {
                     name="service"
                     value={formData.service}
                     onChange={handleChange}
-                    className="w-full p-2 sm:p-2.5 lg:p-3 bg-gray-100 border border-transparent rounded-md focus:outline-none focus:border-[#428CFF] text-xs sm:text-sm"
+                    className="w-full p-2 sm:p-2.5 lg:p-3 bg-gray-50 border border-transparent rounded-md focus:outline-none focus:border-[#428CFF] text-xs sm:text-sm"
                     required
                   >
                     <option value="" disabled>Select Service</option>
@@ -574,7 +579,7 @@ export default function ContactForm() {
                     onChange={handleChange}
                     placeholder="Enter your message"
                     rows="3"
-                    className={`w-full p-2 sm:p-2.5 lg:p-3 bg-gray-100 border border-transparent rounded-md focus:outline-none focus:border-[#428CFF] text-xs sm:text-sm ${errors.message ? 'border-red-500' : ''}`}
+                    className={`w-full p-2 sm:p-2.5 lg:p-3 bg-gray-50 border border-transparent rounded-md focus:outline-none focus:border-[#428CFF] text-xs sm:text-sm ${errors.message ? 'border-red-500' : ''}`}
                     required
                   />
                   {errors.message && (
@@ -603,10 +608,10 @@ export default function ContactForm() {
           </div>
           {/* Map Section below the form, landscape orientation */}
           <div className="max-w-4xl mx-auto w-full mt-8">
-            <div className="backdrop-blur-md border border-black/10 bg-black rounded-md p-3 sm:p-4 lg:p-5 shadow-sm transition-all duration-300 hover:border-white/20 hover:shadow-md">
-              <h3 className="text-base sm:text-lg lg:text-xl font-semibold mb-2 flex items-center gap-2 text-white">
-                <span className="bg-white/10 p-1.5 rounded-md transition-colors duration-300 group-hover:bg-white/20">
-                  <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+            <div className="backdrop-blur-md border border-black/10 bg-black/10 rounded-md p-3 sm:p-4 lg:p-5 shadow-sm transition-all duration-300 hover:border-white/20 hover:shadow-md">
+              <h3 className="text-base sm:text-lg lg:text-xl font-semibold mb-2 flex items-center gap-2 text-black">
+                <span className="bg-black/10 p-1.5 rounded-md transition-colors duration-300 group-hover:bg-white/20">
+                  <svg className="w-4 h-4 text-black" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M20.5 3l-.16.03L15 5.1 9 3 3.36 4.9c-.21.07-.36.25-.36.48V20.5c0 .28.22.5.5.5l.16-.03L9 18.9l6 2.1 5.64-1.9c.21-.07.36-.25.36-.48V3.5c0-.28-.22-.5-.5-.5zM10 5.47l4 1.4v11.66l-4-1.4V5.47zm-5 .99l3-1.01v11.7l-3 1.16V6.46zm14 11.08l-3 1.01V6.86l3-1.16v11.84z"/>
                   </svg>
                 </span>
@@ -635,7 +640,7 @@ export default function ContactForm() {
                 >
                   {isMapHovered && (
                     <div
-                      className="absolute z-30 px-4 py-2 bg-gray-900 text-white text-xs sm:text-sm rounded-lg shadow-xl border border-blue-400 whitespace-normal break-words max-w-[90vw] sm:max-w-xs transition-colors duration-200 opacity-95 animate-fade-in pointer-events-none"
+                      className="absolute z-30 px-4 py-2 bg-gray-100 text-black text-xs sm:text-sm rounded-lg shadow-xl border border-blue-400 whitespace-normal break-words max-w-[90vw] sm:max-w-xs transition-colors duration-200 opacity-95 animate-fade-in"
                       style={{
                         left: tooltipPos.x,
                         top: tooltipPos.y,

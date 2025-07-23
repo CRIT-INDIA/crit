@@ -9,7 +9,7 @@ export default function Page() {
   return (
     <div>
      
-      <div className="relative bg-gradient-to-br from-white to-red-50 pt-10">   
+      <div className="relative bg-[#fff5f5] pt-10">   
         <SAPProductPage />
         < SAPProductsInfo />
 
