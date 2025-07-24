@@ -7,11 +7,11 @@ const ServicesGrid = () => {
   const [isFilterVisible, setIsFilterVisible] = useState(false);
 
   const categories = [
-    { id: 'all', label: 'All', count: 8, icon: '🎯', color: '#dc2626' },
-    { id: 'analytics', label: 'Analytics', count: 1, icon: '📊', color: '#ef4444' },
-    { id: 'integration', label: 'Integration', count: 3, icon: '🔗', color: '#f87171' },
-    { id: 'finance', label: 'Finance', count: 2, icon: '💰', color: '#dc2626' },
-    { id: 'logistics', label: 'Logistics', count: 2, icon: '📦', color: '#991b1b' }
+    { id: 'all', label: 'All', icon: '🎯', color: '#dc2626' },
+    { id: 'analytics', label: 'Analytics', icon: '📊', color: '#ef4444' },
+    { id: 'integration', label: 'Integration', icon: '🔗', color: '#f87171' },
+    { id: 'finance', label: 'Finance', icon: '💰', color: '#dc2626' },
+    { id: 'logistics', label: 'Logistics', icon: '📦', color: '#991b1b' }
   ];
 
   const extensions = [
@@ -106,20 +106,49 @@ const ServicesGrid = () => {
 
   useEffect(() => {
     // Animate filter appearance
-    setTimeout(() => setIsFilterVisible(true), 100);
-  }, []);
+    setIsFilterVisible(true);
+    
+    // Initialize filter indicator position for the active category
+    const activeButton = document.querySelector(`.filter-btn[data-category="${activeCategory}"]`);
+    if (activeButton) {
+      const container = activeButton.parentElement;
+      const scrollLeft = container.scrollLeft;
+      const rect = activeButton.getBoundingClientRect();
+      const containerRect = container.getBoundingClientRect();
+      const left = rect.left - containerRect.left + scrollLeft;
+      
+      setFilterPosition({
+        left: left,
+        width: rect.width
+      });
+    }
+  }, [activeCategory]);
 
   const handleCategoryClick = (category, event) => {
     const button = event.currentTarget;
+    const container = button.parentElement;
+    
+    // Get the scroll position of the container
+    const scrollLeft = container.scrollLeft;
     const rect = button.getBoundingClientRect();
-    const containerRect = button.parentElement.getBoundingClientRect();
+    const containerRect = container.getBoundingClientRect();
+    
+    // Calculate the position relative to the container, accounting for scroll
+    const left = rect.left - containerRect.left + scrollLeft;
     
     setFilterPosition({
-      left: rect.left - containerRect.left,
+      left: left,
       width: rect.width
     });
     
     setActiveCategory(category.id);
+    
+    // Scroll the button into view if needed
+    button.scrollIntoView({
+      behavior: 'smooth',
+      block: 'nearest',
+      inline: 'center'
+    });
   };
 
   return (
@@ -195,6 +224,34 @@ const ServicesGrid = () => {
           margin-right: auto;
         }
 
+        /* Mobile Responsive Styles */
+        @media (max-width: 768px) {
+          .section-title {
+            font-size: 32px;
+            margin-bottom: 16px;
+          }
+          
+          .section-subtitle {
+            font-size: 16px;
+            padding: 0 16px;
+            margin-bottom: 20px;
+          }
+          
+          .container {
+            padding: 0 16px;
+          }
+        }
+        
+        @media (max-width: 480px) {
+          .section-title {
+            font-size: 28px;
+          }
+          
+          .section-subtitle {
+            font-size: 14px;
+          }
+        }
+
         /* Innovative Filter Design */
         .filter-container {
           display: flex;
@@ -207,14 +264,16 @@ const ServicesGrid = () => {
 
         .category-filters {
           display: flex;
-          gap: 4px;
-          padding: 6px;
+          gap: 2px;
+          padding: 4px;
           background: rgba(255, 255, 255, 0.9);
           backdrop-filter: blur(10px);
-          border-radius: 16px;
+          border-radius: 12px;
           box-shadow: 0 4px 24px rgba(220, 38, 38, 0.1);
           position: relative;
           border: 1px solid rgba(220, 38, 38, 0.1);
+          flex-wrap: wrap;
+          justify-content: center;
         }
 
         .filter-indicator {
@@ -230,11 +289,11 @@ const ServicesGrid = () => {
         }
 
         .filter-btn {
-          padding: 12px 24px;
+          padding: 8px 16px;
           border: none;
           background: transparent;
-          border-radius: 12px;
-          font-size: 14px;
+          border-radius: 10px;
+          font-size: 13px;
           font-weight: 500;
           cursor: pointer;
           transition: all 0.3s ease;
@@ -243,8 +302,98 @@ const ServicesGrid = () => {
           z-index: 1;
           display: flex;
           align-items: center;
-          gap: 8px;
+          gap: 6px;
           white-space: nowrap;
+        }
+
+        /* Mobile responsive filter styles */
+        @media (max-width: 1024px) {
+          /* Hide the filter indicator on mobile */
+          .filter-indicator {
+            display: none;
+          }
+
+          /* Mobile filter container */
+          .filter-container {
+            padding: 0 16px;
+            position: relative;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none; /* IE and Edge */
+          }
+          
+          .filter-container::-webkit-scrollbar {
+            display: none; /* Hide scrollbar for Chrome, Safari and Opera */
+          }
+          
+          .category-filters {
+            width: max-content;
+            min-width: 100%;
+            position: relative;
+            padding: 4px;
+            gap: 4px;
+          }
+          
+          /* Mobile filter buttons */
+          .filter-btn {
+            padding: 8px 16px;
+            font-size: 13px;
+            gap: 6px;
+            border: 1px solid #e5e7eb;
+            background: white;
+            border-radius: 8px;
+            margin: 0 2px;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+          }
+          
+          .filter-btn.active {
+            color: #4b5563;
+            font-weight: 500;
+            background: #f9fafb;
+            border-color: #d1d5db;
+          }
+          
+          .filter-btn .filter-count {
+            background: #f3f4f6;
+            color: #4b5563;
+            border-radius: 10px;
+            padding: 0 6px;
+            font-size: 12px;
+            height: 20px;
+            min-width: 20px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+          }
+          
+          .filter-icon {
+            font-size: 16px;
+          }
+          
+          /* Adjustments for smaller screens */
+          @media (max-width: 500px) {
+            .filter-btn {
+              padding: 6px 12px;
+              font-size: 12px;
+            }
+            
+            .filter-icon {
+              font-size: 14px;
+            }
+          }
+        }
+        
+        @media (max-width: 480px) {
+          .filter-btn {
+            padding: 6px 12px;
+            font-size: 11px;
+            gap: 4px;
+          }
+          
+          .filter-icon {
+            font-size: 14px;
+          }
         }
 
         .filter-btn:hover {
@@ -257,12 +406,12 @@ const ServicesGrid = () => {
         }
 
         .filter-icon {
-          font-size: 18px;
+          font-size: 16px;
           transition: transform 0.3s ease;
         }
 
         .filter-btn:hover .filter-icon {
-          transform: scale(1.2) rotate(10deg);
+          transform: scale(1.2);
         }
 
         .filter-btn.active .filter-icon {
@@ -471,21 +620,26 @@ const ServicesGrid = () => {
       `}</style>
 
       <section className="extension-showcase">
+      <div className="relative z-10 text-center sm:mb-12 px-4 sm:px-1">
+      <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 inline-block relative">
+    <span className="text-black">Our </span>
+    <span className="text-red-500">Services</span>
+   <svg className="mx-auto my-0" style={{marginTop: '-4px'}} width="160" height="18" viewBox="0 0 220 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M5 18 Q 110 8, 215 14" stroke="#dc2626" strokeWidth="4" strokeLinecap="round" fill="none"/>
+  <path d="M15 21 Q 120 15, 200 18" stroke="#dc2626" strokeWidth="2" strokeLinecap="round" fill="none"/>
+</svg>
+  </h1>
+      <p className="text-base sm:text-lg text-black max-w-3xl mx-auto px-2 sm:px-0">
+        Comprehensive SAP solutions tailored to transform your business operations and drive digital excellence
+      </p>
+    </div>
         {/* Decorative Elements */}
         <div className="absolute top-20 right-20 w-32 h-32 bg-red-500/10 rounded-full blur-3xl" />
         <div className="absolute bottom-20 left-20 w-40 h-40 bg-red-400/10 rounded-full blur-3xl" />
         <div className="absolute top-1/2 left-1/4 w-24 h-24 bg-red-300/10 rounded-full blur-2xl" />
         
         <div className="container">
-          <div className="header-section">
-            <h2 className="section-title">
-              There's a <span className="gradient-text">SAP Service</span> for Everything.
-            </h2>
-            <p className="section-subtitle">
-              Access your SAP systems instantly. From analytics to logistics, 
-              manage your entire SAP landscape without leaving your keyboard.
-            </p>
-          </div>
+          
 
           <div className="filter-container">
             <div className="category-filters">
@@ -508,16 +662,10 @@ const ServicesGrid = () => {
                 >
                   <span className="filter-icon">{category.icon}</span>
                   <span>{category.label}</span>
-                  <span className="filter-count">{category.count}</span>
+
                 </button>
               ))}
             </div>
-          </div>
-
-          <div className="active-stats">
-            <p className="active-stats-text">
-              Showing <span className="active-stats-number">{activeCount}</span> {activeCategory === 'all' ? 'total' : activeCategory} extensions
-            </p>
           </div>
 
           <div className="extensions-grid">
@@ -557,9 +705,7 @@ const ServicesGrid = () => {
               </div>
             ))}
           </div>
-
-          
-        </div>
+       </div>
       </section>
     </>
   );

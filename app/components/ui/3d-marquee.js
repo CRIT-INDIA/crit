@@ -8,31 +8,32 @@ import CtaForm from "./CtaForm";
 
 export const ThreeDMarquee = ({ className }) => {
   const images = [
-    "https://res.cloudinary.com/duz9xipfm/image/upload/v1750677689/image1_bbzq2l.png",
-    "https://res.cloudinary.com/duz9xipfm/image/upload/v1750677687/image2_c40kmk.png",
-    "https://res.cloudinary.com/duz9xipfm/image/upload/v1750677687/image9_rewxiz.png",
-    "https://res.cloudinary.com/duz9xipfm/image/upload/v1750677686/image5_xoxy2g.png",
-    "https://res.cloudinary.com/duz9xipfm/image/upload/v1750677686/image4_kldmkq.png",
-    "https://res.cloudinary.com/duz9xipfm/image/upload/v1750677686/image7_bpq7lg.png",
-    "https://res.cloudinary.com/duz9xipfm/image/upload/v1750677686/image8_p02tqp.png",
-    "https://res.cloudinary.com/duz9xipfm/image/upload/v1750677686/image6_vm27bv.png",
-    "https://res.cloudinary.com/duz9xipfm/image/upload/v1750912642/bigstock-153437726_ybobwd.jpg",
-    "https://res.cloudinary.com/duz9xipfm/image/upload/v1751344095/image_w8niqw.jpg",
-    "https://res.cloudinary.com/duz9xipfm/image/upload/v1751344095/image_1_fgf2ck.jpg",
-    "https://res.cloudinary.com/duz9xipfm/image/upload/v1751344095/image_2_vimfg0.jpg",
-    "https://res.cloudinary.com/duz9xipfm/image/upload/v1751344095/image_3_jfnwiv.jpg",
-    "https://res.cloudinary.com/duz9xipfm/image/upload/v1751284251/image_2_koxpg4.png",
-    "https://res.cloudinary.com/duz9xipfm/image/upload/v1750677689/image1_bbzq2l.png",
-    "https://res.cloudinary.com/duz9xipfm/image/upload/v1750677687/image2_c40kmk.png",
-    "https://res.cloudinary.com/duz9xipfm/image/upload/v1750677687/image9_rewxiz.png",
-    "https://res.cloudinary.com/duz9xipfm/image/upload/v1750677686/image5_xoxy2g.png",
-    "https://res.cloudinary.com/duz9xipfm/image/upload/v1750677686/image4_kldmkq.png",
-    "https://res.cloudinary.com/duz9xipfm/image/upload/v1750912642/bigstock-153437726_ybobwd.jpg",
-    "https://res.cloudinary.com/duz9xipfm/image/upload/v1750677689/image1_bbzq2l.png",
-    "https://res.cloudinary.com/duz9xipfm/image/upload/v1750677687/image2_c40kmk.png",
-    "https://res.cloudinary.com/duz9xipfm/image/upload/v1750677687/image9_rewxiz.png",
-    "https://res.cloudinary.com/duz9xipfm/image/upload/v1750677686/image5_xoxy2g.png",
-    "https://res.cloudinary.com/duz9xipfm/image/upload/v1750677686/image4_kldmkq.png",
+    "https://res.cloudinary.com/dujw4np0d/image/upload/v1753337240/image6_vm27bv_lsc4ok.avif",
+    "https://res.cloudinary.com/dujw4np0d/image/upload/v1753337239/image8_p02tqp_aguhfo.avif",
+    "https://res.cloudinary.com/dujw4np0d/image/upload/v1753337239/image7_bpq7lg_p6s78c.avif",
+    "https://res.cloudinary.com/dujw4np0d/image/upload/v1753337239/image4_kldmkq_rdh34h.avif",
+    "https://res.cloudinary.com/dujw4np0d/image/upload/v1753337239/image5_xoxy2g_lluu1p.avif",
+    "https://res.cloudinary.com/dujw4np0d/image/upload/v1753337239/image7_bpq7lg_1_a1lynb.avif",
+    "https://res.cloudinary.com/dujw4np0d/image/upload/v1753337239/image2_c40kmk_nk5q2z.avif",
+    "https://res.cloudinary.com/dujw4np0d/image/upload/v1753337238/image1_bbzq2l_qozkgq.avif",
+    "https://res.cloudinary.com/dujw4np0d/image/upload/v1753337238/image10_dyxctm_unyf4m.avif",
+    "https://res.cloudinary.com/dujw4np0d/image/upload/v1753337238/image9_rewxiz_y4drvr.avif",
+    "https://res.cloudinary.com/dujw4np0d/image/upload/v1753337240/image6_vm27bv_lsc4ok.avif",
+    "https://res.cloudinary.com/dujw4np0d/image/upload/v1753337239/image8_p02tqp_aguhfo.avif",
+    "https://res.cloudinary.com/dujw4np0d/image/upload/v1753337239/image7_bpq7lg_p6s78c.avif",
+    "https://res.cloudinary.com/dujw4np0d/image/upload/v1753337239/image4_kldmkq_rdh34h.avif",
+    "https://res.cloudinary.com/dujw4np0d/image/upload/v1753337239/image5_xoxy2g_lluu1p.avif",
+    "https://res.cloudinary.com/dujw4np0d/image/upload/v1753337239/image7_bpq7lg_1_a1lynb.avif",
+    "https://res.cloudinary.com/dujw4np0d/image/upload/v1753337239/image2_c40kmk_nk5q2z.avif",
+    "https://res.cloudinary.com/dujw4np0d/image/upload/v1753337238/image1_bbzq2l_qozkgq.avif",
+    "https://res.cloudinary.com/dujw4np0d/image/upload/v1753337238/image10_dyxctm_unyf4m.avif",
+    "https://res.cloudinary.com/dujw4np0d/image/upload/v1753337238/image9_rewxiz_y4drvr.avif",
+    "https://res.cloudinary.com/dujw4np0d/image/upload/v1753337240/image6_vm27bv_lsc4ok.avif",
+    "https://res.cloudinary.com/dujw4np0d/image/upload/v1753337239/image8_p02tqp_aguhfo.avif",
+    "https://res.cloudinary.com/dujw4np0d/image/upload/v1753337239/image7_bpq7lg_p6s78c.avif",
+    "https://res.cloudinary.com/dujw4np0d/image/upload/v1753337239/image4_kldmkq_rdh34h.avif",
+    "https://res.cloudinary.com/dujw4np0d/image/upload/v1753337239/image5_xoxy2g_lluu1p.avif",
+    "https://res.cloudinary.com/dujw4np0d/image/upload/v1753337239/image7_bpq7lg_1_a1lynb.avif",
   ];
 
   // Split the images array into 4 equal parts
@@ -53,9 +54,9 @@ export const ThreeDMarquee = ({ className }) => {
 
   return (
     <>
-    <div className="relative w-full h-* m-auto min-h-[500px] sm:min-h-[100px] md:min-h-[700px] overflow-hidden max-w-[1800px] mb-10 ">
+    <div className="relative w-full h-* m-auto min-h-[700px] sm:min-h-[500px] md:min-h-[700px] lg:min-h-[800px] overflow-hidden max-w-[1800px] mb-10">
       {/* Overlayed Content */}
-      <div className="flex items-center m-auto justify-start min-h-* max-w-[1800px] z-9 relative px-4">
+      <div className="flex items-center m-auto justify-start min-h-* max-w-[1800px] z-9 relative px-4 pt-40 sm:pt-0">
         <motion.div
           className="w-full max-w-lg md:max-w-xl lg:max-w-2xl px-4 ml-2 sm:ml-8 md:ml-12 lg:ml-24 flex flex-col items-start justify-center"
           variants={containerVariants}
@@ -71,7 +72,7 @@ export const ThreeDMarquee = ({ className }) => {
             <span className="text-red-500">SAP Excellence</span>
           </motion.h1>
           <motion.p
-            className="text-base md:text-lg text-black mb-6 md:mb-8 max-w-xl text-left"
+            className="text-base md:text-lg text-gray-700 mb-6 md:mb-8 max-w-xl text-left"
             variants={itemVariants}
           >
             Empower your enterprise with CritIndia's comprehensive SAP implementation and support services. We deliver tailored solutions that drive innovation and growth.
@@ -102,7 +103,7 @@ export const ThreeDMarquee = ({ className }) => {
         
       </div>
       {/* Marquee Background */}
-      <div className="absolute inset-0 z-0 w-full h-full">
+      <div className="absolute top-36 sm:top-0 left-0 right-0 z-0 w-full h-[150%] sm:h-full">
         <div
           style={{
             transform: "rotateX(55deg) rotateY(0deg) rotateZ(-45deg)",

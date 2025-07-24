@@ -202,7 +202,7 @@ export default function ERPImplementationDiagram() {
   ];
 
   return (
-    <div className="w-full min-h-* flex items-center justify-center p-15  bg-black">
+    <div className="w-full min-h-* flex items-center justify-center p-15 bg-[#f5f5f5]">
       {isMobile ? (
           <div style={{
           display: 'flex', 
@@ -753,10 +753,10 @@ export default function ERPImplementationDiagram() {
                   {/* Projector light beam */}
                   <defs>
                     <radialGradient id="projectorBeam" cx="0%" cy="50%" r="100%">
-                      <stop offset="0%" stopColor="#ffffff" stopOpacity="0.9" />
-                      <stop offset="30%" stopColor="#e0f2fe" stopOpacity="0.7" />
-                      <stop offset="60%" stopColor="#b3e5fc" stopOpacity="0.4" />
-                      <stop offset="100%" stopColor="#81d4fa" stopOpacity="0.1" />
+                      <stop offset="0%" stopColor="#81d4fa" stopOpacity="0.9" />
+                      <stop offset="30%" stopColor="#81d4fa" stopOpacity="0.9" />
+                      <stop offset="60%" stopColor="#81d4fa" stopOpacity="1.0" />
+                      <stop offset="100%" stopColor="#81d4fa" stopOpacity="1.9" />
                     </radialGradient>
                     <filter id="projectorGlow" x="-50%" y="-50%" width="200%" height="200%">
                       <feDropShadow dx="0" dy="0" stdDeviation="15" floodColor="#ffffff" floodOpacity="0.6" />
@@ -849,8 +849,8 @@ export default function ERPImplementationDiagram() {
                     height: '100%',
                     pointerEvents: 'none',
                     zIndex: 1,
-                    background: 'linear-gradient(120deg, rgba(129,212,250,0.06) 0%, rgba(255,255,255,0.03) 60%, rgba(12,28,60,0.0) 100%)',
-                    filter: 'blur(2.5px)',
+                    background: 'linear-gradient(120deg, rgba(203, 117, 144, 0.06) 0%, rgba(191, 49, 49, 0.03) 60%, rgba(60, 12, 22, 0) 100%)',
+                    filter: 'blur(10.5px)',
                     borderRadius: '0.5em',
                   }} />
                   <div style={{ position: 'relative', zIndex: 2 }}>

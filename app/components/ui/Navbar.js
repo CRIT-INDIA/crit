@@ -65,7 +65,7 @@ const MenuItem = ({ setActive, active, item, href, pathname, children, textClass
   const normalizedHref = normalizePathname(href);
   const isCurrentPage = normalizedPathname === normalizedHref;
   
-  const hasDropdown = item === "Products" || item === "Services";
+  const hasDropdown = item === "Services"; // Only show dropdown for Services
   
   // Debug logging
   console.log(`MenuItem ${item}: pathname="${pathname}" -> "${normalizedPathname}", href="${href}" -> "${normalizedHref}", isCurrentPage=${isCurrentPage}`);
@@ -340,32 +340,16 @@ const Navbar = () => {
       {/* Desktop Menu (hidden on mobile) */}
       <div className="flex-1 items-center justify-center gap-8 hidden lg:flex ">
         <MenuItem setActive={setActive} active={active} item="Home" href="/" pathname={pathname} textClass="text-black hover:text-gray-700" />
-        <MenuItem setActive={setActive} active={active} item="Products" href="/products" pathname={pathname} textClass="text-black hover:text-gray-700">
-          {active === "Products" && (
-            <div className="bg-[#0c1c3c]/95 shadow-lg rounded-xl p-2 min-w-[400px]">
-              <div className="grid grid-cols-2 gap-2">
-                {products.map((product, idx) => (
-                  <Link
-                    key={idx}
-                    href={`/${product.slug}`}
-                    className={`block px-4 py-2 rounded-md text-white font-medium hover:bg-blue-900/60 transition text-left ${idx === 0 ? 'font-bold' : ''}`}
-                  >
-                    {product.name}
-                  </Link>
-                ))}
-              </div>
-            </div>
-          )}
-        </MenuItem>
+        <MenuItem setActive={setActive} active={active} item="Products" href="/products" pathname={pathname} textClass="text-black hover:text-gray-700" />
         <MenuItem setActive={setActive} active={active} item="Services" href="/services" pathname={pathname} textClass="text-black hover:text-gray-700">
           {active === "Services" && (
-            <div className="bg-[#0c1c3c]/95 shadow-lg rounded-xl p-2 min-w-[400px]">
+            <div className="backdrop-blur-xl rounded-xl p-2 min-w-[400px]">
               <div className="grid grid-cols-2 gap-2">
                 {services.map((service, idx) => (
                   <Link
                     key={idx}
                     href={`/${createServiceSlug(service.name)}`}
-                    className={`block px-4 py-2 rounded-md text-white font-medium hover:bg-blue-900/60 transition text-left ${idx === 0 ? 'font-bold' : ''}`}
+                    className={`block px-4 py-2 rounded-xl text-white font-light hover:text-red-500 hover:bg-gray-600/60 transition text-left ${idx === 0 ? 'font-bold' : ''}`}
                   >
                     {service.name}
                   </Link>
@@ -415,38 +399,12 @@ const Navbar = () => {
           {/* Menu Items */}
           <nav className="flex-1 min-h-0 overflow-y-auto px-4 py-6 flex flex-col gap-2">
             <a href="/" className="block text-white text-base sm:text-lg md:text-xl font-semibold rounded px-4 py-3 hover:bg-white/10 transition" onClick={() => setIsMobileMenuOpen(false)}>Home</a>
+            <a href="/products" className="block text-white text-base sm:text-lg md:text-xl font-semibold rounded px-4 py-3 hover:bg-white/10 transition" onClick={() => setIsMobileMenuOpen(false)}>Products</a>
             <a href="/career" className="block text-white text-base sm:text-lg md:text-xl font-semibold rounded px-4 py-3 hover:bg-white/10 transition" onClick={() => setIsMobileMenuOpen(false)}>Career</a>
             <a href="/about" className="block text-white text-base sm:text-lg md:text-xl font-semibold rounded px-4 py-3 hover:bg-white/10 transition" onClick={() => setIsMobileMenuOpen(false)}>About</a>
             <a href="/contact" className="block text-white text-base sm:text-lg md:text-xl font-semibold rounded px-4 py-3 hover:bg-white/10 transition" onClick={() => setIsMobileMenuOpen(false)}>Contact</a>
             
             <div className="my-3 border-t border-white/10" />
-            {/* Expandable Products */}
-            <button
-              className="w-full flex items-center justify-between text-white text-base sm:text-lg md:text-xl font-semibold rounded px-4 py-3 hover:bg-white/10 transition focus:outline-none"
-              onClick={() => setMobileProductsOpen((open) => !open)}
-              aria-expanded={mobileProductsOpen}
-            >
-              <span>Products</span>
-              <svg className={`w-5 h-5 ml-2 transition-transform ${mobileProductsOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-              </svg>
-            </button>
-            {mobileProductsOpen && (
-              <div className="bg-[#0c1c3c]/95 shadow-lg rounded-xl p-4 min-w-[300px]">
-                <div className="grid grid-cols-2 gap-2">
-                  {products.map((product, idx) => (
-                    <Link
-                      key={idx}
-                      href={`/${product.slug}`}
-                      className={`block px-4 py-2 rounded-md text-white font-medium hover:bg-blue-900/60 transition text-left ${idx === 0 ? 'font-bold' : ''}`}
-                      onClick={() => setIsMobileMenuOpen(false)}
-                    >
-                      {product.name}
-                    </Link>
-                  ))}
-                </div>
-              </div>
-            )}
             {/* Expandable Services */}
             <button
               className="w-full flex items-center justify-between text-white text-base sm:text-lg md:text-xl font-semibold rounded px-4 py-3 hover:bg-white/10 transition focus:outline-none"
