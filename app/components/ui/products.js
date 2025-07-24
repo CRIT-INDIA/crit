@@ -1,7 +1,8 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { ChevronLeft, ChevronRight, Users, Clock, Award, BookOpen, Target, Briefcase, ArrowUpRight } from 'lucide-react';
+import Link from 'next/link';
+import { ChevronLeft, ChevronRight, Users, Clock, Award, BookOpen, Target, Briefcase, ArrowUpRight, ArrowRight } from 'lucide-react';
 
 // CSS Animations and Utilities
 const styles = `
@@ -157,7 +158,7 @@ const DesignClassesSection = () => {
     <div className="min-h-screen text-white p-8">
       <style jsx global>{styles}</style>
       {/* Header */}
-      <div className="text-center mb-8 md:mb-16">
+      <div className="text-center mb-8 md:mb-8">
         <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 inline-block relative">
           <span className="text-black">Our </span>
           <span className="text-red-500">Products</span>
@@ -170,19 +171,7 @@ const DesignClassesSection = () => {
       {/* Featured Card Display */}
       <div className="max-w-6xl mx-auto mb-8">
         <div className="relative bg-white rounded-2xl p-8 md:p-16 border flex flex-col md:flex-row items-center justify-center md:justify-start min-h-[300px] md:min-h-[420px]">
-          {/* Navigation Arrows */}
-          <button
-            onClick={prevCard}
-            className="absolute left-2 md:left-4 top-1/2 transform -translate-y-1/2 z-10 bg-black bg-opacity-80 hover:bg-opacity-90 rounded-full p-2 md:p-3 transition-all"
-          >
-            <ChevronLeft className="w-4 h-4 md:w-6 md:h-6 text-white" />
-          </button>
-          <button
-            onClick={nextCard}
-            className="absolute right-2 md:right-4 top-1/2 transform -translate-y-1/2 z-10 bg-black bg-opacity-80 hover:bg-opacity-90 rounded-full p-2 md:p-3 transition-all"
-          >
-            <ChevronRight className="w-4 h-4 md:w-6 md:h-6 text-white" />
-          </button>
+          
 
           {/* Small card on the left */}
           <div className="relative flex-shrink-0 mb-4 md:mb-0 mr-0 md:mr-10 block" style={{ width: '200px', height: '250px' }}>
@@ -465,6 +454,18 @@ const DesignClassesSection = () => {
               </div>
           ))}
           </div>
+          
+          {/* View All Products Button */}
+          <div className="flex justify-center mt-12">
+            <Link 
+              href="/products" 
+              className="flex items-center justify-center px-4 py-3 bg-black text-white rounded-full text-md font-medium hover:scale-105 transition-all duration-300 group"
+            >
+              View All Products
+              <ArrowRight className="ml-1 h-5 w-5 group-hover:translate-x-2 transition-transform duration-300" />
+            </Link>
+          </div>
+          
         </div>
       </div>
     </div>

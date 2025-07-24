@@ -96,24 +96,27 @@ const CareerPage = () => {
   return (
     <div className="min-h-screen p-4 sm:p-8 md:p-12">
       {/* Hero Section */}
-      <section className="px-2 sm:px-4 py-6 pt-20">
-        <div className="max-w-5xl mx-auto">
-          <div className="bg-gray-300 rounded-2xl p-6 sm:p-8 text-center relative overflow-hidden border border-red-100 shadow-sm">
-            {/* Exploding Beams SVG Burst */}
+      <section className="relative w-full h-[400px] sm:h-[450px] md:h-[500px] px-2 sm:px-4 py-6 pt-20">
+        
+        <div className="max-w-5xl mx-auto relative z-10 h-full flex items-center justify-center">
+          <div className="bg-white/40 rounded-2xl p-6 sm:p-8 text-center relative overflow-hidden border border-red-100 w-full">
+          <div className="absolute inset-0 w-full h-full overflow-hidden">
+          <div 
+            className="w-full h-full bg-cover bg-center"
+            style={{
+              backgroundImage: `url(https://res.cloudinary.com/dujw4np0d/image/upload/v1753356682/download_aernpp.jpg)`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat'
+            }}
+          ></div>
+          <div className="absolute inset-0 bg-black/50"></div>
+        </div>
+            
             <style jsx>{`
 @keyframes moveGradient {
-  0% {
-    stop-color: #a78bfa;
-    stop-opacity: 1;
-  }
-  50% {
-    stop-color: #38bdf8;
-    stop-opacity: 1;
-  }
-  100% {
-    stop-color: #a78bfa;
-    stop-opacity: 1;
-  }
+  0%, 100% { stop-color: #ffffff; stop-opacity: 1; }
+  50% { stop-color: #ffffff; stop-opacity: 1; }
 }
 .burst-gradient stop {
   animation: moveGradient 2s linear infinite;
@@ -129,57 +132,17 @@ const CareerPage = () => {
   backdrop-filter: blur(8px);
 }
 `}</style>
-            <svg
-              className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-0"
-              width="340"
-              height="340"
-              viewBox="0 0 340 340"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              style={{ opacity: 0.18 }}
-            >
-              <defs>
-                <linearGradient id="beam-gradient-animated" x1="170" y1="0" x2="170" y2="60" gradientUnits="userSpaceOnUse">
-                  <stop offset="0%" stopColor="#a78bfa">
-                    <animate attributeName="stop-color" values="#a78bfa;#38bdf8;#a78bfa" dur="2s" repeatCount="indefinite" />
-                  </stop>
-                  <stop offset="100%" stopColor="#38bdf8">
-                    <animate attributeName="stop-color" values="#38bdf8;#a78bfa;#38bdf8" dur="2s" repeatCount="indefinite" />
-                  </stop>
-                </linearGradient>
-              </defs>
-              <g>
-                {[...Array(24)].map((_, i) => (
-                  <line
-                    key={i}
-                    x1="170"
-                    y1="30"
-                    x2="170"
-                    y2="0"
-                    stroke="url(#beam-gradient-animated)"
-                    strokeWidth="6"
-                    strokeLinecap="round"
-                    transform={`rotate(${(360 / 24) * i} 170 170)`}
-                  />
-                ))}
-              </g>
-              <circle cx="170" cy="170" r="60" fill="#6366f1" fillOpacity="0.12" />
-            </svg>
-            <div className="absolute inset-0 bg-gradient-to-br from-red-50/80 via-blue-50/80 to-red-50/80 rounded-2xl"></div>
             <div className="absolute top-0 right-0 w-48 h-48 bg-white/5 rounded-full blur-2xl transform translate-x-16 -translate-y-16"></div>
             <div className="absolute bottom-0 left-0 w-48 h-48 bg-white/5 rounded-full blur-2xl transform -translate-x-16 translate-y-16"></div>
             
             <div className="relative z-10 ">
-              <h2 className="text-2xl md:text-3xl text-black font-bold mb-4">
+              <h2 className="text-2xl md:text-3xl text-white font-bold mb-4">
                 Looking for the Best IT Job?
               </h2>
-              <p className="text-base md:text-lg mb-4 text-gray-700 max-w-2xl mx-auto leading-relaxed">
+              <p className="text-base md:text-lg mb-4 text-gray-400 max-w-2xl mx-auto leading-relaxed">
                 Join a team that thrives on innovation, creativity, and collaboration. At Codetentacles, we empower individuals to grow while building solutions that make an impact. Discover your next big opportunity today!
               </p>
-              <button className="inline-flex items-center gap-2 bg-red-600 text-white px-6 py-2.5 rounded-full hover:bg-red-700 transition-all duration-300 font-medium text-sm shadow-sm hover:shadow-md linkedin-btn">
-                <span>Visit us on LinkedIn</span>
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" className="text-blue-500 linkedin-logo"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-10h3v10zm-1.5-11.268c-.966 0-1.75-.784-1.75-1.75s.784-1.75 1.75-1.75 1.75.784 1.75 1.75-.784 1.75-1.75 1.75zm15.5 11.268h-3v-5.604c0-1.337-.025-3.063-1.868-3.063-1.868 0-2.154 1.459-2.154 2.968v5.699h-3v-10h2.881v1.367h.041c.401-.761 1.379-1.563 2.838-1.563 3.036 0 3.6 2.001 3.6 4.601v5.595z"/></svg>
-              </button>
+              
             </div>
           </div>
         </div>
@@ -501,7 +464,7 @@ const CareerPage = () => {
                     </label>
                     <input
                       type="text"
-                      className="w-full bg-gray-900/50 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none transition-colors"
+                      className="w-full bg-gray-200 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none transition-colors"
                       placeholder="Enter your full name"
                     />
                   </div>
@@ -511,7 +474,7 @@ const CareerPage = () => {
                     </label>
                     <input
                       type="text"
-                      className="w-full bg-gray-900/50 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none transition-colors"
+                      className="w-full bg-gray-200 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none transition-colors"
                       placeholder="e.g., React Developer"
                     />
                   </div>
@@ -524,7 +487,7 @@ const CareerPage = () => {
                     </label>
                     <input
                       type="text"
-                      className="w-full bg-gray-900/50 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none transition-colors"
+                      className="w-full bg-gray-200 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none transition-colors"
                       placeholder="e.g., 3+ years"
                     />
                   </div>
@@ -534,7 +497,7 @@ const CareerPage = () => {
                     </label>
                     <input
                       type="text"
-                      className="w-full bg-gray-900/50 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none transition-colors"
+                      className="w-full bg-gray-200 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none transition-colors"
                       placeholder="e.g., 10 LPA"
                     />
                   </div>
@@ -547,7 +510,7 @@ const CareerPage = () => {
                     </label>
                     <textarea
                       rows="4"
-                      className="w-full bg-gray-900/50 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none transition-colors resize-none"
+                      className="w-full bg-gray-200 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none transition-colors resize-none"
                       placeholder="Tell us about yourself and your interests..."
                     ></textarea>
                   </div>
@@ -584,7 +547,7 @@ const CareerPage = () => {
                 <div className="flex justify-center pt-4">
                   <button
                     type="submit"
-                    className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-semibold px-6 sm:px-8 py-3 rounded-full flex items-center gap-2 transition-all duration-300 hover:scale-105 w-full sm:w-auto"
+                    className="bg-gradient-to-r from-red-600 to-red-800 hover:from-purple-700 hover:to-blue-700 text-white font-semibold px-6 sm:px-8 py-3 rounded-full flex items-center gap-2 transition-all duration-300 hover:scale-105 w-full sm:w-auto"
                   >
                     <span>Submit</span>
                     <ArrowRight size={20} />

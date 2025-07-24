@@ -88,7 +88,7 @@ const ModernFooter = () => {
             <div className="space-y-2">
               <div className="flex items-start space-x-3">
                 <img 
-                  src="https://res.cloudinary.com/dujw4np0d/image/upload/v1752048521/CRIT-3D_gk4ygq.png" 
+                  src="https://res.cloudinary.com/dujw4np0d/image/upload/v1753342468/CRIT-3D_cpzr1n_ggj84n.avif" 
                   alt="CRIT Logo" 
                   className="w-16 h-16 object-contain flex-shrink-0"
                 />

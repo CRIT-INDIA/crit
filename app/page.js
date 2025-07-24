@@ -2,7 +2,6 @@
 import { Suspense, lazy, useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 
-// Import critical components directly
 import { ThreeDMarquee } from "./components/ui/3d-marquee";
 import MovingClientsSection from "./components/ui/clients";
 
