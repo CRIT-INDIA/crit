@@ -127,7 +127,7 @@ const DesignClassesSection = () => {
           <div className="relative flex-shrink-0 mb-4 md:mb-0 mr-0 md:mr-10 block" style={{ width: '200px', height: '250px' }}>
             {/* Notch background circle for cut-out effect */}
             <div className="absolute -top-4 -right-4 z-20 pointer-events-none">
-              <div className="bg-[#232b36] w-16 h-16 rounded-full" />
+              <div className="bg-white w-16 h-16 rounded-full" />
                 </div>
             {/* Card */}
             <div key={currentCard} className="relative p-6 shadow-md bg-gray-100 text-gray-900 rounded-tl-2xl rounded-tr-none rounded-br-xl rounded-bl-2xl w-full h-full flex flex-col items-center justify-center transition-all duration-300 ease-in-out group overflow-hidden">
@@ -342,7 +342,7 @@ const DesignClassesSection = () => {
               <div key={classItem.id} className="relative w-full h-48 md:h-56">
                 {/* Notch background circle for cut-out effect (all cards) */}
                 <div className="absolute -top-3 -right-3 z-20 pointer-events-none">
-                  <div className="bg-[#232b36] w-16 h-16 rounded-full" />
+                  <div className="bg-white w-16 h-16 rounded-full" />
                 </div>
                 {/* Card */}
                 <div
@@ -373,27 +373,27 @@ const DesignClassesSection = () => {
                   {/* Image container filling remaining space */}
                   {classItem.title === 'SAP S/4 HANA' ? (
                     <div className="w-full h-24 md:h-32 rounded-2xl mt-auto overflow-hidden bg-gray-200 flex items-center justify-center mt-2">
-                      <img src="https://res.cloudinary.com/dujw4np0d/image/upload/v1752832936/Project_44-08_e3kgy4.jpg" alt="SAP S/4 HANA img" className="object-cover w-full h-full rounded-2xl" />
+                      <img src="https://res.cloudinary.com/dujw4np0d/image/upload/v1753339763/Project_74-21_vjuhcv_roxeg0.avif" alt="SAP S/4 HANA img" className="object-cover w-full h-full rounded-2xl" />
                     </div>
                   ) : classItem.title === 'SAP Success Factors' ? (
                     <div className="w-full h-20 md:h-27 rounded-2xl mt-auto overflow-hidden bg-gray-200 flex items-center justify-center mt-2">
-                      <img src="https://res.cloudinary.com/dujw4np0d/image/upload/v1752833898/Project_70-07_gzkqsu.jpg" alt="SAP Success Factors img" className="object-contain w-full h-full rounded-2xl" />
+                      <img src="https://res.cloudinary.com/dujw4np0d/image/upload/v1753339763/Project_69-08_qjqkub_yw2eqt.avif" alt="SAP Success Factors img" className="object-contain w-full h-full rounded-2xl" />
                     </div>
                   ) : classItem.title === 'SAP Analytics & Ariba' ? (
                     <div className="w-full h-24 md:h-28 rounded-2xl mt-auto overflow-hidden bg-gray-200 flex items-center justify-center mt-2">
-                      <img src="https://res.cloudinary.com/dujw4np0d/image/upload/v1752835611/387_generated_eyibjv.jpg" alt="SAP Analytics & Ariba img" className="object-cover w-full h-full rounded-2xl" />
+                      <img src="https://res.cloudinary.com/dujw4np0d/image/upload/v1753339762/Project_70-07_gzkqsu_owvevh.avif" alt="SAP Analytics & Ariba img" className="object-cover w-full h-full rounded-2xl" />
                     </div>
                   ) : classItem.title === 'SAP Concur' ? (
                     <div className="w-full h-24 md:h-32 rounded-2xl mt-auto overflow-hidden bg-gray-200 flex items-center justify-center mt-2">
-                      <img src="https://res.cloudinary.com/dujw4np0d/image/upload/v1752836349/vecteezy_teamwork-or-team-building-office-business-meeting-vector_4154417_wmtzvy.jpg" alt="SAP Concur img " className="object-cover w-full h-full rounded-2xl" />
+                      <img src="https://res.cloudinary.com/dujw4np0d/image/upload/v1753339762/Project_44-08_e3kgy4_oiktxn.avif" alt="SAP Concur img " className="object-cover w-full h-full rounded-2xl" />
                     </div>
                   ) : classItem.title === 'SAP BTP' ? (
                     <div className="w-full h-24 md:h-32 rounded-2xl mt-auto overflow-hidden bg-gray-200 flex items-center justify-center mt-2">
-                      <img src="https://res.cloudinary.com/dujw4np0d/image/upload/v1752898908/Project_69-08_qjqkub.jpg" alt="SAP BTP img" className="object-cover w-full h-full rounded-2xl" />
+                      <img src="https://res.cloudinary.com/dujw4np0d/image/upload/v1753339762/vecteezy_teamwork-or-team-building-office-business-meeting-vector_4154417_wmtzvy_vkkjsc.avif" alt="SAP BTP img" className="object-cover w-full h-full rounded-2xl" />
                     </div>
                   ) : classItem.title === 'SAP Fiori' ? (
                     <div className="w-full h-24 md:h-32 rounded-2xl mt-auto overflow-hidden bg-gray-200 flex items-center justify-center mt-2">
-                      <img src="https://res.cloudinary.com/dujw4np0d/image/upload/v1752899371/Project_74-21_vjuhcv.jpg" alt="SAP Fiori" className="object-cover w-full h-full rounded-2xl" />
+                      <img src="https://res.cloudinary.com/dujw4np0d/image/upload/v1753339762/387_generated_eyibjv_hroypy.avif" alt="SAP Fiori" className="object-cover w-full h-full rounded-2xl" />
                     </div>
                   ) : (
                     <div className="flex-grow w-full rounded-2xl mt-auto overflow-hidden bg-gray-200 flex items-center justify-center">

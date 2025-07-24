@@ -57,7 +57,7 @@ const ModernFooter = () => {
   ];
 
   return (
-    <footer className="relative bg-black min-h-screen overflow-hidden pt-10">
+    <footer className="relative bg-black min-h-* overflow-hidden pt-10">
       {/* Floating geometric shapes */}
       <div className="absolute inset-0 pointer-events-none">
         {/* Main central device mockup */}

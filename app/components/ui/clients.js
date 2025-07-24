@@ -3,11 +3,11 @@ import React from 'react';
 const MovingClientsSection = () => {
   // Client data matching the style from your image
   const clients = [
-    { name: 'Google', logo: 'https://img.icons8.com/color/96/google-logo.png' },
-    { name: 'Microsoft', logo: 'https://img.icons8.com/color/96/microsoft.png' },
-    { name: 'Apple', logo: 'https://res.cloudinary.com/duz9xipfm/image/upload/v1753178491/Apple_logo_grey.svg_m7dsoq.png' },
-    { name: 'Amazon', logo: 'https://res.cloudinary.com/duz9xipfm/image/upload/v1753178786/Amazon-Logo-White-PNG-Pic_m8kupd.png' },
-    { name: 'Meta', logo: 'https://img.icons8.com/color/96/meta.png' },
+    { name: 'Google', logo: 'https://res.cloudinary.com/dujw4np0d/image/upload/v1753339366/google-logo_cxut0t.avif' },
+    { name: 'Microsoft', logo: 'https://res.cloudinary.com/dujw4np0d/image/upload/v1753339366/microsoft_buuqps.avif' },
+    { name: 'Apple', logo: 'https://res.cloudinary.com/dujw4np0d/image/upload/v1753339367/Apple_logo_grey.svg_m7dsoq_vm6wyx.avif' },
+    { name: 'Amazon', logo: 'https://res.cloudinary.com/dujw4np0d/image/upload/v1753339367/Amazon-Logo-White-PNG-Pic_m8kupd_vfhxys.avif' },
+    { name: 'Meta', logo: 'https://res.cloudinary.com/dujw4np0d/image/upload/v1753339366/meta_ivcb5k.avif' },
   ];
 
   // Triple the clients array for seamless infinite scroll
