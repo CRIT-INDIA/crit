@@ -34,6 +34,10 @@ export const ThreeDMarquee = ({ className }) => {
     "https://res.cloudinary.com/dujw4np0d/image/upload/v1753337239/image4_kldmkq_rdh34h.avif",
     "https://res.cloudinary.com/dujw4np0d/image/upload/v1753337239/image5_xoxy2g_lluu1p.avif",
     "https://res.cloudinary.com/dujw4np0d/image/upload/v1753337239/image7_bpq7lg_1_a1lynb.avif",
+    "https://res.cloudinary.com/dujw4np0d/image/upload/v1753337239/image2_c40kmk_nk5q2z.avif",
+    "https://res.cloudinary.com/dujw4np0d/image/upload/v1753337238/image1_bbzq2l_qozkgq.avif",
+    "https://res.cloudinary.com/dujw4np0d/image/upload/v1753337238/image10_dyxctm_unyf4m.avif",
+    "https://res.cloudinary.com/dujw4np0d/image/upload/v1753337238/image9_rewxiz_y4drvr.avif",
   ];
 
   // Split the images array into 4 equal parts
@@ -54,9 +58,9 @@ export const ThreeDMarquee = ({ className }) => {
 
   return (
     <>
-    <div className="relative w-full h-* m-auto min-h-[700px] sm:min-h-[500px] md:min-h-[700px] lg:min-h-[800px] overflow-hidden max-w-[1800px] mb-10">
+    <div className="relative w-full h-* m-auto min-h-[500px] sm:min-h-[100px] md:min-h-[700px] overflow-hidden max-w-[1800px] mb-10 ">
       {/* Overlayed Content */}
-      <div className="flex items-center m-auto justify-start min-h-* max-w-[1800px] z-9 relative px-4 pt-40 sm:pt-0">
+      <div className="flex items-center m-auto justify-start min-h-* max-w-[1800px] z-9 relative px-4">
         <motion.div
           className="w-full max-w-lg md:max-w-xl lg:max-w-2xl px-4 ml-2 sm:ml-8 md:ml-12 lg:ml-24 flex flex-col items-start justify-center"
           variants={containerVariants}
@@ -72,7 +76,7 @@ export const ThreeDMarquee = ({ className }) => {
             <span className="text-red-500">SAP Excellence</span>
           </motion.h1>
           <motion.p
-            className="text-base md:text-lg text-gray-700 mb-6 md:mb-8 max-w-xl text-left"
+            className="text-base md:text-lg text-black mb-6 md:mb-8 max-w-xl text-left"
             variants={itemVariants}
           >
             Empower your enterprise with CritIndia's comprehensive SAP implementation and support services. We deliver tailored solutions that drive innovation and growth.
@@ -82,7 +86,6 @@ export const ThreeDMarquee = ({ className }) => {
               href="#"
               onClick={e => { e.preventDefault(); setShowCtaForm(true); }}
               className="flex items-center gap-2 px-3 sm:px-4 md:px-6 py-2 rounded-full font-semibold bg-gradient-to-r from-red-500 to-red-700 text-white shadow-lg hover:scale-105 hover:from-red-600 hover:to-red-800 focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all duration-200 text-sm md:text-base active:scale-95"
-              style={{ pointerEvents: 'auto' }}
             >
               <svg className="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="13" rx="2" /><path d="M16 2v4M8 2v4M3 10h18" /></svg>
               Schedule a Demo
@@ -103,7 +106,7 @@ export const ThreeDMarquee = ({ className }) => {
         
       </div>
       {/* Marquee Background */}
-      <div className="absolute top-36 sm:top-0 left-0 right-0 z-0 w-full h-[150%] sm:h-full">
+      <div className="absolute inset-0 z-0 w-full h-full">
         <div
           style={{
             transform: "rotateX(55deg) rotateY(0deg) rotateZ(-45deg)",

@@ -753,11 +753,9 @@ export default function ERPImplementationDiagram() {
                   {/* Projector light beam */}
                   <defs>
                     <radialGradient id="projectorBeam" cx="0%" cy="50%" r="100%">
-                      <stop offset="0%" stopColor="#81d4fa" stopOpacity="0.9" />
-                      <stop offset="30%" stopColor="#81d4fa" stopOpacity="0.9" />
+                      <stop offset="100%" stopColor="#81d4fa" stopOpacity="1.0" />                      <stop offset="30%" stopColor="#81d4fa" stopOpacity="0.9" />
                       <stop offset="60%" stopColor="#81d4fa" stopOpacity="1.0" />
-                      <stop offset="100%" stopColor="#81d4fa" stopOpacity="1.9" />
-                    </radialGradient>
+                      <stop offset="100%" stopColor="#81d4fa" stopOpacity="1.0" />                    </radialGradient>
                     <filter id="projectorGlow" x="-50%" y="-50%" width="200%" height="200%">
                       <feDropShadow dx="0" dy="0" stdDeviation="15" floodColor="#ffffff" floodOpacity="0.6" />
                       <feDropShadow dx="0" dy="0" stdDeviation="8" floodColor="#00f6ff" floodOpacity="0.4" />
