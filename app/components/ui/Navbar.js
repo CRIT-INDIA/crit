@@ -308,7 +308,7 @@ const Navbar = () => {
       <div className="flex items-center">
         <div className="relative w-8 h-8">
           <Image
-            src="https://res.cloudinary.com/dujw4np0d/image/upload/v1751005553/CRIT-3D_cpzr1n.png"
+            src="https://res.cloudinary.com/dujw4np0d/image/upload/v1753342468/CRIT-3D_cpzr1n_ggj84n.avif"
             alt="CRIT INDIA Logo"
             fill
             className="object-contain"

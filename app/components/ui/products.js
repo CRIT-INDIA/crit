@@ -3,6 +3,66 @@
 import React, { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight, Users, Clock, Award, BookOpen, Target, Briefcase, ArrowUpRight } from 'lucide-react';
 
+// CSS Animations and Utilities
+const styles = `
+  @keyframes fill-up {
+    0% {
+      transform: translateY(100%);
+      opacity: 0.8;
+    }
+    25% {
+      transform: translateY(50%);
+      opacity: 1;
+    }
+    50% {
+      transform: translateY(0%);
+      opacity: 1;
+    }
+    75% {
+      transform: translateY(50%);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(100%);
+      opacity: 0.8;
+    }
+  }
+  
+  .animate-fill-up {
+    animation: fill-up 4s ease-in-out infinite;
+    transform-origin: bottom;
+  }
+  
+  /* Text color animation */
+  @keyframes text-change {
+    0%, 100% {
+      color: #111827; /* gray-900 */
+    }
+    25%, 75% {
+      color: #000000; /* black */
+    }
+  }
+  
+  .animate-text-change {
+    animation: text-change 4s ease-in-out infinite;
+  }
+  
+  /* Line clamp utilities */
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
+  .line-clamp-none {
+    display: block;
+    -webkit-line-clamp: unset;
+    -webkit-box-orient: unset;
+    overflow: visible;
+  }
+`;
+
 const DesignClassesSection = () => {
   const classesData = [
     {
@@ -95,6 +155,7 @@ const DesignClassesSection = () => {
 
   return (
     <div className="min-h-screen text-white p-8">
+      <style jsx global>{styles}</style>
       {/* Header */}
       <div className="text-center mb-8 md:mb-16">
         <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 inline-block relative">
@@ -151,27 +212,27 @@ const DesignClassesSection = () => {
               {/* Large Image (fills card) */}
                 {classesData[currentCard].title === 'SAP S/4 HANA' ? (
                   <div className="w-full flex-1 rounded-2xl overflow-hidden bg-gray-200 flex items-center justify-center transition-all duration-300">
-                    <img src="https://res.cloudinary.com/dujw4np0d/image/upload/v1752832936/Project_44-08_e3kgy4.jpg" alt="SAP S/4 HANA img" className="object-cover w-full h-full rounded-2xl transition-all duration-300" />
+                    <img src="https://res.cloudinary.com/dujw4np0d/image/upload/v1753339762/387_generated_eyibjv_hroypy.avif" alt="SAP S/4 HANA img" className="object-cover w-full h-full rounded-2xl transition-all duration-300" />
                   </div>
                 ) : classesData[currentCard].title === 'SAP Success Factors' ? (
                   <div className="w-full flex-1 rounded-2xl overflow-hidden bg-gray-200 flex items-center justify-center transition-all duration-300">
-                    <img src="https://res.cloudinary.com/dujw4np0d/image/upload/v1752833898/Project_70-07_gzkqsu.jpg" alt="SAP Success Factors img" className="object-contain w-full h-full rounded-2xl transition-all duration-300" />
+                    <img src="https://res.cloudinary.com/dujw4np0d/image/upload/v1753339762/vecteezy_teamwork-or-team-building-office-business-meeting-vector_4154417_wmtzvy_vkkjsc.avif" alt="SAP Success Factors img" className="object-contain w-full h-full rounded-2xl transition-all duration-300" />
                   </div>
                 ) : classesData[currentCard].title === 'SAP Analytics & Ariba' ? (
                   <div className="w-full flex-1 rounded-2xl overflow-hidden bg-gray-200 flex items-center justify-center transition-all duration-300">
-                    <img src="https://res.cloudinary.com/dujw4np0d/image/upload/v1752835611/387_generated_eyibjv.jpg" alt="SAP Analytics & Ariba img" className="object-cover w-full h-full rounded-2xl transition-all duration-300" />
+                    <img src="https://res.cloudinary.com/dujw4np0d/image/upload/v1753339762/Project_70-07_gzkqsu_owvevh.avif" alt="SAP Analytics & Ariba img" className="object-cover w-full h-full rounded-2xl transition-all duration-300" />
                   </div>
                 ) : classesData[currentCard].title === 'SAP Concur' ? (
                   <div className="w-full flex-1 rounded-2xl overflow-hidden bg-gray-200 flex items-center justify-center transition-all duration-300">
-                    <img src="https://res.cloudinary.com/dujw4np0d/image/upload/v1752836349/vecteezy_teamwork-or-team-building-office-business-meeting-vector_4154417_wmtzvy.jpg" alt="SAP Concur img" className="object-cover w-full h-full rounded-2xl transition-all duration-300" />
+                    <img src="https://res.cloudinary.com/dujw4np0d/image/upload/v1753339762/Project_44-08_e3kgy4_oiktxn.avif" alt="SAP Concur img" className="object-cover w-full h-full rounded-2xl transition-all duration-300" />
                   </div>
                 ) : classesData[currentCard].title === 'SAP BTP' ? (
                   <div className="w-full flex-1 rounded-2xl overflow-hidden bg-gray-200 flex items-center justify-center transition-all duration-300">
-                    <img src="https://res.cloudinary.com/dujw4np0d/image/upload/v1752898908/Project_69-08_qjqkub.jpg" alt="SAP BTP img" className="object-cover w-full h-full rounded-2xl transition-all duration-300" />
+                    <img src="https://res.cloudinary.com/dujw4np0d/image/upload/v1753339763/Project_69-08_qjqkub_yw2eqt.avif" alt="SAP BTP img" className="object-cover w-full h-full rounded-2xl transition-all duration-300" />
                   </div>
                 ) : classesData[currentCard].title === 'SAP Fiori' ? (
                   <div className="w-full flex-1 rounded-2xl overflow-hidden bg-gray-200 flex items-center justify-center transition-all duration-300">
-                    <img src="https://res.cloudinary.com/dujw4np0d/image/upload/v1752899371/Project_74-21_vjuhcv.jpg" alt="SAP Fiori img" className="object-cover w-full h-full rounded-2xl transition-all duration-300" />
+                    <img src="https://res.cloudinary.com/dujw4np0d/image/upload/v1753339763/Project_74-21_vjuhcv_roxeg0.avif" alt="SAP Fiori img" className="object-cover w-full h-full rounded-2xl transition-all duration-300" />
                   </div>
                 ) : null}
               </div>
