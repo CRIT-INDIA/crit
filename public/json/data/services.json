@@ -12,34 +12,28 @@
                 
                 "features": [
                     {
-                        "title": "Strategic Planning & Roadmap Design",
-                        "animation": "https://assets2.lottiefiles.com/packages/lf20_LmW6VioIWc.json",
-                        "description": "Comprehensive planning and strategy development for your SAP implementation journey"
+                        "title": "Strategic Planning & Roadmap Design",                       
+                        "description": "Strategic planning begins with aligning IT initiatives (such as SAP deployments, upgrades, or module rollouts) with the organization's broader business objectives — such as growth, scalability, compliance, or customer experience enhancement."
                     },
                     {
                         "title": "SAP Leadership & Functional Alignment",
-                        "animation": "https://assets2.lottiefiles.com/private_files/lf30_TBKozE.json",
-                        "description": "Align your organization's leadership and functional teams with SAP best practices"
+                        "description": "Align your organization's leadership and functional teams with SAP best practices. This involves identifying key stakeholders, defining roles, and establishing clear communication channels to ensure everyone is on the same page."
                     },
                     {
                         "title": "System Sizing, Blueprinting & TCO Optimization",
-                        "animation": "https://assets2.lottiefiles.com/packages/lf20_49rdyysj.json",
-                        "description": "Detailed system architecture and cost optimization planning"
+                        "description": "System sizing involves determining the optimal number of users, transactions, and modules required to support the business. Blueprinting creates a detailed plan for the system architecture, including hardware, software, and network requirements."
                     },
                     {
                         "title": "Installation, Configuration & Integration",
-                        "animation": "https://res.cloudinary.com/dujw4np0d/raw/upload/v1751532506/installation_xdno80.json",
-                        "description": "Expert installation and configuration of your SAP systems"
+                        "description": "Expert installation and configuration of your SAP systems. This includes setting up the SAP system, configuring the modules, and integrating the system with other applications."
                     },
                     {
                         "title": "Quality Testing & End-User Training",
-                        "animation":"https://res.cloudinary.com/dujw4np0d/raw/upload/v1751532009/testing_ihglx5.json",
-                        "description": "Comprehensive testing and user training programs"
+                        "description": "Comprehensive testing and user training programs. This includes testing the system to ensure it is working as expected and training the end users on how to use the system."
                     },
                     {
                         "title": "Security & Compliance",
-                        "animation":"https://res.cloudinary.com/dujw4np0d/raw/upload/v1751532739/security_ecmiv8.json",
-                        "description": "Ensuring your implementation meets all security and compliance requirements"
+                        "description": "Ensuring your implementation meets all security and compliance requirements. This includes ensuring the system is secure and compliant with all relevant laws and regulations."
                     }
                 ]
             },
@@ -52,33 +46,27 @@
                 "features": [
                     {
                         "title": "End-to-End Rollout Expertise",
-                        "animation": "https://assets9.lottiefiles.com/packages/lf20_LmW6VioIWc.json",
-                        "description": "Complete rollout management from planning to execution"
+                        "description": "Complete rollout management from planning to execution. This includes planning the rollout, executing the rollout, and monitoring the rollout."
                     },
                     {
                         "title": "Localized & Compliant Deployments",
-                        "animation":"https://res.cloudinary.com/dujw4np0d/raw/upload/v1751543037/deployment_kwe3mm.json",
-                        "description": "Region-specific implementations meeting local requirements"
+                        "description": "Region-specific implementations meeting local requirements. This includes ensuring the system is compliant with all relevant laws and regulations in the region."
                     },
                     {
                         "title": "Accelerators & Toolkits",
-                        "animation":"https://res.cloudinary.com/dujw4np0d/raw/upload/v1751544803/accelerators_z8e0h7.json",
-                        "description": "Proven tools and methodologies for faster deployment"
+                        "description": "Proven tools and methodologies for faster deployment. This includes using accelerators and toolkits to speed up the deployment process."
                     },
                     {
                         "title": "Global Support Coverage",
-                        "animation":"https://res.cloudinary.com/dujw4np0d/raw/upload/v1751542080/global_support_dt2oy5.json",
-                        "description": "24/7 support across all time zones"
+                        "description": "24/7 support across all time zones. This includes providing support to the users of the system."
                     },
                     {
                         "title": "Seamless Integration",
-                        "animation":"https://res.cloudinary.com/dujw4np0d/raw/upload/v1751543483/seamless_integrate_otalce.json",
-                        "description": "Harmonized system integration with central SAP landscape"
+                        "description": "Harmonized system integration with central SAP landscape. This includes integrating the system with other applications and systems."
                       },
                       {
                         "title": " Management & Training",
-                        "animation":"https://res.cloudinary.com/dujw4np0d/raw/upload/v1751545824/management_mcuf5h.json",
-                        "description": "Smooth transition with effective user training and adoption"
+                        "description": "Smooth transition with effective user training and adoption. This includes training the users of the system and ensuring they are able to use the system effectively."
                       }
                 ]
             },
@@ -91,33 +79,27 @@
                 "features": [
                     {
                         "title": "24/7 Monitoring & Support",
-                        "animation":"https://res.cloudinary.com/dujw4np0d/raw/upload/v1751543037/deployment_kwe3mm.json",
-                        "description": "Round-the-clock system monitoring and support"
+                        "description": "Round-the-clock system monitoring and support. This includes monitoring the system and providing support to the users of the system."
                     },
                     {
                         "title": "Performance Optimization",
-                        "animation": "https://assets2.lottiefiles.com/packages/lf20_49rdyysj.json",
-                        "description": "Continuous performance tuning and optimization"
+                        "description": "Continuous performance tuning and optimization. This includes optimizing the system to ensure it is running efficiently."
                     },
                     {
                         "title": "Issue Resolution",
-                        "animation": "https://res.cloudinary.com/dujw4np0d/raw/upload/v1751532009/testing_ihglx5.json",
-                        "description": "Quick and effective problem resolution"
+                        "description": "Quick and effective problem resolution. This includes resolving the issue and ensuring the system is running efficiently."
                     },
                     {
                         "title": "Preventive Maintenance",
-                        "animation": "https://res.cloudinary.com/dujw4np0d/raw/upload/v1751532739/security_ecmiv8.json",
-                        "description": "Proactive system maintenance and updates"
+                        "description": "Proactive system maintenance and updates. This includes maintaining the system and updating the system to ensure it is running efficiently."
                     },
                     {
                         "title": "SAP Upgrade & Patch Management",
-                        "animation": "https://assets2.lottiefiles.com/packages/lf20_LmW6VioIWc.json",
-                        "description": "Seamless application of updates and patches to keep systems current"
+                        "description": "Seamless application of updates and patches to keep systems current. This includes applying the updates and patches to the system to ensure it is running efficiently."
                       },
                       {
                         "title": "User Support & Training",
-                        "animation": "https://assets2.lottiefiles.com/private_files/lf30_TBKozE.json",
-                        "description": "Guidance, knowledge sharing, and training for SAP end users"
+                        "description": "Guidance, knowledge sharing, and training for SAP end users. This includes providing guidance to the users of the system and training them on how to use the system effectively."
                       }
                 
             
@@ -139,33 +121,27 @@
                  "features": [
                 {
                     "title": "Version Upgrades",
-                    "animation": "https://res.cloudinary.com/dujw4np0d/raw/upload/v1751545824/management_mcuf5h.json",
-                    "description": "Smooth transition to the latest SAP versions for improved capabilities"
+                    "description": "Smooth transition to the latest SAP versions for improved capabilities. This includes upgrading the system to the latest version to ensure it is running efficiently."
                 },
                 {
                     "title": "Zero Downtime Strategy",
-                    "animation": "https://assets2.lottiefiles.com/packages/lf20_49rdyysj.json",
-                    "description": "Minimized disruption with planned upgrades and continuous availability"
+                    "description": "Minimized disruption with planned upgrades and continuous availability. This includes upgrading the system to the latest version to ensure it is running efficiently."
                 },
                 {
                     "title": "Custom Code Adaptation",
-                    "animation": "https://assets2.lottiefiles.com/private_files/lf30_TBKozE.json",
-                    "description": "Evaluation and adjustment of custom code for compatibility with new versions"
+                    "description": "Evaluation and adjustment of custom code for compatibility with new versions. This includes evaluating the custom code and adjusting it to ensure it is compatible with the new version."
                 },
                 {
                     "title": "Database & Infrastructure Upgrade",
-                    "animation": "https://res.cloudinary.com/dujw4np0d/raw/upload/v1751532506/installation_xdno80.json",
-                    "description": "Modernization of backend systems to support SAP upgrades"
+                    "description": "Modernization of backend systems to support SAP upgrades. This includes modernizing the backend systems to support the SAP upgrades."
                 },
                 {
                     "title": "End-to-End Testing",
-                    "animation": "https://assets2.lottiefiles.com/packages/lf20_LmW6VioIWc.json",
-                    "description": "Thorough functional and technical testing to ensure upgrade success"
+                    "description": "Thorough functional and technical testing to ensure upgrade success. This includes testing the system to ensure it is working as expected."
                 },
                 {
                     "title": "Post-Upgrade Support",
-                    "animation": "https://res.cloudinary.com/dujw4np0d/raw/upload/v1751532009/testing_ihglx5.json",
-                    "description": "Continued support after go-live to resolve issues and stabilize operations"
+                    "description": "Continued support after go-live to resolve issues and stabilize operations. This includes providing support to the users of the system and ensuring they are able to use the system effectively."
                 }
                 ]
 
@@ -186,33 +162,27 @@
             "features": [
             {
                 "title": "Seamless System Connectivity",
-                "animation": "https://assets2.lottiefiles.com/packages/lf20_LmW6VioIWc.json",
-                "description": "Connect SAP with third-party and legacy systems effortlessly"
+                "description": "Connect SAP with third-party and legacy systems effortlessly. This includes connecting the system with other applications and systems."
             },
             {
                 "title": "Real-Time Data Exchange",
-                "animation":"https://res.cloudinary.com/dujw4np0d/raw/upload/v1751532506/installation_xdno80.json",
-                "description": "Enable instant data flow between systems for faster decisions"
+                "description": "Enable instant data flow between systems for faster decisions. This includes enabling the instant data flow between the system and other applications and systems."
             },
             {
                 "title": "API & Middleware Integration",
-                "animation": "https://res.cloudinary.com/dujw4np0d/raw/upload/v1751532009/testing_ihglx5.json",
-                "description": "Utilize APIs and middleware like SAP PI/PO or SAP BTP for advanced integration"
+                "description": "Utilize APIs and middleware like SAP PI/PO or SAP BTP for advanced integration. This includes utilizing the APIs and middleware to integrate the system with other applications and systems."
             },
             {
                 "title": "Cross-Platform Compatibility",
-                "animation": "https://assets2.lottiefiles.com/packages/lf20_49rdyysj.json",
-                "description": "Support for integration across cloud, on-premise, and hybrid environments"
+                "description": "Support for integration across cloud, on-premise, and hybrid environments. This includes supporting the integration across the cloud, on-premise, and hybrid environments."
             },
             {
                 "title": "Secure Data Handling",
-                "animation": "https://res.cloudinary.com/dujw4np0d/raw/upload/v1751532739/security_ecmiv8.json",
-                "description": "Ensure safe and compliant data transmission with encryption and access control"
+                "description": "Ensure safe and compliant data transmission with encryption and access control. This includes ensuring the safe and compliant data transmission with encryption and access control."
             },
             {
                 "title": "Monitoring & Error Handling",
-                "animation": "https://assets2.lottiefiles.com/private_files/lf30_TBKozE.json",
-                "description": "Track integration workflows and resolve failures with intelligent alerts"
+                "description": "Track integration workflows and resolve failures with intelligent alerts. This includes tracking the integration workflows and resolving the failures with intelligent alerts."
             }
             ]
 
@@ -232,33 +202,27 @@
           "features": [
             {
                 "title": "Smooth Data Migration",
-                "animation": "https://assets2.lottiefiles.com/packages/lf20_LmW6VioIWc.json",
-                "description": "Secure and accurate transfer of data from legacy systems to SAP"
+                "description": "Secure and accurate transfer of data from legacy systems to SAP. This includes transferring the data from the legacy systems to the SAP system."
             },
             {
                 "title": "System Landscape Transformation",
-                "animation": "https://res.cloudinary.com/dujw4np0d/raw/upload/v1751532506/installation_xdno80.json",
-                "description": "Reorganization and consolidation of SAP system landscapes"
+                "description": "Reorganization and consolidation of SAP system landscapes. This includes reorganizing and consolidating the SAP system landscapes."
             },
             {
                 "title": "Cloud & On-Premise Migration",
-                "animation": "https://assets2.lottiefiles.com/private_files/lf30_TBKozE.json",
-                "description": "Support for migrating SAP systems to cloud, on-premise, or hybrid environments"
+                "description": "Support for migrating SAP systems to cloud, on-premise, or hybrid environments. This includes supporting the migration of the SAP systems to the cloud, on-premise, or hybrid environments."
             },
             {
                 "title": "Downtime Minimization",
-                "animation": "https://res.cloudinary.com/dujw4np0d/raw/upload/v1751532739/security_ecmiv8.json ",
-                "description": "Strategies to reduce business disruption during migration"
+                "description": "Strategies to reduce business disruption during migration. This includes strategies to reduce the business disruption during the migration."
             },
             {
                 "title": "Data Validation & Testing",
-                "animation": "https://assets2.lottiefiles.com/packages/lf20_49rdyysj.json",
-                "description": "Comprehensive testing to ensure data integrity and system functionality"
+                "description": "Comprehensive testing to ensure data integrity and system functionality. This includes testing the system to ensure it is working as expected."
             },
             {
                 "title": "Post-Migration Support",
-                "animation": "https://res.cloudinary.com/dujw4np0d/raw/upload/v1751532009/testing_ihglx5.json",
-                "description": "Continuous assistance and optimization after migration completion"
+                "description": "Continuous assistance and optimization after migration completion. This includes providing assistance and optimization after the migration is completed."
             }
             ]
 
@@ -278,33 +242,27 @@
             "features": [
             {
                 "title": "Business Process Automation",
-                "animation": "https://res.cloudinary.com/dujw4np0d/raw/upload/v1751532506/installation_xdno80.json",
-                "description": "Streamline repetitive tasks to enhance operational efficiency"
+                "description": "Streamline repetitive tasks to enhance operational efficiency. This includes streamlining the repetitive tasks to enhance the operational efficiency."
             },
             {
                 "title": "Intelligent RPA Integration",
-                "animation": "https://assets2.lottiefiles.com/packages/lf20_49rdyysj.json",
-                "description": "Automate workflows using AI-powered robotic process automation"
+                "description": "Automate workflows using AI-powered robotic process automation. This includes automating the workflows using the AI-powered robotic process automation."
             },
             {
                 "title": "Real-time Data Synchronization",
-                "animation": "https://assets2.lottiefiles.com/private_files/lf30_TBKozE.json",
-                "description": "Ensure instant and accurate data updates across SAP modules"
+                "description": "Ensure instant and accurate data updates across SAP modules. This includes ensuring the instant and accurate data updates across the SAP modules."
             },
             {
                 "title": "Custom Workflow Automation",
-                "animation":"https://res.cloudinary.com/dujw4np0d/raw/upload/v1751545824/management_mcuf5h.json",
-                "description": "Tailored automation workflows to meet unique business needs"
+                "description": "Tailored automation workflows to meet unique business needs. This includes tailoring the automation workflows to meet the unique business needs."
             },
             {
                 "title": "Error Reduction & Compliance",
-                "animation": "https://res.cloudinary.com/dujw4np0d/raw/upload/v1751532739/security_ecmiv8.json",
-                "description": "Minimize human error while ensuring process compliance"
+                "description": "Minimize human error while ensuring process compliance. This includes minimizing the human error while ensuring the process compliance."
             },
             {
                 "title": "Seamless Integration with Tools",
-                "animation": "https://assets2.lottiefiles.com/packages/lf20_LmW6VioIWc.json",
-                "description": "Integrate with third-party tools and platforms effortlessly"
+                "description": "Integrate with third-party tools and platforms effortlessly. This includes integrating the system with the third-party tools and platforms."
             }
             ]
 
@@ -320,33 +278,27 @@
   "features": [
     {
       "title": "SAP Functional Testing",
-      "animation": "https://assets2.lottiefiles.com/packages/lf20_HpFqiS.json",
-      "description": "Validate all core and custom SAP business processes across modules like MM, SD, FI, and HCM."
+      "description": "SAP Functional Testing ensures that all business processes — such as Procure-to-Pay, Order-to-Cash, or Hire-to-Retire — work seamlessly across integrated SAP modules (like MM, SD, HR, FICO). This guarantees functional correctness from user input to backend execution."
     },
     {
       "title": "Automated Testing Solutions",
-      "animation": "https://assets2.lottiefiles.com/packages/lf20_w51pcehl.json",
-      "description": "Accelerate testing cycles using automation tools like SAP TAO, Tricentis, and Worksoft."
+      "description": "Automated testing dramatically reduces the time required to execute repetitive test cases. Test suites that took days manually can now run in hours or minutes, enabling faster releases and quicker feedback loops."
     },
     {
       "title": "Performance & Load Testing",
-      "animation": "https://assets2.lottiefiles.com/packages/lf20_j2kaqzqn.json",
-      "description": "Ensure system scalability and responsiveness under peak load using real-world scenarios."
+      "description": "Performance & load testing helps evaluate how your application behaves as the number of users or transactions increases. It ensures the system scales efficiently without compromising response times or functionality."
     },
     {
       "title": "Integration Testing",
-      "animation": "https://assets2.lottiefiles.com/packages/lf20_0fhlytwe.json",
-      "description": "Test seamless data flow between SAP and third-party systems including CRM, HRMS, and analytics."
+      "description": "Integration Testing ensures that individual SAP modules (like MM, SD, FI, HR, etc.) or external systems (e.g., CRMs, payment gateways, APIs) work together as expected. It verifies the correctness of data flow and business logic across interfaces."
     },
     {
       "title": "Regression Testing",
-      "animation": "https://res.cloudinary.com/dujw4np0d/raw/upload/v1751532802/regression_wx4slk.json",
-      "description": "Continuously validate system stability after upgrades, patches, or custom developments."
+      "description": "Regression Testing is crucial for maintaining system stability after upgrades, patches, or custom developments. It ensures that new changes haven't introduced regressions (i.e., new bugs or issues) in existing functionalities."
     },
     {
       "title": "User Acceptance Testing (UAT)",
-      "animation": "https://res.cloudinary.com/dujw4np0d/raw/upload/v1751533002/uat_jnmeug.json",
-      "description": "Structured UAT processes to ensure business users validate the solution before go-live."
+      "description": "Structured UAT processes to ensure business users validate the solution before go-live. This includes ensuring the business users validate the solution before the go-live."
     }
   ]
 }

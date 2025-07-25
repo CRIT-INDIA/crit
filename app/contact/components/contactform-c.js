@@ -418,7 +418,7 @@ export default function ContactForm() {
                   CALL US
                 </h3>
                 <div className="pl-6 lg:pl-8">
-                  <p className="text-gray-800 text-sm">+91 90040 02941</p>
+                  <p className="text-gray-800 text-sm">+91 7773954892</p>
                 </div>
               </div>
               {/* Location Section */}

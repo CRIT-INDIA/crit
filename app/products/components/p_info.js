@@ -26,6 +26,67 @@ import {
 const SAPProductsInfo = () => {
   const [selectedProduct, setSelectedProduct] = useState('sap-s4hana');
 
+  // Custom styles for animations
+  const animationStyles = `
+    /* Hide scrollbar for all browsers */
+    * {
+      scrollbar-width: none; /* Firefox */
+      -ms-overflow-style: none; /* Internet Explorer 10+ */
+    }
+    *::-webkit-scrollbar {
+      display: none; /* WebKit */
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes slideInLeft {
+      from { transform: translateX(-100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+    @keyframes slideInRight {
+      from { transform: translateX(100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+    @keyframes slideInUp {
+      from { transform: translateY(50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    @keyframes fadeInUp {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    .animate-fade-in {
+      animation: fadeIn 0.8s ease-out;
+    }
+    .animate-slide-in-left {
+      animation: slideInLeft 0.8s ease-out;
+    }
+    .animate-slide-in-right {
+      animation: slideInRight 0.8s ease-out;
+    }
+    .animate-slide-in-up {
+      animation: slideInUp 0.6s ease-out;
+    }
+    .animate-fade-in-up {
+      animation: fadeInUp 0.5s ease-out forwards;
+      opacity: 0;
+    }
+    .hover\:scale-102:hover {
+      transform: scale(1.02);
+    }
+  `;
+
+  React.useEffect(() => {
+    const styleElement = document.createElement('style');
+    styleElement.textContent = animationStyles;
+    document.head.appendChild(styleElement);
+    return () => {
+      document.head.removeChild(styleElement);
+    };
+  }, []);
+
   const products = [
     {
       id: 'sap-s4hana',
@@ -286,22 +347,23 @@ const SAPProductsInfo = () => {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 py-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 py-8 animate-fade-in">
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8 overflow-x-auto">
           {/* Product Navigation */}
-          <div className="lg:col-span-1">
-            <div className="rounded-lg shadow-sm border border-red-200 p-6 bg-white" >
+          <div className="lg:col-span-1 animate-slide-in-left">
+            <div className="rounded-lg shadow-sm border border-red-200 p-6 bg-white hover:shadow-lg transition-all duration-300 transform hover:scale-105" >
               <h3 className="text-lg font-semibold text-red-600 mb-4">Solutions Portfolio</h3>
               <nav className="space-y-2">
-                {products.map((product) => (
+                {products.map((product, index) => (
                   <button
                     key={product.id}
                     onClick={() => setSelectedProduct(product.id)}
-                    className={`w-full flex items-center space-x-3 p-3 rounded-lg text-left transition-colors ${
+                    className={`w-full flex items-center space-x-3 p-3 rounded-lg text-left transition-all duration-300 transform hover:translate-x-2 hover:shadow-md animate-fade-in-up ${
                       selectedProduct === product.id
-                        ? 'bg-red-100 text-red-600 border border-red-300'
-                        : 'hover:bg-red-50 hover:text-gray-900 text-gray-900'
+                        ? 'bg-red-100 text-red-600 border border-red-300 scale-105 shadow-md'
+                        : 'hover:bg-red-50 hover:text-gray-900 text-gray-900 hover:scale-102'
                     }`}
+                    style={{ animationDelay: `${index * 100}ms` }}
                   >
                     <div className={`${selectedProduct === product.id ? 'text-red-600' : 'text-red-400'}`}>
                       {React.cloneElement(product.icon, { className: 'w-8 h-8', color: selectedProduct === product.id ? '#dc2626' : '#f87171' })}
@@ -318,11 +380,11 @@ const SAPProductsInfo = () => {
           </div>
 
           {/* Product Details */}
-          <div className="lg:col-span-3">
+          <div className="lg:col-span-3 animate-slide-in-right">
             {currentProduct && (
-              <div className="space-y-8">
+              <div className="space-y-8 animate-fade-in" key={selectedProduct}>
                 {/* Product Header */}
-                <div className="rounded-lg shadow-sm border border-red-200 p-8 bg-red-100">
+                <div className="rounded-lg shadow-sm border border-red-200 p-8 bg-red-100 hover:shadow-lg transition-all duration-300 transform hover:scale-102 animate-slide-in-up">
                   <div className="flex items-start space-x-4">
                     <div className="text-red-600">
                       {React.cloneElement(currentProduct.icon, { className: 'w-8 h-8', color: '#dc2626' })}
@@ -353,7 +415,7 @@ const SAPProductsInfo = () => {
                 </div>
 
                 {/* Executive Summary */}
-                <div className="rounded-lg shadow-sm border border-red-200 p-8 bg-white">
+                <div className="rounded-lg shadow-sm border border-red-200 p-8 bg-white hover:shadow-lg transition-all duration-300 transform hover:scale-102 animate-slide-in-up" style={{ animationDelay: '200ms' }}>
                   <h3 className="text-xl font-semibold text-red-600 mb-4 flex items-center space-x-2">
                     <FileText className="w-5 h-5 text-red-500" />
                     <span>Executive Summary</span>
@@ -365,31 +427,31 @@ const SAPProductsInfo = () => {
 
                 {/* Key Capabilities & Business Outcomes */}
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                  <div className="rounded-lg shadow-sm border border-red-200 p-8 bg-white">
+                  <div className="rounded-lg shadow-sm border border-red-200 p-8 bg-white hover:shadow-lg transition-all duration-300 transform hover:scale-102 animate-slide-in-up" style={{ animationDelay: '300ms' }}>
                     <h3 className="text-xl font-semibold text-red-600 mb-6 flex items-center space-x-2">
                       <Settings className="w-5 h-5 text-red-500" />
                       <span>Key Capabilities</span>
                     </h3>
                     <div className="space-y-4">
                       {currentProduct.keyCapabilities.map((capability, index) => (
-                        <div key={index} className="flex items-start space-x-3">
-                          <div className="w-2 h-2 bg-red-500 rounded-full mt-2 flex-shrink-0"></div>
-                          <span className="text-gray-900">{capability}</span>
+                        <div key={index} className="flex items-start space-x-3 animate-fade-in-up" style={{ animationDelay: `${400 + index * 100}ms` }}>
+                          <div className="w-2 h-2 bg-red-500 rounded-full mt-2 flex-shrink-0 animate-pulse"></div>
+                          <span className="text-gray-900 hover:text-red-600 transition-colors duration-200">{capability}</span>
                         </div>
                       ))}
                     </div>
                   </div>
 
-                  <div className="rounded-lg shadow-sm border border-red-200 p-8 bg-white">
+                  <div className="rounded-lg shadow-sm border border-red-200 p-8 bg-white hover:shadow-lg transition-all duration-300 transform hover:scale-102 animate-slide-in-up" style={{ animationDelay: '400ms' }}>
                     <h3 className="text-xl font-semibold text-red-600 mb-6 flex items-center space-x-2">
                       <TrendingUp className="w-5 h-5 text-red-500" />
                       <span>Business Outcomes</span>
                     </h3>
                     <div className="space-y-4">
                       {currentProduct.businessOutcomes.map((outcome, index) => (
-                        <div key={index} className="flex items-start space-x-3">
-                          <div className="w-2 h-2 bg-red-500 rounded-full mt-2 flex-shrink-0"></div>
-                          <span className="text-gray-900">{outcome}</span>
+                        <div key={index} className="flex items-start space-x-3 animate-fade-in-up" style={{ animationDelay: `${500 + index * 100}ms` }}>
+                          <div className="w-2 h-2 bg-red-500 rounded-full mt-2 flex-shrink-0 animate-pulse"></div>
+                          <span className="text-gray-900 hover:text-red-600 transition-colors duration-200">{outcome}</span>
                         </div>
                       ))}
                     </div>
@@ -397,7 +459,7 @@ const SAPProductsInfo = () => {
                 </div>
 
                 {/* Investment Metrics */}
-                <div className="rounded-lg shadow-sm border border-red-200 p-8 sm:block hidden bg-white">
+                <div className="rounded-lg shadow-sm border border-red-200 p-8 sm:block hidden bg-white hover:shadow-lg transition-all duration-300 transform hover:scale-102 animate-slide-in-up" style={{ animationDelay: '500ms' }}>
                   <h3 className="text-xl font-semibold text-red-600 mb-6 flex items-center space-x-2 flex-row">
                     <DollarSign className="w-5 h-5 text-red-500" />
                     <span>Investment Analysis</span>
@@ -434,7 +496,7 @@ const SAPProductsInfo = () => {
 
                 {/* Technical Specifications & Industries */}
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                  <div className="rounded-lg shadow-sm border border-red-200 p-8 bg-white" >
+                  <div className="rounded-lg shadow-sm border border-red-200 p-8 bg-white hover:shadow-lg transition-all duration-300 transform hover:scale-102 animate-slide-in-up" style={{ animationDelay: '600ms' }}>
                     <h3 className="text-xl font-semibold text-red-600 mb-6 flex items-center space-x-2">
                       <Shield className="w-5 h-5 text-red-500" />
                       <span>Technical Specifications</span>
@@ -459,7 +521,7 @@ const SAPProductsInfo = () => {
                     </div>
                   </div>
 
-                  <div className="rounded-lg shadow-sm border border-red-200 p-8 sm:block hidden bg-white" >
+                  <div className="rounded-lg shadow-sm border border-red-200 p-8 sm:block hidden bg-white hover:shadow-lg transition-all duration-300 transform hover:scale-102 animate-slide-in-up" style={{ animationDelay: '700ms' }}>
                     <h3 className="text-xl font-semibold text-red-600 mb-6 flex items-center space-x-2">
                       <Building2 className="w-5 h-5 text-red-500" />
                       <span>Industry Applications</span>
@@ -481,7 +543,7 @@ const SAPProductsInfo = () => {
       </div>
 
       {/* Executive Contact Section */}
-      <div className="py-16 bg-white">
+      <div className="py-8 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 py-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold mb-4 text-red-600">

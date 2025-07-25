@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "./card"
 
 export default function AiInsightsSection() {
   return (
-    <section className="w-full py-12 md:py-24 lg:py-32 bg-white flex flex-col items-center">
+    <section className="w-full py-12 md:py-24 lg:py-32 flex flex-col items-center">
       <div className="container px-4 md:px-6 flex flex-col items-center">
         <h2 className="text-3xl font-sans-bold tracking-tighter sm:text-4xl md:text-5xl text-center text-gray-900 mb-12">
         Our Expertise
@@ -33,7 +33,7 @@ export default function AiInsightsSection() {
               alt="Domain Knowledge Illustration"
               className="w-full max-w-sm h-64 object-cover rounded-lg shadow-3xl border border-gray-200"
             />
-            <div className="w-full mt-10 max-w-sm h-42 bg-gradient-to-t from-white to-red-200 rounded-t-3xl"></div>
+            <div className="w-full mt-10 max-w-sm h-42 bg-gradient-to-t from-[#fff5f5] to-red-200 rounded-t-3xl"></div>
 
             
             </div>
@@ -42,7 +42,7 @@ export default function AiInsightsSection() {
 
           {/* Middle Column */}
           <div className="flex flex-col gap-8 items-center justify-center lg:mt-04 p-2">
-          <div className="w-full max-w-sm h-32 bg-gradient-to-b from-white to-red-200 rounded-b-3xl"></div>
+          <div className="w-full max-w-sm h-32 bg-gradient-to-b from-[#fff5f5] to-red-200 rounded-b-3xl"></div>
             
             
                       <Card className="rounded-2xl shadow-3xl border-0 bg-gradient-to-br from-red-500 to-red-600 p-6 text-white w-full max-w-sm h-64 flex items-center justify-center">
@@ -93,7 +93,7 @@ export default function AiInsightsSection() {
                 className="w-full max-w-sm h-64 object-cover rounded-lg shadow-3xl border border-gray-200"
               />
             </div>
-            <div className="w-full ml-10 mt-5 max-w-sm h-42 bg-gradient-to-t from-white to-red-200 rounded-t-3xl"></div>
+            <div className="w-full ml-10 mt-5 max-w-sm h-42 bg-gradient-to-t from-[#fff5f5] to-red-200 rounded-t-3xl"></div>
 
           </div>
         </div>

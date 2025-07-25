@@ -94,12 +94,12 @@ const CareerPage = () => {
   };
 
   return (
-    <div className="min-h-screen p-4 sm:p-8 md:p-12">
+    <div className="min-h-screen p-2 sm:p-4 md:p-6">
       {/* Hero Section */}
-      <section className="relative w-full h-[400px] sm:h-[450px] md:h-[500px] px-2 sm:px-4 py-6 pt-20">
+      <section className="relative w-full h-[400px] sm:h-[450px] md:h-[500px] px-2 sm:px-4 py-6">
         
         <div className="max-w-5xl mx-auto relative z-10 h-full flex items-center justify-center">
-          <div className="bg-white/40 rounded-2xl p-6 sm:p-8 text-center relative overflow-hidden border border-red-100 w-full">
+          <div className="bg-white/40 rounded-2xl p-6 sm:p-9 text-center relative overflow-hidden border border-red-100 w-full">
           <div className="absolute inset-0 w-full h-full overflow-hidden">
           <div 
             className="w-full h-full bg-cover bg-center"
@@ -140,7 +140,7 @@ const CareerPage = () => {
                 Looking for the Best IT Job?
               </h2>
               <p className="text-base md:text-lg mb-4 text-gray-400 max-w-2xl mx-auto leading-relaxed">
-                Join a team that thrives on innovation, creativity, and collaboration. At Codetentacles, we empower individuals to grow while building solutions that make an impact. Discover your next big opportunity today!
+                Join a team that thrives on innovation, creativity, and collaboration. At CRIT, we empower individuals to grow while building solutions that make an impact. Discover your next big opportunity today!
               </p>
               
             </div>
@@ -149,7 +149,7 @@ const CareerPage = () => {
       </section>
 
       {/* Job Listings */}
-      <section className="px-2 sm:px-4 py-6">
+      <section className="px-2 sm:px-4">
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {jobListings.map((job, idx) => (
@@ -206,7 +206,7 @@ const CareerPage = () => {
                 <div className="mb-4">
                   <button 
                     onClick={() => handleLearnMore(job)}
-                    className="text-red-600 hover:text-red-700 text-sm font-medium transition-colors duration-200 flex items-center gap-1"
+                    className="text-red-500 hover:text-red-700 text-sm font-medium transition-colors duration-200 flex items-center gap-1"
                   >
                     Learn More →
                   </button>

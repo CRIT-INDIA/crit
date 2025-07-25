@@ -417,7 +417,7 @@ export default function ContactForm() {
                   CALL US
                 </h3>
                 <div className="pl-6 lg:pl-8">
-                  <p className="text-gray-800 text-sm">+91 90040 02941</p>
+                  <p className="text-gray-800 text-sm">+91 7773954892</p>
                 </div>
               </div>
               {/* Location Section */}
@@ -443,9 +443,9 @@ export default function ContactForm() {
               {/* Map Section */}
               <div className="backdrop-blur-md border bg-black/10 border-white/10 rounded-md p-3 sm:p-4 lg:p-5 shadow-sm transition-all duration-300 hover:border-white/20 hover:shadow-md">
                 <div>
-                  <h3 className="text-base sm:text-lg lg:text-xl font-semibold mb-2 flex items-center gap-2 text-white">
+                  <h3 className="text-base sm:text-lg lg:text-xl font-semibold mb-2 flex items-center gap-2 text-black">
                     <span className="bg-white/10 p-1.5 rounded-md transition-colors duration-300 group-hover:bg-white/20">
-                      <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-4 h-4 text-black" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M20.5 3l-.16.03L15 5.1 9 3 3.36 4.9c-.21.07-.36.25-.36.48V20.5c0 .28.22.5.5.5l.16-.03L9 18.9l6 2.1 5.64-1.9c.21-.07.36-.25.36-.48V3.5c0-.28-.22-.5-.5-.5zM10 5.47l4 1.4v11.66l-4-1.4V5.47zm-5 .99l3-1.01v11.7l-3 1.16V6.46zm14 11.08l-3 1.01V6.86l3-1.16v11.84z"/>
                       </svg>
                     </span>

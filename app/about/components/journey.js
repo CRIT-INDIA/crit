@@ -103,10 +103,6 @@ const Journey = () => {
 
   return (
     <section className="relative min-h-* overflow-hidden pt-10">
-      
-
-          
-        
           {/* Enhanced Professional Journey Timeline */}
           <div 
             ref={timelineRef}
@@ -210,11 +206,11 @@ const Journey = () => {
                                   <>
                                     <div className="flex items-center gap-2 bg-white/10 rounded-full px-4 py-2">
                                       <div className="w-2 h-2 bg-orange-400 rounded-full"></div>
-                                      <span className="text-sm text-slate-300">Founded</span>
+                                      <span className="text-sm text-slate-800">Founded</span>
                                     </div>
                                     <div className="flex items-center gap-2 bg-white/10 rounded-full px-4 py-2">
                                       <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-                                      <span className="text-sm text-slate-300">Vision Set</span>
+                                      <span className="text-sm text-slate-800">Vision Set</span>
                                     </div>
                                   </>
                                 )}
@@ -222,11 +218,11 @@ const Journey = () => {
                                   <>
                                     <div className="flex items-center gap-2 bg-white/10 rounded-full px-4 py-2">
                                       <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
-                                      <span className="text-sm text-slate-300">50+ Clients</span>
+                                      <span className="text-sm text-slate-800">50+ Clients</span>
                                     </div>
                                     <div className="flex items-center gap-2 bg-white/10 rounded-full px-4 py-2">
                                       <div className="w-2 h-2 bg-cyan-400 rounded-full"></div>
-                                      <span className="text-sm text-slate-300">Innovation Hub</span>
+                                      <span className="text-sm text-slate-800">Innovation Hub</span>
                                     </div>
                                   </>
                                 )}
@@ -234,11 +230,11 @@ const Journey = () => {
                                   <>
                                     <div className="flex items-center gap-2 bg-white/10 rounded-full px-4 py-2">
                                       <div className="w-2 h-2 bg-purple-400 rounded-full"></div>
-                                      <span className="text-sm text-slate-300">150+ Projects</span>
+                                      <span className="text-sm text-slate-800">150+ Projects</span>
                                     </div>
                                     <div className="flex items-center gap-2 bg-white/10 rounded-full px-4 py-2">
                                       <div className="w-2 h-2 bg-pink-400 rounded-full"></div>
-                                      <span className="text-sm text-slate-300">Team of 25+</span>
+                                      <span className="text-sm text-slate-800">Team of 25+</span>
                                     </div>
                                   </>
                                 )}
@@ -246,11 +242,11 @@ const Journey = () => {
                                   <>
                                     <div className="flex items-center gap-2 bg-white/10 rounded-full px-4 py-2">
                                       <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-                                      <span className="text-sm text-slate-300">Industry Leader</span>
+                                      <span className="text-sm text-slate-800">Industry Leader</span>
                                     </div>
                                     <div className="flex items-center gap-2 bg-white/10 rounded-full px-4 py-2">
                                                                           <div className="w-2 h-2 bg-emerald-400 rounded-full"></div>
-                                      <span className="text-sm text-slate-300">Global Reach</span>
+                                      <span className="text-sm text-slate-800">Global Reach</span>
                                     </div>
                                   </>
                                 )}
