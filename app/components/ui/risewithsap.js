@@ -220,30 +220,28 @@ const SAPServices3DShowcase = () => {
 
         <div className="flex flex-col lg:grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
           {/* Interactive Icon Showcase */}
-          <div className={`relative w-full transition-all duration-1000 delay-500 ${
-            hasBeenVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'
-          }`}>
-            <div className="relative p-4 md:p-8 rounded-2xl md:rounded-3xl bg-gradient-to-br from-gray-800/40 to-gray-700/20 backdrop-blur-xl border border-gray-600/30">
+          <div className={``}>
+            <div className="relative p-4 md:p-8 rounded-2xl md:rounded-3xl bg-gradient-to-br from-gray-500/20 to-gray-500/20 backdrop-blur-xl border border-gray-600/30">
               
               {/* Central Container - Responsive sizing */}
               <div className={`relative mx-auto ${isMobile ? 'w-64 h-64' : 'w-80 md:w-96 h-80 md:h-96'}`}>
                 {/* Rotating Blue Lines - Only animate when visible */}
                 <div className={`absolute inset-0 ${isVisible ? 'animate-spin' : ''}`} style={{ animationDuration: '20s' }}>
-                  <div className="absolute inset-2 md:inset-4 border-2 border-[#5062B9] rounded-full opacity-60"></div>
-                  <div className="absolute inset-6 md:inset-12 border border-[#3A4BA2] rounded-full opacity-40"></div>
+                  <div className="absolute inset-2 md:inset-4 border-2 border-red-500 rounded-full opacity-60"></div>
+                  <div className="absolute inset-6 md:inset-12 border border-red-500 rounded-full opacity-40"></div>
                   
                   <svg className="absolute inset-0 w-full h-full" viewBox="0 0 384 384">
                     <path
                       d="M 50 192 Q 100 100 192 50 Q 284 100 334 192 Q 284 284 192 334 Q 100 284 50 192"
                       fill="none"
-                      stroke="rgb(80, 98, 185)"
+                      stroke="rgb(190, 66, 66)"
                       strokeWidth="1"
                       opacity="0.5"
                     />
                     <path
                       d="M 80 192 Q 120 130 192 80 Q 264 130 304 192 Q 264 254 192 304 Q 120 254 80 192"
                       fill="none"
-                      stroke="rgb(58, 75, 162)"
+                      stroke="rgb(156, 50, 50)"
                       strokeWidth="1"
                       opacity="0.3"
                     />
@@ -273,20 +271,20 @@ const SAPServices3DShowcase = () => {
                         <button
                           onClick={() => handleServiceInteraction(index)}
                           onMouseEnter={() => !isMobile && handleServiceInteraction(index)}
-                          className={`w-full h-full rounded-lg md:rounded-xl flex items-center justify-center shadow-lg transition-all duration-300 transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50 ${
+                          className={`w-full h-full border-1 border-red-300 rounded-lg md:rounded-xl flex items-center justify-center shadow-lg transition-all duration-300 transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50 ${
                             activeService === index 
-                              ? 'ring-2 md:ring-4 ring-white ring-opacity-75 shadow-2xl border-2 border-white scale-110' 
+                              ? 'ring-2 md:ring-4 ring-white ring-opacity-15 shadow-2xl border-2 border-white scale-105' 
                               : 'hover:ring-2 hover:ring-gray-400'
                           }`}
                           style={{
-                            backgroundColor: service.color,
+                            backgroundColor: '#FFCDD2',
                             boxShadow: activeService === index 
-                              ? `0 0 ${isMobile ? '20px' : '30px'} ${service.glowColor}` 
-                              : `0 4px 15px rgba(0,0,0,0.2)`
+                              ? `0 0 ${isMobile ? '20px' : '30px'} ${'rgba(228, 136, 136, 1)'}` 
+                              : `0 4px 15px rgba(228, 136, 136, 0.2)`
                           }}
                           aria-label={service.title}
                         >
-                          <IconComponent className={`text-white ${isMobile ? 'w-6 h-6' : 'w-7 h-7 md:w-8 md:h-8'}`} />
+                          <IconComponent className={`text-red-600 ${isMobile ? 'w-6 h-6' : 'w-7 h-7 md:w-8 md:h-8'}`} />
                         </button>
                       </div>
                     );
@@ -297,19 +295,13 @@ const SAPServices3DShowcase = () => {
                 <div className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 transition-all duration-1000 ${
                   hasBeenVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-75'
                 }`}>
-                  <div className={`rounded-full bg-gradient-to-br from-[#5062B9] to-[#1B2859] flex items-center justify-center shadow-2xl border-2 border-[#3A4BA2] ${
+                  <div className={`rounded-full bg-gradient-to-br from-red-200 to-red-200 flex items-center justify-center shadow-2xl border-2 border-red-400 ${
                     isMobile ? 'w-20 h-20' : 'w-24 md:w-32 h-24 md:h-32'
                   }`}>
-                    <span className={`text-white font-bold tracking-wide ${isMobile ? 'text-lg' : 'text-xl'}`}>SAP</span>
+                    <span className={`text-red-700 font-bold tracking-wide ${isMobile ? 'text-lg' : 'text-xl'}`}>SAP</span>
                   </div>
                   
-                  {/* Dotted Pattern Overlay */}
-                  <div className="absolute inset-0 rounded-full opacity-30">
-                    <div className="w-full h-full rounded-full" style={{
-                      backgroundImage: `radial-gradient(circle at 2px 2px, #3A4BA2 1px, transparent 0)`,
-                      backgroundSize: '8px 8px'
-                    }}></div>
-                  </div>
+                  
                 </div>
               </div>
 
@@ -332,13 +324,11 @@ const SAPServices3DShowcase = () => {
           </div>
 
           {/* Service Details Panel */}
-          <div className={`w-full space-y-8 transition-all duration-1000 delay-700 ${
-            hasBeenVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'
-          }`}>
+          <div className={``}>
             <div 
-              className="relative p-4 md:p-8 rounded-2xl md:rounded-3xl bg-gradient-to-br from-gray-800/60 to-gray-700/30 backdrop-blur-xl border border-gray-600/30 transition-all duration-500"
+              className="relative p-4 md:p-8 rounded-2xl md:rounded-3xl bg-gradient-to-br from-gray-500/20 to-gray-500/20 backdrop-blur-xl border border-gray-600/30 transition-all duration-500"
               style={{
-                borderColor: currentService.color,
+                borderColor: 'red-50',
                 boxShadow: `0 0 ${isMobile ? '20px' : '30px'} ${currentService.color}33`
               }}
             >
@@ -346,22 +336,22 @@ const SAPServices3DShowcase = () => {
               <div className="flex items-center gap-3 md:gap-4 mb-4 md:mb-6">
                 <div 
                   className="w-10 h-10 md:w-12 md:h-12 rounded-lg md:rounded-xl flex items-center justify-center shadow-lg transition-all duration-300"
-                  style={{ backgroundColor: currentService.color }}
+                  style={{ backgroundColor: '#FFCDD2' }}
                 >
-                  <currentService.icon className="text-white w-5 h-5 md:w-6 md:h-6" />
+                  <currentService.icon className="text-red-600 w-5 h-5 md:w-6 md:h-6" />
                 </div>
                 <div>
-                  <h3 className="text-xl md:text-2xl font-bold text-white mb-1 transition-all duration-300">
+                  <h3 className="text-xl md:text-2xl font-bold text-black/80 mb-1 transition-all duration-300">
                     {currentService.title}
                   </h3>
-                  <div className="text-[#5062B9] font-medium text-sm md:text-base">
+                  <div className="text-[#dc2626] font-medium text-sm md:text-base">
                     SAP Services
                   </div>
                 </div>
               </div>
               
               {/* Description */}
-              <p className="text-gray-300 text-sm md:text-lg leading-relaxed mb-6 md:mb-8 transition-all duration-300">
+              <p className="text-gray-700 text-sm md:text-lg leading-relaxed mb-6 md:mb-8 transition-all duration-300">
                 {currentService.description}
               </p>
               
@@ -370,7 +360,7 @@ const SAPServices3DShowcase = () => {
                 {currentService.features.map((feature, index) => (
                   <div 
                     key={feature}
-                    className={`flex items-center gap-2 md:gap-3 p-2 md:p-3 rounded-lg md:rounded-xl bg-gray-800/40 border border-gray-600/20 transition-all duration-300 ${
+                    className={`flex items-center gap-2 md:gap-3 p-2 md:p-3 rounded-lg md:rounded-xl bg-gray-600/40 border border-gray-600/20 transition-all duration-300 ${
                       hasBeenVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
                     }`}
                     style={{
@@ -379,9 +369,9 @@ const SAPServices3DShowcase = () => {
                   >
                     <div 
                       className="w-2 h-2 rounded-full flex-shrink-0"
-                      style={{ backgroundColor: currentService.color }}
+                      style={{ backgroundColor: '#ffffff ' }}
                     ></div>
-                    <span className="text-gray-200 text-xs md:text-sm font-medium">{feature}</span>
+                    <span className="text-white text-xs md:text-sm font-medium">{feature}</span>
                   </div>
                 ))}
               </div>

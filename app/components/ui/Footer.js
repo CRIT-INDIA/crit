@@ -13,7 +13,7 @@ const ModernFooter = () => {
       title: "SAP Services",
       links: [
         { name: "SAP Implementation", href: "#" },
-        { name: "SAP RollOut", href: "#" },
+        { name: "SAP Roll Out", href: "#" },
         { name: "SAP Support", href: "#" },
         { name: "SAP Upgrade", href: "#" },
         { name: "SAP Integration", href: "#" },

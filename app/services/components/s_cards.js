@@ -20,7 +20,7 @@ const ServicesGrid = () => {
         icon: { type: 'img', url: 'https://res.cloudinary.com/duz9xipfm/image/upload/v1751005882/icons8-rocket-64_u9psqx.png' },
         name: "SAP Implementation Services",
         description: "Professional sap implementation services designed to optimize your business processes and maximize ROI.",
-        link: "/sap-implementation-services",
+        link: "/services/implementation",
         category: "integration",
         color: "#dc2626",
         tags: ["Implementation", "ERP", "Business"]
@@ -28,12 +28,12 @@ const ServicesGrid = () => {
       {
         id: 2,
         icon: { type: 'img', url: 'https://res.cloudinary.com/duz9xipfm/image/upload/v1751005441/icons8-globe-100_v27ffj.png' },
-        name: "SAP RollOut Services",
-        description: "Professional sap rollout services designed to optimize your business processes and maximize ROI.",
+        name: "SAP Roll Out Services",
+        description: "Professional sap roll out services designed to optimize your business processes and maximize ROI.",
         link: "/sap-rollout-services",
         category: "integration",
         color: "#ef4444",
-        tags: ["Rollout", "Global", "Deployment"]
+        tags: ["Roll out", "Global", "Deployment"]
       },
       {
         id: 3,

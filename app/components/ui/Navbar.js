@@ -10,36 +10,36 @@ import { motion } from "framer-motion";
 const services = [
   {
     name: "SAP Implementation Services",
-    link: "/services/implementation",
-    },
+    slug: "implementation"
+  },
   {
-    name: "SAP RollOut Services",
-    link: "/services/rollout",
-    },
+    name: "SAP Roll Out Services",
+    slug: "rollout"
+  },
   {
     name: "SAP Support Services",
-    link: "/services/support",
-    },
+    slug: "support"
+  },
   {
     name: "SAP Upgrade Services",
-    link: "/services/upgrade",
-    },
+    slug: "upgrade"
+  },
   {
     name: "SAP Integration Services",
-    link: "/services/integration",
-    },
+    slug: "integration"
+  },
   {
     name: "SAP Migration Services",
-    link: "/services/migration",
-    },
+    slug: "migration"
+  },
   {
     name: "SAP Automation Services",
-    link: "/services/automation",
-    },
+    slug: "automation"
+  },
   {
     name: "SAP Testing Services",
-    link: "/services/testing",
-    }
+    slug: "testing"
+  }
 ];
 
 const transition = {
@@ -254,15 +254,28 @@ const Navbar = () => {
 
   // Helper function to convert service name to URL slug
   const createServiceSlug = (name) => {
-    return name
-      .toLowerCase()
-      .replace(/services/gi, '') // Remove "Services" from the name
-      .replace(/[^a-z0-9\s]/g, '')
-      .replace(/\s+/g, '-')
-      .replace(/-+/g, '-') // Replace multiple dashes with single dash
-      .trim()
-      .replace(/-$/, '') // Remove trailing dash if exists
-      + '-services';
+    // Map service names to their URL slugs
+    const serviceSlugs = {
+      'SAP Implementation Services': 'services/implementation',
+      'SAP Roll Out Services': 'services/rollout',
+      'SAP Support Services': 'services/support',
+      'SAP Upgrade Services': 'services/upgrade',
+      'SAP Integration Services': 'services/integration',
+      'SAP Migration Services': 'services/migration',
+      'SAP Automation Services': 'services/automation',
+      'SAP Testing Services': 'services/testing'
+    };
+    
+    // Return the mapped slug or fallback to the old behavior
+    return serviceSlugs[name] || 
+      name.toLowerCase()
+        .replace(/services/gi, '')
+        .replace(/[^a-z0-9\s]/g, '')
+        .replace(/\s+/g, '-')
+        .replace(/-+/g, '-')
+        .trim()
+        .replace(/-$/, '')
+        + '-services';
   };
 
   useEffect(() => {
@@ -349,7 +362,7 @@ const Navbar = () => {
                   <Link
                     key={idx}
                     href={`/${createServiceSlug(service.name)}`}
-                    className={`block px-4 py-2 rounded-xl text-white font-light hover:text-red-500 hover:bg-gray-600/60 transition text-left ${idx === 0 ? 'font-bold' : ''}`}
+                    className={`block px-4 py-2 rounded-xl text-white font-light hover:text-red-400 hover:bg-white/15 transition text-left ${idx === 0 ? 'font-bold' : ''}`}
                   >
                     {service.name}
                   </Link>
@@ -421,11 +434,11 @@ const Navbar = () => {
                 <div className="grid grid-cols-2 gap-2">
                   {services.map((service, idx) => (
                     <Link
-                      key={idx}
-                      href={`/${createServiceSlug(service.name)}`}
-                      className={`block px-4 py-2 rounded-md text-white font-medium hover:bg-blue-900/60 transition text-left ${idx === 0 ? 'font-bold' : ''}`}
-                      onClick={() => setIsMobileMenuOpen(false)}
-                    >
+                          key={idx}
+                          href={`/services/${service.slug}`}
+                          className="block px-4 py-2 text-sm text-gray-300 hover:bg-blue-900/30 hover:text-white rounded-md"
+                          onClick={() => setIsMobileMenuOpen(false)}
+                        >
                       {service.name}
                     </Link>
                   ))}

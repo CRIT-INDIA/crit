@@ -209,7 +209,7 @@ export default function CritIndiaCtaForm({ onClose }) {
 
   const serviceOptions = [
     'SAP Implementation',
-    'SAP Rollout Services',
+    'SAP Roll out Services',
     'Sap Support Services',
     'SAP Upgrade Services',
     'SAP Migration Services',

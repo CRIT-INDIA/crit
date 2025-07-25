@@ -1,10 +1,33 @@
 'use client';
 import React, { useState, useEffect } from 'react';
-import { Phone, Mail, AtSign, MessageCircle } from 'lucide-react';
+import { Phone, Mail, Facebook, MessageCircle } from 'lucide-react';
 
 export default function ContactSection() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [hoveredIcon, setHoveredIcon] = useState(null);
+  const [showChat, setShowChat] = useState(false);
+  
+  // Debug: Log state changes and handle escape key
+  useEffect(() => {
+    console.log('showChat state changed:', showChat);
+    
+    // Add event listener for escape key to close modal
+    const handleEscapeKey = (e) => {
+      if (e.key === 'Escape' && showChat) {
+        document.body.style.overflow = 'auto';
+        setShowChat(false);
+      }
+    };
+    
+    if (showChat) {
+      window.addEventListener('keydown', handleEscapeKey);
+    }
+    
+    return () => {
+      window.removeEventListener('keydown', handleEscapeKey);
+    };
+  }, [showChat]);
+  const [showContactForm, setShowContactForm] = useState(false);
   const text = "CONTACT US";
   const [barPos, setBarPos] = useState(0);
   const letterRefs = React.useRef([]);
@@ -47,10 +70,14 @@ export default function ContactSection() {
   }, [barPos, text.length]);
 
   const contactIcons = [
-    { icon: Phone, id: 'phone' },
-    { icon: Mail, id: 'mail' },
-    { icon: AtSign, id: 'email' },
-    { icon: MessageCircle, id: 'chat' }
+    { icon: Facebook, id: 'facebook', action: () => window.open('https://www.facebook.com') },
+    { icon: MessageCircle, id: 'chat', action: () => {
+      console.log('Opening chat modal');
+      document.body.style.overflow = 'hidden'; // Prevent scrolling when modal is open
+      setShowChat(true);
+    }},
+    { icon: Mail, id: 'mail', action: () => window.open('mailto:info@critindia.com') },
+    { icon: Phone, id: 'phone', action: () => window.open('tel:+917773954892') }
   ];
 
   return (
@@ -67,7 +94,7 @@ export default function ContactSection() {
                   ref={el => letterRefs.current[i] = el}
                   className={`transition-colors duration-200`}
                   style={{
-                    color: (barPos > 0 && i < barPos) ? "red" : "black",
+                    color: (barPos > 0 && i < barPos) ? "#ff0000" : "#000",
                     position: "relative",
                     zIndex: 1,
                     fontWeight: "bold",
@@ -86,7 +113,7 @@ export default function ContactSection() {
                   top: "50%",
                   height: "70%",
                   width: "6px",
-                  background: "red",
+                  background: "#ff0000",
                   zIndex: 2,
                   borderRadius: "3px",
                   transform: "translateY(-50%)",
@@ -97,90 +124,92 @@ export default function ContactSection() {
           </div>
           {/* Main text */}
           <div className="space-y-6">
-            <span className="text-black text-base sm:text-lg lg:text-xl leading-relaxed font-light">
+            <p className="text-black text-base sm:text-lg lg:text-xl leading-relaxed font-light">
               Thank you for taking the time to learn more about{' '}
               <span className="text-red-600 font-semibold">CRIT INDIA</span>{' '}
               complete the form with inform business requirements our industry exports will get in touch with you
-            </span>
+            </p>
           </div>
         </div>
         {/* Right side - Interactive contact icons */}
         <div className="flex-1 flex justify-center items-center w-full">
           <div className="relative">
             {/* Central glowing area */}
-            <div className="relative flex items-center justify-center w-44 h-44 sm:w-60 sm:h-60 lg:w-72 lg:h-72 rounded-full bg-transparent border-4 border-blue-400/40 shadow-2xl shadow-blue-500/20">
-              {/* Contact icons floating around */}
-              <div className="absolute inset-0 mt-10 ml-10 sm:mt-14 sm:ml-14 lg:mt-17 lg:ml-17">
-                {/* Calculate icon radius based on phone size */}
-                {(() => {
-                  const phoneWidth = 80; // w-20 (20*4=80px)
-                  const phoneHeight = 128; // h-32 (32*4=128px)
-                  const halfWidth = phoneWidth / 2;
-                  const halfHeight = phoneHeight / 2;
-                  const cornerOffset = Math.sqrt(halfWidth * halfWidth + halfHeight * halfHeight);
-                  const desiredGap = 70; // px, adjust for spacing
-                  const iconRadius = cornerOffset + desiredGap;
-                  return contactIcons.map((item, index) => {
-                    const angle = 45 + index * 90;
-                    const x = Math.cos((angle * Math.PI) / 180) * iconRadius;
-                    const y = Math.sin((angle * Math.PI) / 180) * iconRadius;
-                    return (
-                      <div
-                        key={item.id}
-                        className="absolute w-10 h-10 sm:w-14 sm:h-14 lg:w-16 lg:h-16 transform -translate-x-1/2 -translate-y-1/2 cursor-pointer group"
-                        style={{
-                          left: `50%`,
-                          top: `50%`,
-                          transform: `translate(${x}px, ${y}px) translate(-50%, -50%)`
-                        }}
-                        onMouseEnter={() => setHoveredIcon(item.id)}
-                        onMouseLeave={() => setHoveredIcon(null)}
-                      >
-                        <div className="relative w-full h-full">
-                          {/* Icon background with glow */}
-                          <div className={`absolute inset-0 rounded-full transition-all duration-300 ${
-                            hoveredIcon === item.id ? 'scale-125 shadow-[0_0_24px_8px_rgba(255,255,255,0.7)]' : 'scale-100 shadow-[0_0_16px_4px_rgba(255,255,255,0.4)]'
-                          }`} style={{ background: 'red', border: '2px solid #2563EB' }}>
-                          </div>
-                          {/* Icon */}
-                          <div className="absolute inset-0 flex items-center justify-center">
-                            <item.icon 
-                              className={`w-5 h-5 sm:w-6 sm:h-6 lg:w-6 lg:h-6 transition-all duration-300 text-white cursor-pointer ${
-                                hoveredIcon === item.id ? 'scale-110' : ''
-                              }`} 
-                              style={{ filter: hoveredIcon === item.id ? 'drop-shadow(0 0 12px #fff)' : 'drop-shadow(0 0 6px #fff)' }}
-                            />
-                          </div>
-                          {/* Connecting line to center */}
-                          <div 
-                            className={`absolute w-px bg-gradient-to-r from-blue-400/40 to-transparent transition-opacity duration-300 ${
-                              hoveredIcon === item.id ? 'opacity-60' : 'opacity-20'
-                            }`}
-                            style={{
-                              height: `${iconRadius}px`,
-                              left: '50%',
-                              top: '50%',
-                              transformOrigin: 'top',
-                              transform: `translateX(-50%) rotate(${angle + 180}deg)`
-                            }}
+            <div className="relative flex items-center justify-center w-44 h-44 sm:w-60 sm:h-60 lg:w-72 lg:h-72 rounded-full bg-transparent border-4 border-red-600/40 shadow-2xl shadow-red-500/20">
+              {/* Outer static ring for icons */}
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="w-full h-full border-4 border-red-600/40 rounded-full" style={{ position: 'absolute', left: 0, top: 0 }} />
+                {/* Icons on the ring */}
+                {contactIcons.map((item, index) => {
+                  // Position icons at specific angles to match the image
+                  // Now that the icons are in the correct order: Facebook, message, mail, phone
+                  // We can use a simpler calculation for the angles
+                  const angle = (index / contactIcons.length) * 2 * Math.PI + Math.PI * 0.25; // Start at top-right (1:30 o'clock)
+                  
+                  const radius = 140; // Slightly larger than the ring radius
+                  const x = Math.cos(angle) * radius;
+                  const y = Math.sin(angle) * radius;
+                  // For the phone icon, always show tooltip above and with higher z-index
+                  const isPhone = item.id === 'phone';
+                  return (
+                    <div
+                      key={item.id}
+                      className="absolute"
+                      style={{
+                        left: `calc(50% + ${x}px)` ,
+                        top: `calc(50% + ${y}px)` ,
+                        transform: 'translate(-50%, -50%)',
+                        pointerEvents: 'auto',
+                        zIndex: hoveredIcon === item.id ? 30 : 10
+                      }}
+                      onMouseEnter={() => setHoveredIcon(item.id)}
+                      onMouseLeave={() => setHoveredIcon(null)}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        console.log(`Clicked on ${item.id} icon`);
+                        item.action();
+                      }}
+                      aria-label={item.id}
+                      tabIndex={0}
+                    >
+                      {/* Tooltip */}
+                      {hoveredIcon === item.id && (
+                        <div className={`absolute left-1/2 -translate-x-1/2 bg-red-600 text-white text-xs px-2 py-1 rounded shadow z-50 whitespace-nowrap ${isPhone ? '-top-10' : '-top-8'}`}
+                          style={isPhone ? { minWidth: '70px' } : {}}>
+                          {item.id.charAt(0).toUpperCase() + item.id.slice(1)}
+                        </div>
+                      )}
+                      <div className="relative w-10 h-10 sm:w-14 sm:h-14 lg:w-16 lg:h-16">
+                        {/* Icon background with glow */}
+                        <div className={`absolute inset-0 rounded-full transition-all duration-300 ${
+                          hoveredIcon === item.id ? 'scale-125 shadow-[0_0_24px_8px_rgba(255,255,255,0.7)]' : 'scale-100 shadow-[0_0_16px_4px_rgba(255,255,255,0.4)]'
+                        }`} style={{ background: '#ff0000', border: '2px solid #ff0000' }}>
+                        </div>
+                        {/* Icon */}
+                        <div className="absolute inset-0 flex items-center justify-center">
+                          <item.icon 
+                            className={`w-5 h-5 sm:w-6 sm:h-6 lg:w-6 lg:h-6 transition-all duration-300 text-white ${
+                              hoveredIcon === item.id ? 'scale-110' : ''
+                            }`} 
+                            style={{ filter: hoveredIcon === item.id ? 'drop-shadow(0 0 12px #fff)' : 'drop-shadow(0 0 6px #fff)' }}
                           />
                         </div>
                       </div>
-                    );
-                  });
-                })()}
+                    </div>
+                  );
+                })}
               </div>
               {/* Center device/hand illustration */}
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="relative">
                   {/* Phone mockup */}
-                  <div className="w-16 h-24 sm:w-20 sm:h-32 bg-gradient-to-b from-slate-700 to-slate-800 rounded-2xl border-2 border-blue-400/30 shadow-xl relative overflow-hidden flex flex-col items-center justify-between py-2">
+                  <div className="w-16 h-24 sm:w-20 sm:h-32 bg-gradient-to-b from-slate-700 to-slate-800 rounded-2xl border-2 border-red-600/30 shadow-xl relative overflow-hidden flex flex-col items-center justify-between py-2">
                     {/* Speaker slot */}
                     <div className="w-6 h-1 rounded-full bg-gray-300/60 mb-2 mt-1" />
                     {/* Screen */}
-                    <div className="absolute inset-2 top-6 bottom-6 bg-gradient-to-b from-blue-900/50 to-slate-900/50 rounded-md">
+                    <div className="absolute inset-2 top-6 bottom-6 bg-gradient-to-b from-red-900/50 to-slate-900/50 rounded-md">
                       {/* Screen glow */}
-                      <div className="absolute inset-0 bg-blue-400/10 rounded-md animate-pulse" />
+                      <div className="absolute inset-0 bg-red-400/10 rounded-md animate-pulse" />
                     </div>
                     {/* Home button */}
                     <div className="relative z-10 flex flex-col items-center w-full">
@@ -190,13 +219,111 @@ export default function ContactSection() {
                 </div>
               </div>
             </div>
-            {/* Outer ring animation */}
-            <div className="absolute inset-0 w-44 h-44 sm:w-60 sm:h-60 lg:w-72 lg:h-72 border-4 border-black/10 rounded-full animate-spin" style={{ animationDuration: '20s' }}>
-              <div className="absolute w-2 h-2 bg-blue-400 rounded-full -top-1 left-1/2 transform -translate-x-1/2" />
-            </div>
           </div>
         </div>
       </div>
+
+      {/* Chat Modal */}
+      {showChat && (
+        <div 
+          className="fixed inset-0 bg-black/50 flex items-center justify-center z-[9999]" 
+          style={{pointerEvents: 'auto'}}
+          onClick={(e) => {
+            // Close modal when clicking on backdrop
+            if (e.target === e.currentTarget) {
+              document.body.style.overflow = 'auto';
+              setShowChat(false);
+            }
+          }}
+        >
+          <div 
+            className="bg-white rounded-lg shadow-xl p-6 w-full max-w-md mx-4"
+            onClick={(e) => e.stopPropagation()} // Prevent clicks from reaching the backdrop
+          >
+            <div className="flex justify-between items-center mb-4">
+              <h3 className="text-xl font-semibold text-red-600">Chat with Us</h3>
+              <button 
+                onClick={() => {
+                  document.body.style.overflow = 'auto'; // Restore scrolling when modal is closed
+                  setShowChat(false);
+                }}
+                className="text-gray-500 hover:text-gray-700"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+            <div className="bg-gray-100 p-4 rounded-lg mb-4 h-64 overflow-y-auto">
+              <div className="flex flex-col space-y-2">
+                <div className="bg-red-100 text-red-800 p-2 rounded-lg self-start max-w-[80%]">
+                  Hello! How can we help you today?
+                </div>
+              </div>
+            </div>
+            <div className="flex">
+              <input 
+                type="text" 
+                placeholder="Type your message here..." 
+                className="flex-1 border border-gray-300 rounded-l-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-500"
+              />
+              <button className="bg-red-600 text-white px-4 py-2 rounded-r-lg hover:bg-red-700 transition-colors">
+                Send
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Contact Form Modal */}
+      {showContactForm && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg shadow-xl p-6 w-full max-w-md mx-4">
+            <div className="flex justify-between items-center mb-4">
+              <h3 className="text-xl font-semibold text-red-600">Contact Us</h3>
+              <button 
+                onClick={() => setShowContactForm(false)}
+                className="text-gray-500 hover:text-gray-700"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+            <form className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Name</label>
+                <input 
+                  type="text" 
+                  className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-500"
+                  placeholder="Your name"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                <input 
+                  type="email" 
+                  className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-500"
+                  placeholder="your.email@example.com"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Message</label>
+                <textarea 
+                  className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-500 h-32"
+                  placeholder="How can we help you?"
+                ></textarea>
+              </div>
+              <button 
+                type="submit" 
+                className="w-full bg-red-600 text-white py-2 rounded-lg hover:bg-red-700 transition-colors"
+              >
+                Send Message
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

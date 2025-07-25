@@ -21,7 +21,7 @@ const FeaturedClients = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
           {[
             { icon: Building, title: "Fortune 500", description: "Leading global technology corporation with successful SAP implementation across 25+ countries" },
-            { icon: Factory, title: "Manufacturing Giant", description: "Major industrial manufacturer with seamless SAP rollout across European operations" },
+            { icon: Factory, title: "Manufacturing Giant", description: "Major industrial manufacturer with seamless SAP roll out across European operations" },
             { icon: Hospital, title: "Healthcare Leader", description: "International healthcare provider with integrated SAP solutions across 100+ facilities" }
           ].map((client, index) => (
             <div 

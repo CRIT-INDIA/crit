@@ -15,7 +15,7 @@ const CareerPage = () => {
   const jobListings = [
     {
       id: 1,
-      title: "ReactJs Developer",
+      title: "React JS Developer",
       location: "Pune, Maharashtra",
       experience: "3+ years",
       type: "Part Time",

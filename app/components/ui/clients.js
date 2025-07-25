@@ -52,7 +52,7 @@ const MovingClientsSection = () => {
           </svg>
    </h1>      </div>
 
-      <div className="w-full bg-[#00203F] drop-shadow-lg rounded-lg p-2">
+      <div className="w-full bg-[#00203F] drop-shadow-lg rounded-lg md:p-2">
         <div className="flex gap-8 md:gap-12">
           {/* Left side - Title */}
           
@@ -67,7 +67,7 @@ const MovingClientsSection = () => {
                   key={`${client.name}-${index}`}
                   className="flex-shrink-0 mx-8 md:mx-12"
                 >
-                  <div className="flex items-center justify-center h-16 px-4">
+                  <div className="flex items-center justify-center h-12 md:h-16 px-4">
                     <img
                       src={client.logo}
                       alt={`${client.name} logo`}

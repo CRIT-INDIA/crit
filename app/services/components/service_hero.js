@@ -4,7 +4,7 @@ import { ArrowRight, CheckCircle } from 'lucide-react';
 const SAPHero = () => {
   const services = [
     { id: 1, name: 'SAP Implementation', icon: '🚀' },
-    { id: 2, name: 'SAP Rollout', icon: '🔄' },
+    { id: 2, name: 'SAP Roll out', icon: '🔄' },
     { id: 3, name: 'SAP Support', icon: '🔗' },
     { id: 4, name: 'SAP Upgrade', icon: '💡' },
     { id: 5, name: 'SAP Integration', icon: '🛠️' },

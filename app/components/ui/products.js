@@ -155,7 +155,7 @@ const DesignClassesSection = () => {
   };
 
   return (
-    <div className="min-h-screen text-white p-8">
+    <div className="min-h-* text-white p-8">
       <style jsx global>{styles}</style>
       {/* Header */}
       <div className="text-center mb-8 md:mb-8">
@@ -170,7 +170,7 @@ const DesignClassesSection = () => {
       </div>
       {/* Featured Card Display */}
       <div className="max-w-6xl mx-auto mb-8">
-        <div className="relative bg-white rounded-2xl p-8 md:p-16 border flex flex-col md:flex-row items-center justify-center md:justify-start min-h-[300px] md:min-h-[420px]">
+        <div className="relative bg-white rounded-2xl p-5 md:p-16 border flex flex-col md:flex-row items-center justify-center md:justify-start min-h-[200px] md:min-h-[420px]">
           
 
           {/* Small card on the left */}
@@ -456,7 +456,11 @@ const DesignClassesSection = () => {
           </div>
           
           {/* View All Products Button */}
-          <div className="flex justify-center mt-12">
+          
+          
+        </div>
+      </div>
+      <div className="flex justify-center mt-12">
             <Link 
               href="/products" 
               className="flex items-center justify-center px-4 py-3 bg-black text-white rounded-full text-md font-medium hover:scale-105 transition-all duration-300 group"
@@ -465,9 +469,6 @@ const DesignClassesSection = () => {
               <ArrowRight className="ml-1 h-5 w-5 group-hover:translate-x-2 transition-transform duration-300" />
             </Link>
           </div>
-          
-        </div>
-      </div>
     </div>
   );
 };
