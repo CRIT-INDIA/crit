@@ -26,9 +26,9 @@ const FeaturedClients = () => {
           ].map((client, index) => (
             <div 
               key={index} 
-              className="group bg-[#fff0f0] p-6 sm:p-8 rounded-lg transform-gpu transition-all duration-500 hover:translate-y-[-10px] hover:shadow-xl hover:shadow-[#F8BABA] cursor-pointer"
+              className="group bg-[#ffffff] shadow-lg p-6 sm:p-8 rounded-lg transform-gpu transition-all duration-500 hover:translate-y-[-10px] hover:shadow-xl hover:shadow-[#F8BABA] cursor-pointer"
             >
-              <div className="w-16 h-16 sm:w-20 sm:h-20 bg-[#F8BABA] flex items-center justify-center mb-4 sm:mb-6 transform-gpu transition-transform duration-500 ">
+              <div className="w-16 h-16 sm:w-20 sm:h-20 bg-[#fff0f0] flex items-center justify-center mb-4 sm:mb-6 transform-gpu transition-transform duration-500 ">
                 <client.icon className="text-[#A50034] w-6 h-6 sm:w-8 sm:h-8" />
               </div>
               <h3 className="font-serif text-xl sm:text-2xl mb-3 text-black">

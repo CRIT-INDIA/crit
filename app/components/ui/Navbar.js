@@ -1,5 +1,5 @@
 "use client";
- 
+
 import Link from 'next/link';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
@@ -7,10 +7,11 @@ import CtaForm from './CtaForm';
 import { usePathname } from 'next/navigation';
 import { motion } from "framer-motion";
 
+// 1. Update the slug for SAP Implementation Services
 const services = [
   {
     name: "SAP Implementation Services",
-    slug: "implementation"
+    slug: "sap-implementation-services"   // <-- NEW SLUG
   },
   {
     name: "SAP Roll Out Services",
@@ -67,8 +68,6 @@ const MenuItem = ({ setActive, active, item, href, pathname, children, textClass
   
   const hasDropdown = item === "Services"; // Only show dropdown for Services
   
-  // Debug logging
-  console.log(`MenuItem ${item}: pathname="${pathname}" -> "${normalizedPathname}", href="${href}" -> "${normalizedHref}", isCurrentPage=${isCurrentPage}`);
   return (
     <div 
       onMouseEnter={() => setActive(item)} 
@@ -142,7 +141,6 @@ const ProductItem = ({ title, description, href }) => {
       <h4 className="text-base sm:text-lg md:text-xl font-medium text-white">
         {title}
       </h4>
-      
     </Link>
   );
 };
@@ -153,7 +151,6 @@ const ServiceItem = ({ title, description, href }) => {
       <h4 className="text-base sm:text-lg md:text-xl font-medium text-white">
         {title}
       </h4>
-      
     </Link>
   );
 };
@@ -168,6 +165,32 @@ const HoveredLink = ({ children, ...rest }) => {
   );
 };
 
+// 2. Update createServiceSlug mapping
+const createServiceSlug = (name) => {
+  // Map service names to their URL slugs
+  const serviceSlugs = {
+    'SAP Implementation Services': 'sap-implementation-services',   // <-- NEW SLUG
+    'SAP Roll Out Services': 'sap-rollout-services',
+    'SAP Support Services': 'sap-support-services',
+    'SAP Upgrade Services': 'sap-upgrade-services',
+    'SAP Integration Services': 'sap-integration-services',
+    'SAP Migration Services': 'sap-migration-services',
+    'SAP Automation Services': 'sap-automation-services',
+    'SAP Testing Services': 'sap-testing-services'
+  };
+  
+  // Return the mapped slug or fallback to the old behavior
+  return serviceSlugs[name] || 
+    name.toLowerCase()
+      .replace(/services/gi, '')
+      .replace(/[^a-z0-9\s]/g, '')
+      .replace(/\s+/g, '-')
+      .replace(/-+/g, '-')
+      .trim()
+      .replace(/-$/, '')
+      + '-services';
+};
+
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -178,107 +201,31 @@ const Navbar = () => {
   const [active, setActive] = useState(null);
   const [mobileProductsOpen, setMobileProductsOpen] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
 
-  // Close CTA form when route changes
-  useEffect(() => {
-    setShowCtaForm(false);
+  // Effect for handling CTA form visibility
+  useEffect(() => { 
+    setShowCtaForm(false); 
   }, [pathname]);
 
-  // Close CTA form when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (showCtaForm && !event.target.closest('.cta-modal-content')) {
-        setShowCtaForm(false);
-      }
-    };
-
-    if (showCtaForm) {
-      document.addEventListener('mousedown', handleClickOutside);
+  // Effect for handling mobile menu state
+  useEffect(() => { 
+    console.log('Mobile menu state changed:', isMobileMenuOpen); 
+    
+    if (isMobileMenuOpen) {
+      document.body.classList.add('overflow-hidden');
+    } else {
+      document.body.classList.remove('overflow-hidden');
     }
-
+    
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [showCtaForm]);
-
-  // Debug mobile menu state
-  useEffect(() => {
-    console.log('Mobile menu state changed:', isMobileMenuOpen);
+      document.body.classList.remove('overflow-hidden');
+    }; 
   }, [isMobileMenuOpen]);
 
-  // Fetch products from JSON file
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        console.log('Fetching products from JSON...');
-        const response = await fetch('/json/data/products.json');
-        console.log('Response status:', response.status);
-        
-        if (!response.ok) {
-          throw new Error(`Failed to fetch products: ${response.status}`);
-        }
-        
-        const data = await response.json();
-        console.log('Products data received:', data);
-        console.log('Products array:', data.products);
-        
-        setProducts(data.products || []);
-        console.log('Products state set with', data.products?.length || 0, 'items');
-      } catch (error) {
-        console.error('Error fetching products:', error);
-        setProducts([]);
-      } finally {
-        setLoading(false);
-        console.log('Loading finished');
-      }
-    };
-
-    fetchProducts();
-  }, []);
-
-  // Helper function to convert product name to URL slug
-  const createSlug = (name) => {
-    // Special case for SAP BusinessObjects
-    if (name === "SAP BusinessObjects") {
-      return "products/business-object";
-    }
-    
-    return "products/" + name
-      .toLowerCase()
-      .replace(/[^a-z0-9\s]/g, '')
-      .replace(/\s+/g, '-')
-      .replace(/-+/g, '-')
-      .trim();
-  };
-
-  // Helper function to convert service name to URL slug
-  const createServiceSlug = (name) => {
-    // Map service names to their URL slugs
-    const serviceSlugs = {
-      'SAP Implementation Services': 'services/implementation',
-      'SAP Roll Out Services': 'services/rollout',
-      'SAP Support Services': 'services/support',
-      'SAP Upgrade Services': 'services/upgrade',
-      'SAP Integration Services': 'services/integration',
-      'SAP Migration Services': 'services/migration',
-      'SAP Automation Services': 'services/automation',
-      'SAP Testing Services': 'services/testing'
-    };
-    
-    // Return the mapped slug or fallback to the old behavior
-    return serviceSlugs[name] || 
-      name.toLowerCase()
-        .replace(/services/gi, '')
-        .replace(/[^a-z0-9\s]/g, '')
-        .replace(/\s+/g, '-')
-        .replace(/-+/g, '-')
-        .trim()
-        .replace(/-$/, '')
-        + '-services';
-  };
-
-  useEffect(() => {
+  // Effect for handling dark mode
+  useEffect(() => { 
     if (isDark) {
       document.documentElement.classList.add('dark');
     } else {
@@ -286,33 +233,17 @@ const Navbar = () => {
     }
   }, [isDark]);
 
-  // Debug products state
-  useEffect(() => {
-    console.log('Products state updated:', products);
-    console.log('Products count:', products.length);
-  }, [products]);
-  
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
-  
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-  
-  useEffect(() => {
-    if (isMobileMenuOpen) {
-      document.body.classList.add('overflow-hidden');
-    } else {
-      document.body.classList.remove('overflow-hidden');
-    }
-    return () => {
-      document.body.classList.remove('overflow-hidden');
-    };
-  }, [isMobileMenuOpen]);
+  // Scroll to services function
+  const scrollToServices = (e) => { 
+    e.preventDefault(); 
+    setIsMobileMenuOpen(false); 
+    const servicesSection = document.getElementById('services-section'); 
+    if (servicesSection) { 
+      servicesSection.scrollIntoView({ behavior: 'smooth' }); 
+    } else { 
+      window.location.href = '/services'; 
+    } 
+  };
 
   return (
     <nav className="fixed top-3 left-1/2 -translate-x-1/2 z-50 w-[100vw] max-w-7xl bg-black/50 backdrop-blur-xl shadow-2xl px-6 py-3 flex items-center justify-between rounded-full">
@@ -361,7 +292,7 @@ const Navbar = () => {
                 {services.map((service, idx) => (
                   <Link
                     key={idx}
-                    href={`/${createServiceSlug(service.name)}`}
+                    href={`/${createServiceSlug(service.name)}`}   // <-- ALL USES THIS!
                     className={`block px-4 py-2 rounded-xl text-white font-light hover:text-red-400 hover:bg-white/15 transition text-left ${idx === 0 ? 'font-bold' : ''}`}
                   >
                     {service.name}
@@ -412,7 +343,13 @@ const Navbar = () => {
           {/* Menu Items */}
           <nav className="flex-1 min-h-0 overflow-y-auto px-4 py-6 flex flex-col gap-2">
             <a href="/" className="block text-white text-base sm:text-lg md:text-xl font-semibold rounded px-4 py-3 hover:bg-white/10 transition" onClick={() => setIsMobileMenuOpen(false)}>Home</a>
-            <a href="/products" className="block text-white text-base sm:text-lg md:text-xl font-semibold rounded px-4 py-3 hover:bg-white/10 transition" onClick={() => setIsMobileMenuOpen(false)}>Products</a>
+            <a 
+              href="#services-section" 
+              onClick={scrollToServices}
+              className="block text-white text-base sm:text-lg md:text-xl font-semibold rounded px-4 py-3 hover:bg-white/10 transition"
+            >
+              Services
+            </a>
             <a href="/career" className="block text-white text-base sm:text-lg md:text-xl font-semibold rounded px-4 py-3 hover:bg-white/10 transition" onClick={() => setIsMobileMenuOpen(false)}>Career</a>
             <a href="/about" className="block text-white text-base sm:text-lg md:text-xl font-semibold rounded px-4 py-3 hover:bg-white/10 transition" onClick={() => setIsMobileMenuOpen(false)}>About</a>
             <a href="/contact" className="block text-white text-base sm:text-lg md:text-xl font-semibold rounded px-4 py-3 hover:bg-white/10 transition" onClick={() => setIsMobileMenuOpen(false)}>Contact</a>
@@ -434,11 +371,11 @@ const Navbar = () => {
                 <div className="grid grid-cols-2 gap-2">
                   {services.map((service, idx) => (
                     <Link
-                          key={idx}
-                          href={`/services/${service.slug}`}
-                          className="block px-4 py-2 text-sm text-gray-300 hover:bg-blue-900/30 hover:text-white rounded-md"
-                          onClick={() => setIsMobileMenuOpen(false)}
-                        >
+                      key={idx}
+                      href={`/${createServiceSlug(service.name)}`}     // <-- THIS IS CHANGED!
+                      className="block px-4 py-2 text-sm text-gray-300 hover:bg-blue-900/30 hover:text-white rounded-md"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
                       {service.name}
                     </Link>
                   ))}
@@ -459,6 +396,6 @@ const Navbar = () => {
       )}
     </nav>
   );
-};
- 
+}
+
 export default Navbar;

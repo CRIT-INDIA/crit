@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useRef, useState } from 'react';
-import { MapPin, Briefcase, Clock, User, ExternalLink, ArrowRight, X, DollarSign, Calendar, Users, Award, Zap } from 'lucide-react';
+import React, { useRef, useState, useEffect } from 'react';
+import { MapPin, Briefcase, Clock, User, ExternalLink, ArrowRight, X, DollarSign, Calendar, Users, Award, Zap, Gift, Star } from 'lucide-react';
 import Player from "lottie-react";
 import { useRouter } from 'next/navigation';
 
@@ -11,11 +11,72 @@ const CareerPage = () => {
   const [selectedJob, setSelectedJob] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const fileInputRef = useRef(null);
+  const vantaRef = useRef(null);
   
+  useEffect(() => {
+    // Load Vanta.js scripts
+    const loadVantaScripts = async () => {
+      // Load Three.js
+      if (!window.THREE) {
+        const threeScript = document.createElement('script');
+        threeScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js';
+        threeScript.onload = () => {
+          // Load Vanta Birds
+          const vantaScript = document.createElement('script');
+          vantaScript.src = 'https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.birds.min.js';
+          vantaScript.onload = () => {
+            if (window.VANTA && vantaRef.current) {
+              window.VANTA.BIRDS({
+                el: vantaRef.current,
+                mouseControls: true,
+                touchControls: true,
+                gyroControls: false,
+                minHeight: 200.00,
+                minWidth: 200.00,
+                scale: 2.00,
+                scaleMobile: 1.00
+              });
+            }
+          };
+          document.head.appendChild(vantaScript);
+        };
+        document.head.appendChild(threeScript);
+      } else {
+        // Three.js already loaded, just load Vanta
+        const vantaScript = document.createElement('script');
+        vantaScript.src = 'https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.birds.min.js';
+        vantaScript.onload = () => {
+          if (window.VANTA && vantaRef.current) {
+            window.VANTA.BIRDS({
+              el: vantaRef.current,
+              mouseControls: true,
+              touchControls: true,
+              gyroControls: false,
+              minHeight: 200.00,
+              minWidth: 200.00,
+              scale: 1.00,
+              scaleMobile: 1.00
+            });
+          }
+        };
+        document.head.appendChild(vantaScript);
+      }
+    };
+
+    loadVantaScripts();
+
+    // Cleanup function
+    return () => {
+      if (window.VANTA && window.VANTA.BIRDS) {
+        // Clean up Vanta instance if needed
+      }
+    };
+  }, []);
+
   const jobListings = [
     {
       id: 1,
-      title: "React JS Developer",
+      title: "React Js Developer",
       location: "Pune, Maharashtra",
       experience: "3+ years",
       type: "Part Time",
@@ -43,7 +104,7 @@ const CareerPage = () => {
         "Professional development opportunities",
         "Performance-based bonuses"
       ],
-      company: "Codetentacles",
+      company: "CRIT",
       postedDate: "2024-01-15",
       applicationDeadline: "2024-02-15"
     },
@@ -77,7 +138,7 @@ const CareerPage = () => {
         "Career advancement opportunities",
         "Team building activities"
       ],
-      company: "Codetentacles",
+      company: "CRIT",
       postedDate: "2024-01-10",
       applicationDeadline: "2024-02-10"
     }
@@ -96,21 +157,12 @@ const CareerPage = () => {
   return (
     <div className="min-h-screen p-2 sm:p-4 md:p-6">
       {/* Hero Section */}
-      <section className="relative w-full h-[400px] sm:h-[450px] md:h-[500px] px-2 sm:px-4 py-6">
+      <section className="relative w-full h-[400px] sm:h-[450px] md:h-[500px] px-2 sm:px-4 py-6 pt-20">
         
         <div className="max-w-5xl mx-auto relative z-10 h-full flex items-center justify-center">
-          <div className="bg-white/40 rounded-2xl p-6 sm:p-9 text-center relative overflow-hidden border border-red-100 w-full">
+          <div className="bg-white/40 rounded-2xl p-6 sm:p-9 text-center relative overflow-hidden border border-red-100 w-full" ref={vantaRef}>
           <div className="absolute inset-0 w-full h-full overflow-hidden">
-          <div 
-            className="w-full h-full bg-cover bg-center"
-            style={{
-              backgroundImage: `url(https://res.cloudinary.com/dujw4np0d/image/upload/v1753356682/download_aernpp.jpg)`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              backgroundRepeat: 'no-repeat'
-            }}
-          ></div>
-          <div className="absolute inset-0 bg-black/50"></div>
+          <div className="absolute inset-0 bg-black/10"></div>
         </div>
             
             <style jsx>{`
@@ -132,11 +184,11 @@ const CareerPage = () => {
   backdrop-filter: blur(8px);
 }
 `}</style>
-            <div className="absolute top-0 right-0 w-48 h-48 bg-white/5 rounded-full blur-2xl transform translate-x-16 -translate-y-16"></div>
-            <div className="absolute bottom-0 left-0 w-48 h-48 bg-white/5 rounded-full blur-2xl transform -translate-x-16 translate-y-16"></div>
+            <div className="absolute top-0 right-0 w-40 h-40 bg-white/50 bg-opacity-5 rounded-full blur-3xl transform translate-x-16 -translate-y-16"></div>
+            <div className="absolute bottom-0 left-0 w-40 h-40 bg-white/50 bg-opacity-5 rounded-full blur-3xl transform -translate-x-16 translate-y-16"></div>
             
             <div className="relative z-10 ">
-              <h2 className="text-2xl md:text-3xl text-white font-bold mb-4">
+              <h2 className="text-2xl md:text-3xl text-gray font-bold mb-4">
                 Looking for the Best IT Job?
               </h2>
               <p className="text-base md:text-lg mb-4 text-gray-400 max-w-2xl mx-auto leading-relaxed">
@@ -263,37 +315,45 @@ const CareerPage = () => {
             
             <div className="p-6 space-y-6">
               {/* Company Info */}
-              <div className="bg-gray-800/50 rounded-lg p-4">
+              <div className="bg-gray-200 rounded-lg p-4">
                 <div className="flex items-center gap-3 mb-3">
-                  <div className="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center">
-                    <span className="text-white font-bold text-lg">C</span>
+                  <div className="w-16 h-16 rounded-lg flex items-center justify-center overflow-hidden">
+                    <img
+                      src="https://res.cloudinary.com/dujw4np0d/image/upload/v1753342468/CRIT-3D_cpzr1n_ggj84n.avif"
+                      alt="CRIT Logo"
+                      className="w-full h-full object-cover"
+                    />
                   </div>
                   <div>
-                    <h3 className="text-lg font-semibold text-white">{selectedJob.company}</h3>
-                    <p className="text-gray-400 text-sm">Posted on {new Date(selectedJob.postedDate).toLocaleDateString()}</p>
+                    <h3 className="text-lg font-semibold text-black">{selectedJob.company}</h3>
+                    <p className="text-black text-sm pt-1">Posted on {new Date(selectedJob.postedDate).toLocaleDateString()}</p>
                   </div>
                 </div>
               </div>
 
               {/* Job Description */}
               <div>
-                <h3 className="text-xl font-semibold text-white mb-3 flex items-center gap-2">
-                  <Zap size={20} className="text-blue-400" />
+                <h3 className="text-xl font-semibold text-red-400 mb-3 flex items-center gap-2">
+                  <span className="inline-flex items-center justify-center w-8 h-8 bg-red-100 rounded-lg">
+                    <Zap size={20} className="text-red-400" />
+                  </span>
                   Job Description
                 </h3>
-                <p className="text-gray-300 leading-relaxed">{selectedJob.description}</p>
+                <p className="text-gray-900 leading-relaxed">{selectedJob.description}</p>
               </div>
 
               {/* Responsibilities */}
               <div>
-                <h3 className="text-xl font-semibold text-white mb-3 flex items-center gap-2">
-                  <Users size={20} className="text-blue-400" />
+                <h3 className="text-xl font-semibold text-red-400 mb-3 flex items-center gap-2">
+                  <span className="inline-flex items-center justify-center w-8 h-8 bg-red-100 rounded-lg">
+                    <Users size={20} className="text-red-400" />
+                  </span>
                   Key Responsibilities
                 </h3>
                 <ul className="space-y-2">
                   {selectedJob.responsibilities.map((responsibility, index) => (
-                    <li key={index} className="flex items-start gap-2 text-gray-300">
-                      <span className="w-2 h-2 bg-blue-400 rounded-full mt-2 flex-shrink-0"></span>
+                    <li key={index} className="flex items-start gap-2 text-gray-900">
+                      <span className="w-2 h-2 bg-red-400 rounded-full mt-2 flex-shrink-0"></span>
                       <span>{responsibility}</span>
                     </li>
                   ))}
@@ -302,14 +362,16 @@ const CareerPage = () => {
 
               {/* Requirements */}
               <div>
-                <h3 className="text-xl font-semibold text-white mb-3 flex items-center gap-2">
-                  <Award size={20} className="text-blue-400" />
+                <h3 className="text-xl font-semibold text-red-400 mb-3 flex items-center gap-2">
+                  <span className="inline-flex items-center justify-center w-8 h-8 bg-red-100 rounded-lg">
+                    <Award size={20} className="text-red-400" />
+                  </span>
                   Requirements
                 </h3>
                 <ul className="space-y-2">
                   {selectedJob.requirements.map((requirement, index) => (
-                    <li key={index} className="flex items-start gap-2 text-gray-300">
-                      <span className="w-2 h-2 bg-blue-400 rounded-full mt-2 flex-shrink-0"></span>
+                    <li key={index} className="flex items-start gap-2 text-gray-900">
+                      <span className="w-2 h-2 bg-red-400 rounded-full mt-2 flex-shrink-0"></span>
                       <span>{requirement}</span>
                     </li>
                   ))}
@@ -318,7 +380,12 @@ const CareerPage = () => {
 
               {/* Skills */}
               <div>
-                <h3 className="text-xl font-semibold text-white mb-3">Required Skills</h3>
+                <h3 className="text-xl font-semibold text-red-400 mb-3 flex items-center gap-2">
+                  <span className="inline-flex items-center justify-center w-8 h-8 bg-red-100 rounded-lg">
+                    <Star size={20} className="text-red-400" />
+                  </span>
+                  Required Skills
+                </h3>
                 <div className="flex flex-wrap gap-2">
                   {selectedJob.skills.map((skill, index) => (
                     <span key={index} className="bg-[#14213d] text-white px-3 py-1 rounded-full text-sm">
@@ -330,14 +397,16 @@ const CareerPage = () => {
 
               {/* Benefits */}
               <div>
-                <h3 className="text-xl font-semibold text-white mb-3 flex items-center gap-2">
-                  <Award size={20} className="text-blue-400" />
+                <h3 className="text-xl font-semibold text-red-400 mb-3 flex items-center gap-2">
+                  <span className="inline-flex items-center justify-center w-8 h-8 bg-red-100 rounded-lg">
+                    <Gift size={20} className="text-red-400" />
+                  </span>
                   Benefits & Perks
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                   {selectedJob.benefits.map((benefit, index) => (
-                    <div key={index} className="flex items-center gap-2 text-gray-300">
-                      <span className="w-2 h-2 bg-blue-400 rounded-full"></span>
+                    <div key={index} className="flex items-center gap-2 text-gray-900">
+                        <span className="w-2 h-2 bg-red-400 rounded-full"></span>
                       <span>{benefit}</span>
                     </div>
                   ))}
@@ -345,9 +414,11 @@ const CareerPage = () => {
               </div>
 
               {/* Application Deadline */}
-              <div className="bg-blue-600/10 border border-blue-600/20 rounded-lg p-4">
-                <div className="flex items-center gap-2 text-blue-300">
-                  <Calendar size={16} />
+              <div className="bg-red-600/10 border border-red-600/20 rounded-lg p-4">
+                <div className="flex items-center gap-2 text-gray-900">
+                  <span className="inline-flex items-center justify-center w-8 h-8 bg-gray-100 rounded-lg">
+                    <Calendar size={16} className="text-red-400" />
+                  </span>
                   <span className="font-medium">Application Deadline:</span>
                   <span>{new Date(selectedJob.applicationDeadline).toLocaleDateString()}</span>
                 </div>
@@ -356,7 +427,7 @@ const CareerPage = () => {
               {/* Apply Button */}
               <div className="flex justify-center pt-4">
                 <button
-                  className="bg-blue-600 text-white px-4 py-2 rounded-full hover:bg-blue-700 transition-all duration-300 flex items-center gap-2 font-semibold text-sm"
+                    className="bg-red-600 text-white px-4 py-2 rounded-full hover:bg-red-700 transition-all duration-300 flex items-center gap-2 font-semibold text-sm"
                   onClick={() => router.push('/career/apply')}
                 >
                   <span>Apply for this position</span>
@@ -455,7 +526,7 @@ const CareerPage = () => {
             </div>
 
             {/* Right Side - Form */}
-            <div className="bg-black/10 rounded-2xl p-4 sm:p-8 border h-full">
+            <div className="bg-gradient-to-b from-gray-200 to-gray-100 rounded-2xl p-4 sm:p-8 border border-gray-400 h-full">
               <form className="space-y-4 sm:space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
@@ -547,7 +618,7 @@ const CareerPage = () => {
                 <div className="flex justify-center pt-4">
                   <button
                     type="submit"
-                    className="bg-gradient-to-r from-red-600 to-red-800 hover:from-purple-700 hover:to-blue-700 text-white font-semibold px-6 sm:px-8 py-3 rounded-full flex items-center gap-2 transition-all duration-300 hover:scale-105 w-full sm:w-auto"
+                    className="bg-red-600 hover:red-800 text-white font-semibold px-6 sm:px-8 py-3 rounded-full flex items-center gap-2 transition-all duration-300 hover:scale-105 w-full sm:w-auto"
                   >
                     <span>Submit</span>
                     <ArrowRight size={20} />

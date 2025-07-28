@@ -49,7 +49,7 @@ const ModernFooter = () => {
       title: "Get in Touch",
       isContact: true,
       contactInfo: {
-        address: "1st Floor, 101, Police, Wireless Colony, Vishal Nagar, Pimple Nilakh Pune, Pimpri-Chinchwad, Maharashtra 411027",
+        address: "1st Floor, 101-B, Police, Wireless Colony, Vishal Nagar, Pimple Nilakh Pune, Pimpri-Chinchwad, Maharashtra 411027",
         phone: "+91 7773954892",
         email: "info@critindia.com"
       }
@@ -94,7 +94,7 @@ const ModernFooter = () => {
                 />
                 <div className="space-y-1">
                   <h2 className="text-2xl font-bold text-footer-heading">Connecting Roots IT</h2>
-                  <p className="text-base text-blue-600 ">SAP Excellence Partner</p>
+                  <p className="text-base text-gray-400 ">SAP Excellence Partner</p>
                 </div>
               </div>
             </div>

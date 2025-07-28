@@ -433,7 +433,7 @@ export default function ContactForm() {
                 </h3>
                 <div className="pl-6 lg:pl-8">
                   <p className="text-black text-sm">
-                    1st Floor,101, Police, Wireless Colony,<br />
+                    1st Floor,101-B, Police, Wireless Colony,<br />
                     Vishal Nagar, Pimple Nilakh,<br />
                     Pune, Pimpri-Chinchwad,<br />
                     Maharashtra 411027
@@ -479,7 +479,7 @@ export default function ContactForm() {
             </div>
             {/* Right Side - Form Section */}
             <div className="w-full lg:w-7/12 backdrop-blur-3xl bg-black/10 border border-black/10 rounded-md p-4 sm:p-6 lg:p-8">
-              <h2 className="text-[#428CFF] text-lg sm:text-xl lg:text-2xl font-bold mb-2 sm:mb-3 lg:mb-4">GET IN TOUCH</h2>
+              <h2 className="text-[#dc2626] text-lg sm:text-xl lg:text-2xl font-bold mb-2 sm:mb-3 lg:mb-4">GET IN TOUCH</h2>
               <p className="text-black mb-3 sm:mb-4 lg:mb-5 text-sm">Hey! We are looking forward to start a project with you!</p>
               <form onSubmit={handleSubmit} className="space-y-2 sm:space-y-3 lg:space-y-4 p-1 sm:p-2 lg:p-3">
                 {/* Name Input */}

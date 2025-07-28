@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect } from "react";
 import SapHero from "./components/service_hero";
-import ServicesGrid from "./components/s_cards";
+import ServicesGrid from "../components/ui/ServicesGrid";
 
 export default function Services() {
   useEffect(() => {

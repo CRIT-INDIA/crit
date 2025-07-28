@@ -17,7 +17,7 @@ const SAPServices3DShowcase = () => {
       id: 0,
       icon: Globe,
       title: 'SAP RISE Offering',
-      description: 'One Offer, One Contract - 20% Lower Total Cost of Ownership (TCO) with comprehensive transformation package.',
+      description: 'Unlock faster business value by streamlining your transition to the cloud through SAP’s bundled offering—combining tools, services, and best practices under one roof.',
       color: '#5062B9',
       glowColor: '#3A4BA2',
       features: ['Single Contract', 'Cost Optimization', 'Comprehensive Package', 'Transformation Support']
@@ -26,7 +26,7 @@ const SAPServices3DShowcase = () => {
       id: 1,
       icon: Rocket,
       title: 'Faster Migration Deployment',
-      description: 'Accelerated migration deployment takes only 5-12 months with proven methodologies and expert guidance.',
+      description: 'Achieve a swift and efficient migration with well-defined methodologies, industry best practices, and expert-led execution',
       color: '#3A4BA2',
       glowColor: '#2C3978',
       features: ['Rapid Deployment', 'Expert Guidance', 'Proven Methodologies', 'Minimal Disruption']
@@ -214,7 +214,7 @@ const SAPServices3DShowcase = () => {
   <p className={`text-base md:text-md text-gray-800 max-w-xl mx-auto leading-relaxed transition-all duration-1000 delay-300 px-4 ${
     hasBeenVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
     }`}>
-    RISE with SAP is a program that aims to assist businesses in making the transition to intelligent enterprise. It is a comprehensive approach to digital transformation.
+    Follow your accelerated transformation path to SAP Business Suite and enable continuous innovation.
      </p>
     </div>
 

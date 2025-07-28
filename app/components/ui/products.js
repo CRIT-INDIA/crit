@@ -86,7 +86,7 @@ const DesignClassesSection = () => {
     },
     {
       id: 3,
-      title: "SAP Analytics & Ariba",
+      title: "SAP Ariba",
       subtitle: "Business Intelligence & Procurement",
       description: "SAP Analytics Cloud delivers powerful analytics and planning, while SAP Ariba streamlines procurement and supply chain collaboration for smarter business decisions.",
       mobileDescription: "Powerful analytics and procurement solutions for smarter business decisions.",
@@ -182,18 +182,18 @@ const DesignClassesSection = () => {
             {/* Card */}
             <div key={currentCard} className="relative p-6 shadow-md bg-gray-100 text-gray-900 rounded-tl-2xl rounded-tr-none rounded-br-xl rounded-bl-2xl w-full h-full flex flex-col items-center justify-center transition-all duration-300 ease-in-out group overflow-hidden">
               {/* Orange fill overlay */}
-              <div className="absolute inset-0 bg-orange-500 animate-fill-up"></div>
+              <div className="absolute inset-0 bg-red-700 animate-fill-up"></div>
               {/* Orange Arrow Circle */}
               <div className="absolute -top-1.5 -right-1.5 z-30">
-                <div className="bg-orange-500 rounded-full w-12 h-12 flex items-center justify-center shadow-lg border-4 border-orange-500">
+                <div className="bg-red-500 rounded-full w-12 h-12 flex items-center justify-center shadow-lg border-4 border-red-500">
                   <ArrowUpRight className="w-4 h-4 text-black" />
                 </div>
               </div>
               <div className={`relative z-10 transition-opacity duration-300 flex flex-col items-center justify-between h-full animate-text-change ${isFading ? 'opacity-0' : 'opacity-100'}`}>
               {/* Title (small) */}
-              <div className={`text-center leading-tight mb-4 font-bold transition-all duration-300 ${['SAP Success Factors', 'SAP Analytics & Ariba'].includes(classesData[currentCard].title) ? 'text-base' : classesData[currentCard].title === 'SAP S/4 HANA' ? 'text-sm md:text-lg' : 'text-lg'}`}>
+              <div className={`text-center leading-tight mb-4 font-bold transition-all duration-300 ${['SAP Success Factors', 'SAP Ariba'].includes(classesData[currentCard].title) ? 'text-base' : classesData[currentCard].title === 'SAP S/4 HANA' ? 'text-sm md:text-sm' : 'text-lg'}`}>
                 {classesData[currentCard].title === 'SAP Analytics & Ariba' ? (
-                  <>SAP Analytics<br />& Ariba</>
+                  <>SAP Ariba</>
                 ) : (
                   classesData[currentCard].title
                 )}
@@ -207,9 +207,9 @@ const DesignClassesSection = () => {
                   <div className="w-full flex-1 rounded-2xl overflow-hidden bg-gray-200 flex items-center justify-center transition-all duration-300">
                     <img src="https://res.cloudinary.com/dujw4np0d/image/upload/v1753339762/vecteezy_teamwork-or-team-building-office-business-meeting-vector_4154417_wmtzvy_vkkjsc.avif" alt="SAP Success Factors img" className="object-contain w-full h-full rounded-2xl transition-all duration-300" />
                   </div>
-                ) : classesData[currentCard].title === 'SAP Analytics & Ariba' ? (
+                ) : classesData[currentCard].title === 'SAP Ariba' ? (
                   <div className="w-full flex-1 rounded-2xl overflow-hidden bg-gray-200 flex items-center justify-center transition-all duration-300">
-                    <img src="https://res.cloudinary.com/dujw4np0d/image/upload/v1753339762/Project_70-07_gzkqsu_owvevh.avif" alt="SAP Analytics & Ariba img" className="object-cover w-full h-full rounded-2xl transition-all duration-300" />
+                    <img src="https://res.cloudinary.com/dujw4np0d/image/upload/v1753339762/Project_70-07_gzkqsu_owvevh.avif" alt="SAP Ariba img" className="object-cover w-full h-full rounded-2xl transition-all duration-300" />
                   </div>
                 ) : classesData[currentCard].title === 'SAP Concur' ? (
                   <div className="w-full flex-1 rounded-2xl overflow-hidden bg-gray-200 flex items-center justify-center transition-all duration-300">
@@ -231,13 +231,13 @@ const DesignClassesSection = () => {
           {/* Info on the right */}
           <div className="flex-1 flex flex-col justify-center md:ml-0 text-center md:text-left px-4 md:px-0" style={{ minHeight: '200px', height: 'auto' }}>
             <h2 className="text-2xl md:text-3xl font-bold text-black mb-2 md:mb-4">{classesData[currentCard].title}</h2>
-            <p className="text-base md:text-lg font-semibold text-orange-400 mb-2 md:mb-4">{classesData[currentCard].subtitle}</p>
+            <p className="text-base md:text-lg font-semibold text-[#dc2626] mb-2 md:mb-4">{classesData[currentCard].subtitle}</p>
             <p className="text-gray-800 text-sm md:text-base leading-relaxed mb-3 md:mb-6 text-justify md:text-left">{classesData[currentCard].description}</p>
             
             {/* Additional descriptive content - hidden on mobile */}
             <div className="hidden md:block mb-6">
               <p className="text-gray-800 text-sm leading-relaxed">
-                Built on modern web standards, SAP Fiori provides a seamless experience across desktop, tablet, and mobile devices, ensuring users can work efficiently from anywhere.
+                Built on modern web standards, SAP provides a seamless experience across desktop, tablet, and mobile devices, ensuring users can work efficiently from anywhere.
               </p>
             </div>
             
@@ -246,19 +246,19 @@ const DesignClassesSection = () => {
               {classesData[currentCard].title === 'SAP S/4 HANA' && (
                 <>
                   <div className="flex items-center mb-1 md:mb-3">
-                    <div className="w-2 h-2 bg-orange-500 rounded-full mr-3"></div>
+                    <div className="w-2 h-2 bg-red-500 rounded-full mr-3"></div>
                     <span className="text-gray-700 text-xs md:text-sm">In-memory database technology</span>
                   </div>
                   <div className="flex items-center mb-1 md:mb-3">
-                    <div className="w-2 h-2 bg-orange-500 rounded-full mr-3"></div>
+                    <div className="w-2 h-2 bg-red-500 rounded-full mr-3"></div>
                     <span className="text-gray-700 text-xs md:text-sm">Simplified data model</span>
                   </div>
                   <div className="hidden md:flex items-center mb-3">
-                    <div className="w-2 h-2 bg-orange-500 rounded-full mr-3"></div>
+                    <div className="w-2 h-2 bg-red-500 rounded-full mr-3"></div>
                     <span className="text-gray-700 text-sm">Advanced analytics & AI capabilities</span>
                   </div>
                   <div className="hidden md:flex items-center">
-                    <div className="w-2 h-2 bg-orange-500 rounded-full mr-3"></div>
+                    <div className="w-2 h-2 bg-red-500 rounded-full mr-3"></div>
                     <span className="text-gray-700 text-sm">Real-time business processes</span>
                   </div>
                 </>
@@ -266,39 +266,39 @@ const DesignClassesSection = () => {
               {classesData[currentCard].title === 'SAP Success Factors' && (
                 <>
                   <div className="flex items-center mb-1 md:mb-3">
-                    <div className="w-2 h-2 bg-orange-500 rounded-full mr-3"></div>
+                    <div className="w-2 h-2 bg-red-500 rounded-full mr-3"></div>
                     <span className="text-gray-700 text-xs md:text-sm">Performance & goals management</span>
                   </div>
                   <div className="flex items-center mb-1 md:mb-3">
-                    <div className="w-2 h-2 bg-orange-500 rounded-full mr-3"></div>
+                    <div className="w-2 h-2 bg-red-500 rounded-full mr-3"></div>
                     <span className="text-gray-700 text-xs md:text-sm">Learning & development tools</span>
                   </div>
                   <div className="hidden md:flex items-center mb-3">
-                    <div className="w-2 h-2 bg-orange-500 rounded-full mr-3"></div>
+                    <div className="w-2 h-2 bg-red-500 rounded-full mr-3"></div>
                     <span className="text-gray-700 text-sm">Employee engagement analytics</span>
                   </div>
                   <div className="hidden md:flex items-center">
-                    <div className="w-2 h-2 bg-orange-500 rounded-full mr-3"></div>
+                    <div className="w-2 h-2 bg-red-500 rounded-full mr-3"></div>
                     <span className="text-gray-700 text-sm">Recruitment & onboarding</span>
                   </div>
                 </>
               )}
-              {classesData[currentCard].title === 'SAP Analytics & Ariba' && (
+              {classesData[currentCard].title === 'SAP Ariba' && (
                 <>
                   <div className="flex items-center mb-3">
-                    <div className="w-2 h-2 bg-orange-500 rounded-full mr-3"></div>
+                    <div className="w-2 h-2 bg-red-500 rounded-full mr-3"></div>
                     <span className="text-gray-700 text-sm">Predictive analytics & planning</span>
                   </div>
                   <div className="flex items-center mb-3">
-                    <div className="w-2 h-2 bg-orange-500 rounded-full mr-3"></div>
+                    <div className="w-2 h-2 bg-red-500 rounded-full mr-3"></div>
                     <span className="text-gray-700 text-sm">Supply chain collaboration</span>
                   </div>
                   <div className="flex items-center mb-3">
-                    <div className="w-2 h-2 bg-orange-500 rounded-full mr-3"></div>
+                    <div className="w-2 h-2 bg-red-500 rounded-full mr-3"></div>
                     <span className="text-gray-700 text-sm">Spend management & procurement</span>
                   </div>
                   <div className="flex items-center">
-                    <div className="w-2 h-2 bg-orange-500 rounded-full mr-3"></div>
+                    <div className="w-2 h-2 bg-red-500 rounded-full mr-3"></div>
                     <span className="text-gray-700 text-sm">Business intelligence dashboards</span>
                   </div>
                 </>
@@ -306,19 +306,19 @@ const DesignClassesSection = () => {
               {classesData[currentCard].title === 'SAP Concur' && (
                 <>
                   <div className="flex items-center mb-3">
-                    <div className="w-2 h-2 bg-orange-500 rounded-full mr-3"></div>
+                    <div className="w-2 h-2 bg-red-500 rounded-full mr-3"></div>
                     <span className="text-gray-700 text-sm">Automated expense processing</span>
                   </div>
                   <div className="flex items-center mb-3">
-                    <div className="w-2 h-2 bg-orange-500 rounded-full mr-3"></div>
+                    <div className="w-2 h-2 bg-red-500 rounded-full mr-3"></div>
                     <span className="text-gray-700 text-sm">Travel booking & management</span>
                   </div>
                   <div className="flex items-center mb-3">
-                    <div className="w-2 h-2 bg-orange-500 rounded-full mr-3"></div>
+                    <div className="w-2 h-2 bg-red-500 rounded-full mr-3"></div>
                     <span className="text-gray-700 text-sm">Invoice automation & approval</span>
                   </div>
                   <div className="flex items-center">
-                    <div className="w-2 h-2 bg-orange-500 rounded-full mr-3"></div>
+                    <div className="w-2 h-2 bg-red-500 rounded-full mr-3"></div>
                     <span className="text-gray-700 text-sm">Policy compliance & reporting</span>
                   </div>
                 </>
@@ -326,19 +326,19 @@ const DesignClassesSection = () => {
               {classesData[currentCard].title === 'SAP BTP' && (
                 <>
                   <div className="flex items-center mb-3">
-                    <div className="w-2 h-2 bg-orange-500 rounded-full mr-3"></div>
+                    <div className="w-2 h-2 bg-red-500 rounded-full mr-3"></div>
                     <span className="text-gray-700 text-sm">Database & data management</span>
                   </div>
                   <div className="flex items-center mb-3">
-                    <div className="w-2 h-2 bg-orange-500 rounded-full mr-3"></div>
+                    <div className="w-2 h-2 bg-red-500 rounded-full mr-3"></div>
                     <span className="text-gray-700 text-sm">Application development tools</span>
                   </div>
                   <div className="flex items-center mb-3">
-                    <div className="w-2 h-2 bg-orange-500 rounded-full mr-3"></div>
+                    <div className="w-2 h-2 bg-red-500 rounded-full mr-3"></div>
                     <span className="text-gray-700 text-sm">Integration & automation services</span>
                   </div>
                   <div className="flex items-center">
-                    <div className="w-2 h-2 bg-orange-500 rounded-full mr-3"></div>
+                    <div className="w-2 h-2 bg-red-500 rounded-full mr-3"></div>
                     <span className="text-gray-700 text-sm">AI & machine learning services</span>
                   </div>
                 </>
@@ -346,19 +346,19 @@ const DesignClassesSection = () => {
               {classesData[currentCard].title === 'SAP Fiori' && (
                 <>
                   <div className="flex items-center mb-3">
-                    <div className="w-2 h-2 bg-orange-500 rounded-full mr-3"></div>
+                    <div className="w-2 h-2 bg-red-500 rounded-full mr-3"></div>
                     <span className="text-gray-700 text-sm">Role-based user experience</span>
                   </div>
                   <div className="flex items-center mb-3">
-                    <div className="w-2 h-2 bg-orange-500 rounded-full mr-3"></div>
+                    <div className="w-2 h-2 bg-red-500 rounded-full mr-3"></div>
                     <span className="text-gray-700 text-sm">Responsive design principles</span>
                   </div>
                   <div className="flex items-center mb-3">
-                    <div className="w-2 h-2 bg-orange-500 rounded-full mr-3"></div>
+                    <div className="w-2 h-2 bg-red-500 rounded-full mr-3"></div>
                     <span className="text-gray-700 text-sm">Consistent design language</span>
                   </div>
                   <div className="flex items-center">
-                    <div className="w-2 h-2 bg-orange-500 rounded-full mr-3"></div>
+                    <div className="w-2 h-2 bg-red-500 rounded-full mr-3"></div>
                     <span className="text-gray-700 text-sm">Cross-platform compatibility</span>
                   </div>
                 </>
@@ -398,13 +398,13 @@ const DesignClassesSection = () => {
                 <div
                   className={`relative p-2 transition-all cursor-pointer shadow-md
                     rounded-tl-[2.5rem] rounded-tr-none rounded-br-2xl rounded-bl-2xl
-                    ${index === currentCard ? 'ring-2 ring-orange-500 bg-orange-500 text-black' : 'bg-gray-100 text-gray-900'}`}
+                    ${index === currentCard ? 'ring-2 ring-red-500 bg-red-600 text-black' : 'bg-gray-200 text-gray-900'}`}
                   onClick={() => setCurrentCard(index)}
                   style={{ width: '100%', height: '100%' }}
                 >
                   {/* Orange Arrow Circle (all cards) */}
                   <div className="absolute top-0 right-0 z-30">
-                    <div className="bg-orange-500 rounded-full w-12 h-12 flex items-center justify-center shadow-lg border-4 border-orange-500">
+                    <div className="bg-red-600 rounded-full w-12 h-12 flex items-center justify-center shadow-lg border-4 border-red-600">
                       <ArrowUpRight className="w-4 h-4 text-black" />
                     </div>
                   </div>
@@ -414,12 +414,12 @@ const DesignClassesSection = () => {
                   ) : classItem.title === 'SAP S/4 HANA' ? (
                     <h3 className="text-xs md:text-sm font-bold mb-1 mt-2">{classItem.title}</h3>
                   ) : classItem.title === 'SAP Analytics & Ariba' ? (
-                    <h3 className="text-xs md:text-sm font-bold mb-1 mt-2">SAP Analytics<br/>& Ariba</h3>
+                    <h3 className="text-xs md:text-sm font-bold mb-1 mt-2">SAP Ariba</h3>
                   ) : (
                     <h3 className="text-xs md:text-sm font-bold mb-1 mt-2">{classItem.title}</h3>
                   )}
                   {/* Subtitle (keep a little info) */}
-                  <p className="text-xs mb-2 text-black md:text-gray-600 hidden md:block">{classItem.subtitle}</p>
+                  <p className="text-xs font-light mb-2 text-black md:text-gray-800 hidden md:block">{classItem.subtitle}</p>
                   {/* Image container filling remaining space */}
                   {classItem.title === 'SAP S/4 HANA' ? (
                     <div className="w-full h-24 md:h-32 rounded-2xl mt-auto overflow-hidden bg-gray-200 flex items-center justify-center mt-2">
@@ -429,7 +429,7 @@ const DesignClassesSection = () => {
                     <div className="w-full h-20 md:h-27 rounded-2xl mt-auto overflow-hidden bg-gray-200 flex items-center justify-center mt-2">
                       <img src="https://res.cloudinary.com/dujw4np0d/image/upload/v1753339763/Project_69-08_qjqkub_yw2eqt.avif" alt="SAP Success Factors img" className="object-contain w-full h-full rounded-2xl" />
                     </div>
-                  ) : classItem.title === 'SAP Analytics & Ariba' ? (
+                  ) : classItem.title === 'SAP Ariba' ? (
                     <div className="w-full h-24 md:h-28 rounded-2xl mt-auto overflow-hidden bg-gray-200 flex items-center justify-center mt-2">
                       <img src="https://res.cloudinary.com/dujw4np0d/image/upload/v1753339762/Project_70-07_gzkqsu_owvevh.avif" alt="SAP Analytics & Ariba img" className="object-cover w-full h-full rounded-2xl" />
                     </div>

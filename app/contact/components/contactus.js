@@ -124,11 +124,11 @@ export default function ContactSection() {
           </div>
           {/* Main text */}
           <div className="space-y-6">
-            <p className="text-black text-base sm:text-lg lg:text-xl leading-relaxed font-light">
-              Thank you for taking the time to learn more about{' '}
-              <span className="text-red-600 font-semibold">CRIT INDIA</span>{' '}
-              complete the form with inform business requirements our industry exports will get in touch with you
-            </p>
+            <p className="text-black text-base sm:text-lg lg:text-lg leading-relaxed font-light justify-start text-left">
+            Thank you for your interest in  
+            <span className="text-red-600 font-semibold"> CRIT INDIA</span>. Whether you are seeking SAP solutions, support, or insights, our experienced team is here to help drive your business forward.{' '}
+              <br></br><span className="text-red-600 font-semibold">Connecting Roots, Empowering Growth</span>{' '}
+              Tell us your business requirements below, and one of our SAP experts will reach out to guide you. Lets innovate, transform, and elevate your enterprise together </p>
           </div>
         </div>
         {/* Right side - Interactive contact icons */}

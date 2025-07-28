@@ -67,7 +67,7 @@ const ServicesGrid = () => {
         id: 1,
         icon: { type: 'img', url: 'https://res.cloudinary.com/duz9xipfm/image/upload/v1751005882/icons8-rocket-64_u9psqx.png' },
         name: "SAP Implementation Services",
-        description: "Professional sap implementation services designed to optimize your business processes and maximize ROI.",
+        description: "End-to-end SAP implementation solutions that align with your business goals and drive long-term value.",
         link: "/services/implementation",
         category: "implementation",
         color: "#dc2626",
@@ -77,7 +77,7 @@ const ServicesGrid = () => {
         id: 2,
         icon: { type: 'img', url: 'https://res.cloudinary.com/duz9xipfm/image/upload/v1751005441/icons8-globe-100_v27ffj.png' },
         name: "SAP Roll Out Services",
-        description: "Professional sap roll out services designed to optimize your business processes and maximize ROI.",
+        description: "Accelerate business expansion with structured SAP rollout services that deliver speed, accuracy, and continuity.",
         link: "/sap-rollout-services",
         category: "integration",
         color: "#dc2626",
@@ -87,7 +87,7 @@ const ServicesGrid = () => {
         id: 3,
         icon: { type: 'img', url: 'https://res.cloudinary.com/duz9xipfm/image/upload/v1751005368/icons8-support-100_mi1gat.png' },
         name: "SAP Support Services",
-        description: "Professional sap support services designed to optimize your business processes and maximize ROI.",
+        description: "Expert-led SAP support to minimize downtime, optimize performance, and drive continuous improvement.",
         link: "/sap-support-services",
         category: "support",
         color: "#dc2626",
@@ -97,7 +97,7 @@ const ServicesGrid = () => {
         id: 4,
         icon: { type: 'img', url: 'https://res.cloudinary.com/duz9xipfm/image/upload/v1751005286/icons8-upgrade-96_ursgya.png' },
         name: "SAP Upgrade Services",
-        description: "Professional sap upgrade services designed to optimize your business processes and maximize ROI.",
+        description: "Smart, secure SAP upgrades tailored to your business needs—enabling better insights and faster operations.",
         link: "/sap-upgrade-services",
         category: "upgrade",
         color: "#dc2626",
@@ -107,7 +107,7 @@ const ServicesGrid = () => {
         id: 5,
         icon: { type: 'img', url: 'https://res.cloudinary.com/duz9xipfm/image/upload/v1751005760/icons8-integration-80_c0ug69.png' },
        name: "SAP Integration Services",
-        description: "Professional sap integration services designed to optimize your business processes and maximize ROI.",
+        description: "Seamless integration of SAP and platforms to ensure unified data and optimized workflows.",
         link: "/sap-integration-services",
         category: "integration",
         color: "#dc2626",
@@ -117,7 +117,7 @@ const ServicesGrid = () => {
         id: 6,
         icon: { type: 'img', url: 'https://res.cloudinary.com/duz9xipfm/image/upload/v1751005703/icons8-migration-64_kgr8tx.png' },
        name: "SAP Migration Services",
-        description: "Professional sap migration services designed to optimize your business processes and maximize ROI.",
+        description: "Efficient SAP migration services to modernize your systems and unlock future-ready capabilities.",
         link: "/sap-migration-services",
         category: "logistics",
         color: "#dc2626",
@@ -127,7 +127,7 @@ const ServicesGrid = () => {
         id: 7,
         icon: { type: 'img', url: 'https://res.cloudinary.com/duz9xipfm/image/upload/v1751005595/icons8-automation-80_zccrcv.png' },
         name: "SAP Automation Services",
-        description: "Professional sap automation services designed to optimize your business processes and maximize ROI.",
+        description: "Advanced SAP automation services that reduce costs, increase speed, and ensure process consistency.",
         link: "/sap-automation-services",
         category: "analytics",
         color: "#dc2626",
@@ -701,43 +701,26 @@ const ServicesGrid = () => {
         <div className="container">
           
 
-          <div className="filter-container">
-            <div className="category-filters">
-              <div className="filter-indicator" />
-              {categories.map((category, index) => (
-                <button
-                  key={category.id}
-                  className={`filter-btn ${activeCategory === category.id ? 'active' : ''} ${
-                    activeCategory === category.id 
-                      ? `${category.bgColor} ${category.textColor} border-transparent` 
-                      : `bg-white text-gray-700 ${category.hoverBg} ${category.borderColor}`
-                  }`}
-                  onClick={(e) => handleCategoryClick(category, e)}
-                  style={{
-                    '--active-color': category.color,
-                    '--active-bg': category.bgColor.replace('bg-', '').replace('-50', '-100')
-                  }}
-                  ref={el => {
-                    if (el && activeCategory === category.id && filterPosition.width === 0) {
-                      const rect = el.getBoundingClientRect();
-                      const containerRect = el.parentElement.getBoundingClientRect();
-                      setFilterPosition({
-                        left: rect.left - containerRect.left,
-                        width: rect.width
-                      });
-                    }
-                  }}
-                >
-                  <span className={`filter-icon ${activeCategory === category.id ? 'opacity-100' : 'opacity-70'}`}>
-                    {category.icon}
-                  </span>
-                  <span className="whitespace-nowrap">{category.label}</span>
-                </button>
-              ))}
-            </div>
-          </div>
+     
+        {/* Custom Tabs Implementation */}
+        <div className="flex flex-wrap justify-center gap-2 mb-8 px-4">
+          {categories.map((category) => (
+            <button
+              key={category.id}
+              onClick={() => setActiveCategory(category.id)}
+              className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
+                activeCategory === category.id
+                  ? `${category.bgColor} ${category.textColor} shadow-md`
+                  : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+              }`}
+            >
+              {category.icon}
+              <span>{category.label}</span>
+            </button>
+          ))}
+        </div>
 
-          <div className="extensions-grid">
+        <div className="extensions-grid">
             {filteredExtensions.map((extension, index) => (
               <div 
                 key={extension.id} 
@@ -777,7 +760,7 @@ const ServicesGrid = () => {
        </div>
        <div className="flex justify-center mt-5 md:mt-15">
             <Link 
-              href="/products" 
+              href="/services" 
               className="flex items-center justify-center px-4 py-3 bg-black text-white rounded-full text-md font-medium hover:scale-105 transition-all duration-300 group"
             >
               View All Services

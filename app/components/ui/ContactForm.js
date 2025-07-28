@@ -432,7 +432,7 @@ export default function ContactForm() {
                 </h3>
                 <div className="pl-6 lg:pl-8">
                   <p className="text-gray-800 text-sm">
-                    1st Floor,101, Police, Wireless Colony,<br />
+                    1st Floor,101-B, Police, Wireless Colony,<br />
                     Vishal Nagar, Pimple Nilakh,<br />
                     Pune, Pimpri-Chinchwad,<br />
                     Maharashtra 411027
@@ -503,7 +503,7 @@ export default function ContactForm() {
                     value={formData.name}
                     onChange={handleChange}
                     placeholder="Enter your Name"
-                    className={`w-full p-2 sm:p-2.5 lg:p-3 bg-gray-800 border border-transparent rounded-md focus:outline-none focus:border-[#428CFF] text-xs sm:text-sm ${errors.name ? 'border-red-500' : ''}`}
+                    className={`w-full p-2 sm:p-2.5 lg:p-3 placeholder:text-gray-800 bg-gray-50 border border-transparent rounded-md focus:outline-none focus:border-[#428CFF] text-xs sm:text-sm ${errors.name ? 'border-red-500' : ''}`}
                     required
                   />
                   {errors.name && (
@@ -518,7 +518,7 @@ export default function ContactForm() {
                     value={formData.email}
                     onChange={handleChange}
                     placeholder="Enter a valid email address"
-                    className={`w-full p-2 sm:p-2.5 lg:p-3 bg-gray-800 border border-transparent rounded-md focus:outline-none focus:border-[#428CFF] text-xs sm:text-sm ${errors.email ? 'border-red-500' : ''}`}
+                    className={`w-full p-2 sm:p-2.5 lg:p-3 placeholder:text-gray-800 bg-gray-50 border border-transparent rounded-md focus:outline-none focus:border-[#428CFF] text-xs sm:text-sm ${errors.email ? 'border-red-500' : ''}`}
                     required
                   />
                   {errors.email && (
@@ -533,7 +533,7 @@ export default function ContactForm() {
                     value={formData.companyName}
                     onChange={handleChange}
                     placeholder="Enter your Company Name"
-                    className={`w-full p-2 sm:p-2.5 lg:p-3 bg-gray-800 border border-transparent rounded-md focus:outline-none focus:border-[#428CFF] text-xs sm:text-sm ${errors.companyName ? 'border-red-500' : ''}`}
+                    className={`w-full p-2 sm:p-2.5 lg:p-3 placeholder:text-gray-800 bg-gray-50 border border-transparent rounded-md focus:outline-none focus:border-[#428CFF] text-xs sm:text-sm ${errors.companyName ? 'border-red-500' : ''}`}
                   />
                   {errors.companyName && (
                     <p className="text-red-500 text-xs mt-0.5">{errors.companyName}</p>
@@ -545,7 +545,7 @@ export default function ContactForm() {
                     name="countryCode"
                     value={formData.countryCode}
                     onChange={handleChange}
-                    className="w-full sm:w-28 lg:w-32 p-2 sm:p-2.5 lg:p-3 bg-gray-800 border border-transparent rounded-md focus:outline-none focus:border-[#428CFF] text-xs sm:text-sm"
+                    className="w-full sm:w-28 lg:w-32 p-2 sm:p-2.5 lg:p-3 text-black placeholder:text-gray-800 bg-gray-50 border border-transparent rounded-md focus:outline-none focus:border-[#428CFF] text-xs sm:text-sm"
                   >
                     {countryPhoneCodes.map((country) => (
                       <option key={country.code} value={country.code}>
@@ -561,7 +561,7 @@ export default function ContactForm() {
                     value={formData.phoneNumber}
                     onChange={handlePhoneChange}
                     placeholder={formData.countryCode}
-                    className={`w-full sm:flex-1 p-2 sm:p-2.5 lg:p-3 bg-gray-800 border border-transparent rounded-md focus:outline-none focus:border-[#428CFF] text-xs sm:text-sm ${errors.phoneNumber ? 'border-red-500' : ''}`}
+                    className={`w-full sm:flex-1 p-2 sm:p-2.5 lg:p-3 placeholder:text-gray-800 bg-gray-50 border border-transparent rounded-md focus:outline-none focus:border-[#428CFF] text-xs sm:text-sm ${errors.phoneNumber ? 'border-red-500' : ''}`}
                   />
                 </div>
                 {errors.phoneNumber && (
@@ -573,7 +573,7 @@ export default function ContactForm() {
                     name="service"
                     value={formData.service}
                     onChange={handleChange}
-                    className="w-full p-2 sm:p-2.5 lg:p-3 bg-gray-800 border border-transparent rounded-md focus:outline-none focus:border-[#428CFF] text-xs sm:text-sm"
+                    className="w-full p-2 sm:p-2.5 lg:p-3 text-black placeholder:text-gray-800 bg-gray-50 border border-transparent rounded-md focus:outline-none focus:border-[#428CFF] text-xs sm:text-sm"
                     required
                   >
                     <option value="" disabled>Select Service</option>
@@ -592,7 +592,7 @@ export default function ContactForm() {
                     onChange={handleChange}
                     placeholder="Enter your message"
                     rows="3"
-                    className={`w-full p-2 sm:p-2.5 lg:p-3 bg-gray-800 border border-transparent rounded-md focus:outline-none focus:border-[#428CFF] text-xs sm:text-sm ${errors.message ? 'border-red-500' : ''}`}
+                    className={`w-full p-2 sm:p-2.5 lg:p-3 placeholder:text-gray-800 bg-gray-50 border border-transparent rounded-md focus:outline-none focus:border-[#428CFF] text-xs sm:text-sm ${errors.message ? 'border-red-500' : ''}`}
                     required
                   />
                   {errors.message && (

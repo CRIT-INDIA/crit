@@ -350,7 +350,7 @@ const SAPProductsInfo = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 py-8 animate-fade-in">
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8 overflow-x-auto">
           {/* Product Navigation */}
-          <div className="lg:col-span-1 animate-slide-in-left">
+          <div className="lg:col-span-1 animate-slide-in-left sticky top-8">
             <div className="rounded-lg shadow-sm border border-red-200 p-6 bg-white hover:shadow-lg transition-all duration-300 transform hover:scale-105" >
               <h3 className="text-lg font-semibold text-red-600 mb-4">Solutions Portfolio</h3>
               <nav className="space-y-2">

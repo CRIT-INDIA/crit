@@ -4,6 +4,27 @@ import { ChevronDown, ChevronRight, CheckCircle, ArrowRight, Clock, Users, Shiel
 import Lottie from 'lottie-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
+// Function to create URL-friendly slug from service name
+const createServiceSlug = (name) => {
+  if (!name) return '';
+  return name
+    .toLowerCase()
+    .replace(/[^a-z0-9\s]/g, '')
+    .replace(/\s+/g, '-')
+    .replace(/-+/g, '-');
+};
+
+// Function to format service name from URL-friendly format to display format
+const formatServiceName = (name) => {
+  if (!name) return '';
+  // Replace hyphens with spaces and capitalize each word
+  return name
+    .split('-')
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ')
+    .replace('Sap', 'SAP'); // Special case for SAP
+};
+
 export default function SapS4HanaServicePage({ serviceName }) {
   const [activeAccordion, setActiveAccordion] = useState(null);
   const [activeStep, setActiveStep] = useState(0);
@@ -91,10 +112,25 @@ export default function SapS4HanaServicePage({ serviceName }) {
     }
   ];
 
-  // Find the matching service section based on serviceName
-  const serviceSection = servicesData?.sections?.find(
-    section => section.title === serviceName
-  );
+  // Find the service section that matches the current service name
+  const serviceSection = servicesData?.sections?.find(section => {
+    const sectionSlug = createServiceSlug(section.title).toLowerCase();
+    const currentSlug = serviceName.toLowerCase();
+    return sectionSlug === currentSlug;
+  });
+  
+  // Debug log to help identify matching issues
+  console.log('Service matching:', {
+    serviceName,
+    availableServices: servicesData?.sections?.map(s => ({
+      title: s.title,
+      slug: createServiceSlug(s.title).toLowerCase()
+    })),
+    currentSlug: serviceName?.toLowerCase(),
+    matchedSection: serviceSection
+  });
+
+  const overviewText = serviceSection?.overview || 'Overview content not available.';
 
   // Get key features from the matched service section or use defaults
   const keyFeatures = serviceSection?.features?.map(feature => ({
@@ -103,8 +139,11 @@ export default function SapS4HanaServicePage({ serviceName }) {
     description: feature.description
   })) || defaultKeyFeatures;
 
+  // Format the service name for display
+  const formattedServiceName = serviceName ? formatServiceName(serviceName) : '';
+  
   // Set the headline and subheading based on the service
-  const headline = serviceName || 'SAP S/4 HANA';
+  const headline = formattedServiceName || 'SAP S/4 HANA';
   const subheading = serviceSection?.seo_description || servicesData?.subheading || 'Transform your business with intelligent ERP solutions powered by in-memory computing, real-time analytics, and modern user experiences.';
 
   return (
@@ -116,7 +155,7 @@ export default function SapS4HanaServicePage({ serviceName }) {
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4 leading-tight text-gray-600 drop-shadow-lg">
             {headline}
             <span className="block text-red-600 font-black tracking-widest">
-              {serviceName ? 'Services' : 'Implementation Services'}
+              {serviceName ? '' : 'Implementation Services'}
             </span>
           </h1>
           <p className="text-lg md:text-xl mb-10 max-w-2xl mx-auto text-gray-500 font-light">
@@ -142,23 +181,8 @@ export default function SapS4HanaServicePage({ serviceName }) {
           </div>
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-6">
-              <h3 className="text-2xl font-bold text-gray-700">Revolutionize Your Enterprise Operations</h3>
-              <p className="text-lg leading-relaxed text-gray-700">
-                SAP S/4 HANA represents the future of enterprise resource planning, combining the power of in-memory computing with intelligent automation and real-time analytics. Our comprehensive implementation services ensure your organization leverages the full potential of this next-generation ERP platform.
-              </p>
-              <p className="text-lg leading-relaxed text-gray-700">
-                With over a decade of SAP expertise, we guide enterprises through digital transformation journeys that drive operational excellence, enhance decision-making capabilities, and accelerate business growth.
-              </p>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-8">
-                <div className="text-center p-6 rounded-xl shadow-md border-2 border-red-600 bg-white">
-                  <div className="text-3xl font-extrabold mb-2 text-red-600">500+</div>
-                  <div className="text-black font-medium">Successful Implementations</div>
-                </div>
-                <div className="text-center p-6 rounded-xl shadow-md border-2 border-black bg-white">
-                  <div className="text-3xl font-extrabold mb-2 text-black">99.9%</div>
-                  <div className="text-black font-medium">Uptime Guarantee</div>
-                </div>
-              </div>
+            <h3 className="text-2xl font-bold text-gray-700">{formattedServiceName || 'Overview'}</h3>
+            <p className="text-lg leading-relaxed text-gray-700 whitespace-pre-line">{overviewText}</p>
             </div>
             <div className="relative mt-8 lg:mt-0">
               <div className="aspect-video rounded-2xl shadow-2xl overflow-hidden flex items-center justify-center bg-gray-100">

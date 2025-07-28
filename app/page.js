@@ -4,10 +4,12 @@ import dynamic from 'next/dynamic';
 
 import { ThreeDMarquee } from "./components/ui/3d-marquee";
 import MovingClientsSection from "./components/ui/clients";
-import WhyChooseUs from "./components/ui/whychoose";
+
 
 // Lazy load non-critical components
-
+const WhyChooseUs = dynamic(() => import('./components/ui/whychoose'), { 
+  loading: () => <div className="h-[500px] w-full bg-gray-100 animate-pulse"></div> 
+});
 
 const ServicesGrid = dynamic(() => import('./components/ui/ServicesGrid'), { 
   loading: () => <div className="h-[500px] w-full bg-gray-100 animate-pulse"></div> 
@@ -66,10 +68,11 @@ export default function Home() {
 
       {/* Lazy loaded components with Suspense boundaries */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+        <Suspense fallback={<div className="h-[500px] w-full bg-gray-100 animate-pulse"></div>}>
           <div className="relative">
             <WhyChooseUs />
           </div>
-
+        </Suspense>
 
         <Suspense fallback={<div className="h-[500px] w-full bg-gray-100 animate-pulse"></div>}>
           <div className="relative">

@@ -79,19 +79,19 @@ const SAPHero = () => {
             {/* Glow Effect */}
             <div className="absolute inset-0 bg-red-500/20 blur-3xl" />
             
-            <div className="relative grid grid-cols-2 gap-4">
+            <div className="relative grid grid-cols-2 gap-3 sm:gap-4">
               {services.map((service, index) => (
                 <div
                   key={service.id}
-                  className="group bg-white border border-gray-200 rounded-xl p-6 hover:bg-red-50 hover:border-red-300 transition-all duration-300 cursor-pointer shadow-lg hover:shadow-xl"
+                  className="group bg-white border border-gray-200 rounded-xl p-3 sm:p-4 md:p-6 hover:bg-red-50 hover:border-red-300 transition-all duration-300 cursor-pointer shadow-lg hover:shadow-xl"
                   style={{
                     animationDelay: `${index * 100}ms`,
                   }}
                 >
-                  <div className="flex items-center gap-4">
-                    <div className="text-3xl">{service.icon}</div>
-                    <div>
-                      <h3 className="font-semibold text-gray-900 group-hover:text-red-600 transition-colors">
+                  <div className="flex items-start sm:items-center gap-2 sm:gap-3">
+                    <div className="text-2xl sm:text-3xl flex-shrink-0">{service.icon}</div>
+                    <div className="min-w-0">
+                      <h3 className="font-semibold text-sm sm:text-base text-gray-900 group-hover:text-red-600 transition-colors break-words">
                         {service.name}
                       </h3>
                     </div>

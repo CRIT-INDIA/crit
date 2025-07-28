@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
+import { ChevronLeft, ChevronRight, Users, Clock, Award, BookOpen, Target, Briefcase, ArrowUpRight, ArrowRight, Link2 } from 'lucide-react';
+
 
 const ServicesGrid = () => {
   const [activeCategory, setActiveCategory] = useState('all');
@@ -7,11 +10,56 @@ const ServicesGrid = () => {
   const [isFilterVisible, setIsFilterVisible] = useState(false);
 
   const categories = [
-    { id: 'all', label: 'All', icon: '🎯', color: '#dc2626' },
-    { id: 'analytics', label: 'Analytics', icon: '📊', color: '#ef4444' },
-    { id: 'integration', label: 'Integration', icon: '🔗', color: '#f87171' },
-    { id: 'finance', label: 'Finance', icon: '💰', color: '#dc2626' },
-    { id: 'logistics', label: 'Logistics', icon: '📦', color: '#991b1b' }
+    { 
+      id: 'all', 
+      label: 'All Services', 
+      icon: <Briefcase className="w-4 h-4 sm:w-5 sm:h-5" />, 
+      color: '#dc2626',
+      bgColor: 'bg-red-50',
+      hoverBg: 'hover:bg-red-50',
+      textColor: 'text-red-600',
+      borderColor: 'border-red-100'
+    },
+    { 
+      id: 'implementation', 
+      label: 'Implementation', 
+      icon: <Target className="w-4 h-4 sm:w-5 sm:h-5" />, 
+      color: '#2563eb',
+      bgColor: 'bg-blue-50',
+      hoverBg: 'hover:bg-blue-50',
+      textColor: 'text-blue-600',
+      borderColor: 'border-blue-100'
+    },
+    { 
+      id: 'support', 
+      label: 'Support', 
+      icon: <Users className="w-4 h-4 sm:w-5 sm:h-5" />, 
+      color: '#059669',
+      bgColor: 'bg-emerald-50',
+      hoverBg: 'hover:bg-emerald-50',
+      textColor: 'text-emerald-600',
+      borderColor: 'border-emerald-100'
+    },
+    { 
+      id: 'upgrade', 
+      label: 'Upgrade', 
+      icon: <ArrowUpRight className="w-4 h-4 sm:w-5 sm:h-5" />, 
+      color: '#9333ea',
+      bgColor: 'bg-purple-50',
+      hoverBg: 'hover:bg-purple-50',
+      textColor: 'text-purple-600',
+      borderColor: 'border-purple-100'
+    },
+    { 
+      id: 'integration', 
+      label: 'Integration', 
+      icon: <Link2 className="w-4 h-4 sm:w-5 sm:h-5" />, 
+      color: '#f59e0b',
+      bgColor: 'bg-amber-50',
+      hoverBg: 'hover:bg-amber-50',
+      textColor: 'text-amber-600',
+      borderColor: 'border-amber-100'
+    }
   ];
 
   const extensions = [
@@ -20,8 +68,8 @@ const ServicesGrid = () => {
         icon: { type: 'img', url: 'https://res.cloudinary.com/duz9xipfm/image/upload/v1751005882/icons8-rocket-64_u9psqx.png' },
         name: "SAP Implementation Services",
         description: "Professional sap implementation services designed to optimize your business processes and maximize ROI.",
-        link: "/services/implementation",
-        category: "integration",
+        link: "/sap-implementation-services",
+        category: "implementation",
         color: "#dc2626",
         tags: ["Implementation", "ERP", "Business"]
       },
@@ -32,7 +80,7 @@ const ServicesGrid = () => {
         description: "Professional sap roll out services designed to optimize your business processes and maximize ROI.",
         link: "/sap-rollout-services",
         category: "integration",
-        color: "#ef4444",
+        color: "#dc2626",
         tags: ["Roll out", "Global", "Deployment"]
       },
       {
@@ -41,8 +89,8 @@ const ServicesGrid = () => {
         name: "SAP Support Services",
         description: "Professional sap support services designed to optimize your business processes and maximize ROI.",
         link: "/sap-support-services",
-        category: "finance",
-        color: "#f87171",
+        category: "support",
+        color: "#dc2626",
         tags: ["Support", "Maintenance", "Help"]
       },
       {
@@ -51,7 +99,7 @@ const ServicesGrid = () => {
         name: "SAP Upgrade Services",
         description: "Professional sap upgrade services designed to optimize your business processes and maximize ROI.",
         link: "/sap-upgrade-services",
-        category: "finance",
+        category: "upgrade",
         color: "#dc2626",
         tags: ["Upgrade", "Migration", "Modernization"]
       },
@@ -62,7 +110,7 @@ const ServicesGrid = () => {
         description: "Professional sap integration services designed to optimize your business processes and maximize ROI.",
         link: "/sap-integration-services",
         category: "integration",
-        color: "#ef4444",
+        color: "#dc2626",
         tags: ["Integration", "API", "Connectivity"]
       },
       {
@@ -72,7 +120,7 @@ const ServicesGrid = () => {
         description: "Professional sap migration services designed to optimize your business processes and maximize ROI.",
         link: "/sap-migration-services",
         category: "logistics",
-        color: "#f87171",
+        color: "#dc2626",
         tags: ["Migration", "Data", "Transfer"]
       },
       {
@@ -92,14 +140,16 @@ const ServicesGrid = () => {
         description: "Professional sap testing services designed to optimize your business processes and maximize ROI.",
         link: "/sap-testing-services ",
         category: "logistics",
-        color: "#ef4444",
+        color: "#dc2626",
         tags: ["Testing", "QA", "Quality"]
       },
   ];
 
-  const filteredExtensions = activeCategory === 'all' 
+  // Get filtered extensions based on active category
+  const filteredExtensions = (activeCategory === 'all' 
     ? extensions 
-    : extensions.filter(ext => ext.category === activeCategory);
+    : extensions.filter(ext => ext.category === activeCategory)
+  ).slice(0, typeof window !== 'undefined' && window.innerWidth < 768 ? 2 : undefined);
 
   const activeCount = categories.find(cat => cat.id === activeCategory)?.count || 0;
   const activeColor = categories.find(cat => cat.id === activeCategory)?.color || '#dc2626';
@@ -264,16 +314,15 @@ const ServicesGrid = () => {
 
         .category-filters {
           display: flex;
-          gap: 2px;
-          padding: 4px;
-          background: rgba(255, 255, 255, 0.9);
-          backdrop-filter: blur(10px);
-          border-radius: 12px;
-          box-shadow: 0 4px 24px rgba(220, 38, 38, 0.1);
+          gap: 12px;
+          padding: 8px;
+          background: white;
+          border-radius: 16px;
           position: relative;
-          border: 1px solid rgba(220, 38, 38, 0.1);
           flex-wrap: wrap;
           justify-content: center;
+          max-width: 100%;
+          margin: 0 auto;
         }
 
         .filter-indicator {
@@ -289,21 +338,32 @@ const ServicesGrid = () => {
         }
 
         .filter-btn {
-          padding: 8px 16px;
-          border: none;
-          background: transparent;
-          border-radius: 10px;
-          font-size: 13px;
+          padding: 10px 20px;
+          border: 1px solid #e5e7eb;
+          background: white;
+          border-radius: 12px;
+          font-size: 14px;
           font-weight: 500;
           cursor: pointer;
-          transition: all 0.3s ease;
-          color: #64748b;
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+          color: #4b5563;
           position: relative;
           z-index: 1;
           display: flex;
           align-items: center;
-          gap: 6px;
+          gap: 8px;
           white-space: nowrap;
+          box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+        }
+        
+        .filter-btn:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+        
+        .filter-btn.active {
+          font-weight: 600;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
         }
 
         /* Mobile responsive filter styles */
@@ -629,7 +689,7 @@ const ServicesGrid = () => {
   <path d="M15 21 Q 120 15, 200 18" stroke="#dc2626" strokeWidth="2" strokeLinecap="round" fill="none"/>
 </svg>
   </h1>
-      <p className="text-base sm:text-lg text-black max-w-3xl mx-auto px-2 sm:px-0">
+      <p className="text-base sm:text-lg text-black max-w-3xl mx-auto px-2 sm:px-0 pb-5 md:pb-1">
         Comprehensive SAP solutions tailored to transform your business operations and drive digital excellence
       </p>
     </div>
@@ -641,34 +701,26 @@ const ServicesGrid = () => {
         <div className="container">
           
 
-          <div className="filter-container">
-            <div className="category-filters">
-              <div className="filter-indicator" />
-              {categories.map((category, index) => (
-                <button
-                  key={category.id}
-                  className={`filter-btn ${activeCategory === category.id ? 'active' : ''}`}
-                  onClick={(e) => handleCategoryClick(category, e)}
-                  ref={el => {
-                    if (el && activeCategory === category.id && filterPosition.width === 0) {
-                      const rect = el.getBoundingClientRect();
-                      const containerRect = el.parentElement.getBoundingClientRect();
-                      setFilterPosition({
-                        left: rect.left - containerRect.left,
-                        width: rect.width
-                      });
-                    }
-                  }}
-                >
-                  <span className="filter-icon">{category.icon}</span>
-                  <span>{category.label}</span>
+     
+        {/* Custom Tabs Implementation */}
+        <div className="flex flex-wrap justify-center gap-2 mb-8 px-4">
+          {categories.map((category) => (
+            <button
+              key={category.id}
+              onClick={() => setActiveCategory(category.id)}
+              className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
+                activeCategory === category.id
+                  ? `${category.bgColor} ${category.textColor} shadow-md`
+                  : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+              }`}
+            >
+              {category.icon}
+              <span>{category.label}</span>
+            </button>
+          ))}
+        </div>
 
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <div className="extensions-grid">
+        <div className="extensions-grid">
             {filteredExtensions.map((extension, index) => (
               <div 
                 key={extension.id} 
@@ -706,6 +758,15 @@ const ServicesGrid = () => {
             ))}
           </div>
        </div>
+       <div className="flex justify-center mt-5 md:mt-15">
+            <Link 
+              href="/services" 
+              className="flex items-center justify-center px-4 py-3 bg-black text-white rounded-full text-md font-medium hover:scale-105 transition-all duration-300 group"
+            >
+              View All Services
+              <ArrowRight className="ml-1 h-5 w-5 group-hover:translate-x-2 transition-transform duration-300" />
+            </Link>
+          </div>
       </section>
     </>
   );
