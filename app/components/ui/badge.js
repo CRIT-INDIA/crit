@@ -26,7 +26,12 @@ const CardCarousel = ({
   .swiper {
     width: 100%;
     padding: 40px 0;
-    height: 500px; /* Fixed height for the swiper container */
+    min-height: 500px;
+  }
+  
+  .swiper-wrapper {
+    align-items: center;
+    min-height: 500px;
   }
   
   .swiper-slide {
@@ -40,20 +45,11 @@ const CardCarousel = ({
     transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
   
-  .swiper-slide > div {
-    width: 100%;
-    height: 100%;
-    position: relative;
-  }
-  
   .swiper-slide img {
     display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    position: absolute;
-    top: 0;
-    left: 0;
   }
   
   .swiper-slide-active {
@@ -169,35 +165,42 @@ const CardCarousel = ({
                   }
                 }}
               >
-                {images.map((image, index) => (
-                  <SwiperSlide key={index}>
-                    <div className="w-full h-full rounded-3xl shadow-2xl transform transition-all duration-300 hover:scale-105 overflow-hidden group">
-                      <div className="relative w-full h-full">
-                        <div className="absolute inset-0 w-full h-full">
-                          <Image
-                            src={image.src}
-                            fill
-                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                            className="object-cover transition-transform duration-700 group-hover:scale-110"
-                            alt={image.alt}
-                            priority={index < 3}
-                          />
+                {images.map((image, index) => {
+                  console.log('Image URL:', image.src); // Debug log
+                  return (
+                    <SwiperSlide key={index} className="flex items-center justify-center">
+                      <div className="w-[300px] h-[400px] rounded-3xl shadow-2xl overflow-hidden relative">
+                        {/* Fallback image */}
+                        <div className="absolute inset-0 bg-gray-200 flex items-center justify-center">
+                          <span className="text-gray-500">Loading...</span>
                         </div>
+                        
+                        {/* Actual image */}
+                        <img
+                          src={image.src}
+                          alt={image.alt}
+                          className="absolute inset-0 w-full h-full object-cover"
+                          onLoad={(e) => {
+                            // Hide the fallback when image loads
+                            e.target.style.opacity = '1';
+                            e.target.previousSibling.style.display = 'none';
+                          }}
+                          style={{ opacity: 0, transition: 'opacity 0.3s ease' }}
+                        />
+                        
+                        {/* Overlay */}
                         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent flex flex-col justify-end p-6">
-                          <div className="text-center transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                            <h4 className="text-white font-bold text-xl md:text-2xl lg:text-3xl tracking-wide mb-2">
+                          <div className="text-center">
+                            <h4 className="text-white font-bold text-2xl tracking-wide mb-2">
                               {image.industry}
                             </h4>
-                            <div className="w-16 h-1 bg-gradient-to-r from-red-500 to-red-600 mx-auto mt-3 rounded-full transform group-hover:scale-110 transition-transform duration-300"></div>
-                            <p className="text-white/90 mt-4 text-sm md:text-base opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                              {image.description || 'Learn more about our services'}
-                            </p>
+                            <div className="w-16 h-1 bg-gradient-to-r from-red-500 to-red-600 mx-auto mt-3 rounded-full"></div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                  </SwiperSlide>
-                ))}
+                    </SwiperSlide>
+                  );
+                })}
               </Swiper>
             </div>
           </div>
