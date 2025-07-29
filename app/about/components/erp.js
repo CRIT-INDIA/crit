@@ -202,7 +202,7 @@ export default function ERPImplementationDiagram() {
   ];
 
   return (
-    <div className="w-full min-h-* flex items-center justify-center p-15 bg-[#f5f5f5]">
+    <div className="w-full min-h-* flex items-center justify-center p-15 bg-[#fff5f5]">
       {isMobile ? (
           <div style={{
           display: 'flex', 
@@ -251,18 +251,18 @@ export default function ERPImplementationDiagram() {
               >
                 <defs>
                   <radialGradient id="pie3d" cx="60%" cy="40%" r="80%">
-                    <stop offset="0%" stopColor="#3b82f6" stopOpacity="0.95" />
-                    <stop offset="60%" stopColor="#2852a3" stopOpacity="0.98" />
-                    <stop offset="100%" stopColor="#1e293b" stopOpacity="1" />
+                    <stop offset="0%" stopColor="#e5e7eb" stopOpacity="1" />
+                    <stop offset="60%" stopColor="#a3a3a3" stopOpacity="0.97" />
+                    <stop offset="100%" stopColor="#52525b" stopOpacity="0.95" />
                   </radialGradient>
                   <linearGradient id="pieBevel" x1="0" y1="0" x2="1" y2="1">
                     <stop offset="0%" stopColor="#fff" stopOpacity="0.18" />
                     <stop offset="100%" stopColor="#000" stopOpacity="0.18" />
                   </linearGradient>
                   <radialGradient id="center3d" cx="50%" cy="40%" r="80%">
-                    <stop offset="0%" stopColor="#c7dafe" stopOpacity="0.18" />
-                    <stop offset="60%" stopColor="#1e293b" stopOpacity="0.95" />
-                    <stop offset="100%" stopColor="#0C1C3C" stopOpacity="1" />
+                    <stop offset="0%" stopColor="#ffffff" stopOpacity="0.18" />
+                    <stop offset="60%" stopColor="#1a202c" stopOpacity="0.95" />
+                    <stop offset="100%" stopColor="#000000" stopOpacity="1" />
                   </radialGradient>
                 </defs>
                 {SEGMENTS.map((segment, i) => {
@@ -299,7 +299,7 @@ export default function ERPImplementationDiagram() {
                         strokeWidth={isHovered ? 5 : 3}
                         opacity={isHovered ? 1 : 0.95}
                         style={{
-                          filter: isHovered ? "drop-shadow(0 0 16px #3b82f6)" : undefined,
+                          filter: isHovered ? "drop-shadow(0 0 16px #e53e3e)" : undefined,
                           cursor: "pointer",
                           transition: "all 0.2s cubic-bezier(.4,2,.6,1)",
                         }}
@@ -327,7 +327,7 @@ export default function ERPImplementationDiagram() {
                         y1={arrowStartY}
                         x2={arrowEndX}
                         y2={arrowEndY}
-                        stroke="#6B7280"
+                        stroke="#a0aec0"
                         strokeWidth="2"
                         strokeDasharray="6,6"
                         markerEnd="url(#arrowhead)"
@@ -341,16 +341,16 @@ export default function ERPImplementationDiagram() {
                   cx={cx}
                   cy={cy}
                   r={rInner}
-                  fill="url(#center3d)"
+                  fill="#f3f4f6"
                   stroke="#111827"
-                  strokeWidth={size * 0.025}
+                  strokeWidth={size * 0.012}
                   filter="url(#glow)"
                 />
                 <text
                   x={cx}
                   y={cy - size * 0.015}
                   textAnchor="middle"
-                  fill="#fff"
+                  fill="#111"
                   fontSize={size * 0.07}
                   fontWeight="bold"
                   fontFamily="'Segoe UI', Arial, sans-serif"
@@ -362,7 +362,7 @@ export default function ERPImplementationDiagram() {
                   x={cx}
                   y={cy + size * 0.035}
                   textAnchor="middle"
-                  fill="#c7dafe"
+                  fill="#111"
                   fontSize={size * 0.025}
                   fontWeight="bold"
                   fontFamily="'Segoe UI', Arial, sans-serif"
@@ -372,14 +372,14 @@ export default function ERPImplementationDiagram() {
                 </text>
                 <defs>
                   <radialGradient id="centerGradient" cx="50%" cy="50%" r="50%">
-                    <stop offset="60%" stopColor="#1e293b" />
-                    <stop offset="100%" stopColor="#0C1C3C" />
+                    <stop offset="60%" stopColor="#1a202c" />
+                    <stop offset="100%" stopColor="#000000" />
                   </radialGradient>
                   <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-                    <feDropShadow dx="0" dy="0" stdDeviation={size * 0.012} floodColor="#2563eb" floodOpacity="0.12" />
+                    <feDropShadow dx="0" dy="0" stdDeviation={size * 0.012} floodColor="#e53e3e" floodOpacity="0.12" />
                   </filter>
                   <marker id="arrowhead" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto" markerUnits="strokeWidth">
-                    <path d="M0,0 L8,4 L0,8" fill="#6B7280" />
+                    <path d="M0,0 L8,4 L0,8" fill="#a0aec0" />
                   </marker>
                 </defs>
               </svg>
@@ -395,7 +395,7 @@ export default function ERPImplementationDiagram() {
                 return (
                   <React.Fragment key={i}>
                     <div
-                      className={`absolute px-5 md:px-3 py-1 md:py-2 rounded-lg text-white font-bold text-xs md:text-xs shadow border border-[#222c3c] flex flex-col items-center justify-center whitespace-pre-line text-center transition-all duration-200 ${isHovered ? 'scale-110 z-50 bg-blue-600 shadow-2xl' : 'bg-gray-700'}`}
+                      className={`absolute px-5 md:px-3 py-1 md:py-2 rounded-lg text-white font-bold text-xs md:text-xs shadow border border-[#222c3c] flex flex-col items-center justify-center whitespace-pre-line text-center transition-all duration-200 ${isHovered ? 'scale-110 z-50 bg-red-600 shadow-2xl' : 'bg-gray-500'}`}
                       style={{
                         left: cardCenterX,
                         top: cardCenterY,
@@ -452,13 +452,13 @@ export default function ERPImplementationDiagram() {
                 fontSize: '0.9rem',
                 textShadow: 'none',
                 zIndex: 10,
-                background: 'rgba(12,28,60,0.9)',
+                background: 'rgba(0,0,0,0.9)',
                 borderRadius: '0.8em',
                 padding: '1rem',
                 pointerEvents: 'none',
                 textAlign: 'center',
                 whiteSpace: 'normal',
-                border: '2px solid #3b82f6',
+                border: '2px solid #e53e3e',
                 marginTop: '1.5rem'
               }}
             >
@@ -479,7 +479,7 @@ export default function ERPImplementationDiagram() {
                 textDecoration: 'underline',
                 letterSpacing:
                   SEGMENTS[hovered !== null ? hovered : 7].label === 'Ongoing Improvements & Feedback' ? 0.5 : 1,
-                color: '#3b82f6'
+                color: '#e53e3e'
               }}>
                   {SEGMENTS[hovered !== null ? hovered : 7].label}
                 </div>
@@ -535,18 +535,18 @@ export default function ERPImplementationDiagram() {
               >
                 <defs>
                   <radialGradient id="pie3d" cx="60%" cy="40%" r="80%">
-                    <stop offset="0%" stopColor="#3b82f6" stopOpacity="0.95" />
-                    <stop offset="60%" stopColor="#2852a3" stopOpacity="0.98" />
-                    <stop offset="100%" stopColor="#1e293b" stopOpacity="1" />
+                    <stop offset="0%" stopColor="#e5e7eb" stopOpacity="1" />
+                    <stop offset="60%" stopColor="#a3a3a3" stopOpacity="0.97" />
+                    <stop offset="100%" stopColor="#52525b" stopOpacity="0.95" />
                   </radialGradient>
                   <linearGradient id="pieBevel" x1="0" y1="0" x2="1" y2="1">
                     <stop offset="0%" stopColor="#fff" stopOpacity="0.18" />
                     <stop offset="100%" stopColor="#000" stopOpacity="0.18" />
                   </linearGradient>
                   <radialGradient id="center3d" cx="50%" cy="40%" r="80%">
-                    <stop offset="0%" stopColor="#c7dafe" stopOpacity="0.18" />
-                    <stop offset="60%" stopColor="#1e293b" stopOpacity="0.95" />
-                    <stop offset="100%" stopColor="#0C1C3C" stopOpacity="1" />
+                    <stop offset="0%" stopColor="#ffffff" stopOpacity="0.18" />
+                    <stop offset="60%" stopColor="#1a202c" stopOpacity="0.95" />
+                    <stop offset="100%" stopColor="#000000" stopOpacity="1" />
                   </radialGradient>
                 </defs>
                 {SEGMENTS.map((segment, i) => {
@@ -583,7 +583,7 @@ export default function ERPImplementationDiagram() {
                         strokeWidth={isHovered ? 5 : 3}
                         opacity={isHovered ? 1 : 0.95}
                         style={{
-                          filter: isHovered ? "drop-shadow(0 0 16px #3b82f6)" : undefined,
+                          filter: isHovered ? "drop-shadow(0 0 16px #e53e3e)" : undefined,
                           cursor: "pointer",
                           transition: "all 0.2s cubic-bezier(.4,2,.6,1)",
                         }}
@@ -615,7 +615,7 @@ export default function ERPImplementationDiagram() {
                         y1={arrowStartY}
                         x2={arrowEndX}
                         y2={arrowEndY}
-                        stroke="#6B7280"
+                        stroke="#a0aec0"
                         strokeWidth="2"
                         strokeDasharray="6,6"
                         markerEnd="url(#arrowhead)"
@@ -629,16 +629,16 @@ export default function ERPImplementationDiagram() {
                   cx={cx}
                   cy={cy}
                   r={rInner}
-                  fill="url(#center3d)"
+                  fill="#f3f4f6"
                   stroke="#111827"
-                  strokeWidth={size * 0.025}
+                  strokeWidth={size * 0.012}
                   filter="url(#glow)"
                 />
                 <text
                   x={cx}
                   y={cy - size * 0.015}
                   textAnchor="middle"
-                  fill="#fff"
+                  fill="#111"
                   fontSize={size * 0.07}
                   fontWeight="bold"
                   fontFamily="'Segoe UI', Arial, sans-serif"
@@ -650,7 +650,7 @@ export default function ERPImplementationDiagram() {
                   x={cx}
                   y={cy + size * 0.035}
                   textAnchor="middle"
-                  fill="#c7dafe"
+                  fill="#111"
                   fontSize={size * 0.025}
                   fontWeight="bold"
                   fontFamily="'Segoe UI', Arial, sans-serif"
@@ -664,10 +664,10 @@ export default function ERPImplementationDiagram() {
                     <stop offset="100%" stopColor="#0C1C3C" />
                   </radialGradient>
                   <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-                    <feDropShadow dx="0" dy="0" stdDeviation={size * 0.012} floodColor="#2563eb" floodOpacity="0.12" />
+                    <feDropShadow dx="0" dy="0" stdDeviation={size * 0.012} floodColor="#e53e3e" floodOpacity="0.12" />
                   </filter>
                   <marker id="arrowhead" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto" markerUnits="strokeWidth">
-                    <path d="M0,0 L8,4 L0,8" fill="#6B7280" />
+                    <path d="M0,0 L8,4 L0,8" fill="#a0aec0" />
                   </marker>
                 </defs>
               </svg>
@@ -686,7 +686,7 @@ export default function ERPImplementationDiagram() {
                 return (
                   <React.Fragment key={i}>
                     <div
-                      className={`absolute px-2 md:px-3 py-1 md:py-2 rounded-lg text-white font-bold text-xs md:text-sm shadow border border-[#222c3c] flex flex-col items-center justify-center whitespace-pre-line text-center transition-all duration-200 ${isHovered ? 'scale-110 z-50 bg-blue-600 shadow-2xl' : 'bg-gray-700'}`}
+                      className={`absolute px-2 md:px-3 py-1 md:py-2 rounded-lg text-white font-bold text-xs md:text-sm shadow border border-[#222c3c] flex flex-col items-center justify-center whitespace-pre-line text-center transition-all duration-200 ${isHovered ? 'scale-110 z-50 bg-red-600 shadow-2xl' : 'bg-gray-500'}`}
                       style={{
                         left: cardCenterX,
                         top: cardCenterY,
@@ -753,12 +753,12 @@ export default function ERPImplementationDiagram() {
                   {/* Projector light beam */}
                   <defs>
                     <radialGradient id="projectorBeam" cx="0%" cy="50%" r="100%">
-                      <stop offset="100%" stopColor="#81d4fa" stopOpacity="1.0" />                      <stop offset="30%" stopColor="#81d4fa" stopOpacity="0.9" />
-                      <stop offset="60%" stopColor="#81d4fa" stopOpacity="1.0" />
-                      <stop offset="100%" stopColor="#81d4fa" stopOpacity="1.0" />                    </radialGradient>
+                      <stop offset="100%" stopColor="#f8d9d9" stopOpacity="1.0" />                      <stop offset="30%" stopColor="#f8d9d9" stopOpacity="0.9" />
+                      <stop offset="60%" stopColor="#f8d9d9" stopOpacity="1.0" />
+                      <stop offset="100%" stopColor="#f8d9d9" stopOpacity="1.0" />                    </radialGradient>
                     <filter id="projectorGlow" x="-50%" y="-50%" width="200%" height="200%">
                       <feDropShadow dx="0" dy="0" stdDeviation="15" floodColor="#ffffff" floodOpacity="0.6" />
-                      <feDropShadow dx="0" dy="0" stdDeviation="8" floodColor="#00f6ff" floodOpacity="0.4" />
+                      <feDropShadow dx="0" dy="0" stdDeviation="8" floodColor="#e53e3e" floodOpacity="0.4" />
                     </filter>
                   </defs>
                   {/* Main projector beam - softened corners */}
@@ -794,7 +794,7 @@ export default function ERPImplementationDiagram() {
                       const y1 = beamTopStart - t * (beamTopStart - beamTopEnd);
                       const x2 = x1 + lineLen;
                       const y2 = beamTopStart - t2 * (beamTopStart - beamTopEnd);
-                      return <line x1={x1} y1={y1} x2={x2} y2={y2} stroke="#ffffff" strokeWidth="2" opacity="0.3" />;
+                      return <line x1={x1} y1={y1} x2={x2} y2={y2} stroke="#D92D20" strokeWidth="2" opacity="0.3" />;
                     })()}
                     {/* Bottom edge traveling line */}
                     {(() => {
@@ -809,7 +809,7 @@ export default function ERPImplementationDiagram() {
                       const y1 = beamBottomStart + t * (beamBottomEnd - beamBottomStart);
                       const x2 = x1 + lineLen;
                       const y2 = beamBottomStart + t2 * (beamBottomEnd - beamBottomStart);
-                      return <line x1={x1} y1={y1} x2={x2} y2={y2} stroke="#ffffff" strokeWidth="2" opacity="0.3" />;
+                      return <line x1={x1} y1={y1} x2={x2} y2={y2} stroke="#D92D20" strokeWidth="2" opacity="0.3" />;
                     })()}
                   </g>
                 </svg>
@@ -826,7 +826,7 @@ export default function ERPImplementationDiagram() {
                     fontSize: size * 0.04,
                     textShadow: 'none',
                     zIndex: 10, // Above the beam
-                    background: 'rgba(12,28,60,0.7)',
+                    background: 'rgba(133, 129, 129, 0.7)',
                     borderRadius: '0.5em',
                     padding: '0.7em 1.2em',
                     pointerEvents: 'none',
@@ -847,12 +847,12 @@ export default function ERPImplementationDiagram() {
                     height: '100%',
                     pointerEvents: 'none',
                     zIndex: 1,
-                    background: 'linear-gradient(120deg, rgba(203, 117, 144, 0.06) 0%, rgba(191, 49, 49, 0.03) 60%, rgba(60, 12, 22, 0) 100%)',
+                    background: 'linear-gradient(120deg, rgba(229, 62, 62, 0.06) 0%, rgba(191, 49, 49, 0.03) 60%, rgba(60, 12, 22, 0) 100%)',
                     filter: 'blur(10.5px)',
                     borderRadius: '0.5em',
                   }} />
                   <div style={{ position: 'relative', zIndex: 2 }}>
-                    <div style={{ fontSize: size * 0.045, fontWeight: 700, marginBottom: '0.5em', marginTop: '-1em', textDecoration: 'underline', letterSpacing: 1, color: '#3b82f6' }}>{hovered !== null ? SEGMENTS[hovered].label : SEGMENTS[7].label}</div>
+                    <div style={{ fontSize: size * 0.045, fontWeight: 700, marginBottom: '0.5em', marginTop: '-1em', textDecoration: 'underline', letterSpacing: 1, color: '#e53e3e' }}>{hovered !== null ? SEGMENTS[hovered].label : SEGMENTS[7].label}</div>
                     <ul style={{ fontSize: size * 0.038, margin: 0, padding: 0, color: '#fff', listStyle: 'disc inside', fontWeight: 400, whiteSpace: 'normal', textAlign: 'left', maxWidth: size * 0.98 }}>
                       {(hovered !== null ? SEGMENTS[hovered].info : SEGMENTS[7].info).map((point, idx) => (
                         <li key={idx} style={{ marginBottom: '0.3em', lineHeight: 1.3, wordBreak: 'break-word', whiteSpace: 'normal' }}>{typedInfo[idx] || ''}</li>

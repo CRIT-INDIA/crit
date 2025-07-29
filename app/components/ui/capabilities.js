@@ -14,68 +14,96 @@ import {
 } from 'lucide-react';
 
 const FlipCard = ({ item, index }) => {
+  const [isFlipped, setIsFlipped] = React.useState(false);
+  
+  // Toggle flip state on mobile tap
+  const handleCardTap = () => {
+    if (window.innerWidth < 768) { // Only on mobile
+      setIsFlipped(!isFlipped);
+    }
+  };
+
   return (
-    <div className="group h-40 sm:h-44 md:h-52 [perspective:1000px] touch-pan-y">
-      <div className="relative h-full w-full transition-all duration-500 sm:duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)] active:[transform:rotateY(180deg)] sm:active:[transform:none]">
+    <div 
+      className={`group h-48 sm:h-44 md:h-52 [perspective:1000px] touch-pan-y ${isFlipped ? 'flipped' : ''}`}
+      onClick={handleCardTap}
+    >
+      <div className={`relative h-full w-full transition-all duration-500 sm:duration-700 [transform-style:preserve-3d] ${isFlipped ? '[transform:rotateY(180deg)]' : ''} group-hover:[transform:rotateY(180deg)]`}>
         {/* Front of card */}
-        <div className="absolute inset-0 h-full w-full [backface-visibility:hidden]">
-          <div className="h-full bg-white/95 backdrop-blur-xl border border-gray-200 rounded-2xl p-3 sm:p-4 md:p-6 flex flex-col items-center justify-center space-y-2 sm:space-y-3 md:space-y-4 shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden relative">
+        <div className="absolute inset-0 h-full w-full [backface-visibility:hidden] rounded-2xl overflow-hidden">
+          <div className="h-full bg-white/95 backdrop-blur-xl border border-gray-200 rounded-2xl p-4 sm:p-4 md:p-6 flex flex-col items-center justify-center space-y-2 sm:space-y-3 md:space-y-4 shadow-lg hover:shadow-2xl transition-all duration-300 relative">
             {/* Decorative gradient background */}
             <div className="absolute inset-0 bg-gradient-to-br from-red-50 via-transparent to-pink-50 opacity-50"></div>
             
-            {/* Animated background circles */}
-            <div className="hidden sm:block absolute -top-8 -right-8 w-24 h-24 bg-red-100 rounded-full blur-2xl opacity-40 group-hover:scale-150 transition-transform duration-700"></div>
-            <div className="hidden sm:block absolute -bottom-8 -left-8 w-32 h-32 bg-pink-100 rounded-full blur-2xl opacity-30 group-hover:scale-125 transition-transform duration-700"></div>
+            {/* Mobile touch hint */}
+            <div className="absolute top-2 right-2 sm:hidden text-xs text-gray-400">
+              Tap to flip
+            </div>
             
             {/* Icon container with animation */}
-            <div className="relative z-10 p-1 sm:p-1.5 md:p-2 bg-red-500 rounded-2xl shadow-lg group-hover:scale-110 transition-transform duration-300">
+            <div className="relative z-10 p-2 sm:p-1.5 md:p-2 bg-red-500 rounded-2xl shadow-lg group-hover:scale-110 transition-transform duration-300">
               <div className="text-white">
-                {React.cloneElement(item.icon, { className: "w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10" })}
+                {React.cloneElement(item.icon, { className: "w-8 h-8 sm:w-8 sm:h-8 md:w-10 md:h-10" })}
               </div>
             </div>
             
             {/* Title with gradient text on hover */}
-            <h2 className="relative z-10 text-sm sm:text-base md:text-lg font-bold text-gray-800 text-center leading-tight px-1 sm:px-2 group-hover:bg-gradient-to-r group-hover:from-red-500 group-hover:to-pink-500 group-hover:bg-clip-text group-hover:text-transparent transition-all duration-300 line-clamp-2">
-              {item.title.split(' ').map((word, i, arr) => (
-                <React.Fragment key={i}>
-                  {word}
-                  {i < arr.length - 1 ? ' ' : ''}
-                </React.Fragment>
-              ))}
+            <h2 className="relative z-10 text-base sm:text-base md:text-lg font-bold text-gray-800 text-center leading-tight px-1 sm:px-2 group-hover:bg-gradient-to-r group-hover:from-red-500 group-hover:to-pink-500 group-hover:bg-clip-text group-hover:text-transparent transition-all duration-300 line-clamp-2">
+              {item.title}
             </h2>
-            
-            
           </div>
         </div>
         
         {/* Back of card */}
-        <div className="absolute inset-0 h-full w-full [backface-visibility:hidden] [transform:rotateY(180deg)]">
-          <div className="h-full bg-red-500 rounded-2xl p-4 md:p-6 flex flex-col items-center justify-center shadow-xl relative overflow-hidden">
+        <div className="absolute inset-0 h-full w-full [backface-visibility:hidden] [transform:rotateY(180deg)] rounded-2xl overflow-hidden">
+          <div className="h-full bg-red-500 rounded-2xl p-4 sm:p-4 md:p-6 flex flex-col items-center justify-center shadow-xl relative overflow-hidden">
+            {/* Close button for mobile */}
+            <button 
+              className="absolute top-2 right-2 sm:hidden text-white text-sm bg-black/20 rounded-full w-6 h-6 flex items-center justify-center"
+              onClick={(e) => {
+                e.stopPropagation();
+                setIsFlipped(false);
+              }}
+            >
+              ✕
+            </button>
+            
             {/* Animated background pattern */}
             <div className="absolute inset-0 opacity-10">
               <div className="absolute top-0 left-0 w-40 h-40 bg-white rounded-full blur-3xl animate-pulse"></div>
               <div className="absolute bottom-0 right-0 w-32 h-32 bg-white rounded-full blur-3xl animate-pulse delay-300"></div>
             </div>
             
-            {/* Glass morphism overlay */}
-            <div className="absolute inset-2 backdrop-blur-sm rounded-xl"></div>
-            
             {/* Content */}
-            <div className="relative z-10 text-center">
-              <div className="mb-3 p-2 bg-white/20 backdrop-blur-sm rounded-lg inline-block">
+            <div className="relative z-10 text-center w-full h-full flex flex-col justify-center">
+              <div className="mb-3 p-2 bg-white/20 backdrop-blur-sm rounded-lg inline-block mx-auto">
                 <div className="text-white">
                   {React.cloneElement(item.icon, { className: "w-6 h-6" })}
                 </div>
               </div>
-              <p className="text-white text-xs sm:text-sm leading-relaxed font-medium px-1 sm:px-2 line-clamp-4 sm:line-clamp-5">
+              <p className="text-white text-sm sm:text-sm leading-relaxed font-medium px-1 sm:px-2 line-clamp-4 sm:line-clamp-5">
                 {item.description}
               </p>
             </div>
-            
-            
           </div>
         </div>
       </div>
+      
+      {/* Mobile styles */}
+      <style jsx>{`
+        @media (max-width: 767px) {
+          .group {
+            perspective: 1000px;
+          }
+          .group .relative {
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+          }
+          .flipped .relative {
+            transform: rotateY(180deg);
+          }
+        }
+      `}</style>
     </div>
   );
 };
@@ -84,7 +112,7 @@ const Capabilities = () => {
   const services = [
     {
       title: "AI-Powered Solutions",
-      description: "Leverage cutting-edge artificial intelligence and machine learning to automate and enhance your business processes for maximum efficiency.",
+      description: "Leverage cutting-edge artificial intelligence and machine learning to automate and enhance your business processes.",
       icon: <Bot />
     },
     {
@@ -109,7 +137,7 @@ const Capabilities = () => {
     },
     {
       title: " sales and distribution",
-      description: "Continuous integration and deployment with round-the-clock monitoring and support from our global team of experts.",
+      description: "Providing the agility to adapt to market changes and scale your sales and distribution channels for rapid growth.",
       icon: <Settings />
     },
     {
@@ -125,27 +153,24 @@ const Capabilities = () => {
   ];
 
   return (
-    <div className="min-h-screen py-8 sm:py-12 md:py-20 px-2 sm:px-4">
+    <div className="min-h-* py-6 sm:py-12 md:py-20 px-3 sm:px-4">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-12 md:mb-16">
-        <div className="text-center">
-      <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 inline-block relative">
-    <span className="text-black">Our </span>
-    <span className="text-red-500">Capabilities</span>
-    <svg className="mx-auto my-0" style={{marginTop: '2px'}} width="120" height="18" viewBox="0 0 180 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <div className="text-center mb-8 sm:mb-16 px-2">
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-3 sm:mb-4">
+            <span className="text-black">Our </span>
+            <span className="text-red-500">Capabilities</span>
+            <svg className="mx-auto my-0" style={{marginTop: '4px'}} width="190" height="18" viewBox="0 0 180 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M10 18 Q 70 8, 170 14" stroke="#dc2626" strokeWidth="4" strokeLinecap="round" fill="none"/>
             <path d="M25 21 Q 100 15, 160 18" stroke="#dc2626" strokeWidth="2" strokeLinecap="round" fill="none"/>
           </svg>
-   </h1>      </div>
-          <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto px-4 leading-relaxed">
+          </h1>
+          <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
             Transforming Business Through Expert SAP Implementation and Digital Solutions
           </p>
-          
-          
         </div>
         
-        <div className="max-w-6xl mx-auto px-2 sm:px-4">
-          <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-5 md:gap-6 px-2 sm:px-0">
             {services.map((item, index) => (
               <FlipCard key={index} item={item} index={index} />
             ))}

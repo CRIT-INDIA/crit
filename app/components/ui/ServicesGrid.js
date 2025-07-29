@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { ChevronLeft, ChevronRight, Users, Clock, Award, BookOpen, Target, Briefcase, ArrowUpRight, ArrowRight, Link2 } from 'lucide-react';
 
-
 const ServicesGrid = () => {
   const [activeCategory, setActiveCategory] = useState('all');
   const [hoveredCard, setHoveredCard] = useState(null);
@@ -67,83 +66,83 @@ const ServicesGrid = () => {
         id: 1,
         icon: { type: 'img', url: 'https://res.cloudinary.com/duz9xipfm/image/upload/v1751005882/icons8-rocket-64_u9psqx.png' },
         name: "SAP Implementation Services",
-        description: "End-to-end SAP implementation solutions that align with your business goals and drive long-term value.",
-        link: "/services/implementation",
+        description: "Professional SAP implementation services designed to optimize your business processes and maximize ROI.",
+        link: "/sap-implementation-services",
         category: "implementation",
         color: "#dc2626",
         tags: ["Implementation", "ERP", "Business"]
-      },
-      {
+    },
+    {
         id: 2,
         icon: { type: 'img', url: 'https://res.cloudinary.com/duz9xipfm/image/upload/v1751005441/icons8-globe-100_v27ffj.png' },
         name: "SAP Roll Out Services",
-        description: "Accelerate business expansion with structured SAP rollout services that deliver speed, accuracy, and continuity.",
+        description: "Professional SAP roll out services designed to optimize your business processes and maximize ROI.",
         link: "/sap-rollout-services",
-        category: "integration",
+        category: "implementation",
         color: "#dc2626",
         tags: ["Roll out", "Global", "Deployment"]
-      },
-      {
+    },
+    {
         id: 3,
         icon: { type: 'img', url: 'https://res.cloudinary.com/duz9xipfm/image/upload/v1751005368/icons8-support-100_mi1gat.png' },
         name: "SAP Support Services",
-        description: "Expert-led SAP support to minimize downtime, optimize performance, and drive continuous improvement.",
+        description: "Professional SAP support services designed to optimize your business processes and maximize ROI.",
         link: "/sap-support-services",
         category: "support",
         color: "#dc2626",
         tags: ["Support", "Maintenance", "Help"]
-      },
-      {
+    },
+    {
         id: 4,
         icon: { type: 'img', url: 'https://res.cloudinary.com/duz9xipfm/image/upload/v1751005286/icons8-upgrade-96_ursgya.png' },
         name: "SAP Upgrade Services",
-        description: "Smart, secure SAP upgrades tailored to your business needs—enabling better insights and faster operations.",
+        description: "Professional SAP upgrade services designed to optimize your business processes and maximize ROI.",
         link: "/sap-upgrade-services",
         category: "upgrade",
         color: "#dc2626",
         tags: ["Upgrade", "Migration", "Modernization"]
-      },
-      {
+    },
+    {
         id: 5,
         icon: { type: 'img', url: 'https://res.cloudinary.com/duz9xipfm/image/upload/v1751005760/icons8-integration-80_c0ug69.png' },
-       name: "SAP Integration Services",
-        description: "Seamless integration of SAP and platforms to ensure unified data and optimized workflows.",
+        name: "SAP Integration Services",
+        description: "Professional SAP integration services designed to optimize your business processes and maximize ROI.",
         link: "/sap-integration-services",
         category: "integration",
         color: "#dc2626",
         tags: ["Integration", "API", "Connectivity"]
-      },
-      {
+    },
+    {
         id: 6,
         icon: { type: 'img', url: 'https://res.cloudinary.com/duz9xipfm/image/upload/v1751005703/icons8-migration-64_kgr8tx.png' },
-       name: "SAP Migration Services",
-        description: "Efficient SAP migration services to modernize your systems and unlock future-ready capabilities.",
+        name: "SAP Migration Services",
+        description: "Professional SAP migration services designed to optimize your business processes and maximize ROI.",
         link: "/sap-migration-services",
-        category: "logistics",
+        category: "integration",
         color: "#dc2626",
         tags: ["Migration", "Data", "Transfer"]
-      },
-      {
+    },
+    {
         id: 7,
         icon: { type: 'img', url: 'https://res.cloudinary.com/duz9xipfm/image/upload/v1751005595/icons8-automation-80_zccrcv.png' },
         name: "SAP Automation Services",
-        description: "Advanced SAP automation services that reduce costs, increase speed, and ensure process consistency.",
+        description: "Professional SAP automation services designed to optimize your business processes and maximize ROI.",
         link: "/sap-automation-services",
-        category: "analytics",
+        category: "integration",
         color: "#dc2626",
         tags: ["Automation", "RPA", "Efficiency"]
-      },
-      {
+    },
+    {
         id: 8,
         icon: { type: 'img', url: 'https://res.cloudinary.com/duz9xipfm/image/upload/v1751005506/icons8-testing-100_xsgqf9.png' },
-       name: "SAP Testing Services",
-        description: "Professional sap testing services designed to optimize your business processes and maximize ROI.",
-        link: "/sap-testing-services ",
-        category: "logistics",
+        name: "SAP Testing Services",
+        description: "Professional SAP testing services designed to optimize your business processes and maximize ROI.",
+        link: "/sap-testing-services",
+        category: "support",
         color: "#dc2626",
         tags: ["Testing", "QA", "Quality"]
-      },
-  ];
+    },
+];
 
   // Get filtered extensions based on active category
   const filteredExtensions = (activeCategory === 'all' 
@@ -368,23 +367,21 @@ const ServicesGrid = () => {
 
         /* Mobile responsive filter styles */
         @media (max-width: 1024px) {
-          /* Hide the filter indicator on mobile */
           .filter-indicator {
             display: none;
           }
 
-          /* Mobile filter container */
           .filter-container {
             padding: 0 16px;
             position: relative;
             overflow-x: auto;
             -webkit-overflow-scrolling: touch;
-            scrollbar-width: none; /* Firefox */
-            -ms-overflow-style: none; /* IE and Edge */
+            scrollbar-width: none;
+            -ms-overflow-style: none;
           }
           
           .filter-container::-webkit-scrollbar {
-            display: none; /* Hide scrollbar for Chrome, Safari and Opera */
+            display: none;
           }
           
           .category-filters {
@@ -395,7 +392,6 @@ const ServicesGrid = () => {
             gap: 4px;
           }
           
-          /* Mobile filter buttons */
           .filter-btn {
             padding: 8px 16px;
             font-size: 13px;
@@ -431,7 +427,6 @@ const ServicesGrid = () => {
             font-size: 16px;
           }
           
-          /* Adjustments for smaller screens */
           @media (max-width: 500px) {
             .filter-btn {
               padding: 6px 12px;
@@ -537,6 +532,13 @@ const ServicesGrid = () => {
           animation: slideIn 0.6s ease-out forwards;
           animation-delay: calc(var(--index) * 0.05s);
           opacity: 0;
+          text-decoration: none;
+          color: inherit;
+        }
+
+        .extension-card:hover {
+          text-decoration: none;
+          color: inherit;
         }
 
         .extension-card::before {
@@ -679,94 +681,98 @@ const ServicesGrid = () => {
         }
       `}</style>
 
-      <section className="extension-showcase">
-      <div className="relative z-10 text-center sm:mb-12 px-4 sm:px-1">
-      <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 inline-block relative">
-    <span className="text-black">Our </span>
-    <span className="text-red-500">Services</span>
-   <svg className="mx-auto my-0" style={{marginTop: '-4px'}} width="160" height="18" viewBox="0 0 220 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <path d="M5 18 Q 110 8, 215 14" stroke="#dc2626" strokeWidth="4" strokeLinecap="round" fill="none"/>
-  <path d="M15 21 Q 120 15, 200 18" stroke="#dc2626" strokeWidth="2" strokeLinecap="round" fill="none"/>
-</svg>
-  </h1>
-      <p className="text-base sm:text-lg text-black max-w-3xl mx-auto px-2 sm:px-0 pb-5 md:pb-1">
-        Comprehensive SAP solutions tailored to transform your business operations and drive digital excellence
-      </p>
-    </div>
+      <section id="services" className="extension-showcase">
+        <div className="relative z-10 text-center sm:mb-12 px-4 sm:px-1">
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 inline-block relative">
+            <span className="text-black">Our </span>
+            <span className="text-red-500">Services</span>
+            <svg className="mx-auto my-0" style={{marginTop: '-4px'}} width="160" height="18" viewBox="0 0 220 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5 18 Q 110 8, 215 14" stroke="#dc2626" strokeWidth="4" strokeLinecap="round" fill="none"/>
+              <path d="M15 21 Q 120 15, 200 18" stroke="#dc2626" strokeWidth="2" strokeLinecap="round" fill="none"/>
+            </svg>
+          </h1>
+          <p className="text-base sm:text-lg text-black max-w-3xl mx-auto px-2 sm:px-0 pb-5 md:pb-1">
+            Comprehensive SAP solutions tailored to transform your business operations and drive digital excellence
+          </p>
+        </div>
+        
         {/* Decorative Elements */}
         <div className="absolute top-20 right-20 w-32 h-32 bg-red-500/10 rounded-full blur-3xl" />
         <div className="absolute bottom-20 left-20 w-40 h-40 bg-red-400/10 rounded-full blur-3xl" />
         <div className="absolute top-1/2 left-1/4 w-24 h-24 bg-red-300/10 rounded-full blur-2xl" />
         
         <div className="container">
-          
-
-     
-        {/* Custom Tabs Implementation */}
-        <div className="flex flex-wrap justify-center gap-2 mb-8 px-4">
-          {categories.map((category) => (
-            <button
-              key={category.id}
-              onClick={() => setActiveCategory(category.id)}
-              className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
-                activeCategory === category.id
-                  ? `${category.bgColor} ${category.textColor} shadow-md`
-                  : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-              }`}
-            >
-              {category.icon}
-              <span>{category.label}</span>
-            </button>
-          ))}
-        </div>
-
-        <div className="extensions-grid">
-            {filteredExtensions.map((extension, index) => (
-              <div 
-                key={extension.id} 
-                className="extension-card"
-                style={{
-                  '--card-color': extension.color,
-                  '--index': index
-                }}
-                onMouseEnter={() => setHoveredCard(extension.id)}
-                onMouseLeave={() => setHoveredCard(null)}
+          {/* Custom Tabs Implementation */}
+          <div className="flex flex-wrap justify-center gap-2 mb-8 px-4">
+            {categories.map((category) => (
+              <button
+                key={category.id}
+                onClick={() => setActiveCategory(category.id)}
+                className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
+                  activeCategory === category.id
+                    ? `${category.bgColor} ${category.textColor} shadow-md`
+                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                }`}
               >
-                <div className="card-header">
-                  <div className="extension-icon">
-                    {extension.icon && typeof extension.icon === 'object' && extension.icon.type === 'img' ? (
-                      <img
-                        src={extension.icon.url}
-                        alt={extension.name + ' icon'}
-                        className="w-8 h-8 object-contain filter brightness-0 invert-[0.3] sepia-[0.8] saturate-[2.5] hue-rotate-[340deg]"
-                      />
-                    ) : (
-                      extension.icon
-                    )}
-                  </div>
-                  <div className="extension-info">
-                    <h3 className="extension-name">{extension.name}</h3>
-                  </div>
-                </div>
-                <p className="extension-description">{extension.description}</p>
-                <div className="extension-tags">
-                  {extension.tags.map((tag, index) => (
-                    <span key={index} className="tag">{tag}</span>
-                  ))}
-                </div>
-              </div>
+                {category.icon}
+                <span>{category.label}</span>
+              </button>
             ))}
           </div>
-       </div>
-       <div className="flex justify-center mt-5 md:mt-15">
-            <Link 
-              href="/services" 
-              className="flex items-center justify-center px-4 py-3 bg-black text-white rounded-full text-md font-medium hover:scale-105 transition-all duration-300 group"
-            >
-              View All Services
-              <ArrowRight className="ml-1 h-5 w-5 group-hover:translate-x-2 transition-transform duration-300" />
-            </Link>
+
+          <div className="extensions-grid">
+            {filteredExtensions.map((extension, index) => (
+              <Link 
+                href={extension.link || '#'}
+                key={extension.id}
+                className="block hover:no-underline"
+              >
+                <div 
+                  className="extension-card"
+                  style={{
+                    '--card-color': extension.color,
+                    '--index': index
+                  }}
+                  onMouseEnter={() => setHoveredCard(extension.id)}
+                  onMouseLeave={() => setHoveredCard(null)}
+                >
+                  <div className="card-header">
+                    <div className="extension-icon">
+                      {extension.icon && typeof extension.icon === 'object' && extension.icon.type === 'img' ? (
+                        <img
+                          src={extension.icon.url}
+                          alt={extension.name + ' icon'}
+                          className="w-8 h-8 object-contain filter brightness-0 invert-[0.3] sepia-[0.8] saturate-[2.5] hue-rotate-[340deg]"
+                        />
+                      ) : (
+                        extension.icon
+                      )}
+                    </div>
+                    <div className="extension-info">
+                      <h3 className="extension-name">{extension.name}</h3>
+                    </div>
+                  </div>
+                  <p className="extension-description">{extension.description}</p>
+                  <div className="extension-tags">
+                    {extension.tags.map((tag, index) => (
+                      <span key={index} className="tag">{tag}</span>
+                    ))}
+                  </div>
+                </div>
+              </Link>
+            ))}
           </div>
+        </div>
+        
+        <div className="flex justify-center mt-5 md:mt-15">
+          <Link 
+            href="/services" 
+            className="flex items-center justify-center px-4 py-3 bg-black text-white rounded-full text-md font-medium hover:scale-105 transition-all duration-300 group"
+          >
+            View All Services
+            <ArrowRight className="ml-1 h-5 w-5 group-hover:translate-x-2 transition-transform duration-300" />
+          </Link>
+        </div>
       </section>
     </>
   );

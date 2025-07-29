@@ -113,31 +113,90 @@ export default function SapS4HanaServicePage({ serviceName }) {
   ];
 
   // Find the service section that matches the current service name
-  const serviceSection = servicesData?.sections?.find(section => {
-    const sectionSlug = createServiceSlug(section.title).toLowerCase();
-    const currentSlug = serviceName.toLowerCase();
-    return sectionSlug === currentSlug;
-  });
+  const serviceSection = (() => {
+    // Special case for SAP Rollout Services
+    if (serviceName && serviceName.toLowerCase().includes('rollout')) {
+      const rolloutService = servicesData?.sections?.find(section => 
+        section.title.toLowerCase().includes('roll out') || 
+        section.title.toLowerCase().includes('rollout')
+      );
+      
+      if (rolloutService) {
+        console.log('Matched rollout service:', rolloutService.title);
+        return rolloutService;
+      }
+    }
+
+    // Normal service matching logic
+    return servicesData?.sections?.find(section => {
+      // Normalize both the section title and the service name for comparison
+      const sectionSlug = createServiceSlug(section.title).toLowerCase().replace(/\s+/g, '-');
+      const currentSlug = String(serviceName || '').toLowerCase().replace(/\s+/g, '-');
+      
+      // Also check for common variations (like 'roll-out' vs 'rollout')
+      const normalizedSectionSlug = sectionSlug
+        .replace(/\broll[\s-]?out\b/gi, 'rollout')
+        .replace(/\bimplement(?:ation)?\b/gi, '')
+        .replace(/--+/g, '-')
+        .replace(/^-+|-+$/g, '');
+        
+      const normalizedCurrentSlug = currentSlug
+        .replace(/\broll[\s-]?out\b/gi, 'rollout')
+        .replace(/\bimplement(?:ation)?\b/gi, '')
+        .replace(/--+/g, '-')
+        .replace(/^-+|-+$/g, '');
+      
+      const isMatch = 
+        sectionSlug === currentSlug || 
+        normalizedSectionSlug === currentSlug ||
+        sectionSlug === normalizedCurrentSlug ||
+        normalizedSectionSlug === normalizedCurrentSlug;
+      
+      return isMatch;
+    });
+  })();
   
   // Debug log to help identify matching issues
-  console.log('Service matching:', {
+  console.log('Service matching summary:', {
     serviceName,
+    serviceNameType: typeof serviceName,
+    currentSlug: serviceName?.toLowerCase(),
     availableServices: servicesData?.sections?.map(s => ({
       title: s.title,
-      slug: createServiceSlug(s.title).toLowerCase()
+      slug: createServiceSlug(s.title).toLowerCase(),
+      normalized: createServiceSlug(s.title).toLowerCase()
+        .replace(/\broll[\s-]?out\b/gi, 'rollout')
+        .replace(/\bimplement(?:ation)?\b/gi, '')
+        .replace(/--+/g, '-')
+        .replace(/^-+|-+$/g, '')
     })),
-    currentSlug: serviceName?.toLowerCase(),
-    matchedSection: serviceSection
+    matchedSection: serviceSection ? {
+      title: serviceSection.title,
+      hasOverview: !!serviceSection.overview,
+      overviewLength: serviceSection.overview?.length
+    } : 'No match found'
   });
 
   const overviewText = serviceSection?.overview || 'Overview content not available.';
 
   // Get key features from the matched service section or use defaults
-  const keyFeatures = serviceSection?.features?.map(feature => ({
-    icon: <CheckCircle className="w-8 h-8 text-red-600" />,
-    title: feature.title,
-    description: feature.description
-  })) || defaultKeyFeatures;
+  const keyFeatures = serviceSection?.features?.map((feature, index) => {
+    // Use default icons in sequence, or fall back to CheckCircle
+    const defaultIcons = [
+      <Zap className="w-8 h-8 text-red-600" />,
+      <Database className="w-8 h-8 text-red-600" />,
+      <Shield className="w-8 h-8 text-red-600" />,
+      <Users className="w-8 h-8 text-red-600" />,
+      <BarChart3 className="w-8 h-8 text-red-600" />,
+      <Settings className="w-8 h-8 text-red-600" />
+    ];
+    
+    return {
+      icon: defaultIcons[index % defaultIcons.length] || <CheckCircle className="w-8 h-8 text-red-600" />,
+      title: feature.title,
+      description: feature.description
+    };
+  }) || defaultKeyFeatures;
 
   // Format the service name for display
   const formattedServiceName = serviceName ? formatServiceName(serviceName) : '';
@@ -294,7 +353,7 @@ export default function SapS4HanaServicePage({ serviceName }) {
             <h2 className="text-3xl sm:text-4xl font-extrabold mb-4 text-black">Key Features</h2>
             <div className="w-24 h-1 mx-auto mb-8 bg-red-600 rounded"></div>
             <p className="text-lg md:text-xl max-w-3xl mx-auto text-gray-700">
-              Discover the powerful capabilities that make SAP S/4 HANA the leading choice for modern enterprises seeking digital transformation.
+              Discover the powerful capabilities that make {formattedServiceName} the leading choice for modern enterprises seeking digital transformation.
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -497,7 +556,7 @@ export default function SapS4HanaServicePage({ serviceName }) {
                     transition={{ duration: 0.4 }}
                   />
                 </motion.div>
-              </motion.div>
+                </motion.div>
             ))}
           </div>
         </div>
@@ -506,24 +565,7 @@ export default function SapS4HanaServicePage({ serviceName }) {
       {/* FAQ Section */}
       <FaqSection1 />
 
-      {/* CTA Section */}
-      <section className="py-16 md:py-20 relative overflow-hidden bg-gray-200">
-        <div className="absolute inset-0 bg-white opacity-80"></div>
-        <div className="relative max-w-4xl mx-auto px-4 text-center z-10">
-          <h2 className="text-3xl sm:text-4xl font-extrabold mb-6 text-gray-700">
-            Ready to Transform Your Business?
-          </h2>
-          <p className="text-lg md:text-xl mb-12 max-w-2xl mx-auto text-gray-500">
-            Let our SAP S/4 HANA experts help you unlock the full potential of intelligent ERP and drive your digital transformation journey.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          
-            <button className="px-8 py-4 border-2 font-bold rounded-full text-lg border-red-500 text-gray-700 bg-transparent hover:bg-red-200 hover:text-red transition-all duration-300">
-              Get Free Assessment
-            </button>
-          </div>
-        </div>
-      </section>
+      
     </div>
   );
 }
@@ -533,6 +575,7 @@ function FaqSection1() {
   const [hoveredId, setHoveredId] = useState(null);
   const [isAutoCycling, setIsAutoCycling] = useState(true);
   const [userInteracted, setUserInteracted] = useState(false);
+  const [activeCategory, setActiveCategory] = useState('ALL');
   
   const faqs = useMemo(() => [
     {
@@ -559,7 +602,31 @@ function FaqSection1() {
       q: 'How long does it take to implement SAP?',
       a: 'Implementation time varies based on business size and requirements, but SAP provides rapid deployment options and best practices to accelerate the process.'
     },
+    {
+      id: '05',
+      category: 'BASICS',
+      q: 'What does SAP stand for?',
+      a: 'SAP stands for Systems, Applications, and Products in Data Processing.'
+    },
+    {
+      id: '06',
+      category: 'BENEFITS',
+      q: 'Can SAP help with regulatory compliance?',
+      a: 'Yes, SAP includes features to help businesses maintain compliance with various industry regulations and standards.'
+    },
   ], []);
+
+  // Get unique categories
+  const categories = useMemo(() => {
+    const allCategories = ['ALL', ...new Set(faqs.map(faq => faq.category))];
+    return allCategories;
+  }, [faqs]);
+
+  // Filter FAQs by active category
+  const filteredFaqs = useMemo(() => {
+    if (activeCategory === 'ALL') return faqs;
+    return faqs.filter(faq => faq.category === activeCategory);
+  }, [faqs, activeCategory]);
 
   // Auto-cycling effect
   useEffect(() => {
@@ -618,25 +685,41 @@ function FaqSection1() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="text-center"
+            className="mb-8"
           >
-            
-            <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 mb-5">
-              Frequently Asked
-              <span className="block text-red-500">Questions</span>
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
+              <span className="text-black">Frequently Asked </span>
+              <span className="text-red-500">Questions</span>
             </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Everything you need to know about Nicepay. Can't find your answer? 
-              <span className="text-red-600 font-medium"> We're here to help.</span>
-            </p>
+            
+            {/* Category Tabs */}
+            <div className="flex flex-wrap justify-center gap-2 mb-8">
+              {categories.map((category) => (
+                <button
+                  key={category}
+                  onClick={() => {
+                    setActiveCategory(category);
+                    setUserInteracted(true);
+                    setIsAutoCycling(false);
+                  }}
+                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
+                    activeCategory === category
+                      ? 'bg-red-600 text-white shadow-md'
+                      : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                  }`}
+                >
+                  {category}
+                </button>
+              ))}
+            </div>
           </motion.div>
         </div>
 
         {/* FAQ Container */}
         <div className="grid lg:grid-cols-2 gap-6 lg:gap-12 items-start">
           {/* Left Side - Questions */}
-          <div className="space-y-3">
-            {faqs.map((faq, index) => (
+          <div className="max-w-4xl mx-auto space-y-4">
+            {filteredFaqs.map((faq, index) => (
               <motion.div
                 key={faq.id}
                 initial={{ opacity: 0, x: -50 }}

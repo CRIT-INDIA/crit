@@ -187,6 +187,7 @@ const CareerPage = () => {
             <div className="absolute top-0 right-0 w-40 h-40 bg-white/50 bg-opacity-5 rounded-full blur-3xl transform translate-x-16 -translate-y-16"></div>
             <div className="absolute bottom-0 left-0 w-40 h-40 bg-white/50 bg-opacity-5 rounded-full blur-3xl transform -translate-x-16 translate-y-16"></div>
             
+            
             <div className="relative z-10 ">
               <h2 className="text-2xl md:text-3xl text-gray font-bold mb-4">
                 Looking for the Best IT Job?
@@ -242,9 +243,7 @@ const CareerPage = () => {
                             {skill}
                           </span>
                         ))}
-                        {job.skills.length > 3 && (
-                          <span className="text-gray-400 text-xs">+{job.skills.length - 3} more</span>
-                        )}
+                        
                       </div>
                     </div>
                   </div>
@@ -457,14 +456,14 @@ const CareerPage = () => {
               >
                 <path
                   d="M10 12 Q250 0 490 12"
-                  stroke="#EAB308"
+                  stroke="#dc2626"
                   strokeWidth="4"
                   strokeLinecap="round"
                   fill="none"
                 />
                 <path
                   d="M40 20 Q250 8 460 20"
-                  stroke="#EAB308"
+                  stroke="#dc2626"
                   strokeWidth="2.5"
                   strokeLinecap="round"
                   fill="none"

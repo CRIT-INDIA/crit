@@ -1,7 +1,76 @@
+import { useEffect } from 'react';
 import Link from 'next/link';
 import { ArrowRight, CheckCircle } from 'lucide-react';
 
 const SAPHero = () => {
+  // Add smooth scroll behavior for anchor links
+  useEffect(() => {
+    const scrollToSection = (e) => {
+      // Only handle anchor links that start with '#'
+      if (e.target.tagName === 'A' && e.target.getAttribute('href')?.startsWith('#')) {
+        e.preventDefault();
+        const targetId = e.target.getAttribute('href');
+        const targetElement = document.querySelector(targetId);
+        
+        if (targetElement) {
+          // Calculate the header height (adjust selector if your header has a different class/ID)
+          const headerHeight = document.querySelector('header')?.offsetHeight || 80;
+          const elementPosition = targetElement.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - headerHeight - 20; // 20px extra spacing
+
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+
+          // Update URL without adding to history
+          if (history.pushState) {
+            history.pushState(null, null, targetId);
+          } else {
+            window.location.hash = targetId;
+          }
+        }
+      }
+    };
+
+    // Add event listener to all anchor links
+    const anchorLinks = document.querySelectorAll('a[href^="#"]');
+    anchorLinks.forEach(link => {
+      link.addEventListener('click', scrollToSection);
+    });
+
+    // Handle initial page load with hash
+    const handleInitialScroll = () => {
+      if (window.location.hash) {
+        const targetElement = document.querySelector(window.location.hash);
+        if (targetElement) {
+          const headerHeight = document.querySelector('header')?.offsetHeight || 80;
+          const elementPosition = targetElement.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - headerHeight - 20;
+          
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+        }
+      }
+    };
+
+    // Wait for the page to be fully loaded
+    if (document.readyState === 'complete') {
+      handleInitialScroll();
+    } else {
+      window.addEventListener('load', handleInitialScroll);
+    }
+
+    // Cleanup
+    return () => {
+      anchorLinks.forEach(link => {
+        link.removeEventListener('click', scrollToSection);
+      });
+      window.removeEventListener('load', handleInitialScroll);
+    };
+  }, []);
   const services = [
     { id: 1, name: 'SAP Implementation', icon: '🚀' },
     { id: 2, name: 'SAP Roll out', icon: '🔄' },
@@ -41,14 +110,16 @@ const SAPHero = () => {
             </div>
 
             {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Link 
-                href="/services" 
-                className="inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white px-8 py-4 rounded-lg font-semibold transition-all duration-200 shadow-lg shadow-red-600/25 hover:shadow-xl hover:shadow-red-600/30 transform hover:scale-105 hover:-translate-y-1"
-              >
-                Explore Our Services
-                <ArrowRight className="w-5 h-5" />
-              </Link>
+            <div className="flex flex-col sm:flex-row gap-4 ">
+            <Link 
+  href="#services"
+  scroll={false} // Prevent default scroll behavior
+  className="inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white px-8 py-4 rounded-lg font-semibold transition-all duration-200 shadow-lg shadow-red-600/25 hover:shadow-xl hover:shadow-red-600/30 transform hover:scale-105 hover:-translate-y-1"
+>
+  Explore Our Services
+  <ArrowRight className="w-5 h-5" />
+</Link>
+
               <Link 
                 href="/contact" 
                 className="inline-flex items-center justify-center gap-2 bg-gray-100 hover:bg-gray-200 text-gray-700 px-8 py-4 rounded-lg font-semibold transition-all duration-200 border border-gray-300 hover:border-red-400 shadow hover:shadow-md transform hover:scale-105"

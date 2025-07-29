@@ -127,37 +127,26 @@ function MetricsDesktopView() {
               </linearGradient>
             </defs>
             <path
-              d="M 0,120 Q 300,80 600,120 T 1200,120"
+              d="M 0,120 Q 300,80 600,120 T 1200,160"
               stroke="black"
               strokeWidth="3"
               fill="none"
-              className="animate-pulse"
+              classname="animate-pulse"
+              style={{animationDelay: '2s'}}
             />
             <path
-              d="M 0,240 Q 300,280 600,240 T 1200,240"
+              d="M 0,270 Q 300,280 600,240 T 1200,240"
               stroke="black"
               strokeWidth="3"
               fill='none'
-              className="animate-pulse"
-              style={{ animationDelay: '1s' }}
-            />
-            {/* Additional lines for 3rd and 4th cards */}
-            <path
-              d="M 0,360 Q 300,320 600,360 T 1200,360"
-              stroke="black"
-              strokeWidth="2"
-              fill="none"
-              className="animate-pulse"
-              style={{ animationDelay: '0.5s' }}
             />
             <path
-              d="M 0,480 Q 300,520 600,480 T 1200,480"
+              d="M 0,360 Q 300,320 600,360 T 1300,390"
               stroke="black"
-              strokeWidth="2"
+              strokeWidth="3"
               fill="none"
-              className="animate-pulse"
-              style={{ animationDelay: '1.5s' }}
             />
+            
           </svg>
         </div>
 
@@ -224,39 +213,6 @@ function MetricsDesktopView() {
           })}
         </div>
       </div>
-
-      
-      <style jsx>{`
-        @keyframes slideInLeft {
-          from {
-            opacity: 0;
-            transform: translateX(-100px);
-          }
-          to {
-            opacity: 1;
-            transform: translateX(0);
-          }
-        }
-        
-        @keyframes slideInRight {
-          from {
-            opacity: 0;
-            transform: translateX(100px);
-          }
-          to {
-            opacity: 1;
-            transform: translateX(0);
-          }
-        }
-        
-        .animate-slideInLeft {
-          animation: slideInLeft 0.8s ease-out;
-        }
-        
-        .animate-slideInRight {
-          animation: slideInRight 0.8s ease-out;
-        }
-      `}</style>
     </div>
   );
 }
