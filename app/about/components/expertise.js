@@ -62,8 +62,8 @@ export default function AiInsightsSection() {
               </CardHeader>
               <CardContent className="p-6 pt-0 text-gray-700 text-base">
                 <ul className="list-disc pl-5 space-y-2">
-                  <li><strong>Expert Thinking:</strong> Our team brings deep technical knowledge and innovative problem-solving to every project.</li>
-                  <li><strong>Unwavering Dedication:</strong> We are fully committed to delivering excellence, meeting client expectations with consistency.</li>
+                  <li><strong>Collaborative SAP Solutions:</strong> We work closely with you to understand your unique needs and deliver solutions that align with your business goals.</li>
+                  <li><strong>Dedicated to Your Success::</strong> We go the extra mile to ensure your satisfaction, providing timely support and proactive communication.</li>
                   <li><strong>Robust Skillset:</strong> With a strong foundation in technology and QA practices, we ensure reliable and scalable solutions.</li>
                 </ul>
               </CardContent>

@@ -104,15 +104,11 @@ const CardCarousel = ({
             <path d="M15 21 Q 120 15, 200 18" stroke="#dc2626" strokeWidth="2" strokeLinecap="round" fill="none"/>
           </svg>
         </h2>
-        <p className="mb-4 text-center inline-block text-lg text-gray-700 leading-relaxed max-w-3xl">
+        <p className="mb-2 text-center inline-block text-lg text-gray-700 leading-relaxed max-w-3xl">
           Providing SAP Solutions to Drive Innovation, Efficiency, and Growth Across a Wide Range of Sectors, Helping Businesses Optimize Operations and Achieve Their Strategic Goals.
         </p>
         <div className="relative mx-auto flex w-full flex-col rounded-[22px] border border-gray-200/30 bg-gradient-to-br from-white/80 to-gray-50/80 backdrop-blur-sm p-6 shadow-md md:items-start md:gap-10 md:rounded-[36px] md:p-8">
-          <div className="flex sm:ml-25 flex-col justify-center pb-4 pl-4 pt-6 md:items-center">
-            <div className="flex gap-3">
-              <div className="text-center"></div>
-            </div>
-          </div>
+         
 
           <div className="flex w-full items-center justify-center gap-4">
             <div className="w-full">

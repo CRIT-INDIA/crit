@@ -423,27 +423,27 @@ const DesignClassesSection = () => {
                   {/* Image container filling remaining space */}
                   {classItem.title === 'SAP S/4 HANA' ? (
                     <div className="w-full h-24 md:h-32 rounded-2xl mt-auto overflow-hidden bg-gray-200 flex items-center justify-center mt-2">
-                      <img src="https://res.cloudinary.com/dujw4np0d/image/upload/v1753339763/Project_74-21_vjuhcv_roxeg0.avif" alt="SAP S/4 HANA img" className="object-cover w-full h-full rounded-2xl" />
+                      <img src="https://res.cloudinary.com/duz9xipfm/image/upload/v1753859298/Project_69-08_qjqkub_1_ywnfmb.avif" alt="SAP S/4 HANA img" className="object-cover w-full h-full rounded-2xl" />
                     </div>
                   ) : classItem.title === 'SAP Success Factors' ? (
                     <div className="w-full h-20 md:h-27 rounded-2xl mt-auto overflow-hidden bg-gray-200 flex items-center justify-center mt-2">
-                      <img src="https://res.cloudinary.com/dujw4np0d/image/upload/v1753339763/Project_69-08_qjqkub_yw2eqt.avif" alt="SAP Success Factors img" className="object-contain w-full h-full rounded-2xl" />
+                      <img src="https://res.cloudinary.com/duz9xipfm/image/upload/v1753859452/Project_74-21_vjuhcv_1_jfw7d7.avif" alt="SAP Success Factors img" className="object-contain w-full h-full rounded-2xl" />
                     </div>
                   ) : classItem.title === 'SAP Ariba' ? (
                     <div className="w-full h-24 md:h-28 rounded-2xl mt-auto overflow-hidden bg-gray-200 flex items-center justify-center mt-2">
-                      <img src="https://res.cloudinary.com/dujw4np0d/image/upload/v1753339762/Project_70-07_gzkqsu_owvevh.avif" alt="SAP Analytics & Ariba img" className="object-cover w-full h-full rounded-2xl" />
+                      <img src="https://res.cloudinary.com/duz9xipfm/image/upload/v1753859453/Project_70-07_gzkqsu_1_gl8pwj.avif" alt="SAP Analytics & Ariba img" className="object-cover w-full h-full rounded-2xl" />
                     </div>
                   ) : classItem.title === 'SAP Concur' ? (
                     <div className="w-full h-24 md:h-32 rounded-2xl mt-auto overflow-hidden bg-gray-200 flex items-center justify-center mt-2">
-                      <img src="https://res.cloudinary.com/dujw4np0d/image/upload/v1753339762/Project_44-08_e3kgy4_oiktxn.avif" alt="SAP Concur img " className="object-cover w-full h-full rounded-2xl" />
+                      <img src="https://res.cloudinary.com/duz9xipfm/image/upload/v1753859563/Project_44-08_e3kgy4_1_akiyx7.avif" alt="SAP Concur img " className="object-cover w-full h-full rounded-2xl" />
                     </div>
                   ) : classItem.title === 'SAP BTP' ? (
                     <div className="w-full h-24 md:h-32 rounded-2xl mt-auto overflow-hidden bg-gray-200 flex items-center justify-center mt-2">
-                      <img src="https://res.cloudinary.com/dujw4np0d/image/upload/v1753339762/vecteezy_teamwork-or-team-building-office-business-meeting-vector_4154417_wmtzvy_vkkjsc.avif" alt="SAP BTP img" className="object-cover w-full h-full rounded-2xl" />
+                      <img src="https://res.cloudinary.com/duz9xipfm/image/upload/v1753859890/vecteezy_teamwork-or-team-building-office-business-meeting-vector_4154417_wmtzvy_1_xxqcfd.avif" alt="SAP BTP img" className="object-cover w-full h-full rounded-2xl" />
                     </div>
                   ) : classItem.title === 'SAP Fiori' ? (
                     <div className="w-full h-24 md:h-32 rounded-2xl mt-auto overflow-hidden bg-gray-200 flex items-center justify-center mt-2">
-                      <img src="https://res.cloudinary.com/dujw4np0d/image/upload/v1753339762/387_generated_eyibjv_hroypy.avif" alt="SAP Fiori" className="object-cover w-full h-full rounded-2xl" />
+                      <img src="https://res.cloudinary.com/duz9xipfm/image/upload/v1753859786/387_generated_eyibjv_1_ilzuep.avif" alt="SAP Fiori" className="object-cover w-full h-full rounded-2xl" />
                     </div>
                   ) : (
                     <div className="flex-grow w-full rounded-2xl mt-auto overflow-hidden bg-gray-200 flex items-center justify-center">

@@ -30,14 +30,26 @@ const FlipCard = ({ item, index }) => {
 
   return (
     <div 
-      className={`group h-48 sm:h-44 md:h-52 [perspective:1000px] touch-pan-y select-none ${isFlipped ? 'flipped' : ''}`}
+      className={`group h-48 sm:h-44 md:h-52 touch-pan-y select-none ${isFlipped ? 'flipped' : ''}`}
       onClick={handleCardTap}
       onTouchStart={(e) => e.currentTarget.classList.add('active-tap')}
       onTouchEnd={(e) => e.currentTarget.classList.remove('active-tap')}
+      style={{ perspective: '1000px' }}
     >
-      <div className={`relative h-full w-full transition-all duration-500 sm:duration-700 [transform-style:preserve-3d] ${isFlipped ? '[transform:rotateY(180deg)]' : ''} group-hover:[transform:rotateY(180deg)]`}>
+      <div 
+        className={`relative h-full w-full transition-all duration-500 sm:duration-700 transform-gpu`}
+        style={{
+          transformStyle: 'preserve-3d',
+          transform: isFlipped || (window.innerWidth >= 768) ? 
+            (isFlipped ? 'rotateY(180deg)' : '') : '',
+          backfaceVisibility: 'hidden'
+        }}
+      >
         {/* Front of card */}
-        <div className="absolute inset-0 h-full w-full [backface-visibility:hidden] rounded-2xl overflow-hidden">
+        <div 
+          className="absolute inset-0 h-full w-full rounded-2xl overflow-hidden"
+          style={{ backfaceVisibility: 'hidden' }}
+        >
           <div className="h-full bg-white/95 backdrop-blur-xl border border-gray-200 rounded-2xl p-4 sm:p-4 md:p-6 flex flex-col items-center justify-center space-y-2 sm:space-y-3 md:space-y-4 shadow-lg hover:shadow-2xl transition-all duration-300 relative">
             {/* Decorative gradient background */}
             <div className="absolute inset-0 bg-gradient-to-br from-red-50 via-transparent to-pink-50 opacity-50"></div>
@@ -62,11 +74,17 @@ const FlipCard = ({ item, index }) => {
         </div>
         
         {/* Back of card */}
-        <div className="absolute inset-0 h-full w-full [backface-visibility:hidden] [transform:rotateY(180deg)] rounded-2xl overflow-hidden">
+        <div 
+          className="absolute inset-0 h-full w-full rounded-2xl overflow-hidden"
+          style={{ 
+            backfaceVisibility: 'hidden',
+            transform: 'rotateY(180deg)'
+          }}
+        >
           <div className="h-full bg-red-500 rounded-2xl p-4 sm:p-4 md:p-6 flex flex-col items-center justify-center shadow-xl relative overflow-hidden">
             {/* Close button for mobile */}
             <button 
-              className="absolute top-2 right-2 sm:hidden text-white text-sm bg-black/20 rounded-full w-6 h-6 flex items-center justify-center"
+              className="absolute top-2 right-2 sm:hidden text-white text-sm bg-black/20 rounded-full w-6 h-6 flex items-center justify-center z-20"
               onClick={(e) => {
                 e.stopPropagation();
                 setIsFlipped(false);
@@ -96,35 +114,60 @@ const FlipCard = ({ item, index }) => {
         </div>
       </div>
       
-      {/* Mobile styles */}
+      {/* Enhanced styles for mobile compatibility */}
       <style jsx>{`
+        .perspective-1000 {
+          perspective: 1000px;
+          -webkit-perspective: 1000px;
+        }
+        
+        .transform-gpu {
+          transform-style: preserve-3d;
+          -webkit-transform-style: preserve-3d;
+          will-change: transform;
+        }
+        
         @media (max-width: 767px) {
           .group {
-            perspective: 1000px;
             -webkit-tap-highlight-color: transparent;
             -webkit-touch-callout: none;
+            touch-action: manipulation;
           }
-          .group .relative {
+          
+          .group .transform-gpu {
             transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            transform-style: preserve-3d;
-            -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
+            -webkit-transition: -webkit-transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
           }
-          .flipped .relative {
-            transform: rotateY(180deg);
+          
+          .flipped .transform-gpu {
+            transform: rotateY(180deg) !important;
+            -webkit-transform: rotateY(180deg) !important;
           }
+          
           .active-tap {
             transform: scale(0.98);
+            -webkit-transform: scale(0.98);
           }
-          .group:active {
-            transform: none;
+          
+          /* Ensure cards are visible on mobile */
+          .group > div {
+            opacity: 1 !important;
+            visibility: visible !important;
           }
+          
           /* Prevent text selection on tap */
           * {
             -webkit-user-select: none;
             -moz-user-select: none;
             -ms-user-select: none;
             user-select: none;
+          }
+        }
+        
+        @media (min-width: 768px) {
+          .group:hover .transform-gpu {
+            transform: rotateY(180deg);
+            -webkit-transform: rotateY(180deg);
           }
         }
       `}</style>
@@ -160,7 +203,7 @@ const Capabilities = () => {
       icon: <Shield />
     },
     {
-      title: " sales and distribution",
+      title: "Sales and Distribution",
       description: "Providing the agility to adapt to market changes and scale your sales and distribution channels for rapid growth.",
       icon: <Settings />
     },
@@ -184,9 +227,9 @@ const Capabilities = () => {
             <span className="text-black">Our </span>
             <span className="text-red-500">Capabilities</span>
             <svg className="mx-auto my-0" style={{marginTop: '4px'}} width="190" height="18" viewBox="0 0 180 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M10 18 Q 70 8, 170 14" stroke="#dc2626" strokeWidth="4" strokeLinecap="round" fill="none"/>
-            <path d="M25 21 Q 100 15, 160 18" stroke="#dc2626" strokeWidth="2" strokeLinecap="round" fill="none"/>
-          </svg>
+              <path d="M10 18 Q 70 8, 170 14" stroke="#dc2626" strokeWidth="4" strokeLinecap="round" fill="none"/>
+              <path d="M25 21 Q 100 15, 160 18" stroke="#dc2626" strokeWidth="2" strokeLinecap="round" fill="none"/>
+            </svg>
           </h1>
           <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
             Transforming Business Through Expert SAP Implementation and Digital Solutions

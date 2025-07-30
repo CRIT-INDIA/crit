@@ -188,7 +188,7 @@ const CustomerTestimonials = () => {
                 <span className="text-red-600"> Real Feedback</span>
               </h2>
               <p className="text-gray-600 text-lg leading-relaxed">
-              Our clients success speaks for itself. From enterprise-level implementations to strategic consulting projects, companies across industries have partnered with us to transform their SAP environments and drive measurable business results. 
+              We're proud to be recognized as a leading SAP provider. Our commitment to excellence has earned us numerous awards and accolades, and we're dedicated to delivering the same level of success to every client. 
               </p>
             </div>
             

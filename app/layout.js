@@ -1,3 +1,4 @@
+import { SpeedInsights } from "@vercel/speed-insights/next"
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/ui/Navbar";
@@ -30,6 +31,7 @@ export default function RootLayout({ children }) {
         <div className="relative">
           <Navbar />
         </div>
+        <SpeedInsights/>
         <div className="flex-1 flex flex-col max-w-[1800px] w-full mx-auto">
           {children}
         </div>

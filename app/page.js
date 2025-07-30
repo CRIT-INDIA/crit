@@ -4,7 +4,6 @@ import dynamic from 'next/dynamic';
 
 import { ThreeDMarquee } from "./components/ui/3d-marquee";
 import MovingClientsSection from "./components/ui/clients";
-import WhyChooseUs from "./components/ui/whychoose";
 
 
 function BasicExample() {
@@ -40,6 +39,9 @@ const CustomerTestimonials = dynamic(() => import('./components/ui/review'), {
   loading: () => <div className="h-[500px] w-full bg-gray-100 animate-pulse"></div> 
 });
 
+const WhyChooseUs = dynamic(() => import('./components/ui/whychoose'), { 
+  loading: () => <div className="h-[500px] w-full bg-gray-100 animate-pulse"></div> 
+});
 
 const ServicesGrid = dynamic(() => import('./components/ui/ServicesGrid'), { 
   loading: () => <div className="h-[500px] w-full bg-gray-100 animate-pulse"></div> 
@@ -92,10 +94,11 @@ export default function Home() {
         <MovingClientsSection />
       </div>
 
-      <div className="relative">
+        <Suspense fallback={<div className="h-[500px] w-full bg-gray-100 animate-pulse"></div>}>
+          <div className="relative">
             <WhyChooseUs />
           </div>
-       
+        </Suspense>
 
         <Suspense fallback={<div className="h-[500px] w-full bg-gray-100 animate-pulse"></div>}>
           <div className="relative">
