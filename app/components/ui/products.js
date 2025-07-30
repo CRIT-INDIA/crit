@@ -201,27 +201,27 @@ const DesignClassesSection = () => {
               {/* Large Image (fills card) */}
                 {classesData[currentCard].title === 'SAP S/4 HANA' ? (
                   <div className="w-full flex-1 rounded-2xl overflow-hidden bg-gray-200 flex items-center justify-center transition-all duration-300">
-                    <img src="https://res.cloudinary.com/dujw4np0d/image/upload/v1753339762/387_generated_eyibjv_hroypy.avif" alt="SAP S/4 HANA img" className="object-cover w-full h-full rounded-2xl transition-all duration-300" />
+                    <img src="https://res.cloudinary.com/duz9xipfm/image/upload/v1753859298/Project_69-08_qjqkub_1_ywnfmb.avif" alt="SAP S/4 HANA img" className="object-cover w-full h-full rounded-2xl transition-all duration-300" />
                   </div>
                 ) : classesData[currentCard].title === 'SAP Success Factors' ? (
                   <div className="w-full flex-1 rounded-2xl overflow-hidden bg-gray-200 flex items-center justify-center transition-all duration-300">
-                    <img src="https://res.cloudinary.com/dujw4np0d/image/upload/v1753339762/vecteezy_teamwork-or-team-building-office-business-meeting-vector_4154417_wmtzvy_vkkjsc.avif" alt="SAP Success Factors img" className="object-contain w-full h-full rounded-2xl transition-all duration-300" />
+                    <img src="https://res.cloudinary.com/duz9xipfm/image/upload/v1753859452/Project_74-21_vjuhcv_1_jfw7d7.avif" alt="SAP Success Factors img" className="object-contain w-full h-full rounded-2xl transition-all duration-300" />
                   </div>
                 ) : classesData[currentCard].title === 'SAP Ariba' ? (
                   <div className="w-full flex-1 rounded-2xl overflow-hidden bg-gray-200 flex items-center justify-center transition-all duration-300">
-                    <img src="https://res.cloudinary.com/dujw4np0d/image/upload/v1753339762/Project_70-07_gzkqsu_owvevh.avif" alt="SAP Ariba img" className="object-cover w-full h-full rounded-2xl transition-all duration-300" />
+                    <img src="https://res.cloudinary.com/duz9xipfm/image/upload/v1753859453/Project_70-07_gzkqsu_1_gl8pwj.avif" alt="SAP Ariba img" className="object-cover w-full h-full rounded-2xl transition-all duration-300" />
                   </div>
                 ) : classesData[currentCard].title === 'SAP Concur' ? (
                   <div className="w-full flex-1 rounded-2xl overflow-hidden bg-gray-200 flex items-center justify-center transition-all duration-300">
-                    <img src="https://res.cloudinary.com/dujw4np0d/image/upload/v1753339762/Project_44-08_e3kgy4_oiktxn.avif" alt="SAP Concur img" className="object-cover w-full h-full rounded-2xl transition-all duration-300" />
+                    <img src="https://res.cloudinary.com/duz9xipfm/image/upload/v1753859563/Project_44-08_e3kgy4_1_akiyx7.avif" alt="SAP Concur img" className="object-cover w-full h-full rounded-2xl transition-all duration-300" />
                   </div>
                 ) : classesData[currentCard].title === 'SAP BTP' ? (
                   <div className="w-full flex-1 rounded-2xl overflow-hidden bg-gray-200 flex items-center justify-center transition-all duration-300">
-                    <img src="https://res.cloudinary.com/dujw4np0d/image/upload/v1753339763/Project_69-08_qjqkub_yw2eqt.avif" alt="SAP BTP img" className="object-cover w-full h-full rounded-2xl transition-all duration-300" />
+                    <img src="https://res.cloudinary.com/duz9xipfm/image/upload/v1753859890/vecteezy_teamwork-or-team-building-office-business-meeting-vector_4154417_wmtzvy_1_xxqcfd.avif" alt="SAP BTP img" className="object-cover w-full h-full rounded-2xl transition-all duration-300" />
                   </div>
                 ) : classesData[currentCard].title === 'SAP Fiori' ? (
                   <div className="w-full flex-1 rounded-2xl overflow-hidden bg-gray-200 flex items-center justify-center transition-all duration-300">
-                    <img src="https://res.cloudinary.com/dujw4np0d/image/upload/v1753339763/Project_74-21_vjuhcv_roxeg0.avif" alt="SAP Fiori img" className="object-cover w-full h-full rounded-2xl transition-all duration-300" />
+                    <img src="https://res.cloudinary.com/duz9xipfm/image/upload/v1753859786/387_generated_eyibjv_1_ilzuep.avif" alt="SAP Fiori img" className="object-cover w-full h-full rounded-2xl transition-all duration-300" />
                   </div>
                 ) : null}
               </div>
@@ -384,7 +384,7 @@ const DesignClassesSection = () => {
           {/* Remove the small card/info row from here; start with heading */}
           <div className="text-center mb-4">
             <h2 className="text-2xl font-bold mb-2 text-black">Our products</h2>
-            <p className="text-gray-800 hidden md:block">Here is our types of design classes that will accompany you in learning graphic design</p>
+            <p className="text-gray-800 hidden md:block">Unlock the Power of SAP Solutions for a Smarter, More Efficient Business</p>
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-6 gap-2 md:gap-4 mb-4">

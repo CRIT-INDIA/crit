@@ -1,6 +1,12 @@
 'use client'; 
 import React, { useState, useEffect, useMemo } from 'react';
-import { ChevronDown, ChevronRight, CheckCircle, ArrowRight, Clock, Users, Shield, Zap, Database, Cloud, BarChart3, Settings } from 'lucide-react';
+import { 
+  ChevronDown, ChevronRight, CheckCircle, ArrowRight, Clock, Users, Shield, Zap, 
+  Database, Cloud, BarChart3, Settings, Cpu, Globe, Lock, TrendingUp, 
+  Layers, Smartphone, RefreshCw, Target, Workflow, Activity, Monitor,
+  Lightbulb, Rocket, Brain, Network, Server, Palette, Briefcase,
+  Building, FileText, Mail, Phone, Calendar, MapPin, Award, Star
+} from 'lucide-react';
 import Lottie from 'lottie-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -25,6 +31,101 @@ const formatServiceName = (name) => {
     .replace('Sap', 'SAP'); // Special case for SAP
 };
 
+// Global icon usage tracker to prevent duplicates
+let usedIcons = new Set();
+
+// Reset used icons for each page load
+const resetIconTracker = () => {
+  usedIcons.clear();
+};
+
+// Enhanced icon mapping function with duplicate prevention
+const getIconForFeature = (feature, index, availableIcons) => {
+  const iconMap = {
+    // Performance related
+    'performance': <Cpu className="w-8 h-8" />,
+    'memory': <Database className="w-8 h-8" />,
+    'speed': <Zap className="w-8 h-8" />,
+    'real-time': <Activity className="w-8 h-8" />,
+    'computing': <Brain className="w-8 h-8" />,
+    'fast': <Rocket className="w-8 h-8" />,
+    'lightning': <TrendingUp className="w-8 h-8" />,
+    
+    // Cloud & Infrastructure
+    'cloud': <Cloud className="w-8 h-8" />,
+    'architecture': <Layers className="w-8 h-8" />,
+    'deployment': <Settings className="w-8 h-8" />,
+    'infrastructure': <Network className="w-8 h-8" />,
+    'hybrid': <Globe className="w-8 h-8" />,
+    'server': <Server className="w-8 h-8" />,
+    
+    // Analytics & Reporting
+    'analytics': <BarChart3 className="w-8 h-8" />,
+    'reporting': <FileText className="w-8 h-8" />,
+    'insights': <Target className="w-8 h-8" />,
+    'data': <Monitor className="w-8 h-8" />,
+    'intelligence': <Lightbulb className="w-8 h-8" />,
+    
+    // User Experience
+    'user': <Users className="w-8 h-8" />,
+    'interface': <Smartphone className="w-8 h-8" />,
+    'mobile': <Phone className="w-8 h-8" />,
+    'fiori': <Palette className="w-8 h-8" />,
+    'experience': <Star className="w-8 h-8" />,
+    'modern': <Award className="w-8 h-8" />,
+    
+    // Security & Compliance
+    'security': <Shield className="w-8 h-8" />,
+    'compliance': <Lock className="w-8 h-8" />,
+    'protection': <Building className="w-8 h-8" />,
+    'enhanced': <CheckCircle className="w-8 h-8" />,
+    'access': <MapPin className="w-8 h-8" />,
+    
+    // Process & Workflow
+    'workflow': <Workflow className="w-8 h-8" />,
+    'automation': <RefreshCw className="w-8 h-8" />,
+    'process': <Briefcase className="w-8 h-8" />,
+    'simplified': <Settings className="w-8 h-8" />,
+    'streamlined': <Calendar className="w-8 h-8" />
+  };
+  
+  // Try to match feature title/description with keywords
+  const featureText = (feature.title + ' ' + feature.description).toLowerCase();
+  
+  // First, try to find a contextually relevant icon that hasn't been used
+  for (const [keyword, icon] of Object.entries(iconMap)) {
+    if (featureText.includes(keyword)) {
+      const iconKey = icon.type.displayName || icon.type.name || keyword;
+      if (!usedIcons.has(iconKey)) {
+        usedIcons.add(iconKey);
+        return icon;
+      }
+    }
+  }
+  
+  // If no contextual match or all contextual icons are used, use available icons
+  const availableIcon = availableIcons[index % availableIcons.length];
+  const iconKey = availableIcon.type.displayName || availableIcon.type.name || `fallback-${index}`;
+  usedIcons.add(iconKey);
+  return availableIcon;
+};
+
+// Category-based color function
+const getCategoryColor = (category) => {
+  const colorMap = {
+    'Performance': 'text-blue-600',
+    'Security': 'text-green-600', 
+    'Analytics': 'text-purple-600',
+    'User Experience': 'text-orange-600',
+    'Infrastructure': 'text-indigo-600',
+    'Automation': 'text-pink-600',
+    'Compliance': 'text-teal-600',
+    'Architecture': 'text-cyan-600'
+  };
+  
+  return colorMap[category] || 'text-red-600';
+};
+
 export default function SapS4HanaServicePage({ serviceName }) {
   const [activeAccordion, setActiveAccordion] = useState(null);
   const [activeStep, setActiveStep] = useState(0);
@@ -35,6 +136,11 @@ export default function SapS4HanaServicePage({ serviceName }) {
   const [servicesData, setServicesData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  // Reset icon tracker on component mount
+  useEffect(() => {
+    resetIconTracker();
+  }, []);
 
   useEffect(() => {
     // Load animations
@@ -78,39 +184,104 @@ export default function SapS4HanaServicePage({ serviceName }) {
       .finally(() => setLoading(false));
   }, []);
 
-  // Default key features in case services data is not loaded
-  const defaultKeyFeatures = [
-    {
-      icon: <Database className="w-8 h-8" />,
-      title: "In-Memory Computing",
-      description: "Lightning-fast data processing with real-time analytics and reporting capabilities"
-    },
-    {
-      icon: <Cloud className="w-8 h-8" />,
-      title: "Cloud-Ready Architecture",
-      description: "Flexible deployment options including on-premise, cloud, and hybrid models"
-    },
-    {
-      icon: <BarChart3 className="w-8 h-8" />,
-      title: "Real-Time Analytics",
-      description: "Embedded analytics with real-time insights for data-driven decision making"
-    },
-    {
-      icon: <Settings className="w-8 h-8" />,
-      title: "Simplified Architecture",
-      description: "Streamlined data model reducing complexity and improving system performance"
-    },
-    {
-      icon: <Users className="w-8 h-8" />,
-      title: "Modern User Experience",
-      description: "Intuitive SAP Fiori interface designed for enhanced user productivity"
-    },
-    {
-      icon: <Shield className="w-8 h-8" />,
-      title: "Enhanced Security",
-      description: "Advanced security features with role-based access and data protection"
-    }
-  ];
+  // Create a comprehensive list of unique icons for fallback
+  const allUniqueIcons = useMemo(() => [
+    <Zap className="w-8 h-8" />,
+    <Database className="w-8 h-8" />,
+    <Shield className="w-8 h-8" />,
+    <Users className="w-8 h-8" />,
+    <BarChart3 className="w-8 h-8" />,
+    <Settings className="w-8 h-8" />,
+    <Cloud className="w-8 h-8" />,
+    <TrendingUp className="w-8 h-8" />,
+    <Cpu className="w-8 h-8" />,
+    <Globe className="w-8 h-8" />,
+    <Lock className="w-8 h-8" />,
+    <Layers className="w-8 h-8" />,
+    <Smartphone className="w-8 h-8" />,
+    <RefreshCw className="w-8 h-8" />,
+    <Target className="w-8 h-8" />,
+    <Workflow className="w-8 h-8" />,
+    <Activity className="w-8 h-8" />,
+    <Monitor className="w-8 h-8" />,
+    <Lightbulb className="w-8 h-8" />,
+    <Rocket className="w-8 h-8" />,
+    <Settings className="w-8 h-8" />,
+    <Brain className="w-8 h-8" />,
+    <Network className="w-8 h-8" />,
+    <Server className="w-8 h-8" />,
+    <Palette className="w-8 h-8" />,
+    <Briefcase className="w-8 h-8" />,
+    <Building className="w-8 h-8" />,
+    <FileText className="w-8 h-8" />,
+    <Mail className="w-8 h-8" />,
+    <Phone className="w-8 h-8" />,
+    <Calendar className="w-8 h-8" />,
+    <MapPin className="w-8 h-8" />,
+    <Award className="w-8 h-8" />,
+    <Star className="w-8 h-8" />,
+    <CheckCircle className="w-8 h-8" />,
+    <ArrowRight className="w-8 h-8" />,
+    <Clock className="w-8 h-8" />
+  ], []);
+
+  // Enhanced default key features with guaranteed unique icons
+  const defaultKeyFeatures = useMemo(() => {
+    // Reset icon tracker for default features
+    const tempUsedIcons = new Set();
+    
+    const features = [
+      {
+        title: "In-Memory Computing",
+        description: "Lightning-fast data processing with real-time analytics and reporting capabilities",
+        category: "Performance"
+      },
+      {
+        title: "Cloud-Ready Architecture", 
+        description: "Flexible deployment options including on-premise, cloud, and hybrid models",
+        category: "Infrastructure"
+      },
+      {
+        title: "Real-Time Analytics",
+        description: "Embedded analytics with real-time insights for data-driven decision making",
+        category: "Analytics"
+      },
+      {
+        title: "Simplified Architecture",
+        description: "Streamlined data model reducing complexity and improving system performance",
+        category: "Architecture"
+      },
+      {
+        title: "Modern User Experience",
+        description: "Intuitive SAP Fiori interface designed for enhanced user productivity",
+        category: "User Experience"
+      },
+      {
+        title: "Enhanced Security",
+        description: "Advanced security features with role-based access and data protection",
+        category: "Security"
+      }
+    ];
+
+    return features.map((feature, index) => {
+      // Get unique icon for each feature
+      const availableIcons = allUniqueIcons.filter((icon, iconIndex) => {
+        const iconKey = icon.type.displayName || icon.type.name || `icon-${iconIndex}`;
+        return !tempUsedIcons.has(iconKey);
+      });
+      
+      const selectedIcon = availableIcons[index % availableIcons.length] || allUniqueIcons[index];
+      const iconKey = selectedIcon.type.displayName || selectedIcon.type.name || `default-${index}`;
+      tempUsedIcons.add(iconKey);
+      
+      return {
+        icon: selectedIcon,
+        title: feature.title,
+        description: feature.description,
+        category: feature.category
+      };
+    });
+  }, [allUniqueIcons]);
 
   // Find the service section that matches the current service name
   const serviceSection = (() => {
@@ -155,48 +326,41 @@ export default function SapS4HanaServicePage({ serviceName }) {
       return isMatch;
     });
   })();
-  
-  // Debug log to help identify matching issues
-  console.log('Service matching summary:', {
-    serviceName,
-    serviceNameType: typeof serviceName,
-    currentSlug: serviceName?.toLowerCase(),
-    availableServices: servicesData?.sections?.map(s => ({
-      title: s.title,
-      slug: createServiceSlug(s.title).toLowerCase(),
-      normalized: createServiceSlug(s.title).toLowerCase()
-        .replace(/\broll[\s-]?out\b/gi, 'rollout')
-        .replace(/\bimplement(?:ation)?\b/gi, '')
-        .replace(/--+/g, '-')
-        .replace(/^-+|-+$/g, '')
-    })),
-    matchedSection: serviceSection ? {
-      title: serviceSection.title,
-      hasOverview: !!serviceSection.overview,
-      overviewLength: serviceSection.overview?.length
-    } : 'No match found'
-  });
 
   const overviewText = serviceSection?.overview || 'Overview content not available.';
 
-  // Get key features from the matched service section or use defaults
-  const keyFeatures = serviceSection?.features?.map((feature, index) => {
-    // Use default icons in sequence, or fall back to CheckCircle
-    const defaultIcons = [
-      <Zap className="w-8 h-8 text-red-600" />,
-      <Database className="w-8 h-8 text-red-600" />,
-      <Shield className="w-8 h-8 text-red-600" />,
-      <Users className="w-8 h-8 text-red-600" />,
-      <BarChart3 className="w-8 h-8 text-red-600" />,
-      <Settings className="w-8 h-8 text-red-600" />
-    ];
+  // Get key features from the matched service section or use defaults with guaranteed unique icons
+  const keyFeatures = useMemo(() => {
+    if (serviceSection?.features) {
+      // Reset used icons for service features
+      usedIcons.clear();
+      
+      return serviceSection.features.map((feature, index) => {
+        // Get remaining available icons that haven't been used
+        const availableIcons = allUniqueIcons.filter((icon, iconIndex) => {
+          const iconKey = icon.type.displayName || icon.type.name || `icon-${iconIndex}`;
+          return !usedIcons.has(iconKey);
+        });
+        
+        const icon = getIconForFeature(feature, index, availableIcons.length > 0 ? availableIcons : [allUniqueIcons[index % allUniqueIcons.length]]);
+        const colorClass = getCategoryColor(feature.category || 'General');
+        
+        return {
+          icon: React.cloneElement(icon, { className: `w-8 h-8 ${colorClass}` }),
+          title: feature.title,
+          description: feature.description,
+          category: feature.category || 'General'
+        };
+      });
+    }
     
-    return {
-      icon: defaultIcons[index % defaultIcons.length] || <CheckCircle className="w-8 h-8 text-red-600" />,
-      title: feature.title,
-      description: feature.description
-    };
-  }) || defaultKeyFeatures;
+    return defaultKeyFeatures.map((feature, index) => ({
+      ...feature,
+      icon: React.cloneElement(feature.icon, { 
+        className: `w-8 h-8 ${getCategoryColor(feature.category)}` 
+      })
+    }));
+  }, [serviceSection, allUniqueIcons, defaultKeyFeatures]);
 
   // Format the service name for display
   const formattedServiceName = serviceName ? formatServiceName(serviceName) : '';
@@ -220,13 +384,13 @@ export default function SapS4HanaServicePage({ serviceName }) {
           <p className="text-lg md:text-xl mb-10 max-w-2xl mx-auto text-gray-500 font-light">
             {subheading}
           </p>
-            <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto px-4 sm:px-0">
-              <button className="w-full sm:w-auto px-6 py-4 sm:px-8 sm:py-4 font-bold rounded-full shadow-lg bg-red-600 text-white text-base sm:text-lg hover:bg-red-700 transition-all duration-300 active:scale-95">
-                Get Started Today
-              </button>
-              <button className="w-full sm:w-auto px-6 py-4 sm:px-8 sm:py-4 border-2 font-bold rounded-full text-base sm:text-lg border-gray-400 text-gray-500 bg-transparent hover:bg-white hover:text-black transition-all duration-300 active:scale-95">
-                Download Brochure
-              </button>
+          <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto px-4 sm:px-0">
+            <button className="w-full sm:w-auto px-6 py-4 sm:px-8 sm:py-4 font-bold rounded-full shadow-lg bg-red-600 text-white text-base sm:text-lg hover:bg-red-700 transition-all duration-300 active:scale-95">
+              Get Started Today
+            </button>
+            <button className="w-full sm:w-auto px-6 py-4 sm:px-8 sm:py-4 border-2 font-bold rounded-full text-base sm:text-lg border-gray-400 text-gray-500 bg-transparent hover:bg-white hover:text-black transition-all duration-300 active:scale-95">
+              Download Brochure
+            </button>
           </div>
         </div>
       </section>
@@ -240,24 +404,24 @@ export default function SapS4HanaServicePage({ serviceName }) {
           </div>
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-6">
-            <h3 className="text-2xl font-bold text-gray-700">{formattedServiceName || 'Overview'}</h3>
-            <p className="text-lg leading-relaxed text-gray-700 whitespace-pre-line">{overviewText}</p>
+              <h3 className="text-2xl font-bold text-gray-700">{formattedServiceName || 'Overview'}</h3>
+              <p className="text-lg leading-relaxed text-gray-700 whitespace-pre-line">{overviewText}</p>
             </div>
             <div className="relative mt-8 lg:mt-0">
               <div className="aspect-video rounded-2xl shadow-2xl overflow-hidden flex items-center justify-center bg-gray-100">
-                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 p-4 sm:p-8 w-full h-full">
-                    {[
-                      "https://res.cloudinary.com/dujw4np0d/image/upload/v1753165462/Project_70-02_uw5nzc.jpg",
-                      "https://res.cloudinary.com/dujw4np0d/image/upload/v1753166207/101_ZS0yMw_jp1azj.jpg",
-                      "https://res.cloudinary.com/dujw4np0d/image/upload/v1753166794/MyApril10_k7z7wb.jpg",
-                      "https://res.cloudinary.com/dujw4np0d/image/upload/v1753167637/vecteezy_office-worker-vector-illustration-holding-business-chart_8149367-1_bstjox.jpg",
-                      "https://res.cloudinary.com/dujw4np0d/image/upload/v1753167770/Man_and_woman_with_briefcase_shake_hand_generated_bv5jsf.jpg",
-                      "https://res.cloudinary.com/dujw4np0d/image/upload/v1753167937/vecteezy_business-teamwork-brainstorming-in-flat-style-isolated-on_36893510_mzafm8.jpg"
-                    ].map((src, i) => (
-                      <div key={i} className="rounded-lg flex items-center justify-center animate-pulse bg-red-100" style={{ animationDelay: `${i * 0.2}s` }}>
-                         <img src={src} alt={`Overview ${i+1}`} className="w-24 h-24 object-contain rounded" />
-                      </div>
-                    ))}
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 p-4 sm:p-8 w-full h-full">
+                  {[
+                    "https://res.cloudinary.com/dujw4np0d/image/upload/v1753165462/Project_70-02_uw5nzc.jpg",
+                    "https://res.cloudinary.com/dujw4np0d/image/upload/v1753166207/101_ZS0yMw_jp1azj.jpg",
+                    "https://res.cloudinary.com/dujw4np0d/image/upload/v1753166794/MyApril10_k7z7wb.jpg",
+                    "https://res.cloudinary.com/dujw4np0d/image/upload/v1753167637/vecteezy_office-worker-vector-illustration-holding-business-chart_8149367-1_bstjox.jpg",
+                    "https://res.cloudinary.com/dujw4np0d/image/upload/v1753167770/Man_and_woman_with_briefcase_shake_hand_generated_bv5jsf.jpg",
+                    "https://res.cloudinary.com/dujw4np0d/image/upload/v1753167937/vecteezy_business-teamwork-brainstorming-in-flat-style-isolated-on_36893510_mzafm8.jpg"
+                  ].map((src, i) => (
+                    <div key={i} className="rounded-lg flex items-center justify-center animate-pulse bg-red-100" style={{ animationDelay: `${i * 0.2}s` }}>
+                      <img src={src} alt={`Overview ${i+1}`} className="w-24 h-24 object-contain rounded" />
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
@@ -272,81 +436,81 @@ export default function SapS4HanaServicePage({ serviceName }) {
             <h2 className="text-3xl sm:text-4xl font-extrabold mb-4 text-black">Our Implementation Process</h2>
           </div>
           <div className="flex flex-col md:flex-row items-center justify-center md:items-start md:justify-between gap-8 md:gap-0">
-              {/* Step 1 */}
-              <div className="flex-1 flex flex-col items-center text-center">
-                {assessmentAnimation ? (
-                  <Lottie 
-                    animationData={assessmentAnimation} 
-                    loop={true} 
-                    className="w-40 h-40 md:w-56 md:h-56 mb-1"
-                  />
-                ) : (
-                  <div className="w-40 h-40 md:w-56 md:h-56 mb-1 bg-gray-200 rounded-lg flex items-center justify-center">
-                    <div className="text-gray-500">Loading...</div>
+            {/* Step 1 */}
+            <div className="flex-1 flex flex-col items-center text-center">
+              {assessmentAnimation ? (
+                <Lottie 
+                  animationData={assessmentAnimation} 
+                  loop={true} 
+                  className="w-40 h-40 md:w-56 md:h-56 mb-1"
+                />
+              ) : (
+                <div className="w-40 h-40 md:w-56 md:h-56 mb-1 bg-gray-200 rounded-lg flex items-center justify-center">
+                  <div className="text-gray-500">Loading...</div>
+                </div>
+              )}
+              <div className="font-bold text-lg text-black mb-1">Assessment</div>
+              <div className="text-gray-600 text-base">Current state analysis</div>
             </div>
-                )}
-                <div className="font-bold text-lg text-black mb-1">Assessment</div>
-                <div className="text-gray-600 text-base">Current state analysis</div>
+            <div className="w-16 h-1 bg-red-600 rounded md:hidden"></div>
+            <div className="h-32 hidden md:flex items-center"><div className="w-16 h-1 bg-red-600 mx-2 rounded"></div></div>
+            {/* Step 2 */}
+            <div className="flex-1 flex flex-col items-center text-center">
+              {planningAnimation ? (
+                <Lottie 
+                  animationData={planningAnimation} 
+                  loop={true} 
+                  className="w-40 h-40 md:w-56 md:h-56 mb-1"
+                />
+              ) : (
+                <div className="w-40 h-40 md:w-56 md:h-56 mb-1 bg-gray-200 rounded-lg flex items-center justify-center">
+                  <div className="text-gray-500">Loading...</div>
                 </div>
-              <div className="w-16 h-1 bg-red-600 rounded md:hidden"></div>
-              <div className="h-32 hidden md:flex items-center"><div className="w-16 h-1 bg-red-600 mx-2 rounded"></div></div>
-              {/* Step 2 */}
-              <div className="flex-1 flex flex-col items-center text-center">
-                {planningAnimation ? (
-                  <Lottie 
-                    animationData={planningAnimation} 
-                    loop={true} 
-                    className="w-40 h-40 md:w-56 md:h-56 mb-1"
-                  />
-                ) : (
-                  <div className="w-40 h-40 md:w-56 md:h-56 mb-1 bg-gray-200 rounded-lg flex items-center justify-center">
-                    <div className="text-gray-500">Loading...</div>
-                  </div>
-                )}
-                <div className="font-bold text-lg text-black mb-1">Planning</div>
-                <div className="text-gray-600 text-base">Strategy & roadmap</div>
-              </div>
-              <div className="w-16 h-1 bg-red-600 rounded md:hidden"></div>
-              <div className="h-32 hidden md:flex items-center"><div className="w-16 h-1 bg-red-600 mx-2 rounded"></div></div>
-              {/* Step 3 */}
-              <div className="flex-1 flex flex-col items-center text-center">
-                {implementationAnimation ? (
-                  <Lottie 
-                    animationData={implementationAnimation} 
-                    loop={true} 
-                    className="w-40 h-40 md:w-56 md:h-56 mb-1"
-                  />
-                ) : (
-                  <div className="w-40 h-40 md:w-56 md:h-56 mb-1 bg-gray-200 rounded-lg flex items-center justify-center">
-                    <div className="text-gray-500">Loading...</div>
+              )}
+              <div className="font-bold text-lg text-black mb-1">Planning</div>
+              <div className="text-gray-600 text-base">Strategy & roadmap</div>
+            </div>
+            <div className="w-16 h-1 bg-red-600 rounded md:hidden"></div>
+            <div className="h-32 hidden md:flex items-center"><div className="w-16 h-1 bg-red-600 mx-2 rounded"></div></div>
+            {/* Step 3 */}
+            <div className="flex-1 flex flex-col items-center text-center">
+              {implementationAnimation ? (
+                <Lottie 
+                  animationData={implementationAnimation} 
+                  loop={true} 
+                  className="w-40 h-40 md:w-56 md:h-56 mb-1"
+                />
+              ) : (
+                <div className="w-40 h-40 md:w-56 md:h-56 mb-1 bg-gray-200 rounded-lg flex items-center justify-center">
+                  <div className="text-gray-500">Loading...</div>
                 </div>
-                )}
-                <div className="font-bold text-lg text-black mb-1">Implementation</div>
-                <div className="text-gray-600 text-base">Deployment & testing</div>
-              </div>
-              <div className="w-16 h-1 bg-red-600 rounded md:hidden"></div>
-              <div className="h-32 hidden md:flex items-center"><div className="w-16 h-1 bg-red-600 mx-2 rounded"></div></div>
-              {/* Step 4 */}
-              <div className="flex-1 flex flex-col items-center text-center">
-                {supportAnimation ? (
-                  <Lottie 
-                    animationData={supportAnimation} 
-                    loop={true} 
-                    className="w-40 h-40 md:w-56 md:h-56 mb-1"
-                  />
-                ) : (
-                  <div className="w-40 h-40 md:w-56 md:h-56 mb-1 bg-gray-200 rounded-lg flex items-center justify-center">
-                    <div className="text-gray-500">Loading...</div>
-                    </div>
-                )}
-                <div className="font-bold text-lg text-black mb-1">Support</div>
-                <div className="text-gray-600 text-base">Ongoing optimization</div>
-              </div>
+              )}
+              <div className="font-bold text-lg text-black mb-1">Implementation</div>
+              <div className="text-gray-600 text-base">Deployment & testing</div>
+            </div>
+            <div className="w-16 h-1 bg-red-600 rounded md:hidden"></div>
+            <div className="h-32 hidden md:flex items-center"><div className="w-16 h-1 bg-red-600 mx-2 rounded"></div></div>
+            {/* Step 4 */}
+            <div className="flex-1 flex flex-col items-center text-center">
+              {supportAnimation ? (
+                <Lottie 
+                  animationData={supportAnimation} 
+                  loop={true} 
+                  className="w-40 h-40 md:w-56 md:h-56 mb-1"
+                />
+              ) : (
+                <div className="w-40 h-40 md:w-56 md:h-56 mb-1 bg-gray-200 rounded-lg flex items-center justify-center">
+                  <div className="text-gray-500">Loading...</div>
+                </div>
+              )}
+              <div className="font-bold text-lg text-black mb-1">Support</div>
+              <div className="text-gray-600 text-base">Ongoing optimization</div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Key Features Section */}
+      {/* Enhanced Key Features Section with Unique Icons */}
       <section className="py-16 md:py-20 bg-white">
         <div className="max-w-6xl mx-auto px-4">
           <div className="text-center mb-12 md:mb-16">
@@ -386,94 +550,49 @@ export default function SapS4HanaServicePage({ serviceName }) {
                 style={{ transformStyle: 'preserve-3d' }}
               >
                 <motion.div 
-                  className="relative flex flex-col h-full rounded-2xl p-8 bg-white min-h-[320px] overflow-hidden shadow-lg border-2 border-transparent"
+                  className="relative flex flex-col h-full rounded-2xl p-8 bg-white min-h-[350px] overflow-hidden shadow-lg border-2 border-transparent"
                   whileHover={{
                     borderColor: "#ef4444",
                     boxShadow: "0 25px 50px rgba(239, 68, 68, 0.15)"
                   }}
                   transition={{ duration: 0.3 }}
                 >
-                  {/* Morphing Background Blobs */}
-                  <motion.div
-                    className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-red-200 to-pink-200 rounded-full opacity-20 blur-xl"
-                    animate={{
-                      scale: [1, 1.3, 1],
-                      x: [0, 20, 0],
-                      y: [0, -10, 0]
-                    }}
-                    transition={{
-                      duration: 6,
-                      repeat: Infinity,
-                      delay: index * 0.8,
-                      type: "tween"
-                    }}
-                  />
-                  <motion.div
-                    className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-orange-200 to-red-200 rounded-full opacity-15 blur-lg"
-                    animate={{
-                      scale: [1.2, 1, 1.2],
-                      x: [0, -15, 0],
-                      y: [0, 15, 0]
-                    }}
-                    transition={{
-                      duration: 5,
-                      repeat: Infinity,
-                      delay: index * 0.6,
-                      type: "tween"
-                    }}
-                  />
+                
 
-                  {/* Pulsing Border Effect */}
+                  {/* Enhanced Icon with Animation - Guaranteed Unique */}
                   <motion.div
-                    className="absolute inset-0 rounded-2xl border-2 border-red-400 opacity-0"
-                    animate={{
-                      opacity: [0, 0.6, 0],
-                      scale: [1, 1.02, 1]
+                    className="relative mb-6"
+                    whileHover={{ 
+                      scale: 1.15,
+                      rotate: [0, -5, 5, 0],
+                      transition: { duration: 0.5 }
                     }}
-                    transition={{
-                      duration: 3,
-                      repeat: Infinity,
-                      delay: index * 1.2,
-                      type: "tween"
+                    initial={{ scale: 0, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    transition={{ 
+                      duration: 0.6, 
+                      delay: index * 0.1 + 0.3,
+                      type: "spring",
+                      stiffness: 100
                     }}
-                  />
-
-                  {/* 3D Rotating Icon Container */}
-                  <motion.div
-                    className="relative inline-flex items-center justify-center w-20 h-20 rounded-2xl mb-6 bg-gradient-to-br from-red-500 via-red-600 to-red-700 text-white shadow-xl"
-                    whileHover={{
-                      rotateY: 180,
-                      scale: 1.1,
-                      boxShadow: "0 30px 60px rgba(239, 68, 68, 0.4)"
-                    }}
-                    transition={{ duration: 0.6, type: "spring" }}
-                    style={{ transformStyle: 'preserve-3d' }}
                   >
-                    {/* Front Face */}
-                    <motion.div
-                      className="absolute inset-0 flex items-center justify-center rounded-2xl bg-gradient-to-br from-red-500 to-red-600"
-                      style={{ backfaceVisibility: 'hidden' }}
-                    >
-                      {feature.icon}
-                    </motion.div>
-                    
-                    {/* Back Face */}
-                    <motion.div
-                      className="absolute inset-0 flex items-center justify-center rounded-2xl bg-gradient-to-br from-pink-500 to-red-500"
-                      style={{ 
-                        backfaceVisibility: 'hidden',
-                        transform: 'rotateY(180deg)'
-                      }}
-                    >
+                    <div className="relative inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-gray-50 to-gray-100 group-hover:from-red-50 group-hover:to-pink-50 transition-all duration-300 shadow-lg">
                       <motion.div
-                        animate={{ rotate: 360 }}
-                        transition={{ duration: 2, repeat: Infinity, type: "tween" }}
+                        className="relative z-10"
+                        whileHover={{
+                          scale: 1.1,
+                          filter: "drop-shadow(0 0 8px rgba(239, 68, 68, 0.5))"
+                        }}
                       >
                         {feature.icon}
                       </motion.div>
-                    </motion.div>
-                  </motion.div>
+                      
+                      
+                    </div>
 
+                    
+                  </motion.div>
+                    
                   {/* Typewriter Effect Title */}
                   <motion.h3
                     className="relative text-xl font-bold mb-4 text-gray-800 z-10 overflow-hidden"
@@ -556,7 +675,7 @@ export default function SapS4HanaServicePage({ serviceName }) {
                     transition={{ duration: 0.4 }}
                   />
                 </motion.div>
-                </motion.div>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -564,8 +683,6 @@ export default function SapS4HanaServicePage({ serviceName }) {
 
       {/* FAQ Section */}
       <FaqSection1 />
-
-      
     </div>
   );
 }
@@ -649,7 +766,7 @@ function FaqSection1() {
       const timeout = setTimeout(() => {
         setUserInteracted(false);
         setIsAutoCycling(true);
-      }, 4000); // Resume auto-cycling after 10 seconds of no interaction
+      }, 4000); // Resume auto-cycling after 4 seconds of no interaction
 
       return () => clearTimeout(timeout);
     }
@@ -665,19 +782,14 @@ function FaqSection1() {
   // Handle hover events
   const handleMouseEnter = (faqId) => {
     setHoveredId(faqId);
-    // Removed auto-cycling pause on hover
   };
 
   const handleMouseLeave = () => {
     setHoveredId(null);
-    // Removed auto-cycling resume logic
   };
 
   return (
     <section className="relative min-h-[80vh] bg-white py-16 md:py-20 overflow-hidden pb-20">
-      {/* Animated Background Pattern */}
-      
-
       <div className="relative mx-auto max-w-6xl px-4 sm:px-5 lg:px-7">
         {/* Header */}
         <div className="mb-12 md:mb-16">
@@ -737,7 +849,6 @@ function FaqSection1() {
                       : 'bg-white border-gray-200'
                   }`}
                 >
-
                   <div className="relative flex items-start gap-3">
                     {/* Number */}
                     <div

@@ -111,7 +111,7 @@ const Journey = () => {
             <div className="text-center mb-16">
               <h2 className="text-5xl font-bold text-gray-900 mb-4">Our Journey</h2>
               <p className="text-xl text-gray-700 max-w-3xl mx-auto">
-                From a bold vision to industry leadership - discover the milestones that shaped our success
+                A Legacy of Innovation, Celebrating the Milestones That Have Transformed Our Industry
               </p>
             </div>
             

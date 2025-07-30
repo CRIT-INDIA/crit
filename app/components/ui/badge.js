@@ -105,7 +105,7 @@ const CardCarousel = ({
           </svg>
         </h2>
         <p className="mb-4 text-center inline-block text-lg text-gray-700 leading-relaxed max-w-3xl">
-          Delivering tailored technology and consulting solutions across diverse sectors to drive innovation, efficiency, and growth.
+          Providing SAP Solutions to Drive Innovation, Efficiency, and Growth Across a Wide Range of Sectors, Helping Businesses Optimize Operations and Achieve Their Strategic Goals.
         </p>
         <div className="relative mx-auto flex w-full flex-col rounded-[22px] border border-gray-200/30 bg-gradient-to-br from-white/80 to-gray-50/80 backdrop-blur-sm p-6 shadow-md md:items-start md:gap-10 md:rounded-[36px] md:p-8">
           <div className="flex sm:ml-25 flex-col justify-center pb-4 pl-4 pt-6 md:items-center">

@@ -16,17 +16,24 @@ import {
 const FlipCard = ({ item, index }) => {
   const [isFlipped, setIsFlipped] = React.useState(false);
   
-  // Toggle flip state on mobile tap
-  const handleCardTap = () => {
-    if (window.innerWidth < 768) { // Only on mobile
-      setIsFlipped(!isFlipped);
-    }
+  // Toggle flip state on mobile tap with better touch handling
+  const handleCardTap = (e) => {
+    // Only handle touch events on mobile
+    if (window.innerWidth >= 768) return;
+    
+    // Prevent double-tap zoom
+    e.preventDefault();
+    
+    // Toggle flip state
+    setIsFlipped(!isFlipped);
   };
 
   return (
     <div 
-      className={`group h-48 sm:h-44 md:h-52 [perspective:1000px] touch-pan-y ${isFlipped ? 'flipped' : ''}`}
+      className={`group h-48 sm:h-44 md:h-52 [perspective:1000px] touch-pan-y select-none ${isFlipped ? 'flipped' : ''}`}
       onClick={handleCardTap}
+      onTouchStart={(e) => e.currentTarget.classList.add('active-tap')}
+      onTouchEnd={(e) => e.currentTarget.classList.remove('active-tap')}
     >
       <div className={`relative h-full w-full transition-all duration-500 sm:duration-700 [transform-style:preserve-3d] ${isFlipped ? '[transform:rotateY(180deg)]' : ''} group-hover:[transform:rotateY(180deg)]`}>
         {/* Front of card */}
@@ -94,13 +101,30 @@ const FlipCard = ({ item, index }) => {
         @media (max-width: 767px) {
           .group {
             perspective: 1000px;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-touch-callout: none;
           }
           .group .relative {
-            transition: transform 0.6s;
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             transform-style: preserve-3d;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
           }
           .flipped .relative {
             transform: rotateY(180deg);
+          }
+          .active-tap {
+            transform: scale(0.98);
+          }
+          .group:active {
+            transform: none;
+          }
+          /* Prevent text selection on tap */
+          * {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
           }
         }
       `}</style>

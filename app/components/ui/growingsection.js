@@ -300,8 +300,8 @@ const GrowingSectionMobile = () => {
           <div className="relative inline-block">
             <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full flex items-center justify-center mb-6 relative bg-gradient-to-br from-red-600 to-red-800">
               <TrendingUp className="w-8 h-8 sm:w-10 sm:h-10 text-white" />
-              <div className="absolute inset-0 rounded-full animate-ping border-2 bg-gradient-to-r from-red-500 to-red-700" style={{ WebkitMaskImage: 'radial-gradient(white, black)', borderColor: 'transparent', boxShadow: '0 0 0 4px rgba(220, 38, 38, 0.1)', animationDuration: '2.5s' }}></div>
-              <div className="absolute inset-0 rounded-full animate-ping bg-gradient-to-r from-red-500 to-red-700" style={{ animationDelay: '2s', WebkitMaskImage: 'radial-gradient(white, black)', borderColor: 'transparent', boxShadow: '0 0 0 4px rgba(220, 38, 38, 0.1)', animationDuration: '2.5s' }}></div>
+              <div className="absolute inset-0 rounded-full animate-ping border-2 bg-gradient-to-r from-red-400 to-red-600" style={{ WebkitMaskImage: 'radial-gradient(white, black)', borderColor: 'transparent', boxShadow: '0 0 0 4px rgba(220, 38, 38, 0.1)', animationDuration: '2.5s' }}></div>
+              <div className="absolute inset-0 rounded-full animate-ping bg-gradient-to-r from-red-400 to-red-600" style={{ animationDelay: '2s', WebkitMaskImage: 'radial-gradient(white, black)', borderColor: 'transparent', boxShadow: '0 0 0 4px rgba(220, 38, 38, 0.1)', animationDuration: '2.5s' }}></div>
             </div>
           </div>
           <h1 className="text-3xl sm:text-4xl font-black text-gray-900 leading-tight">WE ARE</h1>

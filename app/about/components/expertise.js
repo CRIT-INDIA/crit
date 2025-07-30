@@ -21,9 +21,9 @@ export default function AiInsightsSection() {
               </CardHeader>
               <CardContent className="p-6 pt-0 text-gray-700 text-base">
                 <ul className="list-disc pl-5 space-y-2">
-                  <li><strong>Expertise That Delivers:</strong> Our skilled QA team combines technical excellence with industry-specific knowledge to drive quality and efficiency.</li>
-                  <li><strong>Domain-Focused Approach:</strong> We understand your business and customize our testing strategies accordingly.</li>
-                  <li><strong>Comprehensive QA Solutions:</strong> From functional and performance testing to mobile and security testing, we cover the full QA lifecycle.</li>
+                  <li><strong>Expertise That Delivers:</strong> Our team's in-depth knowledge of SAP enables us to provide insightful guidance and effective solutions for your business.</li>
+                  <li><strong>Domain-Focused Approach:</strong>  We apply our extensive SAP knowledge to optimize your business processes and drive tangible results.</li>
+                  <li><strong>Comprehensive QA Solutions:</strong> Our domain knowledge equips us to tackle your most intricate SAP issues with confidence and precision.</li>
                 </ul>
               </CardContent>
             </Card>
@@ -80,8 +80,8 @@ export default function AiInsightsSection() {
               </CardHeader>
               <CardContent className="p-6 pt-0 text-gray-700 text-base">
                 <ul className="list-disc pl-5 space-y-2">
-                  <li><strong>Test Automation:</strong> Streamline testing processes and improve coverage with robust automation frameworks.</li>
-                  <li><strong>Cloud Migration Testing:</strong> Ensure seamless transitions to the cloud with comprehensive validation and compatibility checks.</li>
+                  <li><strong>Error-Free SAP Deployments:</strong> Reduce errors and improve user satisfaction with our rigorous testing, validation, and quality assurance processes.</li>
+                  <li><strong>Optimized SAP Performance:</strong> Achieve peak performance and efficiency with our expert tuning, monitoring, and optimization services.</li>
                   <li><strong>Performance Engineering:</strong> Optimize application speed, scalability, and reliability through proactive performance testing.</li>
                 </ul>
               </CardContent>

@@ -141,11 +141,11 @@ const AboutUsHero = () => {
                 </div>
                 
                 <p className="text-base sm:text-lg md:text-xl text-white leading-relaxed">
-                &quot;We{' '}
+                &quot;We're not just {' '}
                   <span className="italic text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-700 font-bold">
-                    Challenge 
+                    Implementing SAP 
                   </span>{' '}
-                  the notion that enterprise software has to be boring, overly complex, or frustrating. We believe every SAP system should be efficient, user-friendly, and a true asset to your business.
+                  , we're creating business value. We believe that your SAP system should be a strategic asset that drives efficiency, innovation, and growth.
                   &quot;
                 </p>
               </div>

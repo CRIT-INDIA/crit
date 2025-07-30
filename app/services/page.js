@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect } from "react";
 import SapHero from "./components/service_hero";
-import ServicesGrid from "../components/ui/ServicesGrid";
+import ServicesGrid1 from "./components/s_cards";
 
 export default function Services() {
   useEffect(() => {
@@ -20,7 +20,7 @@ export default function Services() {
       <div className="relative flex-1 w-full text-white pt-15 pb-10 sm:pb-18 sm:pb-22 md:pb-26">
         <div className="max-w-[90rem] mx-auto">
           <SapHero />
-          <ServicesGrid showAll={true} />
+          <ServicesGrid1/>
         </div>
       </div>
     </div>

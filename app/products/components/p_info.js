@@ -132,7 +132,7 @@ const SAPProductsInfo = () => {
       subtitle: 'Global Procurement and Supply Chain Network',
       category: 'Procurement Excellence',
       icon: <Handshake className="w-8 h-8 text-white" />,
-      executiveSummary: 'SAP Ariba connects your organization to the world\'s largest business network, enabling strategic procurement, supplier collaboration, and supply chain optimization. With over 4 million companies in the network, it provides unparalleled visibility and control over your procurement processes.',
+      executiveSummary: 'SAP Ariba connects your organization to the world\'s largest business network, enabling strategic procurement, supplier collaboration, and supply chain optimization. Built on a secure and collaborative platform, Ariba helps you negotiate better deals, reduce risk, and build stronger relationships with your trading partners.',
       keyCapabilities: [
         'Strategic sourcing with AI-powered supplier recommendations',
         'Contract lifecycle management with automated compliance monitoring',
@@ -170,7 +170,7 @@ const SAPProductsInfo = () => {
       subtitle: 'Comprehensive Human Capital Management Suite',
       category: 'Human Resources Technology',
       icon: <Users className="w-8 h-8 text-blue-600" />,
-      executiveSummary: 'SAP SuccessFactors transforms human resources into a strategic business function through intelligent talent management, workforce analytics, and employee engagement solutions. Used by over 7,000 organizations globally, it manages the complete employee lifecycle from recruitment to retirement.',
+      executiveSummary: 'SAP SuccessFactors transforms human resources into a strategic business function through intelligent talent management, workforce analytics, and employee engagement solutions. By aligning your people strategy with your business goals, SuccessFactors helps you attract, retain, and develop top talent in today\'s competitive market.',
       keyCapabilities: [
         'AI-powered talent acquisition and candidate matching',
         'Continuous performance management with goal alignment',

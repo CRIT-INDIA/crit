@@ -2,11 +2,12 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { ChevronLeft, ChevronRight, Users, Clock, Award, BookOpen, Target, Briefcase, ArrowUpRight, ArrowRight, Link2 } from 'lucide-react';
 
-const ServicesGrid = () => {
+const ServicesGrid1 = () => {
   const [activeCategory, setActiveCategory] = useState('all');
   const [hoveredCard, setHoveredCard] = useState(null);
   const [filterPosition, setFilterPosition] = useState({ left: 0, width: 0 });
   const [isFilterVisible, setIsFilterVisible] = useState(false);
+  const [showAllServices, setShowAllServices] = useState(false);
 
   const categories = [
     { 
@@ -66,7 +67,7 @@ const ServicesGrid = () => {
         id: 1,
         icon: { type: 'img', url: 'https://res.cloudinary.com/duz9xipfm/image/upload/v1751005882/icons8-rocket-64_u9psqx.png' },
         name: "SAP Implementation Services",
-        description: "End-to-end SAP implementation solutions that align with your business goals and drive long-term value.",
+        description: "End-to-end SAP implementation solutions that expertly align with your business goals and drive long-term value.",
         link: "/sap-implementation-services",
         category: "implementation",
         color: "#dc2626",
@@ -76,7 +77,7 @@ const ServicesGrid = () => {
         id: 2,
         icon: { type: 'img', url: 'https://res.cloudinary.com/duz9xipfm/image/upload/v1751005441/icons8-globe-100_v27ffj.png' },
         name: "SAP Roll Out Services",
-        description: "End-to-end SAP implementation solutions that align with your business goals and drive long-term value.",
+        description: "Accelerate business expansion with structured SAP rollout services that deliver speed, accuracy, and continuity.",
         link: "/sap-rollout-services",
         category: "implementation",
         color: "#dc2626",
@@ -86,7 +87,7 @@ const ServicesGrid = () => {
         id: 3,
         icon: { type: 'img', url: 'https://res.cloudinary.com/duz9xipfm/image/upload/v1751005368/icons8-support-100_mi1gat.png' },
         name: "SAP Support Services",
-        description: "Expert-led SAP support to minimize downtime, optimize performance, & continuous improvement.",
+        description: "Expert-led SAP support to minimize downtime, optimize performance, and drive continuous improvement.",
         link: "/sap-support-services",
         category: "support",
         color: "#dc2626",
@@ -145,10 +146,9 @@ const ServicesGrid = () => {
 ];
 
   // Get filtered extensions based on active category
-  const filteredExtensions = (activeCategory === 'all' 
+  const filteredExtensions = activeCategory === 'all' 
     ? extensions 
-    : extensions.filter(ext => ext.category === activeCategory)
-  ).slice(0, typeof window !== 'undefined' && window.innerWidth < 768 ? 2 : undefined);
+    : extensions.filter(ext => ext.category === activeCategory);
 
   const activeCount = categories.find(cat => cat.id === activeCategory)?.count || 0;
   const activeColor = categories.find(cat => cat.id === activeCategory)?.color || '#dc2626';
@@ -764,18 +764,10 @@ const ServicesGrid = () => {
           </div>
         </div>
         
-        <div className="flex justify-center mt-5 md:mt-15">
-          <Link 
-            href="/services" 
-            className="flex items-center justify-center px-4 py-3 bg-black text-white rounded-full text-md font-medium hover:scale-105 transition-all duration-300 group"
-          >
-            View All Services
-            <ArrowRight className="ml-1 h-5 w-5 group-hover:translate-x-2 transition-transform duration-300" />
-          </Link>
-        </div>
+        
       </section>
     </>
   );
 };
 
-export default ServicesGrid;
+export default ServicesGrid1;

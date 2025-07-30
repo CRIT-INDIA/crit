@@ -341,15 +341,9 @@ const Navbar = () => {
           </div>
 
           {/* Menu Items */}
-          <nav className="flex-1 min-h-0 overflow-y-auto px-4 py-6 flex flex-col gap-2">
+          <nav className="flex-1 min-h-0 overflow-y-auto px-4 py-4 flex flex-col gap-2">
             <a href="/" className="block text-white text-base sm:text-lg md:text-xl font-semibold rounded px-4 py-3 hover:bg-white/10 transition" onClick={() => setIsMobileMenuOpen(false)}>Home</a>
-            <a 
-              href="#services-section" 
-              onClick={scrollToServices}
-              className="block text-white text-base sm:text-lg md:text-xl font-semibold rounded px-4 py-3 hover:bg-white/10 transition"
-            >
-              Services
-            </a>
+            <a href="/products" className="block text-white text-base sm:text-lg md:text-xl font-semibold rounded px-4 py-3 hover:bg-white/10 transition" onClick={() => setIsMobileMenuOpen(false)}>Products</a>
             <a href="/career" className="block text-white text-base sm:text-lg md:text-xl font-semibold rounded px-4 py-3 hover:bg-white/10 transition" onClick={() => setIsMobileMenuOpen(false)}>Career</a>
             <a href="/about" className="block text-white text-base sm:text-lg md:text-xl font-semibold rounded px-4 py-3 hover:bg-white/10 transition" onClick={() => setIsMobileMenuOpen(false)}>About</a>
             <a href="/contact" className="block text-white text-base sm:text-lg md:text-xl font-semibold rounded px-4 py-3 hover:bg-white/10 transition" onClick={() => setIsMobileMenuOpen(false)}>Contact</a>
@@ -382,16 +376,17 @@ const Navbar = () => {
                 </div>
               </div>
             )}
+            
+            {/* CTA Button - Below Services */}
+            <div className="mt-4 mb-2">
+              <button
+                onClick={() => { setShowCtaForm(true); setIsMobileMenuOpen(false); }}
+                className="w-full rounded-full px-6 py-3 font-semibold text-white bg-gradient-to-r from-red-600 via-red-700 to-red-800 shadow-lg border border-white/20 hover:brightness-110 hover:scale-105 transition-all duration-200 text-base"
+              >
+                Get Consultation
+              </button>
+            </div>
           </nav>
-          {/* CTA Button */}
-          <div className="px-4 pb-6">
-            <button
-              onClick={() => { setShowCtaForm(true); setIsMobileMenuOpen(false); }}
-              className="w-full rounded-full px-6 py-3 font-semibold text-white bg-gradient-to-r from-red-600 via-red-700 to-red-800 shadow-lg border border-white/20 hover:brightness-110 hover:scale-105 transition-all duration-200 text-base"
-            >
-              Get Consultation
-            </button>
-          </div>
         </div>
       )}
     </nav>
