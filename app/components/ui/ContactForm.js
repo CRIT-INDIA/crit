@@ -1,11 +1,52 @@
 'use client';
 
-import { useState } from 'react';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
-import 'leaflet/dist/leaflet.css';
+import { useState, useEffect, useMemo, lazy, Suspense, useRef } from 'react';
+import dynamic from 'next/dynamic';
+
+// Lazy load the map component
+const MapWithNoSSR = dynamic(
+  () => import('react-leaflet').then((mod) => {
+    const { MapContainer, TileLayer, Marker, Popup } = mod;
+    return function Map({ position, zoom }) {
+      return (
+        <div className="w-full h-64 md:h-80 lg:h-96 rounded-xl overflow-hidden shadow-lg">
+          <Suspense fallback={
+            <div className="h-full w-full bg-gray-100 flex items-center justify-center">
+              <div className="animate-pulse text-gray-400">Loading map...</div>
+            </div>
+          }>
+            <MapContainer 
+              center={position} 
+              zoom={zoom} 
+              style={{ height: '100%', width: '100%' }}
+              zoomControl={false}
+              attributionControl={false}
+            >
+              <TileLayer
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              />
+              <Marker position={position}>
+                <Popup>Our Office</Popup>
+              </Marker>
+            </MapContainer>
+          </Suspense>
+        </div>
+      );
+    };
+  }),
+  { 
+    ssr: false,
+    loading: () => (
+      <div className="h-full w-full bg-gray-100 flex items-center justify-center">
+        <div className="animate-pulse text-gray-400">Loading map...</div>
+      </div>
+    )
+  }
+);
 
 export default function ContactForm() {
-  const countryPhoneCodes = [
+  // Memoize country codes to prevent unnecessary re-renders
+  const countryPhoneCodes = useMemo(() => [
     { code: '+1', country: 'USA/Canada' },
     { code: '+44', country: 'United Kingdom' },
     { code: '+91', country: 'India' },
@@ -26,7 +67,11 @@ export default function ContactForm() {
     { code: '+971', country: 'UAE' },
     { code: '+27', country: 'South Africa' },
     { code: '+64', country: 'New Zealand' }
-  ];
+  ], []);
+
+  const [showCountryDropdown, setShowCountryDropdown] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [selectedCountry, setSelectedCountry] = useState({ code: '+91', country: 'India' });
 
   const [formData, setFormData] = useState({
     name: '',
@@ -37,6 +82,46 @@ export default function ContactForm() {
     message: '',
     service: ''
   });
+
+  // Filter countries based on search term
+  const filteredCountries = useMemo(() => {
+    if (!searchTerm) return countryPhoneCodes;
+    const term = searchTerm.toLowerCase();
+    return countryPhoneCodes.filter(
+      country => 
+        country.country.toLowerCase().includes(term) || 
+        country.code.includes(term)
+    );
+  }, [searchTerm, countryPhoneCodes]);
+
+  // Handle country selection
+  const countryDropdownRef = useRef(null);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (countryDropdownRef.current && !countryDropdownRef.current.contains(event.target)) {
+        setShowCountryDropdown(false);
+      }
+    }
+
+    // Bind the event listener
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      // Unbind the event listener on clean up
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [countryDropdownRef]);
+
+  const handleCountrySelect = (country) => {
+    setSelectedCountry(country);
+    setFormData(prev => ({
+      ...prev,
+      countryCode: country.code
+    }));
+    setShowCountryDropdown(false);
+    setSearchTerm('');
+  };
 
   const [errors, setErrors] = useState({
     name: '',
@@ -494,7 +579,7 @@ export default function ContactForm() {
             <div className="w-full lg:w-7/12 backdrop-blur-md border bg-black/10 border-white/10 rounded-md p-4 sm:p-6 lg:p-8">
               <h2 className="text-red-600 text-lg sm:text-xl lg:text-2xl font-bold mb-2 sm:mb-3 lg:mb-4">GET IN TOUCH</h2>
               <p className="text-gray-800 mb-3 sm:mb-4 lg:mb-5 text-sm">Hey! We are looking forward to start a project with you!</p>
-              <form onSubmit={handleSubmit} className="space-y-2 sm:space-y-3 lg:space-y-4 p-1 sm:p-2 lg:p-3">
+              <form onSubmit={handleSubmit} className="text-black space-y-2 sm:space-y-3 lg:space-y-4 p-1 sm:p-2 lg:p-3">
                 {/* Name Input */}
                 <div>
                   <input
@@ -503,7 +588,7 @@ export default function ContactForm() {
                     value={formData.name}
                     onChange={handleChange}
                     placeholder="Enter your Name"
-                    className={`w-full p-2 sm:p-2.5 lg:p-3 placeholder:text-gray-800 bg-gray-50 border border-transparent rounded-md focus:outline-none focus:border-[#428CFF] text-xs sm:text-sm ${errors.name ? 'border-red-500' : ''}`}
+                    className={`w-full p-2 sm:p-2.5 lg:p-3 text-black placeholder:text-gray-800 bg-gray-50 border border-transparent rounded-md focus:outline-none focus:border-[#428CFF] text-xs sm:text-sm ${errors.name ? 'border-red-500' : ''}`}
                     required
                   />
                   {errors.name && (
@@ -539,34 +624,72 @@ export default function ContactForm() {
                     <p className="text-red-500 text-xs mt-0.5">{errors.companyName}</p>
                   )}
                 </div>
-                {/* Phone Input */}
-                <div className="flex flex-col sm:flex-row gap-2">
-                  <select
-                    name="countryCode"
-                    value={formData.countryCode}
-                    onChange={handleChange}
-                    className="w-full sm:w-28 lg:w-32 p-2 sm:p-2.5 lg:p-3 text-black placeholder:text-gray-800 bg-gray-50 border border-transparent rounded-md focus:outline-none focus:border-[#428CFF] text-xs sm:text-sm"
-                  >
-                    {countryPhoneCodes.map((country) => (
-                      <option key={country.code} value={country.code}>
-                        {formData.countryCode === country.code
-                          ? country.code
-                          : `${country.country} (${country.code})`}
-                      </option>
-                    ))}
-                  </select>
-                  <input
-                    type="tel"
-                    name="phoneNumber"
-                    value={formData.phoneNumber}
-                    onChange={handlePhoneChange}
-                    placeholder={formData.countryCode}
-                    className={`w-full sm:flex-1 p-2 sm:p-2.5 lg:p-3 placeholder:text-gray-800 bg-gray-50 border border-transparent rounded-md focus:outline-none focus:border-[#428CFF] text-xs sm:text-sm ${errors.phoneNumber ? 'border-red-500' : ''}`}
-                  />
+                {/* Phone Number Input with Optimized Country Code Selector */}
+                <div className="flex flex-col gap-2">
+                  <div className="relative" ref={countryDropdownRef}>
+                    <div 
+                      className="w-full p-2 sm:p-2.5 lg:p-3 text-black bg-gray-50 border border-transparent rounded-md focus:outline-none focus:border-[#428CFF] text-xs sm:text-sm cursor-pointer flex items-center justify-between"
+                      onClick={() => setShowCountryDropdown(!showCountryDropdown)}
+                    >
+                      <span>{selectedCountry.code} {selectedCountry.country}</span>
+                      <svg 
+                        className={`w-4 h-4 text-gray-500 transition-transform ${showCountryDropdown ? 'transform rotate-180' : ''}`} 
+                        fill="none" 
+                        viewBox="0 0 24 24" 
+                        stroke="currentColor"
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                      </svg>
+                    </div>
+                    
+                    {showCountryDropdown && (
+                      <div className="absolute z-20 mt-1 w-full bg-white border border-gray-200 rounded-md shadow-lg max-h-60 overflow-auto">
+                        <div className="sticky top-0 bg-white p-2 border-b">
+                          <input
+                            type="text"
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
+                            placeholder="Search country..."
+                            className="w-full p-2 text-sm border rounded focus:outline-none focus:ring-1 focus:ring-blue-500"
+                            autoFocus
+                          />
+                        </div>
+                        <div className="max-h-48 overflow-y-auto">
+                          {filteredCountries.length > 0 ? (
+                            filteredCountries.map((country) => (
+                              <div
+                                key={country.code}
+                                className={`px-4 py-2 text-sm cursor-pointer hover:bg-gray-100 ${
+                                  country.code === selectedCountry.code ? 'bg-blue-50 text-blue-600' : ''
+                                }`}
+                                onClick={() => handleCountrySelect(country)}
+                              >
+                                {country.code} {country.country}
+                              </div>
+                            ))
+                          ) : (
+                            <div className="px-4 py-2 text-sm text-gray-500">No countries found</div>
+                          )}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="w-full">
+                    <input
+                      type="tel"
+                      name="phoneNumber"
+                      value={formData.phoneNumber}
+                      onChange={handlePhoneChange}
+                      placeholder={phoneValidationRules[formData.countryCode]?.placeholder || "Enter your phone number"}
+                      className={`w-full p-2 sm:p-2.5 lg:p-3 text-black placeholder:text-gray-800 bg-gray-50 border border-transparent rounded-md focus:outline-none focus:border-[#428CFF] text-xs sm:text-sm ${errors.phoneNumber ? 'border-red-500' : ''}`}
+                      required
+                    />
+                    {errors.phoneNumber && (
+                      <p className="text-red-500 text-xs mt-0.5">{errors.phoneNumber}</p>
+                    )}
+                  </div>
                 </div>
-                {errors.phoneNumber && (
-                  <p className="text-red-500 text-xs mt-0.5">{errors.phoneNumber}</p>
-                )}
                 {/* Service Dropdown */}
                 <div>
                   <select

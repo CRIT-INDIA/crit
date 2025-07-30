@@ -337,7 +337,7 @@ const SAPProductsInfo = () => {
             <div className="flex items-center space-x-4">
               <button
                 className="flex items-center space-x-2 border border-red-300 text-black px-6 py-3 rounded-lg transition-colors group hover:text-white hover:bg-red-600 hover:border-red-600"
-                onClick={() => window.open('mailto:info@example.com?subject=Schedule%20Meeting%20Request&body=I%20would%20like%20to%20schedule%20a%20meeting%20to%20discuss%20SAP%20solutions.')}
+                onClick={() => window.open('mailto:info@critindia.com?subject=Schedule%20Meeting%20Request&body=I%20would%20like%20to%20schedule%20a%20meeting%20to%20discuss%20SAP%20solutions.')}
               >
                 <Calendar className="w-5 h-5 text-black group-hover:text-white transition-colors" />
                 <span>Schedule Meeting</span>
