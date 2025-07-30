@@ -31,9 +31,10 @@ export default function RootLayout({ children }) {
         <div className="relative">
           <Navbar />
         </div>
-        <SpeedInsights/>
+        
         <div className="flex-1 flex flex-col max-w-[1800px] w-full mx-auto">
           {children}
+          <SpeedInsights/>
         </div>
         <Footer />
       </body>
