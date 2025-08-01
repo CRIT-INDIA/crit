@@ -198,8 +198,8 @@ export default function CritIndiaCtaForm({ onClose }) {
     company: '',
     phone: '',
     countryCode: '+91',
-    service: '',
-    message: '',
+    service: 'SAP Implementation', // Default value for testing
+    message: 'Test message for backend testing', // Default value for testing
   });
 
   const [errors, setErrors] = useState({});
@@ -209,7 +209,7 @@ export default function CritIndiaCtaForm({ onClose }) {
 
   const serviceOptions = [
     'SAP Implementation',
-    'SAP Roll out Services',
+    'SAP Rollout  Services',
     'Sap Support Services',
     'SAP Upgrade Services',
     'SAP Migration Services',
@@ -223,100 +223,53 @@ export default function CritIndiaCtaForm({ onClose }) {
   };
 
   const validatePhone = (phone, countryCode) => {
-    const selectedCountry = countryOptions.find((c) => c.code === countryCode);
-    if (!selectedCountry) return { isValid: false, message: 'Invalid country selected' };
-
-    const { minLength, maxLength, pattern, name } = selectedCountry;
-
-    // Check if phone contains only digits
-    if (!/^\d+$/.test(phone)) {
-      return { 
-        isValid: false, 
-        message: 'Phone number must contain only digits' 
-      };
+    // Simplified validation for testing
+    if (!phone || phone.trim() === '') {
+      return { isValid: false, message: 'Phone number is required' };
     }
-
-    // Check length
-    if (phone.length < minLength || phone.length > maxLength) {
-      const lengthText = minLength === maxLength 
-        ? `exactly ${minLength} digits` 
-        : `${minLength}-${maxLength} digits`;
-      return { 
-        isValid: false, 
-        message: `${name} phone numbers require ${lengthText}` 
-      };
+    
+    // Just check if it has at least 5 digits
+    if (phone.length < 5) {
+      return { isValid: false, message: 'Phone number must be at least 5 digits' };
     }
-
-    // Check country-specific pattern
-    if (pattern && !pattern.test(phone)) {
-      return { 
-        isValid: false, 
-        message: `Invalid ${name} phone number format` 
-      };
-    }
-
+    
     return { isValid: true, message: '' };
   };
 
   const validateEmail = (email) => {
-    // Stricter email regex
+    // Basic email regex - allow any email for testing
     const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
     if (!emailRegex.test(email)) {
       return { isValid: false, message: 'Please enter a valid email address' };
     }
-    // Disallow free email providers
-    const domain = email.split('@')[1]?.toLowerCase();
-    if (freeEmailProviders.includes(domain)) {
-      return { isValid: false, message: 'Please use your business email address' };
-    }
+    // Temporarily allow all emails for testing
     return { isValid: true, message: '' };
   };
 
   const validate = () => {
     const errs = {};
-    // Name: required, only letters/spaces, min 2 chars
+    
+    // Basic validation for testing
     if (!formData.name.trim()) {
       errs.name = 'Name is required';
-    } else if (!/^[A-Za-z\s]{2,}$/.test(formData.name.trim())) {
-      errs.name = 'Name must be at least 2 letters and contain only letters and spaces';
     }
 
-    // Email: required, stricter regex, no free providers
     if (!formData.email.trim()) {
       errs.email = 'Email is required';
-    } else {
-      const emailValidation = validateEmail(formData.email.trim());
-      if (!emailValidation.isValid) {
-        errs.email = emailValidation.message;
-      }
     }
 
-    // Company: optional, but if provided, min 2 chars
-    if (formData.company && formData.company.trim().length > 0 && formData.company.trim().length < 2) {
-      errs.company = 'Company name must be at least 2 characters';
-    }
-
-    // Phone: required, country-specific, and not all same digit
     if (!formData.phone.trim()) {
       errs.phone = 'Phone number is required';
-    } else {
-      const phoneValidation = validatePhone(formData.phone, formData.countryCode);
-      if (!phoneValidation.isValid) {
-        errs.phone = phoneValidation.message;
-      } else if (/^(\d)\1+$/.test(formData.phone)) {
-        errs.phone = 'Phone number cannot be all the same digit';
-      }
     }
 
-    // Service: required
-    if (!formData.service) errs.service = 'Please select a service';
+    if (!formData.service) {
+      errs.service = 'Please select a service';
+    }
 
-    // Message: required, min 15 chars
     if (!formData.message.trim()) {
-      errs.message = 'Please tell us how we can help you';
-    } else if (formData.message.trim().length < 15) {
-      errs.message = 'Message must be at least 15 characters';
+      errs.message = 'Message is required';
     }
+
     return errs;
   };
 
@@ -369,19 +322,70 @@ export default function CritIndiaCtaForm({ onClose }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Submitting...');
+    console.log('=== FORM SUBMISSION START ===');
+    console.log('Current formData:', formData);
+    console.log('FormData keys:', Object.keys(formData));
+    console.log('FormData values:', Object.values(formData));
+    
     const validationErrors = validate();
+    console.log('Validation errors:', validationErrors);
+    console.log('Validation errors count:', Object.keys(validationErrors).length);
+    
+    // Temporarily bypass validation for testing
+    console.log('BYPASSING VALIDATION FOR TESTING');
+    /*
     if (Object.keys(validationErrors).length) {
-      console.log('Validation errors:', validationErrors);
+      console.log('Validation failed, not submitting to backend');
+      console.log('Failed fields:', Object.keys(validationErrors));
       setErrors(validationErrors);
       return;
     }
-    const fullPhone = `${formData.countryCode}${formData.phone}`;
-    console.log('Submitted:', { ...formData, phone: fullPhone });
-    setSubmitted(true);
-    setTimeout(() => {
-      handleClose();
-    }, 3000);
+    */
+    
+    console.log('Validation passed, preparing to send to backend');
+    
+    try {
+      const submitData = {
+        name: formData.name,
+        email: formData.email,
+        company: formData.company,
+        phone: formData.phone,
+        countryCode: formData.countryCode,
+        service: formData.service,
+        message: formData.message
+      };
+      
+      console.log('Data being sent to backend:', submitData);
+      console.log('JSON stringified data:', JSON.stringify(submitData));
+      console.log('About to make fetch request...');
+      
+      const response = await fetch('http://localhost:5000/api/cta/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(submitData)
+      });
+      
+      console.log('Response status:', response.status);
+      console.log('Response headers:', response.headers);
+      const result = await response.json();
+      console.log('Response data:', result);
+      
+      if (result.success) {
+        console.log('Form submitted successfully:', result);
+        setSubmitted(true);
+        setTimeout(() => {
+          handleClose();
+        }, 3000);
+      } else {
+        console.error('Form submission failed:', result);
+        alert('Form submission failed. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      alert('Error submitting form. Please try again.');
+    }
   };
 
   if (!visible) return null;

@@ -12,37 +12,35 @@ const ModernFooter = () => {
     {
       title: "SAP Services",
       links: [
-        { name: "SAP Implementation", href: "#" },
-        { name: "SAP Roll Out", href: "#" },
-        { name: "SAP Support", href: "#" },
-        { name: "SAP Upgrade", href: "#" },
-        { name: "SAP Integration", href: "#" },
-        { name: "SAP Migration", href: "#" },
-        { name: "SAP Automation", href: "#" },
-        { name: "SAP Testing", href: "#" }
+        { name: "SAP Implementation", href: "/sap-implementation-services" },
+        { name: "SAP Rollout ", href: "/sap-Rollout-services" },
+        { name: "SAP Support", href: "/sap-support-services" },
+        { name: "SAP Upgrade", href: "/sap-upgrade-services" },
+        { name: "SAP Integration", href: "/sap-integration-services" },
+        { name: "SAP Migration", href: "/sap-migration-services" },
+        { name: "SAP Automation", href: "/sap-automation-services" },
+        { name: "SAP Testing", href: "/sap-testing-services" }
       ]
     },
     {
       title: "Our Products",
       links: [
-        { name: "SAP S/4HANA", href: "#" },
-        { name: "SAP ARIBA", href: "#" },
-        { name: "SAP SuccessFactors", href: "#" },
-        { name: "SAP HYBRIS", href: "#" },
-        { name: "SAP Business Object", href: "#" },
-        { name: "SAP Concur", href: "#" }
+        { name: "SAP S/4HANA", href: "/products" },
+        { name: "SAP ARIBA", href: "/products" },
+        { name: "SAP SuccessFactors", href: "/products" },
+        { name: "SAP HYBRIS", href: "/products" },
+        { name: "SAP Business Object", href: "/products" },
+        { name: "SAP Concur", href: "/products" }
       ]
     },
     {
       title: "Company",
       links: [
-        { name: "About Us", href: "#" },
-        { name: "Our Team", href: "#" },
-        { name: "Careers", href: "#" },
-        { name: "Case Studies", href: "#" },
-        { name: "News & Events", href: "#" },
-        { name: "Contact", href: "#" },
-        { name: "Blogs", href: "#" }
+        { name: "About Us", href: "/about" },
+        { name: "Our Team", href: "/about" },
+        { name: "Careers", href: "/career" },
+        { name: "Contact", href: "/contact" },
+        { name: "Blogs", href: "/blog" }
       ]
     },
     {

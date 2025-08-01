@@ -1,6 +1,7 @@
+"use client";
 import { useEffect } from 'react';
 import Link from 'next/link';
-import { ArrowRight, CheckCircle } from 'lucide-react';
+import { ArrowRight, CheckCircle, Rocket, RefreshCw, Link2, Lightbulb, Wrench, Book, Lock, Bot } from 'lucide-react';
 
 const SAPHero = () => {
   // Add smooth scroll behavior for anchor links
@@ -72,14 +73,14 @@ const SAPHero = () => {
     };
   }, []);
   const services = [
-    { id: 1, name: 'SAP Implementation', icon: '🚀' },
-    { id: 2, name: 'SAP Roll out', icon: '🔄' },
-    { id: 3, name: 'SAP Support', icon: '🔗' },
-    { id: 4, name: 'SAP Upgrade', icon: '💡' },
-    { id: 5, name: 'SAP Integration', icon: '🛠️' },
-    { id: 6, name: 'SAP Migration', icon: '📚' },
-    { id: 7, name: 'SAP Automation', icon: '⚡' },
-    { id: 8, name: 'SAP Testing', icon: '🔒' },
+    { id: 1, name: 'SAP Implementation', icon: <Rocket size={24} color="red" /> },
+    { id: 2, name: 'SAP Rollout ', icon: <RefreshCw size={24} color="red" /> },
+    { id: 3, name: 'SAP Support', icon: <Link2 size={24} color="red" /> },
+    { id: 4, name: 'SAP Upgrade', icon: <Lightbulb size={24} color="red" /> },
+    { id: 5, name: 'SAP Integration', icon: <Wrench size={24} color="red" /> },
+    { id: 6, name: 'SAP Migration', icon: <Book size={24} color="red" /> },
+    { id: 7, name: 'SAP Automation', icon: <Bot size={24} color="red" /> },
+    { id: 8, name: 'SAP Testing', icon: <Lock size={24} color="red" /> },
   ];
 
   return (
@@ -150,24 +151,30 @@ const SAPHero = () => {
             {/* Glow Effect */}
             <div className="absolute inset-0 bg-red-500/20 blur-3xl" />
             
-            <div className="relative grid grid-cols-2 gap-3 sm:gap-4">
+            <div className="relative grid grid-cols-2 -p-10 gap-3 sm:gap-7">
               {services.map((service, index) => (
-                <div
+                <Link
                   key={service.id}
-                  className="group bg-white border border-gray-200 rounded-xl p-3 sm:p-4 md:p-6 hover:bg-red-50 hover:border-red-300 transition-all duration-300 cursor-pointer shadow-lg hover:shadow-xl"
-                  style={{
-                    animationDelay: `${index * 100}ms`,
-                  }}
+                  href={`/${service.name.toLowerCase().replace(/\s+/g, '-')}-services`}
+                  className="block group"
                 >
-                  <div className="flex items-start sm:items-center gap-2 sm:gap-3">
-                    <div className="text-2xl sm:text-3xl flex-shrink-0">{service.icon}</div>
-                    <div className="min-w-0">
-                      <h3 className="font-semibold text-sm sm:text-base text-gray-900 group-hover:text-red-600 transition-colors break-words">
-                        {service.name}
-                      </h3>
+                  <div
+                    className=" h-full bg-white border border-gray-200 rounded-xl p-5 sm:p-6 md:p-6 hover:bg-red-50 hover:border-red-300 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+                    style={{
+                      animationDelay: `${index * 100}ms`,
+                    }}
+                  >
+                    <div className="flex items-start sm:items-center gap-5 sm:gap-5">
+                      <div className="text-2xl sm:text-3xl flex-shrink-0">{service.icon}</div>
+                      <div className="min-w-0">
+                        <h3 className="font-semibold text-lg sm:text-md text-gray-900 group-hover:text-red-600 transition-colors break-words">
+                          {service.name}
+                          <span className="ml-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></span>
+                        </h3>
+                      </div>
                     </div>
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
 

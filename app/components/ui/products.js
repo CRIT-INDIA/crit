@@ -77,7 +77,7 @@ const DesignClassesSection = () => {
     },
     {
       id: 2,
-      title: "SAP Success Factors",
+      title: "SAP SuccessFactors",
       subtitle: "Cloud-Based Human Experience Management",
       description: "SAP SuccessFactors provides comprehensive cloud solutions for core HR, payroll, talent management, and employee experience, helping organizations attract and retain top talent.",
       mobileDescription: "Cloud-based HR solutions for talent management and employee experience.",
@@ -88,7 +88,7 @@ const DesignClassesSection = () => {
       id: 3,
       title: "SAP Ariba",
       subtitle: "Business Intelligence & Procurement",
-      description: "SAP Analytics Cloud delivers powerful analytics and planning, while SAP Ariba streamlines procurement and supply chain collaboration for smarter business decisions.",
+      description: "SAP Ariba streamlines procurement processes, connecting businesses with a vast network of suppliers. This enables smarter supply chain collaboration and more informed business decisions.",
       mobileDescription: "Powerful analytics and procurement solutions for smarter business decisions.",
       icon: <Briefcase className="w-8 h-8" />,
       color: "bg-green-500",
@@ -96,7 +96,7 @@ const DesignClassesSection = () => {
     {
       id: 4,
       title: "SAP Concur",
-      subtitle: "Travel & Expense Automation",
+      subtitle: " Automation Travel  and Expense Management ",
       description: "SAP Concur automates travel, expense, and invoice management, providing visibility and control over spending for businesses of all sizes.",
       icon: <Clock className="w-8 h-8" />,
       color: "bg-purple-500",
@@ -104,7 +104,7 @@ const DesignClassesSection = () => {
     {
       id: 5,
       title: "SAP BTP",
-      subtitle: "Business Technology Platform",
+      subtitle: " Integrates SAP Business Technology  Platform",
       description: "SAP BTP (Business Technology Platform) integrates data management, analytics, AI, and application development to accelerate innovation and business growth.",
       icon: <Users className="w-8 h-8" />,
       color: "bg-pink-500",
@@ -191,7 +191,7 @@ const DesignClassesSection = () => {
               </div>
               <div className={`relative z-10 transition-opacity duration-300 flex flex-col items-center justify-between h-full animate-text-change ${isFading ? 'opacity-0' : 'opacity-100'}`}>
               {/* Title (small) */}
-              <div className={`text-center leading-tight mb-4 font-bold transition-all duration-300 ${['SAP Success Factors', 'SAP Ariba'].includes(classesData[currentCard].title) ? 'text-base' : classesData[currentCard].title === 'SAP S/4 HANA' ? 'text-sm md:text-sm' : 'text-lg'}`}>
+              <div className={`text-center leading-tight mb-4 font-bold transition-all duration-300 ${['SAP SuccessFactors', 'SAP Ariba'].includes(classesData[currentCard].title) ? 'text-base' : classesData[currentCard].title === 'SAP S/4 HANA' ? 'text-sm md:text-sm' : 'text-lg'}`}>
                 {classesData[currentCard].title === 'SAP Analytics & Ariba' ? (
                   <>SAP Ariba</>
                 ) : (
@@ -203,9 +203,9 @@ const DesignClassesSection = () => {
                   <div className="w-full flex-1 rounded-2xl overflow-hidden bg-gray-200 flex items-center justify-center transition-all duration-300">
                     <img src="https://res.cloudinary.com/duz9xipfm/image/upload/v1753859298/Project_69-08_qjqkub_1_ywnfmb.avif" alt="SAP S/4 HANA img" className="object-cover w-full h-full rounded-2xl transition-all duration-300" />
                   </div>
-                ) : classesData[currentCard].title === 'SAP Success Factors' ? (
+                ) : classesData[currentCard].title === 'SAP SuccessFactors' ? (
                   <div className="w-full flex-1 rounded-2xl overflow-hidden bg-gray-200 flex items-center justify-center transition-all duration-300">
-                    <img src="https://res.cloudinary.com/duz9xipfm/image/upload/v1753859452/Project_74-21_vjuhcv_1_jfw7d7.avif" alt="SAP Success Factors img" className="object-contain w-full h-full rounded-2xl transition-all duration-300" />
+                    <img src="https://res.cloudinary.com/duz9xipfm/image/upload/v1753859452/Project_74-21_vjuhcv_1_jfw7d7.avif" alt="SAP SuccessFactors img" className="object-contain w-full h-full rounded-2xl transition-all duration-300" />
                   </div>
                 ) : classesData[currentCard].title === 'SAP Ariba' ? (
                   <div className="w-full flex-1 rounded-2xl overflow-hidden bg-gray-200 flex items-center justify-center transition-all duration-300">
@@ -263,7 +263,7 @@ const DesignClassesSection = () => {
                   </div>
                 </>
               )}
-              {classesData[currentCard].title === 'SAP Success Factors' && (
+              {classesData[currentCard].title === 'SAP SuccessFactors' && (
                 <>
                   <div className="flex items-center mb-1 md:mb-3">
                     <div className="w-2 h-2 bg-red-500 rounded-full mr-3"></div>
@@ -409,7 +409,7 @@ const DesignClassesSection = () => {
                     </div>
                   </div>
                   {/* Title */}
-                  {classItem.title === 'SAP Success Factors' ? (
+                  {classItem.title === 'SAP SuccessFactors' ? (
                     <h3 className="text-xs md:text-sm font-bold mb-1 mt-2">SAP Success<br/>Factors</h3>
                   ) : classItem.title === 'SAP S/4 HANA' ? (
                     <h3 className="text-xs md:text-sm font-bold mb-1 mt-2">{classItem.title}</h3>
@@ -425,9 +425,9 @@ const DesignClassesSection = () => {
                     <div className="w-full h-24 md:h-32 rounded-2xl mt-auto overflow-hidden bg-gray-200 flex items-center justify-center mt-2">
                       <img src="https://res.cloudinary.com/duz9xipfm/image/upload/v1753859298/Project_69-08_qjqkub_1_ywnfmb.avif" alt="SAP S/4 HANA img" className="object-cover w-full h-full rounded-2xl" />
                     </div>
-                  ) : classItem.title === 'SAP Success Factors' ? (
+                  ) : classItem.title === 'SAP SuccessFactors' ? (
                     <div className="w-full h-20 md:h-27 rounded-2xl mt-auto overflow-hidden bg-gray-200 flex items-center justify-center mt-2">
-                      <img src="https://res.cloudinary.com/duz9xipfm/image/upload/v1753859452/Project_74-21_vjuhcv_1_jfw7d7.avif" alt="SAP Success Factors img" className="object-contain w-full h-full rounded-2xl" />
+                      <img src="https://res.cloudinary.com/duz9xipfm/image/upload/v1753859452/Project_74-21_vjuhcv_1_jfw7d7.avif" alt="SAP SuccessFactors img" className="object-contain w-full h-full rounded-2xl" />
                     </div>
                   ) : classItem.title === 'SAP Ariba' ? (
                     <div className="w-full h-24 md:h-28 rounded-2xl mt-auto overflow-hidden bg-gray-200 flex items-center justify-center mt-2">

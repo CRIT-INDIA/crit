@@ -94,8 +94,8 @@ const SAPProductsInfo = () => {
       subtitle: 'Next-Generation Intelligent ERP Suite',
       category: 'Enterprise Resource Planning',
       icon: <Database className="w-8 h-8 text-blue-600" />,
-      executiveSummary: 'Think of SAP S/4HANA as the central nervous system for your entire company. It is the intelligent engine that powers everything, giving you up-to-the-minute information and automating tasks to make your business run smoother and smarter. Because it is built on a super-fast platform called SAP HANA. Built on the SAP HANA in-memory platform, it delivers unprecedented performance and simplifies your IT landscape while enabling digital transformation initiatives.',
-      keyCapabilities: [
+    executiveSummary: 'SAP S/4HANA acts as the intelligent core of your organization, like a central nervous system providing real-time visibility and control across all business functions. Built on the foundation of the SAP HANA in-memory platform, it delivers unparalleled speed and efficiency, enabling you to process vast amounts of data instantly. This allows for data-driven decision-making, proactive problem-solving, and the automation of a wide range of tasks, freeing up resources for strategic initiatives. Beyond enhanced performance, SAP S/4HANA simplifies your IT landscape, reducing complexity and costs. More importantly, it empowers comprehensive digital transformation by providing the platform for adopting new technologies like AI, machine learning, and IoT, ultimately driving innovation and competitive advantage.',
+    keyCapabilities: [
         'Real-time financial planning and analysis with embedded analytics',
         'Intelligent automation through machine learning and AI integration',
         'Simplified data architecture reducing system complexity by 75%',
@@ -123,7 +123,7 @@ const SAPProductsInfo = () => {
         productivity: '25% improvement in employee productivity'
       },
       industryFocus: ['Manufacturing', 'Financial Services', 'Retail', 'Healthcare', 'Oil & Gas', 'Utilities'],
-      clientProfile: 'Mid-market to Enterprise (500+ employees)',
+      clientProfile: 'Mid-market to Enterprise (300+ employees)',
       implementationTime: '6-18 months depending on complexity'
     },
     {
@@ -132,7 +132,7 @@ const SAPProductsInfo = () => {
       subtitle: 'Global Procurement and Supply Chain Network',
       category: 'Procurement Excellence',
       icon: <Handshake className="w-8 h-8 text-white" />,
-      executiveSummary: 'SAP Ariba connects your organization to the world\'s largest business network, enabling strategic procurement, supplier collaboration, and supply chain optimization. Built on a secure and collaborative platform, Ariba helps you negotiate better deals, reduce risk, and build stronger relationships with your trading partners.',
+      executiveSummary: 'SAP Ariba provides a comprehensive platform connecting your organization to the world\'s largest business network, facilitating strategic procurement, deeper supplier collaboration, and optimized supply chain management. Going beyond simple transactions, Ariba offers tools for strategic sourcing, contract management, and spend analysis, empowering you to negotiate better deals and drive cost savings. The secure and collaborative platform fosters stronger relationships with your trading partners by streamlining communication, improving transparency, and mitigating risk throughout the supply chain. Ultimately, SAP Ariba enables you to build a more resilient, efficient, and agile supply chain, driving significant value for your business.',
       keyCapabilities: [
         'Strategic sourcing with AI-powered supplier recommendations',
         'Contract lifecycle management with automated compliance monitoring',
@@ -162,7 +162,7 @@ const SAPProductsInfo = () => {
       },
       industryFocus: ['Manufacturing', 'Government', 'Healthcare', 'Technology', 'Professional Services'],
       clientProfile: 'Mid-market to Enterprise (200+ employees)',
-      implementationTime: '3-9 months depending on scope'
+      implementationTime: '3-8 months depending on scope'
     },
     {
       id: 'sap-successfactors',
@@ -170,7 +170,7 @@ const SAPProductsInfo = () => {
       subtitle: 'Comprehensive Human Capital Management Suite',
       category: 'Human Resources Technology',
       icon: <Users className="w-8 h-8 text-blue-600" />,
-      executiveSummary: 'SAP SuccessFactors transforms human resources into a strategic business function through intelligent talent management, workforce analytics, and employee engagement solutions. By aligning your people strategy with your business goals, SuccessFactors helps you attract, retain, and develop top talent in today\'s competitive market.',
+      executiveSummary: 'SAP SuccessFactors revolutionizes human resources, transforming it into a strategic business driver through intelligent talent management, comprehensive workforce analytics, and engaging employee experience solutions. Going beyond traditional HR processes, SuccessFactors empowers you to align your people strategy directly with your overarching business objectives. By providing deep insights into your workforce, you can make data-driven decisions to attract, retain, and develop top talent in today\'s fiercely competitive market. Furthermore, SuccessFactors fosters a culture of continuous improvement by enabling personalized employee experiences, promoting collaboration, and driving increased engagement, ultimately leading to higher productivity and business success.',
       keyCapabilities: [
         'AI-powered talent acquisition and candidate matching',
         'Continuous performance management with goal alignment',
@@ -200,7 +200,7 @@ const SAPProductsInfo = () => {
       },
       industryFocus: ['Technology', 'Financial Services', 'Manufacturing', 'Healthcare', 'Public Sector'],
       clientProfile: 'Mid-market to Enterprise (100+ employees)',
-      implementationTime: '4-12 months depending on modules'
+      implementationTime: '3-10 months depending on modules'
     },
     {
       id: 'sap-commerce',
@@ -208,7 +208,7 @@ const SAPProductsInfo = () => {
       subtitle: 'Omnichannel Digital Commerce Platform',
       category: 'Digital Experience',
       icon: <ShoppingCart className="w-8 h-8 text-white" />,
-      executiveSummary: 'SAP Commerce Cloud enables businesses to deliver personalized, seamless shopping experiences across all channels. With advanced AI-driven personalization and robust B2B capabilities, it supports complex commerce scenarios while driving revenue growth and customer loyalty.',
+      executiveSummary: 'SAP Commerce Cloud empowers businesses to create and deliver personalized, seamless, and engaging shopping experiences across all touchpoints, from web and mobile to in-store and beyond. Leveraging advanced AI-driven personalization capabilities, Commerce Cloud enables you to understand individual customer needs and preferences, delivering tailored product recommendations, targeted promotions, and relevant content. With robust B2B commerce functionalities, it supports complex business scenarios, including self-service portals, contract pricing, and streamlined order management. Ultimately, SAP Commerce Cloud not only drives revenue growth and increases customer loyalty but also provides the agility and scalability needed to adapt to the ever-evolving demands of the modern commerce landscape.',
       keyCapabilities: [
         'Omnichannel experience management with unified customer profiles',
         'AI-powered personalization and product recommendations',
@@ -238,7 +238,7 @@ const SAPProductsInfo = () => {
       },
       industryFocus: ['Retail', 'Consumer Goods', 'Manufacturing', 'B2B Wholesale', 'Fashion'],
       clientProfile: 'Mid-market to Enterprise (50+ employees)',
-      implementationTime: '6-15 months depending on complexity'
+      implementationTime: '3-12 months depending on complexity'
     },
     {
       id: 'sap-businessobjects',
@@ -246,7 +246,7 @@ const SAPProductsInfo = () => {
       subtitle: 'Enterprise Business Intelligence Platform',
       category: 'Analytics & Intelligence',
       icon: <BarChart3 className="w-8 h-8 text-blue-600" />,
-      executiveSummary: 'SAP BusinessObjects delivers comprehensive business intelligence capabilities, enabling organizations to transform data into actionable insights. With self-service analytics, enterprise reporting, and advanced visualization, it democratizes data access while maintaining governance and security.',
+      executiveSummary: 'SAP BusinessObjects provides a complete suite of business intelligence tools, empowering organizations to unlock the full potential of their data and transform it into actionable insights. Through self-service analytics capabilities, BusinessObjects enables users across the organization to explore data independently and answer their own business questions. It also offers robust enterprise reporting features for creating standardized reports and dashboards, along with advanced visualization options for presenting data in compelling and easily understandable formats. By democratizing access to data while maintaining robust governance and security controls, SAP BusinessObjects ensures that everyone has the information they need to make better decisions, driving improved business performance.',
       keyCapabilities: [
         'Self-service analytics with drag-and-drop report building',
         'Enterprise-grade reporting with pixel-perfect formatting',
@@ -284,7 +284,7 @@ const SAPProductsInfo = () => {
       subtitle: 'Travel, Expense & Invoice Management',
       category: 'Financial Operations',
       icon: <Plane className="w-8 h-8 text-white" />,
-      executiveSummary: 'SAP Concur simplifies and automates travel and expense management for organizations worldwide. With intelligent automation, policy compliance, and comprehensive audit capabilities, it provides complete visibility and control over business spending.',
+      executiveSummary: 'SAP Concur offers a cloud-based solution that simplifies and automates the entire travel and expense management process for organizations of all sizes, worldwide. By leveraging intelligent automation, Concur streamlines expense reporting, automates invoice processing, and ensures compliance with company policies and regulatory requirements. The platform provides comprehensive audit capabilities, offering complete visibility and control over business spending, enabling organizations to identify potential cost savings and mitigate risks. From booking travel to submitting expenses and reimbursing employees, SAP Concur provides an integrated and user-friendly experience that increases efficiency, reduces administrative overhead, and improves financial transparency.',
       keyCapabilities: [
         'Automated expense reporting with receipt capture and processing',
         'Integrated travel booking with policy compliance monitoring',
@@ -314,7 +314,7 @@ const SAPProductsInfo = () => {
       },
       industryFocus: ['Professional Services', 'Technology', 'Manufacturing', 'Financial Services', 'Healthcare'],
       clientProfile: 'Small to Enterprise (25+ employees)',
-      implementationTime: '2-6 months depending on complexity'
+      implementationTime: '3-5 months depending on complexity'
     }
   ];
 

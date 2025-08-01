@@ -14,8 +14,8 @@ const services = [
     slug: "sap-implementation-services"   // <-- NEW SLUG
   },
   {
-    name: "SAP Roll Out Services",
-    slug: "rollout"
+    name: "SAP Rollout Services",
+    slug: "Rollout "
   },
   {
     name: "SAP Support Services",
@@ -170,7 +170,7 @@ const createServiceSlug = (name) => {
   // Map service names to their URL slugs
   const serviceSlugs = {
     'SAP Implementation Services': 'sap-implementation-services',   // <-- NEW SLUG
-    'SAP Roll Out Services': 'sap-rollout-services',
+    'SAP Rollout Services': 'sap-Rollout-services',
     'SAP Support Services': 'sap-support-services',
     'SAP Upgrade Services': 'sap-upgrade-services',
     'SAP Integration Services': 'sap-integration-services',

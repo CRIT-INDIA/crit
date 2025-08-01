@@ -3,11 +3,14 @@ import React from 'react';
 const MovingClientsSection = () => {
   // Client data matching the style from your image
   const clients = [
-    { name: 'Google', logo: 'https://res.cloudinary.com/dujw4np0d/image/upload/v1753339366/google-logo_cxut0t.avif' },
-    { name: 'Microsoft', logo: 'https://res.cloudinary.com/dujw4np0d/image/upload/v1753339366/microsoft_buuqps.avif' },
-    { name: 'Apple', logo: 'https://res.cloudinary.com/dujw4np0d/image/upload/v1753339367/Apple_logo_grey.svg_m7dsoq_vm6wyx.avif' },
-    { name: 'Amazon', logo: 'https://res.cloudinary.com/dujw4np0d/image/upload/v1753339367/Amazon-Logo-White-PNG-Pic_m8kupd_vfhxys.avif' },
-    { name: 'Meta', logo: 'https://res.cloudinary.com/dujw4np0d/image/upload/v1753339366/meta_ivcb5k.avif' },
+    { name: 'Binstellar', logo: 'https://res.cloudinary.com/duz9xipfm/image/upload/v1753945853/Binstellar_fzcqil.avif' },
+    { name: 'SFMS', logo: 'https://res.cloudinary.com/duz9xipfm/image/upload/v1753945852/SFMS_bu6too.avif' },
+    { name: 'Form6', logo: 'https://res.cloudinary.com/duz9xipfm/image/upload/v1753945852/Form6_cgfpju.avif' },
+    { name: 'EPN', logo: 'https://res.cloudinary.com/duz9xipfm/image/upload/v1753945852/EPN_aniiah.avif' },
+    { name: 'Protergia', logo: 'https://res.cloudinary.com/duz9xipfm/image/upload/v1753945852/protergia_uwbnzm.avif' },
+    { name: 'NXI', logo: 'https://res.cloudinary.com/duz9xipfm/image/upload/v1753945852/NXI_a3a0yi.avif' },
+    { name: 'Brihati', logo: 'https://res.cloudinary.com/duz9xipfm/image/upload/v1753946455/Brihati_1_uoswjm.avif' },
+    { name: 'VP techno labs', logo: 'https://res.cloudinary.com/duz9xipfm/image/upload/v1753945852/VPTechnoLabsFinal_fieg3m.avif' },
   ];
 
   // Triple the clients array for seamless infinite scroll
@@ -58,7 +61,7 @@ const MovingClientsSection = () => {
           
           
           {/* Right side - Moving Clients Container */}
-          <div className="flex-grow relative overflow-hidden group">
+          <div className="flex-grow relative overflow-hidden group pt-2">
             
             {/* Scrolling Container */}
             <div className="flex items-center animate-marquee">
@@ -67,7 +70,7 @@ const MovingClientsSection = () => {
                   key={`${client.name}-${index}`}
                   className="flex-shrink-0 mx-8 md:mx-12"
                 >
-                  <div className="flex items-center justify-center h-12 md:h-16 px-4">
+                  <div className=" flex items-center justify-center h-12 md:h-16 px-4 border border-white bg-gray-200 rounded-sm">
                     <img
                       src={client.logo}
                       alt={`${client.name} logo`}

@@ -139,35 +139,73 @@ const CustomerTestimonials = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    if (rating === 0) {
+      alert('Please select a rating');
+      return;
+    }
+
+    if (!formData.name || !formData.email || !formData.position || 
+        !formData.company || !formData.review) {
+      alert('Please fill in all required fields');
+      return;
+    }
+
     setIsSubmitting(true);
     
-    // Here you would typically upload the file and form data to your server
-    // For now, we'll just simulate the process
-    console.log('Form Data:', formData);
-    console.log('Rating:', rating);
-    console.log('Selected File:', selectedFile);
-    
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    
-    setIsSubmitting(false);
-    setShowSuccess(true);
-    
-    // Reset form after 3 seconds
-    setTimeout(() => {
-      setShowReviewForm(false);
-      setShowSuccess(false);
-      setFormData({
-        name: '',
-        email: '',
-        position: '',
-        company: '',
-        review: ''
+    try {
+      const formDataToSend = new FormData();
+      formDataToSend.append('name', formData.name);
+      formDataToSend.append('email', formData.email);
+      formDataToSend.append('position', formData.position);
+      formDataToSend.append('company', formData.company);
+      formDataToSend.append('review', formData.review);
+      formDataToSend.append('rating', rating.toString());
+      
+      if (selectedFile) {
+        formDataToSend.append('profilePicture', selectedFile);
+      }
+      
+      console.log('Sending review form data to backend');
+      
+      const response = await fetch('http://localhost:5000/api/review/submit', {
+        method: 'POST',
+        body: formDataToSend
       });
-      setRating(0);
-      setSelectedFile(null);
-      setFilePreview(null);
-    }, 3000);
+      
+      const result = await response.json();
+      
+      if (result.success) {
+        console.log('Review submitted successfully:', result);
+        setShowSuccess(true);
+        
+        // Reset form
+        setFormData({
+          name: '',
+          email: '',
+          position: '',
+          company: '',
+          review: ''
+        });
+        setRating(0);
+        setSelectedFile(null);
+        setFilePreview(null);
+        
+        // Close form after 3 seconds
+        setTimeout(() => {
+          setShowReviewForm(false);
+          setShowSuccess(false);
+        }, 3000);
+      } else {
+        console.error('Review submission failed:', result);
+        alert(result.message || 'Form submission failed. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error submitting review:', error);
+      alert('Error submitting form. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (

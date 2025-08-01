@@ -10,6 +10,15 @@ const CareerPage = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [selectedJob, setSelectedJob] = useState(null);
   const [showModal, setShowModal] = useState(false);
+  const [opportunityFormData, setOpportunityFormData] = useState({
+    fullName: '',
+    desiredPosition: '',
+    experience: '',
+    currentCTC: '',
+    message: ''
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
   const fileInputRef = useRef(null);
   const vantaRef = useRef(null);
   
@@ -154,6 +163,71 @@ const CareerPage = () => {
     setSelectedJob(null);
   };
 
+  const handleOpportunityInputChange = (field, value) => {
+    setOpportunityFormData(prev => ({ ...prev, [field]: value }));
+  };
+
+  const handleOpportunitySubmit = async (e) => {
+    e.preventDefault();
+    
+    if (!selectedFile) {
+      alert('Please upload your CV');
+      return;
+    }
+
+    if (!opportunityFormData.fullName || !opportunityFormData.desiredPosition || 
+        !opportunityFormData.experience || !opportunityFormData.currentCTC || 
+        !opportunityFormData.message) {
+      alert('Please fill in all required fields');
+      return;
+    }
+
+    setIsSubmitting(true);
+    
+    try {
+      const formDataToSend = new FormData();
+      formDataToSend.append('fullName', opportunityFormData.fullName);
+      formDataToSend.append('desiredPosition', opportunityFormData.desiredPosition);
+      formDataToSend.append('experience', opportunityFormData.experience);
+      formDataToSend.append('currentCTC', opportunityFormData.currentCTC);
+      formDataToSend.append('message', opportunityFormData.message);
+      formDataToSend.append('cv', selectedFile);
+      
+      console.log('Sending opportunity form data to backend');
+      
+      const response = await fetch('http://localhost:5000/api/opportunity/submit', {
+        method: 'POST',
+        body: formDataToSend
+      });
+      
+      const result = await response.json();
+      
+      if (result.success) {
+        console.log('Opportunity form submitted successfully:', result);
+        setSubmitted(true);
+        setOpportunityFormData({
+          fullName: '',
+          desiredPosition: '',
+          experience: '',
+          currentCTC: '',
+          message: ''
+        });
+        setSelectedFile(null);
+        setTimeout(() => {
+          setSubmitted(false);
+        }, 3000);
+      } else {
+        console.error('Opportunity form submission failed:', result);
+        alert('Form submission failed. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error submitting opportunity form:', error);
+      alert('Error submitting form. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <div className="min-h-screen p-2 sm:p-4 md:p-6">
       {/* Hero Section */}
@@ -186,7 +260,6 @@ const CareerPage = () => {
 `}</style>
             <div className="absolute top-0 right-0 w-40 h-40 bg-white/50 bg-opacity-5 rounded-full blur-3xl transform translate-x-16 -translate-y-16"></div>
             <div className="absolute bottom-0 left-0 w-40 h-40 bg-white/50 bg-opacity-5 rounded-full blur-3xl transform -translate-x-16 translate-y-16"></div>
-            
             
             <div className="relative z-10 ">
               <h2 className="text-2xl md:text-3xl text-gray font-bold mb-4">
@@ -243,7 +316,9 @@ const CareerPage = () => {
                             {skill}
                           </span>
                         ))}
-                        
+                        {job.skills.length > 3 && (
+                          <span className="text-gray-400 text-xs">+{job.skills.length - 3} more</span>
+                        )}
                       </div>
                     </div>
                   </div>
@@ -456,14 +531,14 @@ const CareerPage = () => {
               >
                 <path
                   d="M10 12 Q250 0 490 12"
-                  stroke="#dc2626"
+                  stroke="#EAB308"
                   strokeWidth="4"
                   strokeLinecap="round"
                   fill="none"
                 />
                 <path
                   d="M40 20 Q250 8 460 20"
-                  stroke="#dc2626"
+                  stroke="#EAB308"
                   strokeWidth="2.5"
                   strokeLinecap="round"
                   fill="none"
@@ -526,7 +601,14 @@ const CareerPage = () => {
 
             {/* Right Side - Form */}
             <div className="bg-gradient-to-b from-gray-200 to-gray-100 rounded-2xl p-4 sm:p-8 border border-gray-400 h-full">
-              <form className="space-y-4 sm:space-y-6">
+              {submitted ? (
+                <div className="text-center py-8">
+                  <div className="text-green-600 text-6xl mb-4">✓</div>
+                  <h3 className="text-2xl font-bold text-gray-900 mb-2">Thank You!</h3>
+                  <p className="text-gray-600">Your application has been submitted successfully. We'll contact you when a matching position becomes available.</p>
+                </div>
+              ) : (
+                <form className="space-y-4 sm:space-y-6" onSubmit={handleOpportunitySubmit}>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-black font-medium mb-2">
@@ -534,7 +616,9 @@ const CareerPage = () => {
                     </label>
                     <input
                       type="text"
-                      className="w-full bg-gray-200 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none transition-colors"
+                      value={opportunityFormData.fullName}
+                      onChange={(e) => handleOpportunityInputChange('fullName', e.target.value)}
+                      className="w-full bg-gray-200 border border-gray-600 rounded-lg px-4 py-3 text-black placeholder-gray-400 focus:border-purple-500 focus:outline-none transition-colors"
                       placeholder="Enter your full name"
                     />
                   </div>
@@ -544,7 +628,9 @@ const CareerPage = () => {
                     </label>
                     <input
                       type="text"
-                      className="w-full bg-gray-200 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none transition-colors"
+                      value={opportunityFormData.desiredPosition}
+                      onChange={(e) => handleOpportunityInputChange('desiredPosition', e.target.value)}
+                      className="w-full bg-gray-200 border border-gray-600 rounded-lg px-4 py-3 text-black placeholder-gray-400 focus:border-purple-500 focus:outline-none transition-colors"
                       placeholder="e.g., React Developer"
                     />
                   </div>
@@ -557,7 +643,9 @@ const CareerPage = () => {
                     </label>
                     <input
                       type="text"
-                      className="w-full bg-gray-200 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none transition-colors"
+                      value={opportunityFormData.experience}
+                      onChange={(e) => handleOpportunityInputChange('experience', e.target.value)}
+                      className="w-full bg-gray-200 border border-gray-600 rounded-lg px-4 py-3 text-black placeholder-gray-400 focus:border-purple-500 focus:outline-none transition-colors"
                       placeholder="e.g., 3+ years"
                     />
                   </div>
@@ -567,7 +655,9 @@ const CareerPage = () => {
                     </label>
                     <input
                       type="text"
-                      className="w-full bg-gray-200 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none transition-colors"
+                      value={opportunityFormData.currentCTC}
+                      onChange={(e) => handleOpportunityInputChange('currentCTC', e.target.value)}
+                      className="w-full bg-gray-200 border border-gray-600 rounded-lg px-4 py-3 text-black placeholder-gray-400 focus:border-purple-500 focus:outline-none transition-colors"
                       placeholder="e.g., 10 LPA"
                     />
                   </div>
@@ -580,7 +670,9 @@ const CareerPage = () => {
                     </label>
                     <textarea
                       rows="4"
-                      className="w-full bg-gray-200 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none transition-colors resize-none"
+                      value={opportunityFormData.message}
+                      onChange={(e) => handleOpportunityInputChange('message', e.target.value)}
+                      className="w-full bg-gray-200 border border-gray-600 rounded-lg px-4 py-3 text-black placeholder-gray-400 focus:border-purple-500 focus:outline-none transition-colors resize-none"
                       placeholder="Tell us about yourself and your interests..."
                     ></textarea>
                   </div>
@@ -617,13 +709,15 @@ const CareerPage = () => {
                 <div className="flex justify-center pt-4">
                   <button
                     type="submit"
-                    className="bg-red-600 hover:red-800 text-white font-semibold px-6 sm:px-8 py-3 rounded-full flex items-center gap-2 transition-all duration-300 hover:scale-105 w-full sm:w-auto"
+                    disabled={isSubmitting}
+                    className="bg-red-600 hover:red-800 text-white font-semibold px-6 sm:px-8 py-3 rounded-full flex items-center gap-2 transition-all duration-300 hover:scale-105 w-full sm:w-auto disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    <span>Submit</span>
+                    <span>{isSubmitting ? 'Submitting...' : 'Submit'}</span>
                     <ArrowRight size={20} />
                   </button>
                 </div>
               </form>
+              )}
             </div>
           </div>
         </div>

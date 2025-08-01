@@ -53,7 +53,7 @@ export default function ContactForm() {
 
   const serviceOptions = [
     'SAP Implementation',
-    'SAP Roll out Services',
+    'SAP Rollout  Services',
     'SAP Support Services',
     'SAP Upgrade Services',
     'SAP Migration Services',
@@ -234,30 +234,17 @@ export default function ContactForm() {
         return value.length < 2 ? 'Company name must be at least 2 characters long' : '';
 
       case 'phoneNumber':
+        // Simplified validation for testing
         const cleanNumber = value.replace(/[\s()-]/g, '');
-        const countryValidation = phoneValidationRules[formData.countryCode];
-
+        
         if (!cleanNumber) {
           return 'Phone number is required';
         }
-
-        if (!countryValidation) {
-          return 'Please select a valid country code';
+        
+        if (cleanNumber.length < 5) {
+          return 'Phone number must be at least 5 digits';
         }
-
-        const numberLength = cleanNumber.length;
-        if (numberLength < countryValidation.minLength || numberLength > countryValidation.maxLength) {
-          return `Phone number must be ${
-            countryValidation.minLength === countryValidation.maxLength
-              ? `${countryValidation.minLength} digits`
-              : `between ${countryValidation.minLength} and ${countryValidation.maxLength} digits`
-          } for ${formData.countryCode}`;
-        }
-
-        if (!countryValidation.pattern.test(cleanNumber)) {
-          return countryValidation.message;
-        }
-
+        
         return '';
 
       case 'message':
@@ -346,14 +333,18 @@ export default function ContactForm() {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log('=== CONTACT FORM SUBMISSION START ===');
+    console.log('Form data:', formData);
     
     const trimmedData = {
       ...formData,
       name: formData.name.trim(),
       email: formData.email.trim()
     };
+    
+    console.log('Trimmed data:', trimmedData);
     
     const newErrors = {};
     Object.keys(trimmedData).forEach(key => {
@@ -362,30 +353,62 @@ export default function ContactForm() {
       }
     });
     
+    console.log('Validation errors:', newErrors);
     setErrors(newErrors);
 
+    console.log('All errors empty?', Object.values(newErrors).every(error => error === ''));
+    
     if (Object.values(newErrors).every(error => error === '')) {
-      setIsSubmitted(true);
-      alert('Form submitted successfully!');
-      
-      console.log('Form submitted:', {
-        ...trimmedData,
-        phoneNumber: formData.countryCode + ' ' + formData.phoneNumber
-      });
-      
-      // Reset form after 3 seconds
-      setTimeout(() => {
-        setIsSubmitted(false);
-        setFormData({
-          name: '',
-          email: '',
-          companyName: '',
-          countryCode: '+91',
-          phoneNumber: '',
-          message: '',
-          service: ''
+      console.log('Validation passed, sending to backend...');
+      try {
+        const submitData = {
+          name: trimmedData.name,
+          email: trimmedData.email,
+          companyName: trimmedData.companyName,
+          countryCode: formData.countryCode,
+          phoneNumber: formData.phoneNumber,
+          message: trimmedData.message,
+          service: trimmedData.service
+        };
+        
+        console.log('Sending contact form data to backend:', submitData);
+        
+        const response = await fetch('http://localhost:5000/api/contact/submit', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(submitData)
         });
-      }, 3000);
+        
+        const result = await response.json();
+        
+        if (result.success) {
+          console.log('Contact form submitted successfully:', result);
+          setIsSubmitted(true);
+          alert('Form submitted successfully!');
+          
+          // Reset form after 3 seconds
+          setTimeout(() => {
+            setIsSubmitted(false);
+            setFormData({
+              name: '',
+              email: '',
+              companyName: '',
+              countryCode: '+91',
+              phoneNumber: '',
+              message: '',
+              service: ''
+            });
+          }, 3000);
+        } else {
+          console.error('Contact form submission failed:', result);
+          alert('Form submission failed. Please try again.');
+        }
+      } catch (error) {
+        console.error('Error submitting contact form:', error);
+        alert('Error submitting form. Please try again.');
+      }
     }
   };
 
@@ -433,7 +456,7 @@ export default function ContactForm() {
                 </h3>
                 <div className="pl-6 lg:pl-8">
                   <p className="text-black text-sm">
-                    1st Floor,101-B, Police, Wireless Colony,<br />
+                    1st Floor,101, Police, Wireless Colony,<br />
                     Vishal Nagar, Pimple Nilakh,<br />
                     Pune, Pimpri-Chinchwad,<br />
                     Maharashtra 411027
@@ -479,7 +502,7 @@ export default function ContactForm() {
             </div>
             {/* Right Side - Form Section */}
             <div className="w-full lg:w-7/12 backdrop-blur-3xl bg-black/10 border border-black/10 rounded-md p-4 sm:p-6 lg:p-8">
-              <h2 className="text-[#dc2626] text-lg sm:text-xl lg:text-2xl font-bold mb-2 sm:mb-3 lg:mb-4">GET IN TOUCH</h2>
+              <h2 className="text-[#428CFF] text-lg sm:text-xl lg:text-2xl font-bold mb-2 sm:mb-3 lg:mb-4">GET IN TOUCH</h2>
               <p className="text-black mb-3 sm:mb-4 lg:mb-5 text-sm">Hey! We are looking forward to start a project with you!</p>
               <form onSubmit={handleSubmit} className="space-y-2 sm:space-y-3 lg:space-y-4 p-1 sm:p-2 lg:p-3">
                 {/* Name Input */}

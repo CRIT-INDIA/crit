@@ -137,7 +137,7 @@ export default function ContactForm() {
 
   const serviceOptions = [
     'SAP Implementation',
-    'SAP Roll out Services',
+    'SAP Rollout  Services',
     'SAP Support Services',
     'SAP Upgrade Services',
     'SAP Migration Services',
@@ -430,14 +430,19 @@ export default function ContactForm() {
     }));
   };
 
-  const handleSubmit = (e) => {
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log('=== CONTACT FORM SUBMISSION START ===');
+    console.log('Form data:', formData);
     
     const trimmedData = {
       ...formData,
       name: formData.name.trim(),
       email: formData.email.trim()
     };
+    
+    console.log('Trimmed data:', trimmedData);
     
     const newErrors = {};
     Object.keys(trimmedData).forEach(key => {
@@ -446,30 +451,62 @@ export default function ContactForm() {
       }
     });
     
+    console.log('Validation errors:', newErrors);
     setErrors(newErrors);
 
+    console.log('All errors empty?', Object.values(newErrors).every(error => error === ''));
+    
     if (Object.values(newErrors).every(error => error === '')) {
-      setIsSubmitted(true);
-      alert('Form submitted successfully!');
-      
-      console.log('Form submitted:', {
-        ...trimmedData,
-        phoneNumber: formData.countryCode + ' ' + formData.phoneNumber
-      });
-      
-      // Reset form after 3 seconds
-      setTimeout(() => {
-        setIsSubmitted(false);
-        setFormData({
-          name: '',
-          email: '',
-          companyName: '',
-          countryCode: '+91',
-          phoneNumber: '',
-          message: '',
-          service: ''
+      console.log('Validation passed, sending to backend...');
+      try {
+        const submitData = {
+          name: trimmedData.name,
+          email: trimmedData.email,
+          companyName: trimmedData.companyName,
+          countryCode: formData.countryCode,
+          phoneNumber: formData.phoneNumber,
+          message: trimmedData.message,
+          service: trimmedData.service
+        };
+        
+        console.log('Sending contact form data to backend:', submitData);
+        
+        const response = await fetch('http://localhost:5000/api/contact/submit', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(submitData)
         });
-      }, 3000);
+        
+        const result = await response.json();
+        
+        if (result.success) {
+          console.log('Contact form submitted successfully:', result);
+          setIsSubmitted(true);
+          alert('Form submitted successfully!');
+          
+          // Reset form after 3 seconds
+          setTimeout(() => {
+            setIsSubmitted(false);
+            setFormData({
+              name: '',
+              email: '',
+              companyName: '',
+              countryCode: '+91',
+              phoneNumber: '',
+              message: '',
+              service: ''
+            });
+          }, 3000);
+        } else {
+          console.error('Contact form submission failed:', result);
+          alert('Form submission failed. Please try again.');
+        }
+      } catch (error) {
+        console.error('Error submitting contact form:', error);
+        alert('Error submitting form. Please try again.');
+      }
     }
   };
 
@@ -479,14 +516,14 @@ export default function ContactForm() {
         <div className="container mx-auto px-2 sm:px-4 lg:px-6 py-3 sm:py-4 lg:py-6">
           {/* Main Heading */}
           <div className="text-center mb-6 sm:mb-8 pt-6 sm:pt-8">
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 inline-block relative">
-    <span className="text-black">Get In Touch With </span>
-    <span className="text-red-500">Connecting Roots</span>
-    <svg className="mx-auto my-0" style={{marginTop: '-4px'}} width="160" height="18" viewBox="0 0 220 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <path d="M5 18 Q 110 8, 215 14" stroke="#dc2626" strokeWidth="4" strokeLinecap="round" fill="none"/>
-  <path d="M15 21 Q 120 15, 200 18" stroke="#dc2626" strokeWidth="2" strokeLinecap="round" fill="none"/>
-</svg>
-  </h1>
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 inline-block relative">
+              <span className="text-black">Get In Touch With </span>
+              <span className="text-red-500">Connecting Roots</span>
+              <svg className="mx-auto my-0" style={{marginTop: '-4px'}} width="160" height="18" viewBox="0 0 220 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5 18 Q 110 8, 215 14" stroke="#dc2626" strokeWidth="4" strokeLinecap="round" fill="none"/>
+                <path d="M15 21 Q 120 15, 200 18" stroke="#dc2626" strokeWidth="2" strokeLinecap="round" fill="none"/>
+              </svg>
+            </h1>
           </div>
           <div className="max-w-6xl mx-auto flex flex-col lg:flex-row gap-4 sm:gap-6 lg:gap-8 items-start relative z-10 w-full">
             {/* Left Side - Contact Information */}

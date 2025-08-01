@@ -75,7 +75,7 @@ export const ThreeDMarquee = ({ className }) => {
             className="text-base md:text-lg text-black mb-6 md:mb-8 max-w-xl text-left"
             variants={itemVariants}
           >
-            Empower your enterprise with CritIndia's comprehensive SAP implementation and support services. We deliver tailored solutions that drive innovation and growth.
+            Empower your enterprise with CritIndia comprehensive SAP implementation and support services. We deliver tailored solutions that drive innovation and growth.
           </motion.p>
           <motion.div className="flex flex-wrap gap-3 md:gap-4 justify-start" variants={itemVariants}>
             <a
@@ -87,11 +87,11 @@ export const ThreeDMarquee = ({ className }) => {
               Schedule a Demo
             </a>
             <a
-              href="#solutions"
+              href="/services"
               className="flex items-center gap-2 px-3 sm:px-4 md:px-6 py-2 hover:scale-105 rounded-full font-semibold bg-white/10 border border-gray-400/30 text-black/80 backdrop-blur-md hover:bg-white/20 hover:border-gray-200/50 transition-all duration-200 text-sm md:text-base active:scale-95 shadow-md"
               style={{ pointerEvents: 'auto' }}
             >
-              View Solutions
+              View Services
               <svg xmlns="http://www.w3.org/2000/svg" fill="black" width="20" height="20" className="w-4 h-4 md:w-5 md:h-5"><path d="M7.293 4.707 14.586 12l-7.293 7.293 1.414 1.414L17.414 12 8.707 3.293 7.293 4.707z"/></svg>
             </a>
             

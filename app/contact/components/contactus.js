@@ -182,7 +182,7 @@ export default function ContactSection() {
                       <div className="relative w-10 h-10 sm:w-14 sm:h-14 lg:w-16 lg:h-16">
                         {/* Icon background with glow */}
                         <div className={`absolute inset-0 rounded-full transition-all duration-300 ${
-                          hoveredIcon === item.id ? 'scale-125 shadow-[0_0_24px_8px_rgba(255,255,255,0.7)]' : 'scale-100 shadow-[0_0_16px_4px_rgba(255,255,255,0.4)]'
+                          hoveredIcon === item.id ? 'scale-105 shadow-[0_0_24px_8px_rgba(255,255,255,0.7)]' : 'scale-100 shadow-[0_0_16px_4px_rgba(255,255,255,0.4)]'
                         }`} style={{ background: '#ff0000', border: '2px solid #ff0000' }}>
                         </div>
                         {/* Icon */}

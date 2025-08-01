@@ -12,6 +12,10 @@ const WhyChooseUs = () => {
       title: "End-to-End Support", 
       description: "Comprehensive support from assessment to post-implementation maintenance."
     },
+     {
+      title: "Industry Experts", 
+      description: "The Crit team comprises professionals with hands-on knowledge in 30+ industries, including manufacturing, logistics, and oil and gas."
+    },
     {
       title: "Industry Expertise",
       description: "Deep understanding of industry-specific requirements and best practices."
