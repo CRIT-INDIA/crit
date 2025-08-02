@@ -471,7 +471,7 @@ export default function SapS4HanaServicePage({ serviceName }) {
               <path d="M15 21 Q 120 15, 200 18" stroke="#FFD700" strokeWidth="2" strokeLinecap="round" fill="none"/>
             </svg>  
           </div>
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="grid lg:grid-cols-2 gap-2 items-center">
             <div className="space-y-6">
               <h3 className="text-2xl font-bold text-gray-700">{formattedServiceName || 'Overview'}</h3>
               <p className="text-lg leading-relaxed text-gray-700 whitespace-pre-line">{overviewText}</p>
@@ -481,31 +481,31 @@ export default function SapS4HanaServicePage({ serviceName }) {
                 <div className="flex flex-col gap-6 w-full max-w-2xl">
                   {/* Pair 1 */}
                   <div className="flex gap-4 items-center">
-                    <div className="flex-1 rounded-xl flex items-center justify-center animate-pulse bg-red-100" style={{ animationDelay: '0s' }}>
-                      <img src="https://res.cloudinary.com/dujw4np0d/image/upload/v1753165462/Project_70-02_uw5nzc.jpg" alt="Overview 1" className="w-42 h-42 object-contain rounded" />
+                    <div className="flex-1 rounded-xl flex items-center justify-center animate-pulse bg-red-100 p-1" style={{ animationDelay: '0s' }}>
+                      <img src="https://res.cloudinary.com/dujw4np0d/image/upload/v1753165462/Project_70-02_uw5nzc.jpg" alt="Overview 1" className="w-40 h-40 object-contain rounded" />
                     </div>
-                    <div className="flex-1 rounded-xl flex items-center justify-center animate-pulse bg-red-100" style={{ animationDelay: '0.2s' }}>
-                      <img src="https://res.cloudinary.com/dujw4np0d/image/upload/v1753166207/101_ZS0yMw_jp1azj.jpg" alt="Overview 2" className="w-42 h-42 object-contain rounded" />
+                    <div className="flex-1 rounded-xl flex items-center justify-center animate-pulse bg-red-100 p-1" style={{ animationDelay: '0.2s' }}>
+                      <img src="https://res.cloudinary.com/dujw4np0d/image/upload/v1753166207/101_ZS0yMw_jp1azj.jpg" alt="Overview 2" className="w-40 h-40 object-contain rounded" />
                     </div>
                   </div>
                   
                   {/* Pair 2 */}
                   <div className="flex gap-4 items-center">
-                    <div className="flex-1 rounded-xl flex items-center justify-center animate-pulse bg-red-100" style={{ animationDelay: '0.4s' }}>
-                      <img src="https://res.cloudinary.com/dujw4np0d/image/upload/v1753166794/MyApril10_k7z7wb.jpg" alt="Overview 3" className="w-42 h-42 object-contain rounded" />
+                    <div className="flex-1 rounded-xl flex items-center justify-center animate-pulse bg-red-100 p-1" style={{ animationDelay: '0.4s' }}>
+                      <img src="https://res.cloudinary.com/dujw4np0d/image/upload/v1753166794/MyApril10_k7z7wb.jpg" alt="Overview 3" className="w-40 h-40 object-contain rounded" />
                     </div>
-                    <div className="flex-1 rounded-xl flex items-center justify-center animate-pulse bg-red-100" style={{ animationDelay: '0.6s' }}>
-                      <img src="https://res.cloudinary.com/dujw4np0d/image/upload/v1753167637/vecteezy_office-worker-vector-illustration-holding-business-chart_8149367-1_bstjox.jpg" alt="Overview 4" className="w-42 h-42 object-contain rounded" />
+                    <div className="flex-1 rounded-xl flex items-center justify-center animate-pulse bg-red-100 p-1" style={{ animationDelay: '0.6s' }}>
+                      <img src="https://res.cloudinary.com/dujw4np0d/image/upload/v1753167637/vecteezy_office-worker-vector-illustration-holding-business-chart_8149367-1_bstjox.jpg" alt="Overview 4" className="w-40 h-40 object-contain rounded" />
                     </div>
                   </div>
                   
                   {/* Pair 3 */}
                   <div className="flex gap-4 items-center">
-                    <div className="flex-1 rounded-xl flex items-center justify-center animate-pulse bg-red-100" style={{ animationDelay: '0.8s' }}>
-                      <img src="https://res.cloudinary.com/dujw4np0d/image/upload/v1753167770/Man_and_woman_with_briefcase_shake_hand_generated_bv5jsf.jpg" alt="Overview 5" className="w-42 h-42 object-contain rounded" />
+                    <div className="flex-1 rounded-xl flex items-center justify-center animate-pulse bg-red-100 p-1" style={{ animationDelay: '0.8s' }}>
+                      <img src="https://res.cloudinary.com/dujw4np0d/image/upload/v1753167770/Man_and_woman_with_briefcase_shake_hand_generated_bv5jsf.jpg" alt="Overview 5" className="w-40 h-40 object-contain rounded" />
                     </div>
-                    <div className="flex-1 rounded-xl flex items-center justify-center animate-pulse bg-red-100" style={{ animationDelay: '1s' }}>
-                      <img src="https://res.cloudinary.com/dujw4np0d/image/upload/v1753167937/vecteezy_business-teamwork-brainstorming-in-flat-style-isolated-on_36893510_mzafm8.jpg" alt="Overview 6" className="w-42 h-42 object-contain rounded" />
+                    <div className="flex-1 rounded-xl flex items-center justify-center animate-pulse bg-red-100 p-1" style={{ animationDelay: '1s' }}>
+                      <img src="https://res.cloudinary.com/dujw4np0d/image/upload/v1753167937/vecteezy_business-teamwork-brainstorming-in-flat-style-isolated-on_36893510_mzafm8.jpg" alt="Overview 6" className="w-40 h-40 object-contain rounded" />
                     </div>
                   </div>
                 </div>
