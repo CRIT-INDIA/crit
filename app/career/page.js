@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react';
 import { usePathname } from 'next/navigation';
-import CareerPage from './components/general';
+import CareerPage from './components/general'
 
 export default function Career() {
   const pathname = usePathname();
@@ -14,6 +14,7 @@ export default function Career() {
 
   return (
     <main className="relative bg-[#fff5f5]">
+      
       <CareerPage />
     </main>
   );

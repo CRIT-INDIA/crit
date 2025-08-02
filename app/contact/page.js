@@ -7,6 +7,7 @@ import "./contactus.css";
 export default function ContactPage() {
   return (
     <section className="bg-[#fff5f5]">
+        
         <ContactSection />
         <div>
           <ContactForm />

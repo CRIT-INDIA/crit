@@ -1,9 +1,58 @@
 'use client';
 import React, { useState, useEffect, useRef } from "react";
 
+// Add custom CSS for animations
+const customStyles = `
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+  }
+  
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+  }
+  
+
+
+  
+  @keyframes glow {
+    0%, 100% { box-shadow: 0 0 20px rgba(239, 68, 68, 0.3); }
+    50% { box-shadow: 0 0 30px rgba(239, 68, 68, 0.5); }
+  }
+  
+  .animate-fadeIn {
+    animation: fadeIn 0.6s ease-out;
+  }
+  
+  .animate-pulse-slow {
+    animation: pulse 3s ease-in-out infinite;
+  }
+  
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+  
+
+
+  
+  .animate-glow {
+    animation: glow 2s ease-in-out infinite;
+  }
+  
+  .glow-effect {
+    box-shadow: 0 0 20px rgba(239, 68, 68, 0.3);
+  }
+`;
+
 const SEGMENTS = [
   {
-    label: "Ongoing Improvements & Feedback",
+    label: "Ongoing Improvement & Feedback",
     info: [
       "Collect user feedback regularly from all departments using surveys, interviews, and suggestion boxes.",
       "Implement system improvements based on prioritized feedback and business needs. Track the impact of changes and communicate updates to all users.",
@@ -89,25 +138,38 @@ const LABEL_POSITIONS = [
 
 export default function ERPImplementationDiagram() {
   const [hovered, setHovered] = useState(null);
-  const [size, setSize] = useState(300); // default size is now smaller
+  const [size, setSize] = useState(300);
   const [leftInfo, setLeftInfo] = useState(SEGMENTS[7]);
   const [rightInfo, setRightInfo] = useState(SEGMENTS[0]);
   const [panelWidth, setPanelWidth] = useState(280);
   const [isMobile, setIsMobile] = useState(false);
-  // Set robotActive to true by default so the beam and info box show on load
+  const [isTablet, setIsTablet] = useState(false);
   const [robotActive, setRobotActive] = useState(true);
   const [rayAnim, setRayAnim] = useState(0);
-  const animRef = useRef();
+  const [rotationAngle, setRotationAngle] = useState(0);
+  const animRef = useRef(null);
+  const rotationRef = useRef(null);
   const [typedInfo, setTypedInfo] = useState([]);
   const typingIndex = useRef(0);
-  const typingTimeout = useRef();
+  const typingTimeout = useRef(null);
 
+  // Enhanced responsive sizing
   useEffect(() => {
     function handleResize() {
       const w = window.innerWidth;
       const h = window.innerHeight;
-      // Responsive: 90vw or 90vh, max 440px, min 220px (slightly larger)
-      const s = Math.max(220, Math.min(440, Math.min(w, h) * 0.98));
+      
+      // More responsive sizing with better breakpoints
+      let s;
+      if (w <= 480) { // Mobile phones
+        s = Math.max(200, Math.min(280, Math.min(w, h) * 0.85));
+      } else if (w <= 768) { // Tablets
+        s = Math.max(250, Math.min(350, Math.min(w, h) * 0.75));
+      } else if (w <= 1024) { // Small laptops
+        s = Math.max(300, Math.min(400, Math.min(w, h) * 0.7));
+      } else { // Desktop
+        s = Math.max(350, Math.min(450, Math.min(w, h) * 0.6));
+      }
       setSize(s);
     }
     handleResize();
@@ -118,8 +180,14 @@ export default function ERPImplementationDiagram() {
   useEffect(() => {
     function handlePanelResize() {
       const w = window.innerWidth;
-      // Responsive: 90vw (max 340px, min 220px)
-      const pw = Math.max(220, Math.min(340, w * 0.9));
+      let pw;
+      if (w <= 480) {
+        pw = Math.max(200, Math.min(280, w * 0.85));
+      } else if (w <= 768) {
+        pw = Math.max(250, Math.min(320, w * 0.8));
+      } else {
+        pw = Math.max(280, Math.min(340, w * 0.7));
+      }
       setPanelWidth(pw);
     }
     handlePanelResize();
@@ -127,13 +195,16 @@ export default function ERPImplementationDiagram() {
     return () => window.removeEventListener('resize', handlePanelResize);
   }, []);
 
+  // Enhanced device detection
   useEffect(() => {
-    function handleMobileCheck() {
-      setIsMobile(window.innerWidth <= 600);
+    function handleDeviceCheck() {
+      const w = window.innerWidth;
+      setIsMobile(w <= 768);
+      setIsTablet(w > 768 && w <= 1024);
     }
-    handleMobileCheck();
-    window.addEventListener('resize', handleMobileCheck);
-    return () => window.removeEventListener('resize', handleMobileCheck);
+    handleDeviceCheck();
+    window.addEventListener('resize', handleDeviceCheck);
+    return () => window.removeEventListener('resize', handleDeviceCheck);
   }, []);
 
   useEffect(() => {
@@ -142,7 +213,7 @@ export default function ERPImplementationDiagram() {
       const animate = (now) => {
         const elapsed = now - last;
         last = now;
-        setRayAnim((prev) => (prev + elapsed * 0.0015) % 1); // loop 0-1
+        setRayAnim((prev) => (prev + elapsed * 0.0015) % 1);
         animRef.current = requestAnimationFrame(animate);
       };
       animRef.current = requestAnimationFrame(animate);
@@ -153,14 +224,37 @@ export default function ERPImplementationDiagram() {
     }
   }, [robotActive]);
 
+  // Continuous rotation animation
+  useEffect(() => {
+    let animationId;
+    let startTime = performance.now();
+    
+    const animateRotation = (currentTime) => {
+      const elapsed = currentTime - startTime;
+      const rotationSpeed = 0.008; // Much smoother rotation speed
+      const newAngle = (elapsed * rotationSpeed) % 360;
+      
+      setRotationAngle(newAngle);
+      animationId = requestAnimationFrame(animateRotation);
+    };
+    
+    animationId = requestAnimationFrame(animateRotation);
+    
+    return () => {
+      if (animationId) {
+        cancelAnimationFrame(animationId);
+      }
+    };
+  }, []);
+
   useEffect(() => {
     let active = true;
-    // Change default info to SEGMENTS[7] (Go Live) when not hovered
     const infoArr = hovered !== null ? SEGMENTS[hovered].info : SEGMENTS[7].info;
     setTypedInfo(Array(infoArr.length).fill(''));
     typingIndex.current = 0;
     let charIdx = 0;
     let bulletIdx = 0;
+    
     function typeNext() {
       if (!active) return;
       if (bulletIdx >= infoArr.length) return;
@@ -172,11 +266,14 @@ export default function ERPImplementationDiagram() {
           return updated;
         });
         charIdx++;
-        typingTimeout.current = setTimeout(typeNext, isMobile ? 8 : 5);
+        // Faster typing on mobile for better UX
+        const typingSpeed = isMobile ? 6 : 5;
+        typingTimeout.current = setTimeout(typeNext, typingSpeed);
       } else {
         bulletIdx++;
         charIdx = 0;
-        typingTimeout.current = setTimeout(typeNext, isMobile ? 300 : 250);
+        const pauseTime = isMobile ? 200 : 250;
+        typingTimeout.current = setTimeout(typeNext, pauseTime);
       }
     }
     typeNext();
@@ -184,347 +281,230 @@ export default function ERPImplementationDiagram() {
       active = false;
       clearTimeout(typingTimeout.current);
     };
-  }, [hovered]);
+  }, [hovered, isMobile]);
 
   const cx = size / 2;
   const cy = size / 2;
   const rOuter = size * 0.3;
   const rInner = size * 0.18;
   const cardDistance = size < 500 ? size * 0.43 : size * 0.5;
-  const cardWidth = Math.max(90, Math.min(120, size * 0.18)); // reduced for mobile compression
-  const cardHeight = Math.max(50, Math.min(40, size * 0.98)); // reduced for mobile compression
+  
+  // Responsive card sizing
+  const cardWidth = isMobile ? Math.max(80, Math.min(100, size * 0.16)) : Math.max(90, Math.min(120, size * 0.18));
+  const cardHeight = isMobile ? Math.max(40, Math.min(50, size * 0.12)) : Math.max(50, Math.min(70, size * 0.15));
   const popupWidth = Math.max(180, size * 0.4);
 
-  // Helper to get coordinates for a given angle and radius
   const polarToCartesian = (angle, radius) => [
     cx + radius * Math.cos((angle - 90) * (Math.PI / 180)),
     cy + radius * Math.sin((angle - 90) * (Math.PI / 180))
   ];
 
   return (
-    <div className="w-full min-h-* flex items-center justify-center p-15 bg-[#fff5f5]">
+    <>
+      <style dangerouslySetInnerHTML={{ __html: customStyles }} />
+      <div className="w-full min-h-* flex flex-col items-center justify-start p-4 sm:p-6 lg:px-4 lg:py-8">
       {isMobile ? (
-          <div style={{
-          display: 'flex', 
-          flexDirection: 'column', 
-          alignItems: 'center', 
-          width: '100%', 
-          padding: '1rem',
-          gap: '0.5rem',
-          minHeight: '100vh',
-          justifyContent: 'space-between'
-        }}>
-          {/* Pie Chart Diagram */}
-            <div style={{
-              width: '100%',
-            display: 'flex', 
-            justifyContent: 'flex-start', 
-            alignItems: 'center',
-            marginBottom: '1rem',
-            marginTop: '0rem',
-            paddingLeft: '0rem',
-            marginLeft: '-2rem',
-                  position: 'relative',
-            zIndex: 2
-                }}>
-            <div
-              style={{
-                position: 'relative',
-                aspectRatio: '1 / 1',
-                maxWidth: '120px',
-                maxHeight: '120px',
-                width: size,
-                height: size,
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}
-            >
-              {/* Pie Chart and Arrows */}
-              <svg
-                width={size}
-                height={size}
-                viewBox={`0 0 ${size} ${size}`}
-                className="z-10 absolute left-0 top-0"
-                style={{ filter: 'drop-shadow(0 8px 24px #1e293b88)' }}
-                preserveAspectRatio="xMidYMid meet"
-              >
-                <defs>
-                  <radialGradient id="pie3d" cx="60%" cy="40%" r="80%">
-                    <stop offset="0%" stopColor="#e5e7eb" stopOpacity="1" />
-                    <stop offset="60%" stopColor="#a3a3a3" stopOpacity="0.97" />
-                    <stop offset="100%" stopColor="#52525b" stopOpacity="0.95" />
-                  </radialGradient>
-                  <linearGradient id="pieBevel" x1="0" y1="0" x2="1" y2="1">
-                    <stop offset="0%" stopColor="#fff" stopOpacity="0.18" />
-                    <stop offset="100%" stopColor="#000" stopOpacity="0.18" />
-                  </linearGradient>
-                  <radialGradient id="center3d" cx="50%" cy="40%" r="80%">
-                    <stop offset="0%" stopColor="#ffffff" stopOpacity="0.18" />
-                    <stop offset="60%" stopColor="#1a202c" stopOpacity="0.95" />
-                    <stop offset="100%" stopColor="#000000" stopOpacity="1" />
-                  </radialGradient>
-                </defs>
-                {SEGMENTS.map((segment, i) => {
-                  const startAngle = i * 45;
-                  const endAngle = (i + 1) * 45;
-                  // Pie segment path
-                  const [x1, y1] = polarToCartesian(startAngle, rOuter);
-                  const [x2, y2] = polarToCartesian(endAngle, rOuter);
-                  const [x3, y3] = polarToCartesian(endAngle, rInner);
-                  const [x4, y4] = polarToCartesian(startAngle, rInner);
-                  const largeArc = endAngle - startAngle > 180 ? 1 : 0;
-                  const pathData = [
-                    `M${x1},${y1}`,
-                    `A${rOuter},${rOuter} 0 ${largeArc} 1 ${x2},${y2}`,
-                    `L${x3},${y3}`,
-                    `A${rInner},${rInner} 0 ${largeArc} 0 ${x4},${y4}`,
-                    "Z"
-                  ].join(" ");
-                  // Arrow
-                  const midAngle = startAngle + 22.5;
-                  const rad = (midAngle - 90) * (Math.PI / 180);
-                  const cardCenterX = cx + cardDistance * Math.cos(rad);
-                  const cardCenterY = cy + cardDistance * Math.sin(rad);
-                  const [arrowStartX, arrowStartY] = polarToCartesian(midAngle, rOuter + 5);
-                  const arrowEndX = cardCenterX;
-                  const arrowEndY = cardCenterY;
-                  const isHovered = hovered === i;
-                  return (
-                    <g key={i}>
-                      <path
-                        d={pathData}
-                        fill={isHovered ? 'url(#pie3d)' : 'url(#pie3d)'}
-                        stroke="#111827"
-                        strokeWidth={isHovered ? 5 : 3}
-                        opacity={isHovered ? 1 : 0.95}
-                        style={{
-                          filter: isHovered ? "drop-shadow(0 0 16px #e53e3e)" : undefined,
-                          cursor: "pointer",
-                          transition: "all 0.2s cubic-bezier(.4,2,.6,1)",
-                        }}
-                        onMouseEnter={() => {
-                          setHovered(i);
-                          setRobotActive(true);
-                        }}
-                        onMouseLeave={() => {
-                          setHovered(null);
-                          setRobotActive(false);
-                        }}
-                      />
-                      {/* Bevel highlight */}
-                      <path
-                        d={pathData}
-                        fill="none"
-                        stroke="url(#pieBevel)"
-                        strokeWidth={isHovered ? 7 : 4}
-                        opacity={isHovered ? 0.7 : 0.5}
-                        style={{ pointerEvents: 'none' }}
-                      />
-                      {/* Arrow */}
-                      <line
-                        x1={arrowStartX}
-                        y1={arrowStartY}
-                        x2={arrowEndX}
-                        y2={arrowEndY}
-                        stroke="#a0aec0"
-                        strokeWidth="2"
-                        strokeDasharray="6,6"
-                        markerEnd="url(#arrowhead)"
-                        opacity="0.7"
-                      />
-                    </g>
-                  );
-                })}
-                {/* Central Circle and text */}
-                <circle
-                  cx={cx}
-                  cy={cy}
-                  r={rInner}
-                  fill="#f3f4f6"
-                  stroke="#111827"
-                  strokeWidth={size * 0.012}
-                  filter="url(#glow)"
-                />
-                <text
-                  x={cx}
-                  y={cy - size * 0.015}
-                  textAnchor="middle"
-                  fill="#111"
-                  fontSize={size * 0.07}
-                  fontWeight="bold"
-                  fontFamily="'Segoe UI', Arial, sans-serif"
-                  style={{ letterSpacing: 2 }}
+        // MOBILE VIEW - Vertical Stack Layout
+        <div className="w-full max-w-md mx-auto space-y-8">
+          {/* Tabbed Interface Design */}
+          <div className="px-4 py-6">
+            <div className="text-center mb-6">
+              <h2 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-3">ERP Implementation Process</h2>
+              <p className="text-gray-600 text-lg">Interactive guide to successful ERP deployment</p>
+            </div>
+            
+            {/* Tab Navigation */}
+            <div className="flex overflow-x-auto space-x-1 mb-6 pb-2 scrollbar-hide">
+              {SEGMENTS.map((segment, index) => (
+                <button
+                  key={index}
+                  onClick={() => setHovered(index)}
+                  className={`flex-shrink-0 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 whitespace-nowrap ${
+                    hovered === index
+                      ? 'bg-gray-600 text-white shadow-lg'
+                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  }`}
                 >
-                  ERP
-                </text>
-                <text
-                  x={cx}
-                  y={cy + size * 0.035}
-                  textAnchor="middle"
-                  fill="#111"
-                  fontSize={size * 0.025}
-                  fontWeight="bold"
-                  fontFamily="'Segoe UI', Arial, sans-serif"
-                  style={{ letterSpacing: 3 }}
-                >
-                  IMPLEMENTATION
-                </text>
-                <defs>
-                  <radialGradient id="centerGradient" cx="50%" cy="50%" r="50%">
-                    <stop offset="60%" stopColor="#1a202c" />
-                    <stop offset="100%" stopColor="#000000" />
-                  </radialGradient>
-                  <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-                    <feDropShadow dx="0" dy="0" stdDeviation={size * 0.012} floodColor="#e53e3e" floodOpacity="0.12" />
-                  </filter>
-                  <marker id="arrowhead" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto" markerUnits="strokeWidth">
-                    <path d="M0,0 L8,4 L0,8" fill="#a0aec0" />
-                  </marker>
-                </defs>
+                  {index + 1}
+                </button>
+              ))}
+            </div>
+
+            {/* Content Area */}
+            <div className="bg-white rounded-lg shadow-lg border border-gray-200 overflow-hidden">
+              {/* Step Header */}
+              <div className="bg-gray-600 px-6 py-4">
+                <h3 className="text-lg font-semibold text-white">
+                  Step {hovered !== null ? hovered + 1 : 8}: {SEGMENTS[hovered !== null ? hovered : 7].label}
+                </h3>
+              </div>
+              
+              {/* Step Content */}
+              <div className="p-6">
+                <div className="space-y-4">
+                  {SEGMENTS[hovered !== null ? hovered : 7].info.map((point, idx) => (
+                    <div key={idx} className="flex items-start space-x-3">
+                      <div className="flex-shrink-0 w-2 h-2 bg-gray-600 rounded-full mt-2"></div>
+                      <p className="text-gray-700 leading-relaxed">
+                        {point}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              
+              {/* Navigation Footer */}
+              <div className="bg-gray-50 px-6 py-4 border-t border-gray-200">
+                <div className="flex items-center justify-between">
+                  <button
+                    onClick={() => setHovered(hovered !== null && hovered > 0 ? hovered - 1 : 7)}
+                    className="flex items-center space-x-2 px-4 py-2 text-sm font-medium text-gray-600 hover:text-gray-800 transition-colors"
+                  >
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                    </svg>
+                    <span>Previous</span>
+                  </button>
+                  
+                  <div className="text-sm text-gray-500">
+                    {hovered !== null ? hovered + 1 : 8} of {SEGMENTS.length}
+                  </div>
+                  
+                  <button
+                    onClick={() => setHovered(hovered !== null && hovered < 7 ? hovered + 1 : 0)}
+                    className="flex items-center space-x-2 px-4 py-2 text-sm font-medium text-gray-600 hover:text-gray-800 transition-colors"
+                  >
+                    <span>Next</span>
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>
-              {/* Cards around the pie chart */}
-              {SEGMENTS.map((segment, i) => {
-                const startAngle = i * 45;
-                const midAngle = startAngle + 22.5;
-                const rad = (midAngle - 90) * (Math.PI / 180);
-                const cardCenterX = cx + cardDistance * Math.cos(rad);
-                const cardCenterY = cy + cardDistance * Math.sin(rad);
-                const isHovered = hovered === i;
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          {/* Circular ERP Implementation Lifecycle */}
+          <div className="px-4 py-6">
+            <div className="text-center mb-6 -mt-8">
+              <h2 className="text-3xl font-bold text-gray-900 mb-3"> ERP Implementation </h2>
+            </div>
+            
+                          {/* Circular Infographic Container */}
+                              <div className="relative w-full max-w-md mx-auto mt-8">
+                {/* Central Octagon */}
+                <div className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 ${isMobile ? 'w-23 h-23' : 'w-24 h-24'} bg-gradient-to-br from-white to-gray-50 rounded-xl shadow-2xl border-2 border-gray-300 z-30 flex items-center justify-center backdrop-blur-sm`} style={{ marginLeft: '10px' }}>
+                  <div className="text-center">
+                                          <h3 className={`font-bold text-gray-900 leading-tight ${isMobile ? 'text-xs' : 'text-sm'}`}> ERP Implementation </h3>
+                  </div>
+                </div>
+              
+                            {/* Circular Stages */}
+              <div className={`relative mx-auto ${isMobile ? 'w-80 h-80' : 'w-80 h-80'}`} style={{ marginLeft: '-15px' }}>
+                {SEGMENTS.map((segment, index) => {
+                  // Position stages along the circular path at 45-degree intervals with rotation
+                  const baseAngle = (index * 45) - 90; // Start from top and go clockwise
+                  const totalAngle = baseAngle + rotationAngle; // Add rotation
+                  const radius = isMobile ? 140 : 150; // Fixed radius - same as circle
+                  const x = Math.cos(totalAngle * Math.PI / 180) * radius;
+                  const y = Math.sin(totalAngle * Math.PI / 180) * radius;
+                  
+                  // Color scheme matching the design
+                  const colors = [
+                    hovered === index ? 'bg-white' : 'bg-gradient-to-br from-gray-400 to-gray-300',       // Ongoing Improvements - White when selected
+                    hovered === index ? 'bg-white' : 'bg-gradient-to-br from-gray-400 to-gray-300',       // Planning & Organization - White when selected
+                    hovered === index ? 'bg-white' : 'bg-gradient-to-br from-gray-400 to-gray-300',       // System Selection - White when selected
+                    hovered === index ? 'bg-white' : 'bg-gradient-to-br from-gray-400 to-gray-300',       // Installation - White when selected
+                    hovered === index ? 'bg-white' : 'bg-gradient-to-br from-gray-400 to-gray-300',       // Data Migration - White when selected
+                    hovered === index ? 'bg-white' : 'bg-gradient-to-br from-gray-400 to-gray-300',       // Training - White when selected
+                    hovered === index ? 'bg-white' : 'bg-gradient-to-br from-gray-300 to-gray-400',       // Testing & Validation - White when selected
+                    hovered === index ? 'bg-white' : 'bg-gradient-to-br from-gray-300 to-gray-400'        // Go Live - White when selected
+                  ];
+                  
+
 
                 return (
-                  <React.Fragment key={i}>
                     <div
-                      className={`absolute px-5 md:px-3 py-1 md:py-2 rounded-lg text-white font-bold text-xs md:text-xs shadow border border-[#222c3c] flex flex-col items-center justify-center whitespace-pre-line text-center transition-all duration-200 ${isHovered ? 'scale-110 z-50 bg-red-600 shadow-2xl' : 'bg-gray-500'}`}
+                      key={index}
+                      className={`absolute ${isMobile ? 'w-16 h-16' : 'w-20 h-20'} ${colors[index]} rounded-xl shadow-xl border-2 ${hovered === index ? 'border-gray-600' : 'border-white'} flex items-center justify-center cursor-pointer transition-all duration-300 hover:shadow-2xl ${hovered === index ? 'ring-4 ring-gray-400 ring-opacity-50 shadow-2xl' : ''}`}
                       style={{
-                        left: cardCenterX,
-                        top: cardCenterY,
-                        width: cardWidth,
-                        height: cardHeight,
-                        textAlign: 'center',
-                        zIndex: isHovered ? 50 : 30,
+                        left: `calc(50% + ${x}px)`,
+                        top: `calc(50% + ${y}px)`,
                         transform: 'translate(-50%, -50%)',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        padding: '0.9em 0.9em',
-                        fontSize: '0.80em', // smaller for mobile to fit inside the gray box
+                        position: 'absolute',
+                        zIndex: 20,
                       }}
-                      onMouseEnter={() => {
-                        setHovered(i);
-                        setRobotActive(true);
-                      }}
-                      onMouseLeave={() => {
-                        setHovered(null);
-                        setRobotActive(false);
-                      }}
+                      onClick={() => setHovered(index)}
                     >
+                      <div className={`text-gray-900 font-bold text-center leading-tight drop-shadow-sm px-1 ${isMobile ? 'text-[10px]' : 'text-xs'}`}>
                       {segment.label}
+                      </div>
                     </div>
-                  </React.Fragment>
                 );
               })}
             </div>
+              
+                             {/* Connection Lines */}
+               <svg className="absolute top-0 left-0 w-full h-full" style={{ width: '320px', height: '320px', zIndex: 1, marginLeft: '-15px' }}>
+                 <defs>
+
+                   <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                     <stop offset="0%" stopColor="#9CA3AF" stopOpacity="0.6" />
+                     <stop offset="50%" stopColor="#6B7280" stopOpacity="0.8" />
+                     <stop offset="100%" stopColor="#9CA3AF" stopOpacity="0.6" />
+                   </linearGradient>
+                 </defs>
+                 {/* Perfect Circle Connection Line */}
+                 <circle
+                   cx="160"
+                   cy="160"
+                   r={isMobile ? 130 : 150}
+                   fill="none"
+                   stroke="url(#lineGradient)"
+                   strokeWidth="2"
+                   opacity="0.7"
+                 />
+               </svg>
           </div>
 
-          {/* Robot and Info Section */}
-          <div style={{
-            display: 'flex', 
-            flexDirection: 'column', 
-            alignItems: 'center', 
-              width: '100%',
-            gap: '1rem',
-            marginTop: '2.5rem',
-              marginBottom: '2rem',
-            paddingLeft: '0rem',
-            position: 'relative',
-            zIndex: 1
-          }}>
-            {/* Spacer to push info card downward */}
-            <div style={{ height: '4rem' }} />
-            {/* Info Box */}
-            <div
-              style={{
-                width: (SEGMENTS[hovered !== null ? hovered : 7].label === 'Ongoing Improvements & Feedback') ? '100%' : '100%',
-                maxWidth: (SEGMENTS[hovered !== null ? hovered : 7].label === 'Ongoing Improvements & Feedback') ? '440px' : '400px',
-                color: '#fff',
-                fontWeight: 700,
-                fontSize: '0.9rem',
-                textShadow: 'none',
-                zIndex: 10,
-                background: 'rgba(0,0,0,0.9)',
-                borderRadius: '0.8em',
-                padding: '1rem',
-                pointerEvents: 'none',
-                textAlign: 'center',
-                whiteSpace: 'normal',
-                border: '2px solid #e53e3e',
-                marginTop: '1.5rem'
-              }}
-            >
-              <div style={{
-                fontSize:
-                  typeof window !== 'undefined' && window.innerWidth <= 600
-                    ? '1.1rem' // reduced heading for mobile
-                    : typeof window !== 'undefined' && window.innerWidth > 600 && SEGMENTS[hovered !== null ? hovered : 7].label === 'Ongoing Improvements & Feedback'
-                    ? '0.8rem'
-                    : typeof window !== 'undefined' && window.innerWidth > 600
-                    ? '0.9rem'
-                    : '1.1rem',
-                lineHeight: 1.1,
-                padding: '0 0.9em',
-                fontWeight:
-                  SEGMENTS[hovered !== null ? hovered : 7].label === 'Ongoing Improvements & Feedback' ? 600 : 700,
-                marginBottom: '0.8em',
-                textDecoration: 'underline',
-                letterSpacing:
-                  SEGMENTS[hovered !== null ? hovered : 7].label === 'Ongoing Improvements & Feedback' ? 0.5 : 1,
-                color: '#e53e3e'
-              }}>
-                  {SEGMENTS[hovered !== null ? hovered : 7].label}
+            {/* Selected Stage Details */}
+            {hovered !== null && (
+              <div className={`${isMobile ? 'mt-20' : 'mt-16'} animate-fadeIn`}>
+                <div className={`bg-gradient-to-br from-white to-gray-50 rounded-2xl shadow-2xl border border-gray-300 backdrop-blur-sm ${isMobile ? 'p-6' : 'p-8'}`}>
+                  <div className="mb-6">
+                    <h3 className={`font-bold text-gray-900 ${isMobile ? 'text-lg' : 'text-xl'}`}>{SEGMENTS[hovered].label}</h3>
+                  </div>
+                  <div className="space-y-4">
+                    {SEGMENTS[hovered].info.map((point, idx) => (
+                                              <div key={idx} className="flex items-start space-x-4 p-3 bg-white/50 rounded-lg border border-gray-200 hover:bg-white/70 transition-colors duration-200">
+                        <div className="flex-shrink-0 w-3 h-3 bg-gray-600 rounded-full mt-2 shadow-sm"></div>
+                        <p className="text-gray-700 leading-relaxed text-base">
+                          {point}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              <ul style={{
-                fontSize: '0.85rem', 
-                margin: 0,
-                padding: 0, 
-                color: '#fff',
-                listStyle: 'disc inside', 
-                fontWeight: 400, 
-                whiteSpace: 'normal', 
-                textAlign: 'left',
-                lineHeight: 1.4
-              }}>
-                {SEGMENTS[hovered !== null ? hovered : 7].info.map((point, idx) => (
-                  <li key={idx} style={{
-                    marginBottom: '0.8em', 
-                    lineHeight: 1.3, 
-                    wordBreak: 'break-word', 
-                    whiteSpace: 'normal' 
-                  }}>
-                    {typedInfo[idx] || ''}
-                  </li>
-                ))}
-              </ul>
             </div>
+            )}
           </div>
         </div>
       ) : (
-        <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', width: '100%' }}>
+        // DESKTOP VIEW - With robot and SVG rays
+        <div className="flex flex-col lg:flex-row items-center justify-start w-full max-w-7xl mx-auto space-y-8 lg:space-y-0 lg:space-x-4 lg:pr-4">
+          {/* Desktop/Tablet Pie Chart */}
+          <div className="relative flex-shrink-0 lg:ml-0">
             <div
               style={{
                 position: 'relative',
                 aspectRatio: '1 / 1',
-                maxWidth: '95vw',
-                maxHeight: '95vw',
                 width: size,
                 height: size,
                 display: 'flex',
                 justifyContent: 'center',
               alignItems: 'center',
-              marginLeft: '5%',
               }}
             >
-              {/* Pie Chart and Arrows */}
               <svg
                 width={size}
                 height={size}
@@ -535,9 +515,9 @@ export default function ERPImplementationDiagram() {
               >
                 <defs>
                   <radialGradient id="pie3d" cx="60%" cy="40%" r="80%">
-                    <stop offset="0%" stopColor="#e5e7eb" stopOpacity="1" />
-                    <stop offset="60%" stopColor="#a3a3a3" stopOpacity="0.97" />
-                    <stop offset="100%" stopColor="#52525b" stopOpacity="0.95" />
+                    <stop offset="0%" stopColor="#e5e7eb" stopOpacity="0.95" />
+                    <stop offset="60%" stopColor="#a3a3a3" stopOpacity="0.98" />
+                    <stop offset="100%" stopColor="#52525b" stopOpacity="1" />
                   </radialGradient>
                   <linearGradient id="pieBevel" x1="0" y1="0" x2="1" y2="1">
                     <stop offset="0%" stopColor="#fff" stopOpacity="0.18" />
@@ -552,7 +532,6 @@ export default function ERPImplementationDiagram() {
                 {SEGMENTS.map((segment, i) => {
                   const startAngle = i * 45;
                   const endAngle = (i + 1) * 45;
-                  // Pie segment path
                   const [x1, y1] = polarToCartesian(startAngle, rOuter);
                   const [x2, y2] = polarToCartesian(endAngle, rOuter);
                   const [x3, y3] = polarToCartesian(endAngle, rInner);
@@ -565,7 +544,6 @@ export default function ERPImplementationDiagram() {
                     `A${rInner},${rInner} 0 ${largeArc} 0 ${x4},${y4}`,
                     "Z"
                   ].join(" ");
-                  // Arrow
                   const midAngle = startAngle + 22.5;
                   const rad = (midAngle - 90) * (Math.PI / 180);
                   const cardCenterX = cx + cardDistance * Math.cos(rad);
@@ -583,7 +561,7 @@ export default function ERPImplementationDiagram() {
                         strokeWidth={isHovered ? 5 : 3}
                         opacity={isHovered ? 1 : 0.95}
                         style={{
-                          filter: isHovered ? "drop-shadow(0 0 16px #e53e3e)" : undefined,
+                          filter: isHovered ? "drop-shadow(0 0 16px #3b82f6)" : undefined,
                           cursor: "pointer",
                           transition: "all 0.2s cubic-bezier(.4,2,.6,1)",
                         }}
@@ -597,10 +575,9 @@ export default function ERPImplementationDiagram() {
                           setHovered(null);
                           if (i >= 4) setLeftInfo(SEGMENTS[7]);
                           if (i < 4) setRightInfo(SEGMENTS[0]);
-                        setRobotActive(true); // keep the beam/info visible by default
+                          setRobotActive(true);
                       }}
                       />
-                      {/* Bevel highlight */}
                       <path
                         d={pathData}
                         fill="none"
@@ -609,13 +586,12 @@ export default function ERPImplementationDiagram() {
                         opacity={isHovered ? 0.7 : 0.5}
                         style={{ pointerEvents: 'none' }}
                       />
-                      {/* Arrow */}
                       <line
                         x1={arrowStartX}
                         y1={arrowStartY}
                         x2={arrowEndX}
                         y2={arrowEndY}
-                        stroke="#a0aec0"
+                        stroke="#6B7280"
                         strokeWidth="2"
                         strokeDasharray="6,6"
                         markerEnd="url(#arrowhead)"
@@ -624,21 +600,20 @@ export default function ERPImplementationDiagram() {
                     </g>
                   );
                 })}
-                {/* Central Circle and text */}
                 <circle
                   cx={cx}
                   cy={cy}
                   r={rInner}
-                  fill="#f3f4f6"
+                  fill="url(#center3d)"
                   stroke="#111827"
-                  strokeWidth={size * 0.012}
+                  strokeWidth={size * 0.025}
                   filter="url(#glow)"
                 />
                 <text
                   x={cx}
                   y={cy - size * 0.015}
                   textAnchor="middle"
-                  fill="#111"
+                  fill="#fff"
                   fontSize={size * 0.07}
                   fontWeight="bold"
                   fontFamily="'Segoe UI', Arial, sans-serif"
@@ -650,7 +625,7 @@ export default function ERPImplementationDiagram() {
                   x={cx}
                   y={cy + size * 0.035}
                   textAnchor="middle"
-                  fill="#111"
+                  fill="#c7dafe"
                   fontSize={size * 0.025}
                   fontWeight="bold"
                   fontFamily="'Segoe UI', Arial, sans-serif"
@@ -671,7 +646,8 @@ export default function ERPImplementationDiagram() {
                   </marker>
                 </defs>
               </svg>
-              {/* Only render the cards outside the SVG, no per-label SVGs for arrows */}
+              
+              {/* Desktop Cards */}
               {SEGMENTS.map((segment, i) => {
                 const startAngle = i * 45;
                 const midAngle = startAngle + 22.5;
@@ -680,13 +656,10 @@ export default function ERPImplementationDiagram() {
                 const cardCenterY = cy + cardDistance * Math.sin(rad);
                 const isHovered = hovered === i;
 
-                // For left-side cards (indices 4-7), show info popup on left edge
-                const showLeftPopup = isHovered && i >= 4;
-
                 return (
-                  <React.Fragment key={i}>
                     <div
-                      className={`absolute px-2 md:px-3 py-1 md:py-2 rounded-lg text-white font-bold text-xs md:text-sm shadow border border-[#222c3c] flex flex-col items-center justify-center whitespace-pre-line text-center transition-all duration-200 ${isHovered ? 'scale-110 z-50 bg-red-600 shadow-2xl' : 'bg-gray-500'}`}
+                    key={i}
+                      className={`absolute px-2 md:px-3 py-1 md:py-2 rounded-lg text-white font-bold text-xs md:text-sm shadow border border-[#222c3c] flex flex-col items-center justify-center whitespace-pre-line text-center transition-all duration-200 ${isHovered ? 'scale-110 z-50 bg-red-600 shadow-2xl' : 'bg-gray-700'}`}
                       style={{
                         left: cardCenterX,
                         top: cardCenterY,
@@ -699,7 +672,7 @@ export default function ERPImplementationDiagram() {
                       alignItems: 'center',
                       justifyContent: 'center',
                       padding: '0.5em 0.7em',
-                      fontSize: '0.7em', // normal for desktop
+                      fontSize: isTablet ? '0.65em' : '0.7em',
                       }}
                       onMouseEnter={() => {
                         setHovered(i);
@@ -716,28 +689,25 @@ export default function ERPImplementationDiagram() {
                     >
                       {segment.label}
                     </div>
-                  </React.Fragment>
                 );
               })}
             </div>
-          <div style={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          </div>
+
+          {/* Desktop Robot and Info Section */}
+          <div className="relative flex items-center justify-center lg:ml-[-40px]">
             <img
               src="https://res.cloudinary.com/dujw4np0d/image/upload/v1751954513/vecteezy_3d-cute-robot-consultant-with-friendly-expression-pointing_52259583_z9hfjk.png"
               alt="Robot"
+              className="h-auto pt-23 max-h-96 lg:max-h-[500px] rounded-lg transition-transform duration-300 hover:scale-105"
               style={{
-                height: size * 0.7,
-                marginLeft: '2vw', // shifted a little bit backward
-                marginTop: '6vw', // moved much further downward
-                borderRadius: '1rem',
-                transition: 'transform 0.3s cubic-bezier(.4,2,.6,1)',
-                transform: 'none',
+                height: size * 0.9,
                 zIndex: 2,
                 position: 'relative',
               }}
             />
             {robotActive && (
               <>
-                {/* Light beam SVG - zIndex 2 (below info box) */}
                 <svg
                   width={size * 0.9}
                   height={size * 0.8}
@@ -746,28 +716,23 @@ export default function ERPImplementationDiagram() {
                     left: size * 0.42,
                     top: size * 0.01,
                     pointerEvents: 'none',
-                    zIndex: 2, // Lower than info box
+                    zIndex: 2,
                   }}
                   viewBox={`0 0 ${size * 0.9} ${size * 0.8}`}
                 >
-                  {/* Projector light beam */}
                   <defs>
                     <radialGradient id="projectorBeam" cx="0%" cy="50%" r="100%">
-                      <stop offset="100%" stopColor="#f8d9d9" stopOpacity="1.0" />                      <stop offset="30%" stopColor="#f8d9d9" stopOpacity="0.9" />
-                      <stop offset="60%" stopColor="#f8d9d9" stopOpacity="1.0" />
-                      <stop offset="100%" stopColor="#f8d9d9" stopOpacity="1.0" />                    </radialGradient>
+                      <stop offset="100%" stopColor="#dc2626" stopOpacity="0.3" />
+                      <stop offset="30%" stopColor="#dc2626" stopOpacity="0.3" />
+                      <stop offset="60%" stopColor="#dc2626" stopOpacity="0.3" />
+                      <stop offset="100%" stopColor="#dc2626" stopOpacity="0.3" />
+                    </radialGradient>
                     <filter id="projectorGlow" x="-50%" y="-50%" width="200%" height="200%">
-                      <feDropShadow dx="0" dy="0" stdDeviation="15" floodColor="#ffffff" floodOpacity="0.6" />
-                      <feDropShadow dx="0" dy="0" stdDeviation="8" floodColor="#e53e3e" floodOpacity="0.4" />
+                      <feDropShadow dx="0" dy="0" stdDeviation="12" floodColor="#ffffff" floodOpacity="0.8" />
+                      <feDropShadow dx="0" dy="0" stdDeviation="10" floodColor="#e53e3e" floodOpacity="0.8" />
+                      <feDropShadow dx="0" dy="0" stdDeviation="5" floodColor="#c53030" floodOpacity="0.6" />
                     </filter>
                   </defs>
-                  {/* Main projector beam - softened corners */}
-                  {/* Calculate the info card's top and bottom y-coordinates to match the polygon's right corners to the card.
-                      Assume info card top is at 'size * 0.01' and height is 'size * 0.8' (from SVG height), so: */}
-                  const infoCardTop = size * 0.01;
-                  const infoCardHeight = size * 0.8;
-                  const infoCardBottom = infoCardTop + infoCardHeight;
-                  
                   <polygon
                     points={`
                       0,${size*0.34}
@@ -779,11 +744,9 @@ export default function ERPImplementationDiagram() {
                     filter="url(#projectorGlow)"
                     opacity="0.4"
                   />
-                  {/* Animated light rays (unchanged) */}
                   <g opacity="0.6">
-                    {/* Top edge traveling line */}
                     {(() => {
-                      const beamWidth = size * 0.85; // match polygon width
+                      const beamWidth = size * 0.85;
                       const beamLeft = 0;
                       const beamTopStart = size * 0.34;
                       const beamTopEnd = size * 0.08;
@@ -794,9 +757,8 @@ export default function ERPImplementationDiagram() {
                       const y1 = beamTopStart - t * (beamTopStart - beamTopEnd);
                       const x2 = x1 + lineLen;
                       const y2 = beamTopStart - t2 * (beamTopStart - beamTopEnd);
-                      return <line x1={x1} y1={y1} x2={x2} y2={y2} stroke="#D92D20" strokeWidth="2" opacity="0.3" />;
+                      return <line x1={x1} y1={y1} x2={x2} y2={y2} stroke="#ef4444" strokeWidth="2" opacity="0.3" />;
                     })()}
-                    {/* Bottom edge traveling line */}
                     {(() => {
                       const beamWidth = size * 0.85;
                       const beamLeft = 0;
@@ -809,53 +771,35 @@ export default function ERPImplementationDiagram() {
                       const y1 = beamBottomStart + t * (beamBottomEnd - beamBottomStart);
                       const x2 = x1 + lineLen;
                       const y2 = beamBottomStart + t2 * (beamBottomEnd - beamBottomStart);
-                      return <line x1={x1} y1={y1} x2={x2} y2={y2} stroke="#D92D20" strokeWidth="2" opacity="0.3" />;
+                      return <line x1={x1} y1={y1} x2={x2} y2={y2} stroke="#ef4444" strokeWidth="2" opacity="0.3" />;
                     })()}
                   </g>
                 </svg>
-                {/* Info box - zIndex 10 (above beam) */}
                 <div
+                  className="absolute bg-[rgba(12,28,60,0.7)] text-white font-bold rounded-lg p-4 border-1 border-red-500 shadow-lg"
                   style={{
-                    position: 'absolute',
                     left: size * 0.45 + size * 0.82,
                     top: size * 0.01,
                     minWidth: size * 0.92,
                     height: size * 0.8,
-                    color: '#fff',
-                    fontWeight: 700,
                     fontSize: size * 0.04,
-                    textShadow: 'none',
-                    zIndex: 10, // Above the beam
-                    background: 'rgba(133, 129, 129, 0.7)',
-                    borderRadius: '0.5em',
-                    padding: '0.7em 1.2em',
-                    pointerEvents: 'none',
-                    textAlign: 'center',
-                    whiteSpace: 'normal',
+                    zIndex: 10,
                     overflow: 'hidden',
                     display: 'flex',
                     flexDirection: 'column',
                     justifyContent: 'center',
                   }}
                 >
-                  {/* Light beam overlay for info card */}
-                  <div style={{
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    width: '100%',
-                    height: '100%',
-                    pointerEvents: 'none',
-                    zIndex: 1,
-                    background: 'linear-gradient(120deg, rgba(229, 62, 62, 0.06) 0%, rgba(191, 49, 49, 0.03) 60%, rgba(60, 12, 22, 0) 100%)',
-                    filter: 'blur(10.5px)',
-                    borderRadius: '0.5em',
-                  }} />
-                  <div style={{ position: 'relative', zIndex: 2 }}>
-                    <div style={{ fontSize: size * 0.045, fontWeight: 700, marginBottom: '0.5em', marginTop: '-1em', textDecoration: 'underline', letterSpacing: 1, color: '#e53e3e' }}>{hovered !== null ? SEGMENTS[hovered].label : SEGMENTS[7].label}</div>
-                    <ul style={{ fontSize: size * 0.038, margin: 0, padding: 0, color: '#fff', listStyle: 'disc inside', fontWeight: 400, whiteSpace: 'normal', textAlign: 'left', maxWidth: size * 0.98 }}>
+                  <div className="absolute inset-0 bg-gradient-to-r from-red-500/10 to-red-400/10 rounded-lg" />
+                  <div className="relative z-10">
+                    <div className="text-red-400 font-semibold mb-3 text-center underline">
+                      {hovered !== null ? SEGMENTS[hovered].label : SEGMENTS[7].label}
+                    </div>
+                    <ul className="text-sm space-y-2 text-left">
                       {(hovered !== null ? SEGMENTS[hovered].info : SEGMENTS[7].info).map((point, idx) => (
-                        <li key={idx} style={{ marginBottom: '0.3em', lineHeight: 1.3, wordBreak: 'break-word', whiteSpace: 'normal' }}>{typedInfo[idx] || ''}</li>
+                        <li key={idx} className="leading-relaxed">
+                          {typedInfo[idx] || ''}
+                        </li>
                       ))}
                     </ul>
                   </div>
@@ -866,5 +810,6 @@ export default function ERPImplementationDiagram() {
         </div>
       )}
     </div>
+    </>
   );
 }

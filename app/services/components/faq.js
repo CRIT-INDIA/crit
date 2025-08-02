@@ -127,7 +127,7 @@ export default function FaqSection1() {
     };
   
     return (
-      <section className="relative min-h-* py-16 md:py-20 overflow-hidden pb-20">
+      <section className="relative min-h-* py-16 md:py-20 overflow-hidden pb-20 bg-white">
         <div className="relative mx-auto max-w-6xl px-4 sm:px-5 lg:px-7">
           {/* Header */}
           <div className="mb-12 md:mb-16">
@@ -140,6 +140,10 @@ export default function FaqSection1() {
               <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
                 <span className="text-black">Frequently Asked </span>
                 <span className="text-red-500">Questions</span>
+                <svg className="mx-auto my-0" style={{marginTop: '-4px'}} width="160" height="18" viewBox="0 0 220 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5 18 Q 110 8, 215 14" stroke="#FFD700" strokeWidth="4" strokeLinecap="round" fill="none"/>
+              <path d="M15 21 Q 120 15, 200 18" stroke="#FFD700" strokeWidth="2" strokeLinecap="round" fill="none"/>
+            </svg>
               </h2>
               
               {/* Category Tabs */}

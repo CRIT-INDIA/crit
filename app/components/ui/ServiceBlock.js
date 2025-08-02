@@ -10,6 +10,8 @@ import {
 import Lottie from 'lottie-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import FaqSection1 from '@/app/services/components/faq';
+import CompanyProgressSection from '@/app/services/components/companyprogress';
+import TestimonialCarousel from '@/app/services/components/testimonial';
 
 // Function to create URL-friendly slug from service name
 const createServiceSlug = (name) => {
@@ -371,56 +373,140 @@ export default function SapS4HanaServicePage({ serviceName }) {
   const subheading = serviceSection?.seo_description || servicesData?.subheading || 'Transform your business with intelligent ERP solutions powered by in-memory computing, real-time analytics, and modern user experiences.';
 
   return (
-    <div className="min-h-* text-black">
+    <div className="min-h-*">
+      {/* Preload the hero image in the document head */}
+      <link 
+        rel="preload" 
+        as="image" 
+        href={serviceSection?.image} 
+        fetchPriority="high"
+      />
+      
       {/* Hero Section */}
-      <section className="relative py-16 md:py-24 flex flex-col items-center justify-center text-center" style={{ background: 'linear-gradient(90deg, #fff 0%, #ffe5e5 100%)' }}>
-        <div className="absolute inset-0" style={{ background: 'linear-gradient(90deg, #fff 0%, #ffe5e5 100%)', opacity: 0.95, zIndex: 0 }}></div>
-        <div className="relative z-10 max-w-3xl mx-auto flex flex-col items-center px-4">
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4 leading-tight text-gray-600 drop-shadow-lg">
-            {headline}
-            <span className="block text-red-600 font-black tracking-widest">
-              {serviceName ? '' : 'Implementation Services'}
-            </span>
-          </h1>
-          <p className="text-lg md:text-xl mb-10 max-w-2xl mx-auto text-gray-500 font-light">
-            {subheading}
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto px-4 sm:px-0">
-           <a href="/contact"> <button className="w-full sm:w-auto px-6 py-4 sm:px-8 sm:py-4 font-bold rounded-full shadow-lg bg-red-600 text-white text-base sm:text-lg hover:bg-red-700 transition-all duration-300 active:scale-95">
-              Get Started Today
-            </button></a>
-            
+      <section className="relative h-[550px] overflow-hidden">
+        {/* Background Image with Overlay */}
+        <div 
+          className="absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage: `url('${serviceSection?.image}')`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
+            width: '100%',
+            height: '100%',
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            // Add will-change for performance hint
+            willChange: 'transform',
+            // Add transform for GPU acceleration
+            transform: 'translateZ(0)'
+          }}
+          // Add loading and fetchpriority attributes
+          loading="eager"
+          fetchPriority="high"
+          // Add width and height to prevent layout shifts
+          width="1920"
+          height="1080"
+        >
+          {/* Dark overlay for better text readability */}
+          <div className="absolute inset-0 bg-black/50"></div>
+        </div>
+        
+        {/* Main Content Container */}
+        <div className="relative z-10 h-full flex items-center">
+          <div className="container mx-auto px-6 lg:px-8">
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              
+              {/* Left Content */}
+              <div className="text-left space-y-4 pl-10">
+                {/* Main Headline */}
+                <h1 
+                  className="text-3xl lg:text-5xl xl:text-6xl font-bold leading-tight"
+                  style={{ color: '#ffffff' }}
+                >
+                  {serviceSection?.title}
+                </h1>
+                
+                {/* Subheadline */}
+                <p 
+                  className="text-md lg:text-lg leading-relaxed max-w-2xl text-gray-300">
+                  Are you ready to optimize you buisness processes? Expert consulting, customization, and support to transform your business operations
+                </p>
+                
+                {/* CTA Button */}
+                <div className="pt-2">
+                 <a href="/contact"> <button 
+                    className="group relative bg-[#dc2626] border-1 border-gray-500 text-white px-4 py-3 rounded-lg font-semibold text-md transition-all duration-300 hover:shadow-2xl whitespace-nowrap cursor-pointer"
+                    style={{
+                      boxShadow: '0 0 0 0 rgba(255, 0, 0, 0)'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.boxShadow = '0 0 20px 5px rgba(255, 0, 0, 0.3)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.boxShadow = '0 0 0 0 rgba(255, 0, 0, 0)';
+                    }}
+                  >
+                    Get Started Today
+                  </button>
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Overview Section */}
-      <section className="py-16 md:py-20">
+      <section className="py-10 md:py-10 text-black bg-[#fff5f5]">
         <div className="max-w-6xl mx-auto px-4">
           <div className="text-center mb-12 md:mb-16">
             <h2 className="text-3xl sm:text-4xl font-extrabold mb-4 text-Gray-700">Overview</h2>
-            <div className="w-24 h-1 mx-auto mb-8 bg-red-600 rounded"></div>
+            <svg className="mx-auto my-0" style={{marginTop: '-18px'}} width="130" height="18" viewBox="0 0 220 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5 18 Q 110 8, 215 14" stroke="#FFD700" strokeWidth="4" strokeLinecap="round" fill="none"/>
+              <path d="M15 21 Q 120 15, 200 18" stroke="#FFD700" strokeWidth="2" strokeLinecap="round" fill="none"/>
+            </svg>  
           </div>
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-6">
               <h3 className="text-2xl font-bold text-gray-700">{formattedServiceName || 'Overview'}</h3>
               <p className="text-lg leading-relaxed text-gray-700 whitespace-pre-line">{overviewText}</p>
             </div>
-            <div className="relative mt-8 lg:mt-0">
-              <div className="aspect-video rounded-2xl shadow-2xl overflow-hidden flex items-center justify-center bg-gray-100">
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 p-4 sm:p-8 w-full h-full">
-                  {[
-                    "https://res.cloudinary.com/dujw4np0d/image/upload/v1753165462/Project_70-02_uw5nzc.jpg",
-                    "https://res.cloudinary.com/dujw4np0d/image/upload/v1753166207/101_ZS0yMw_jp1azj.jpg",
-                    "https://res.cloudinary.com/dujw4np0d/image/upload/v1753166794/MyApril10_k7z7wb.jpg",
-                    "https://res.cloudinary.com/dujw4np0d/image/upload/v1753167637/vecteezy_office-worker-vector-illustration-holding-business-chart_8149367-1_bstjox.jpg",
-                    "https://res.cloudinary.com/dujw4np0d/image/upload/v1753167770/Man_and_woman_with_briefcase_shake_hand_generated_bv5jsf.jpg",
-                    "https://res.cloudinary.com/dujw4np0d/image/upload/v1753167937/vecteezy_business-teamwork-brainstorming-in-flat-style-isolated-on_36893510_mzafm8.jpg"
-                  ].map((src, i) => (
-                    <div key={i} className="rounded-lg flex items-center justify-center animate-pulse bg-red-100" style={{ animationDelay: `${i * 0.2}s` }}>
-                      <img src={src} alt={`Overview ${i+1}`} className="w-24 h-24 object-contain rounded" />
+            <div className="relative mt-1 lg:mt-1">
+              <div className="rounded-2xl shadow-2xl overflow-hidden flex items-center justify-center bg-gray-100 p-4">
+                <div className="flex flex-col gap-6 w-full max-w-2xl">
+                  {/* Pair 1 */}
+                  <div className="flex gap-4 items-center">
+                    <div className="flex-1 rounded-xl flex items-center justify-center animate-pulse bg-red-100" style={{ animationDelay: '0s' }}>
+                      <img src="https://res.cloudinary.com/dujw4np0d/image/upload/v1753165462/Project_70-02_uw5nzc.jpg" alt="Overview 1" className="w-42 h-42 object-contain rounded" />
                     </div>
-                  ))}
+                    <div className="flex-1 rounded-xl flex items-center justify-center animate-pulse bg-red-100" style={{ animationDelay: '0.2s' }}>
+                      <img src="https://res.cloudinary.com/dujw4np0d/image/upload/v1753166207/101_ZS0yMw_jp1azj.jpg" alt="Overview 2" className="w-42 h-42 object-contain rounded" />
+                    </div>
+                  </div>
+                  
+                  {/* Pair 2 */}
+                  <div className="flex gap-4 items-center">
+                    <div className="flex-1 rounded-xl flex items-center justify-center animate-pulse bg-red-100" style={{ animationDelay: '0.4s' }}>
+                      <img src="https://res.cloudinary.com/dujw4np0d/image/upload/v1753166794/MyApril10_k7z7wb.jpg" alt="Overview 3" className="w-42 h-42 object-contain rounded" />
+                    </div>
+                    <div className="flex-1 rounded-xl flex items-center justify-center animate-pulse bg-red-100" style={{ animationDelay: '0.6s' }}>
+                      <img src="https://res.cloudinary.com/dujw4np0d/image/upload/v1753167637/vecteezy_office-worker-vector-illustration-holding-business-chart_8149367-1_bstjox.jpg" alt="Overview 4" className="w-42 h-42 object-contain rounded" />
+                    </div>
+                  </div>
+                  
+                  {/* Pair 3 */}
+                  <div className="flex gap-4 items-center">
+                    <div className="flex-1 rounded-xl flex items-center justify-center animate-pulse bg-red-100" style={{ animationDelay: '0.8s' }}>
+                      <img src="https://res.cloudinary.com/dujw4np0d/image/upload/v1753167770/Man_and_woman_with_briefcase_shake_hand_generated_bv5jsf.jpg" alt="Overview 5" className="w-42 h-42 object-contain rounded" />
+                    </div>
+                    <div className="flex-1 rounded-xl flex items-center justify-center animate-pulse bg-red-100" style={{ animationDelay: '1s' }}>
+                      <img src="https://res.cloudinary.com/dujw4np0d/image/upload/v1753167937/vecteezy_business-teamwork-brainstorming-in-flat-style-isolated-on_36893510_mzafm8.jpg" alt="Overview 6" className="w-42 h-42 object-contain rounded" />
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -429,10 +515,14 @@ export default function SapS4HanaServicePage({ serviceName }) {
       </section>
 
       {/* Implementation Process Section */}
-      <section className="py-16 md:py-20">
+      <section className="py-16 md:py-20 bg-white">
         <div className="max-w-6xl mx-auto px-4">
           <div className="text-center mb-12 md:mb-16">
             <h2 className="text-3xl sm:text-4xl font-extrabold mb-4 text-black">Our Implementation Process</h2>
+            <svg className="mx-auto my-0" style={{marginTop: '-18px'}} width="340" height="18" viewBox="0 0 360 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5 18 Q 140 8, 275 14" stroke="#FFD700" strokeWidth="4" strokeLinecap="round" fill="none"/>
+              <path d="M15 21 Q 150 15, 260 18" stroke="#FFD700" strokeWidth="2" strokeLinecap="round" fill="none"/>
+            </svg>
           </div>
           <div className="flex flex-col md:flex-row items-center justify-center md:items-start md:justify-between gap-8 md:gap-0">
             {/* Step 1 */}
@@ -510,11 +600,14 @@ export default function SapS4HanaServicePage({ serviceName }) {
       </section>
 
       {/* Enhanced Key Features Section with Unique Icons */}
-      <section className="py-16 md:py-20">
+      <section className="py-16 md:py-20 bg-[#fff5f5]">
         <div className="max-w-6xl mx-auto px-4">
           <div className="text-center mb-12 md:mb-16">
             <h2 className="text-3xl sm:text-4xl font-extrabold mb-4 text-black">Key Features</h2>
-            <div className="w-24 h-1 mx-auto mb-8 bg-red-600 rounded"></div>
+            <svg className="mx-auto my-0" style={{marginTop: '-18px'}} width="160" height="18" viewBox="0 0 220 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5 18 Q 110 8, 215 14" stroke="#FFD700" strokeWidth="4" strokeLinecap="round" fill="none"/>
+              <path d="M15 21 Q 120 15, 200 18" stroke="#FFD700" strokeWidth="2" strokeLinecap="round" fill="none"/>
+            </svg>
             <p className="text-lg md:text-xl max-w-3xl mx-auto text-gray-700">
               Discover the powerful capabilities that make {formattedServiceName} the leading choice for modern enterprises seeking digital transformation.
             </p>
@@ -679,8 +772,12 @@ export default function SapS4HanaServicePage({ serviceName }) {
           </div>
         </div>
       </section>
-<FaqSection1 />
+      {/* Company Progress Section */}
+      <CompanyProgressSection />
+      {/* Testimonial Section */}
+      <TestimonialCarousel />
+      {/* FAQ Section */}
+      <FaqSection1 />
     </div>
   );
 }
-

@@ -6,6 +6,7 @@ import { ThreeDMarquee } from "./components/ui/3d-marquee";
 import MovingClientsSection from "./components/ui/clients";
 
 
+
 function BasicExample() {
   const images = [
     { src: "https://res.cloudinary.com/dujw4np0d/image/upload/v1753680388/istockphoto-2004564843-1024x1024_1_x6gfh5.avif", alt: "iStock Photo 2", industry: "Manufacturing" },

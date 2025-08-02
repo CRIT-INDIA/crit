@@ -50,8 +50,8 @@ const MovingClientsSection = () => {
     <span className="text-black">Our </span>
     <span className="text-red-500">Clients</span>
     <svg className="mx-auto my-0" style={{marginTop: '-4px'}} width="120" height="18" viewBox="0 0 180 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M10 18 Q 70 8, 170 14" stroke="#dc2626" strokeWidth="4" strokeLinecap="round" fill="none"/>
-            <path d="M25 21 Q 100 15, 160 18" stroke="#dc2626" strokeWidth="2" strokeLinecap="round" fill="none"/>
+            <path d="M10 18 Q 70 8, 170 14" stroke="#FFD700" strokeWidth="4" strokeLinecap="round" fill="none"/>
+            <path d="M25 21 Q 100 15, 160 18" stroke="#FFD700" strokeWidth="2" strokeLinecap="round" fill="none"/>
           </svg>
    </h1>      </div>
 

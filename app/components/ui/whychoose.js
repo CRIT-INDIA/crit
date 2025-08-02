@@ -5,20 +5,20 @@ import Image from 'next/image';
 const WhyChooseUs = () => {
   const features = [
     {
-      title: "Certified Expertise",
-      description: "Team of certified SAP professionals with extensive implementation experience."
+      title: "Industry Expertise",
+      description: "Deep understanding of industry-specific requirements and best practices.Our team of SAP consultants has extensive experience in SAP implementation and projects across industries and geographies."
     },
     {
       title: "End-to-End Support", 
-      description: "Comprehensive support from assessment to post-implementation maintenance."
+      description: "From planning and preparation to deployment and post support, we provide comprehensive assistance at every stage of the process."
     },
      {
-      title: "Industry Experts", 
-      description: "The Crit team comprises professionals with hands-on knowledge in 30+ industries, including manufacturing, logistics, and oil and gas."
+      title: "Customized Solutions", 
+      description: "We tailor our SAP services to meet the unique needs and challenges of your organization, ensuring a smooth and successful implementation."
     },
     {
-      title: "Industry Expertise",
-      description: "Deep understanding of industry-specific requirements and best practices."
+      title: "Proven Methodology",
+      description: "We follow a proven methodology and best practices to ensure that your SAP project is completed on time, within budget, and to your satisfaction."
     }
   ];
 
@@ -55,9 +55,9 @@ const WhyChooseUs = () => {
               </h2>
             </header>
 
-            <ul className="space-y-4" role="list">
+            <ul className="space-y-2" role="list">
               {features.map((feature, index) => (
-                <li key={index} className="flex sm:flex-row items-start gap-2 sm:gap-4">
+                <li key={index} className="flex sm:flex-row items-start gap-1 sm:gap-4">
                   {/* Red checkmark */}
                   <div className="flex-shrink-0 mt-1" aria-hidden="true">
                     <div className="w-6 h-6 bg-red-500 rounded-full flex items-center justify-center">

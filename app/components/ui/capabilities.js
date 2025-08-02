@@ -81,7 +81,7 @@ const FlipCard = ({ item, index }) => {
             transform: 'rotateY(180deg)'
           }}
         >
-          <div className="h-full bg-red-500 rounded-2xl p-4 sm:p-4 md:p-6 flex flex-col items-center justify-center shadow-xl relative overflow-hidden">
+          <div className="h-full bg-red-500 rounded-2xl p-3 sm:p-4 md:p-5 flex flex-col items-center justify-start shadow-xl relative overflow-hidden">
             {/* Close button for mobile */}
             <button 
               className="absolute top-2 right-2 sm:hidden text-white text-sm bg-black/20 rounded-full w-6 h-6 flex items-center justify-center z-20"
@@ -100,13 +100,13 @@ const FlipCard = ({ item, index }) => {
             </div>
             
             {/* Content */}
-            <div className="relative z-10 text-center w-full h-full flex flex-col justify-center">
-              <div className="mb-3 p-2 bg-white/20 backdrop-blur-sm rounded-lg inline-block mx-auto">
+            <div className="relative z-10 text-center w-full h-full flex flex-col justify-center overflow-y-auto p-2">
+              <div className="mb-2 p-2 bg-white/20 backdrop-blur-sm rounded-lg inline-block mx-auto flex-shrink-0">
                 <div className="text-white">
-                  {React.cloneElement(item.icon, { className: "w-6 h-6" })}
+                  {React.cloneElement(item.icon, { className: "w-5 h-5" })}
                 </div>
               </div>
-              <p className="text-white text-sm sm:text-sm leading-relaxed font-medium px-1 sm:px-2 line-clamp-4 sm:line-clamp-5">
+              <p className="text-white text-xs sm:text-sm leading-normal font-medium px-1 sm:px-2 flex-grow overflow-y-auto hide-scrollbar">
                 {item.description}
               </p>
             </div>
@@ -153,6 +153,15 @@ const FlipCard = ({ item, index }) => {
           .group > div {
             opacity: 1 !important;
             visibility: visible !important;
+          }
+          
+          /* Custom scrollbar for better mobile experience */
+          .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+          }
+          .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
           }
           
           /* Prevent text selection on tap */
@@ -227,8 +236,8 @@ const Capabilities = () => {
             <span className="text-black">Our </span>
             <span className="text-red-500">Capabilities</span>
             <svg className="mx-auto my-0" style={{marginTop: '4px'}} width="190" height="18" viewBox="0 0 180 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M10 18 Q 70 8, 170 14" stroke="#dc2626" strokeWidth="4" strokeLinecap="round" fill="none"/>
-              <path d="M25 21 Q 100 15, 160 18" stroke="#dc2626" strokeWidth="2" strokeLinecap="round" fill="none"/>
+              <path d="M10 18 Q 70 8, 170 14" stroke="#FFD700" strokeWidth="4" strokeLinecap="round" fill="none"/>
+              <path d="M25 21 Q 100 15, 160 18" stroke="#FFD700" strokeWidth="2" strokeLinecap="round" fill="none"/>
             </svg>
           </h1>
           <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
