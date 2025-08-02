@@ -12,6 +12,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import FaqSection1 from '@/app/services/components/faq';
 import CompanyProgressSection from '@/app/services/components/companyprogress';
 import TestimonialCarousel from '@/app/services/components/testimonial';
+import BenefitsSection from '@/app/services/components/benefits';
 
 // Function to create URL-friendly slug from service name
 const createServiceSlug = (name) => {
@@ -774,6 +775,8 @@ export default function SapS4HanaServicePage({ serviceName }) {
       </section>
       {/* Company Progress Section */}
       <CompanyProgressSection />
+      {/* Benefits Section */}
+      <BenefitsSection serviceName={serviceName} />
       {/* Testimonial Section */}
       <TestimonialCarousel />
       {/* FAQ Section */}
