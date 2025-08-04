@@ -11,13 +11,34 @@ import {
 import dynamic from 'next/dynamic';
 import { motion, AnimatePresence } from 'framer-motion';
 
-// Dynamically import components with no SSR to avoid hydration issues
-const Lottie = dynamic(() => import('lottie-react'), { ssr: false });
-const FaqSection1 = dynamic(() => import('@/app/services/components/faq'), { ssr: false });
-const CompanyProgressSection = dynamic(() => import('@/app/services/components/companyprogress'), { ssr: false });
-const TestimonialCarousel = dynamic(() => import('@/app/services/components/testimonial'), { ssr: false });
-const BenefitsSection = dynamic(() => import('@/app/services/components/benefits'), { ssr: false });
-const ErrorBoundary = dynamic(() => import('./ErrorBoundary'), { ssr: false });
+// Import ErrorBoundary directly since it's a client component
+import ErrorBoundary from './ErrorBoundary';
+
+// Dynamically import heavy components with no SSR to avoid hydration issues
+const Lottie = dynamic(() => import('lottie-react'), { 
+  ssr: false,
+  loading: () => <div className="w-full h-full bg-gray-200 animate-pulse rounded-lg"></div>
+});
+
+const FaqSection1 = dynamic(() => import('@/app/services/components/faq'), { 
+  ssr: false,
+  loading: () => null
+});
+
+const CompanyProgressSection = dynamic(() => import('@/app/services/components/companyprogress'), { 
+  ssr: false,
+  loading: () => null
+});
+
+const TestimonialCarousel = dynamic(() => import('@/app/services/components/testimonial'), { 
+  ssr: false,
+  loading: () => null
+});
+
+const BenefitsSection = dynamic(() => import('@/app/services/components/benefits'), { 
+  ssr: false,
+  loading: () => null
+});
 
 // Function to create URL-friendly slug from service name
 const createServiceSlug = (name) => {
@@ -563,9 +584,20 @@ export default function ServiceBlock({ serviceName }) {
   // Validate keyFeatures to ensure it's always an array
   const safeKeyFeatures = Array.isArray(keyFeatures) ? keyFeatures : [];
 
+  // Ensure we have valid data before rendering
+  if (!serviceSection) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-red-600 mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading service information...</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <ErrorBoundary>
-      <div className="min-h-*">
+    <div className="min-h-screen">
       {/* Preload the hero image in the document head */}
       <link 
         rel="preload" 
@@ -971,9 +1003,10 @@ export default function ServiceBlock({ serviceName }) {
       {/* Testimonial Section */}
       <TestimonialCarousel />
       {/* FAQ Section */}
+      <ErrorBoundary>
         <FaqSection1 />
-      </div>
-    </ErrorBoundary>
+      </ErrorBoundary>
+    </div>
   );
 }
 
