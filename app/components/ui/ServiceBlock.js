@@ -14,31 +14,73 @@ import { motion, AnimatePresence } from 'framer-motion';
 // Import ErrorBoundary directly since it's a client component
 import ErrorBoundary from './ErrorBoundary';
 
+// Simple placeholder component for loading states
+const LoadingPlaceholder = ({ className = '' }) => (
+  <div className={`bg-gray-200 animate-pulse rounded-lg ${className}`} />
+);
+
+// Safe component wrapper with error boundary
+const SafeComponent = ({ children, fallback = null }) => {
+  try {
+    return React.Children.only(children);
+  } catch (error) {
+    console.error('Error rendering component:', error);
+    return fallback;
+  }
+};
+
 // Dynamically import heavy components with no SSR to avoid hydration issues
-const Lottie = dynamic(() => import('lottie-react'), { 
-  ssr: false,
-  loading: () => <div className="w-full h-full bg-gray-200 animate-pulse rounded-lg"></div>
-});
+const Lottie = dynamic(
+  () => import('lottie-react').then(mod => {
+    // Ensure we have a valid component
+    if (!mod.default) throw new Error('Lottie component not found');
+    return mod;
+  }), 
+  { 
+    ssr: false,
+    loading: () => <LoadingPlaceholder className="w-full h-full" />
+  }
+);
 
-const FaqSection1 = dynamic(() => import('@/app/services/components/faq'), { 
-  ssr: false,
-  loading: () => null
-});
+// Helper function to safely import components
+const safeDynamicImport = (importFn, componentName) => {
+  return dynamic(
+    () => importFn()
+      .then(mod => {
+        if (!mod.default) throw new Error(`${componentName} component not found`);
+        return mod;
+      })
+      .catch(error => {
+        console.error(`Error loading ${componentName}:`, error);
+        return { default: () => null };
+      }),
+    { 
+      ssr: false,
+      loading: () => null
+    }
+  );
+};
 
-const CompanyProgressSection = dynamic(() => import('@/app/services/components/companyprogress'), { 
-  ssr: false,
-  loading: () => null
-});
+// Import components with error handling
+const FaqSection1 = safeDynamicImport(
+  () => import('@/app/services/components/faq'),
+  'FaqSection1'
+);
 
-const TestimonialCarousel = dynamic(() => import('@/app/services/components/testimonial'), { 
-  ssr: false,
-  loading: () => null
-});
+const CompanyProgressSection = safeDynamicImport(
+  () => import('@/app/services/components/companyprogress'),
+  'CompanyProgressSection'
+);
 
-const BenefitsSection = dynamic(() => import('@/app/services/components/benefits'), { 
-  ssr: false,
-  loading: () => null
-});
+const TestimonialCarousel = safeDynamicImport(
+  () => import('@/app/services/components/testimonial'),
+  'TestimonialCarousel'
+);
+
+const BenefitsSection = safeDynamicImport(
+  () => import('@/app/services/components/benefits'),
+  'BenefitsSection'
+);
 
 // Function to create URL-friendly slug from service name
 const createServiceSlug = (name) => {
@@ -585,7 +627,7 @@ export default function ServiceBlock({ serviceName }) {
   const safeKeyFeatures = Array.isArray(keyFeatures) ? keyFeatures : [];
 
   // Ensure we have valid data before rendering
-  if (!serviceSection) {
+  if (!serviceSection || typeof serviceSection !== 'object') {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
@@ -597,7 +639,7 @@ export default function ServiceBlock({ serviceName }) {
   }
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen" key={`service-${serviceName || 'default'}`}>
       {/* Preload the hero image in the document head */}
       <link 
         rel="preload" 
@@ -997,14 +1039,31 @@ export default function ServiceBlock({ serviceName }) {
         </div>
       </section>
       {/* Company Progress Section */}
-      <CompanyProgressSection />
+      <ErrorBoundary>
+        <SafeComponent>
+          <CompanyProgressSection />
+        </SafeComponent>
+      </ErrorBoundary>
+      
       {/* Benefits Section */}
-      <BenefitsSection serviceName={serviceName} />
+      <ErrorBoundary>
+        <SafeComponent>
+          <BenefitsSection serviceName={serviceName} />
+        </SafeComponent>
+      </ErrorBoundary>
+      
       {/* Testimonial Section */}
-      <TestimonialCarousel />
+      <ErrorBoundary>
+        <SafeComponent>
+          <TestimonialCarousel />
+        </SafeComponent>
+      </ErrorBoundary>
+      
       {/* FAQ Section */}
       <ErrorBoundary>
-        <FaqSection1 />
+        <SafeComponent>
+          <FaqSection1 />
+        </SafeComponent>
       </ErrorBoundary>
     </div>
   );
