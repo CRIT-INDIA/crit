@@ -472,7 +472,7 @@ export default function ServiceBlock({ serviceName }) {
             </svg>  
           </div>
           <div className="grid lg:grid-cols-2 gap-2 items-center">
-            <div className="space-y-6">
+            <div className="space-y-6 mr-10">
               <h3 className="text-2xl font-bold text-gray-700">{formattedServiceName || 'Overview'}</h3>
               <p className="text-lg leading-relaxed text-gray-700 whitespace-pre-line">{overviewText}</p>
             </div>

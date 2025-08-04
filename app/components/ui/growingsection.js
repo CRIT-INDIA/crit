@@ -131,7 +131,7 @@ function MetricsDesktopView() {
               stroke="black"
               strokeWidth="3"
               fill="none"
-              classname="animate-pulse"
+              class="animate-pulse"
               style={{animationDelay: '2s'}}
             />
             <path

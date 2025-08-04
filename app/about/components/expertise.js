@@ -6,13 +6,13 @@ export default function AiInsightsSection() {
   return (
     <section className="w-full py-12 md:py-24 lg:py-32 flex flex-col items-center">
       <div className="container px-4 md:px-6 flex flex-col items-center">
-        <h2 className="text-3xl font-sans-bold tracking-tighter sm:text-4xl md:text-5xl text-center text-gray-900 mb-12">
-        Our Expertise
+        {/* Hide heading on mobile */}
+        <h2 className="hidden md:block text-3xl font-sans-bold tracking-tighter sm:text-4xl md:text-5xl text-center text-gray-900 mb-12">
+          Our Expertise
         </h2>
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start justify-items-center">
           {/* Left Column */}
           <div className="flex flex-col gap-8">
-            
             <Card className="rounded-full shadow-3xl border border-red-500 bg-white p-2">
               <CardHeader className="p-6 pb-4">
                 <CardTitle className="text-xl font-semibold text-gray-800">
@@ -27,30 +27,29 @@ export default function AiInsightsSection() {
                 </ul>
               </CardContent>
             </Card>
-            <div className="pl-10">
-            <img
-              src="https://res.cloudinary.com/duz9xipfm/image/upload/v1751344095/image_3_jfnwiv.jpg"
-              alt="Domain Knowledge Illustration"
-              className="w-full max-w-sm h-64 object-cover rounded-lg shadow-3xl border border-gray-200"
-            />
-            <div className="w-full mt-10 max-w-sm h-42 bg-gradient-to-t from-[#fff5f5] to-red-200 rounded-t-3xl"></div>
-
             
+            {/* Hide image and gradient on mobile */}
+            <div className="hidden md:block pl-10">
+              <img
+                src="https://res.cloudinary.com/duz9xipfm/image/upload/v1751344095/image_3_jfnwiv.jpg"
+                alt="Domain Knowledge Illustration"
+                className="w-full max-w-sm h-64 object-cover rounded-lg shadow-3xl border border-gray-200"
+              />
+              <div className="w-full mt-10 max-w-sm h-42 bg-gradient-to-t from-[#fff5f5] to-red-200 rounded-t-3xl"></div>
             </div>
-            
           </div>
 
           {/* Middle Column */}
           <div className="flex flex-col gap-8 items-center justify-center lg:mt-04 p-2">
-          <div className="w-full max-w-sm h-32 bg-gradient-to-b from-[#fff5f5] to-red-200 rounded-b-3xl"></div>
+            {/* Hide gradient on mobile */}
+            <div className="hidden md:block w-full max-w-sm h-32 bg-gradient-to-b from-[#fff5f5] to-red-200 rounded-b-3xl"></div>
             
-            
-                      <Card className="rounded-2xl shadow-3xl border-0 bg-gradient-to-br from-red-500 to-red-600 p-6 text-white w-full max-w-sm h-64 flex items-center justify-center">
+            <Card className="rounded-2xl shadow-3xl border-0 bg-gradient-to-br from-red-500 to-red-600 p-6 text-white w-full max-w-sm h-64 flex items-center justify-center">
               <CardContent className="p-5 text-center">
                 <div className="text-5xl font-bold mb-3">75%</div>
                 <div className="text-sm leading-relaxed">
                   of the services are available with us.
-                  </div>
+                </div>
               </CardContent>
             </Card>
             
@@ -63,7 +62,7 @@ export default function AiInsightsSection() {
               <CardContent className="p-6 pt-0 text-gray-700 text-base">
                 <ul className="list-disc pl-5 space-y-2">
                   <li><strong>Collaborative SAP Solutions:</strong> We work closely with you to understand your unique needs and deliver solutions that align with your business goals.</li>
-                  <li><strong>Dedicated to Your Success::</strong> We go the extra mile to ensure your satisfaction, providing timely support and proactive communication.</li>
+                  <li><strong>Dedicated to Your Success:</strong> We go the extra mile to ensure your satisfaction, providing timely support and proactive communication.</li>
                   <li><strong>Robust Skillset:</strong> With a strong foundation in technology and QA practices, we ensure reliable and scalable solutions.</li>
                 </ul>
               </CardContent>
@@ -72,7 +71,7 @@ export default function AiInsightsSection() {
 
           {/* Right Column */}
           <div className="flex flex-col gap-8">
-          <Card className="rounded-full shadow-3xl border border-gray-200 bg-white">
+            <Card className="rounded-full shadow-3xl border border-gray-200 bg-white">
               <CardHeader className="p-6 pb-4">
                 <CardTitle className="text-xl font-bold text-gray-800">
                   A Focus on Results
@@ -86,15 +85,16 @@ export default function AiInsightsSection() {
                 </ul>
               </CardContent>
             </Card>
-            <div className="pl-10">
+            
+            {/* Hide image and gradient on mobile */}
+            <div className="hidden md:block pl-10">
               <img
                 src="https://res.cloudinary.com/dujw4np0d/image/upload/v1751703287/image_2_qzxt24.png"
                 alt="Team Collaboration"
                 className="w-full max-w-sm h-64 object-cover rounded-lg shadow-3xl border border-gray-200"
               />
+              <div className="w-full ml-10 mt-5 max-w-sm h-42 bg-gradient-to-t from-[#fff5f5] to-red-200 rounded-t-3xl"></div>
             </div>
-            <div className="w-full ml-10 mt-5 max-w-sm h-42 bg-gradient-to-t from-[#fff5f5] to-red-200 rounded-t-3xl"></div>
-
           </div>
         </div>
       </div>

@@ -5,6 +5,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/ui/Navbar";
 import Footer from "./components/ui/Footer";
+import ContactButton from "./components/ui/ContactButton";
 
 const geistSans = Geist({
   subsets: ["latin"],
@@ -14,15 +15,12 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-
-
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className="h-screen" suppressHydrationWarning>
       <head>
         <link rel="icon" href="https://res.cloudinary.com/duz9xipfm/image/upload/v1753937310/CRIT-3D_cpzr1n_1_efzl5o.avif" type="image/png" />
       
-
       {/* Updated SEO Meta Tags */}
       <title> critindia - Connecting roots of SAP</title>
       <meta name="description" content="Crit India is in SAP implementation and support. Critindia provides SAP solution and services across entire SAP range of technology." />
@@ -128,6 +126,10 @@ export default function RootLayout({ children }) {
           <SpeedInsights/>
         </div>
         <Footer />
+        {/* Global Contact Button - Fixed Position */}
+        <div className="fixed bottom-8 right-8 z-50 hidden md:block">
+          <ContactButton variant="default" className="shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-200" />
+        </div>
       </body>
     </html>
   );

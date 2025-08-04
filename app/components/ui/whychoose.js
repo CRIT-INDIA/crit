@@ -30,14 +30,15 @@ const WhyChooseUs = () => {
           {/* Left side - Office Image */}
           <div className="relative w-full mb-8 lg:mb-0">
             <div className="rounded-none sm:rounded-xl overflow-hidden">
-              <div className="aspect-[16/9] sm:aspect-[4/3] md:aspect-[3/2] relative w-full min-h-[180px] sm:min-h-[240px] md:min-h-[320px]">
+              <div className="relative w-full aspect-[16/9] sm:aspect-[4/3] md:aspect-[3/2] min-h-[180px] sm:min-h-[240px] md:min-h-[320px]">
                 <Image 
-                  src="https://res.cloudinary.com/dujw4np0d/image/upload/v1750913233/DeWatermark.ai_1750851940290-_2__iyr1bg.avif" 
+                  src="https://res.cloudinary.com/dujw4np0d/image/upload/f_auto,q_auto,w_1200/v1750913233/DeWatermark.ai_1750851940290-_2__iyr1bg.avif" 
                   alt="CRIT India Office showing team collaboration and modern workspace environment" 
                   fill
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 600px"
                   priority
                   fetchPriority="high"
+                  loading="eager"
                   className="object-cover"
                   placeholder="blur"
                   blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="

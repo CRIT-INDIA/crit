@@ -174,9 +174,9 @@ export default function ContactSection() {
                     >
                       {/* Tooltip */}
                       {hoveredIcon === item.id && (
-                        <div className={`absolute left-1/2 -translate-x-1/2 bg-red-600 text-white text-xs px-2 py-1 rounded shadow z-50 whitespace-nowrap ${isPhone ? '-top-10' : '-top-8'}`}
-                          style={isPhone ? { minWidth: '70px' } : {}}>
-                          {item.id.charAt(0).toUpperCase() + item.id.slice(1)}
+                        <div className={`absolute left-1/2 -translate-x-1/2 bg-red-600 text-white text-xs px-2 py-1 rounded shadow z-50 ${isPhone ? '-top-10' : '-top-8'}`}
+                          style={{ whiteSpace: 'nowrap' }}>
+                          {item.id.charAt(0).toUpperCase() + item.id.slice(1).trim()}
                         </div>
                       )}
                       <div className="relative w-10 h-10 sm:w-14 sm:h-14 lg:w-16 lg:h-16">

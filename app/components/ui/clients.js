@@ -70,13 +70,21 @@ const MovingClientsSection = () => {
                   key={`${client.name}-${index}`}
                   className="flex-shrink-0 mx-8 md:mx-12"
                 >
-                  <div className=" flex items-center justify-center h-12 md:h-16 px-4 border border-white bg-gray-200 rounded-sm">
+                  <div className="flex items-center justify-center h-16 w-32 md:h-20 md:w-40 p-2 border border-white bg-white rounded-sm">
                     <img
                       src={client.logo}
                       alt={`${client.name} logo`}
-                      className="max-h-12 w-auto object-contain opacity-90 hover:opacity-100 transition-all duration-300"
-                    /> </div>
-                    <div className="w-full text-center text-xs text-white font-medium pb-2">{client.name}</div>
+                      className="h-full w-full object-contain object-center opacity-90 hover:opacity-100 transition-all duration-300"
+                      style={{
+                        maxWidth: '100%',
+                        maxHeight: '100%',
+                        width: 'auto',
+                        height: 'auto',
+                        objectFit: 'contain'
+                      }}
+                    />
+                  </div>
+                  <div className="w-full text-center text-xs text-white font-medium mt-1">{client.name}</div>
                   
                 </div>
               ))}

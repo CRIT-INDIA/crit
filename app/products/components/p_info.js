@@ -2,7 +2,8 @@
 import React, { useState } from 'react';
 import { 
   Database, 
-  ShoppingCart, 
+  ShoppingCart,
+  MessageSquare, 
   Users, 
   BarChart3, 
   Plane, 
@@ -326,22 +327,24 @@ const SAPProductsInfo = () => {
       <div className="border-b border-red-200 bg-white" >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 py-8">
           <div className="flex items-center justify-between flex-wrap gap-4">
-            <div>
-              <h1 className="text-4xl font-bold text-black mb-2">
-                SAP Enterprise Solutions Portfolio
-              </h1>
-              <p className="text-lg text-gray-700">
-                Strategic Technology Solutions for Digital Transformation
-              </p>
+            <div className="flex items-center space-x-4">
+              
+              <div>
+                <h1 className="text-4xl font-bold text-black mb-2">
+                  SAP Enterprise Solutions Portfolio
+                </h1>
+                <p className="text-lg text-gray-700">
+                  Strategic Technology Solutions for Digital Transformation
+                </p>
+              </div>
             </div>
             <div className="flex items-center space-x-4">
-              <button
+             <a href="/contact"> <button
                 className="flex items-center space-x-2 border border-red-300 text-black px-6 py-3 rounded-lg transition-colors group hover:text-white hover:bg-red-600 hover:border-red-600"
-                onClick={() => window.open('mailto:info@critindia.com?subject=Schedule%20Meeting%20Request&body=I%20would%20like%20to%20schedule%20a%20meeting%20to%20discuss%20SAP%20solutions.')}
-              >
+               >
                 <Calendar className="w-5 h-5 text-black group-hover:text-white transition-colors" />
                 <span>Schedule Meeting</span>
-              </button>
+              </button></a>
             </div>
           </div>
         </div>
@@ -424,29 +427,7 @@ const SAPProductsInfo = () => {
                     {currentProduct.executiveSummary}
                   </p>
                 </div>
-
-                {/* Key Capabilities & Business Outcomes */}
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                  <div className="rounded-lg shadow-sm border border-red-200 p-8 bg-white hover:shadow-lg transition-all duration-300 transform hover:scale-102 animate-slide-in-up" style={{ animationDelay: '300ms' }}>
-                    <h3 className="text-xl font-semibold text-red-600 mb-6 flex items-center space-x-2">
-                      <Settings className="w-5 h-5 text-red-500" />
-                      <span>Key Capabilities</span>
-                    </h3>
-                    <div className="space-y-4">
-                      {currentProduct.keyCapabilities.map((capability, index) => (
-                        <div key={index} className="flex items-start space-x-3 animate-fade-in-up" style={{ animationDelay: `${400 + index * 100}ms` }}>
-                          <div className="w-2 h-2 bg-red-500 rounded-full mt-2 flex-shrink-0 animate-pulse"></div>
-                          <span className="text-gray-900 hover:text-red-600 transition-colors duration-200">{capability}</span>
                         </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div className="rounded-lg shadow-sm border border-red-200 p-8 bg-white hover:shadow-lg transition-all duration-300 transform hover:scale-102 animate-slide-in-up" style={{ animationDelay: '400ms' }}>
-                    <h3 className="text-xl font-semibold text-red-600 mb-6 flex items-center space-x-2">
-                      <TrendingUp className="w-5 h-5 text-red-500" />
-                      <span>Business Outcomes</span>
-                    </h3>
                     <div className="space-y-4">
                       {currentProduct.businessOutcomes.map((outcome, index) => (
                         <div key={index} className="flex items-start space-x-3 animate-fade-in-up" style={{ animationDelay: `${500 + index * 100}ms` }}>

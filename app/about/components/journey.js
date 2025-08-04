@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect ,useRef } from 'react';
 import { SparklesIcon, ChartBarIcon, UserGroupIcon, LightBulbIcon } from '@heroicons/react/24/outline';
 import CountUp from 'react-countup';
 import { useInView } from 'react-intersection-observer';
@@ -85,7 +85,7 @@ const Journey = () => {
   }, [timelineVisible]);
 
   // Add a ref for the timeline container
-  const timelineContainerRef = useState(null);
+  const timelineContainerRef = useRef(null);
 
   // Mouse move handler for interactive timeline
   const handleTimelineMouseMove = (e) => {

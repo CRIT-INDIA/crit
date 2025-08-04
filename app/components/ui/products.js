@@ -122,8 +122,11 @@ const DesignClassesSection = () => {
   // Auto-rotate through all 6 cards in 1st box
   const [currentCard, setCurrentCard] = useState(0);
   const [isFading, setIsFading] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
 
   useEffect(() => {
+    if (isPaused) return; // Don't auto-rotate when paused
+    
     const interval = setInterval(() => {
       setIsFading(true);
       setTimeout(() => {
@@ -132,7 +135,7 @@ const DesignClassesSection = () => {
       }, 300); // match fade duration
     }, 2000);
     return () => clearInterval(interval);
-  }, []);
+  }, [isPaused]);
 
   // Show all 6 cards in 2nd box
   const cardGroup = Math.floor(currentCard / 3);
@@ -152,6 +155,17 @@ const DesignClassesSection = () => {
       setCurrentCard((prev) => (prev - 1 + classesData.length) % classesData.length);
       setIsFading(false);
     }, 300);
+  };
+
+  // Handle card selection
+  const handleCardClick = (index) => {
+    setCurrentCard(index);
+    setIsPaused(true);
+    
+    // Resume auto-rotation after 8 seconds
+    setTimeout(() => {
+      setIsPaused(false);
+    }, 6000); // 8 seconds
   };
 
   return (
@@ -369,10 +383,10 @@ const DesignClassesSection = () => {
           {/* Dots (pagination) */}
           <div className="absolute right-8 top-8 flex space-x-2 hidden md:flex">
             {classesData.map((_, idx) => (
-              <span
-                key={idx}
-                className={`inline-block w-3 h-3 rounded-full ${idx === currentCard ? 'bg-orange-500' : 'bg-gray-500 opacity-50'}`}
-              />
+                              <span
+                  key={idx}
+                  className={`inline-block w-3 h-3 rounded-full ${idx === currentCard ? 'bg-orange-500' : 'bg-gray-500 opacity-50'}`}
+                />
             ))}
           </div>
         </div>
@@ -399,7 +413,7 @@ const DesignClassesSection = () => {
                   className={`relative p-2 transition-all cursor-pointer shadow-md
                     rounded-tl-[2.5rem] rounded-tr-none rounded-br-2xl rounded-bl-2xl
                     ${index === currentCard ? 'ring-2 ring-red-500 bg-red-600 text-black' : 'bg-gray-200 text-gray-900'}`}
-                  onClick={() => setCurrentCard(index)}
+                  onClick={() => handleCardClick(index)}
                   style={{ width: '100%', height: '100%' }}
                 >
                   {/* Orange Arrow Circle (all cards) */}

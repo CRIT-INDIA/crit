@@ -10,15 +10,6 @@ const CareerPage = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [selectedJob, setSelectedJob] = useState(null);
   const [showModal, setShowModal] = useState(false);
-  const [opportunityFormData, setOpportunityFormData] = useState({
-    fullName: '',
-    desiredPosition: '',
-    experience: '',
-    currentCTC: '',
-    message: ''
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
   const fileInputRef = useRef(null);
   const vantaRef = useRef(null);
   
@@ -82,76 +73,18 @@ const CareerPage = () => {
     };
   }, []);
 
-  const jobListings = [
-    {
-      id: 1,
-      title: "React Js Developer",
-      location: "Pune, Maharashtra",
-      experience: "3+ years",
-      type: "Part Time",
-      salary: "₹8-12 LPA",
-      skills: ["React.js", "JavaScript", "TypeScript", "Redux", "Node.js", "Git"],
-      description: "We are looking for a skilled React.js developer to join our dynamic team. You will be responsible for building user-facing features and reusable components.",
-      responsibilities: [
-        "Develop new user-facing features using React.js",
-        "Build reusable code and libraries for future use",
-        "Ensure the technical feasibility of UI/UX designs",
-        "Optimize applications for maximum speed and scalability",
-        "Collaborate with other team members and stakeholders"
-      ],
-      requirements: [
-        "Strong proficiency in JavaScript, including DOM manipulation",
-        "Thorough understanding of React.js and its core principles",
-        "Experience with popular React.js workflows (Redux, Context API)",
-        "Familiarity with newer specifications of EcmaScript",
-        "Experience with data structure libraries (e.g., Immutable.js)"
-      ],
-      benefits: [
-        "Flexible working hours",
-        "Remote work options",
-        "Health insurance coverage",
-        "Professional development opportunities",
-        "Performance-based bonuses"
-      ],
-      company: "CRIT",
-      postedDate: "2024-01-15",
-      applicationDeadline: "2024-02-15"
-    },
-    {
-      id: 2,
-      title: "Business Developer",
-      location: "Pune, Maharashtra",
-      experience: "1+ years",
-      type: "Full Time",
-      salary: "₹6-10 LPA",
-      skills: ["LinkedIn Sales Navigator", "Upwork", "Data Scraping Tools", "Negotiation", "Proposals Documentation", "CRM"],
-      description: "Join our business development team to drive growth and establish strategic partnerships. You will be responsible for identifying new business opportunities and building client relationships.",
-      responsibilities: [
-        "Identify and pursue new business opportunities",
-        "Build and maintain relationships with potential clients",
-        "Develop and implement sales strategies",
-        "Prepare and deliver presentations to clients",
-        "Negotiate contracts and close deals"
-      ],
-      requirements: [
-        "Proven experience in business development or sales",
-        "Strong communication and negotiation skills",
-        "Experience with CRM systems and sales tools",
-        "Ability to work independently and as part of a team",
-        "Bachelor's degree in Business or related field"
-      ],
-      benefits: [
-        "Competitive salary with commission structure",
-        "Comprehensive health benefits",
-        "Paid time off and holidays",
-        "Career advancement opportunities",
-        "Team building activities"
-      ],
-      company: "CRIT",
-      postedDate: "2024-01-10",
-      applicationDeadline: "2024-02-10"
-    }
-  ];
+  const sapCareerInfo = {
+    title: "SAP Career Opportunities at CRIT",
+    description: "Going beyond work, Life at Crit is brimming with a dynamic and fun environment; one where people not only ace at their field of expertise but also give meaning to their passion.\n\n  We provide opportunities for you to grow and excel in your career and beyond. Along with creating an impact on technology, you also have the chance to unleash your full potential at every stage of your career. Our expertise spans SAP implementation, customization, and comprehensive consulting services, ensuring our clients achieve maximum value from their SAP investments. ",
+    requirements: [
+      "Strong technical background in SAP technologies",
+      "Excellent communication and problem-solving skills",
+      "Ability to work in a fast-paced environment",
+      "Willingness to travel for client projects",
+      "Bachelor's degree in Computer Science or related field",
+      "SAP certifications are preferred"
+    ]
+  };
 
   const handleLearnMore = (job) => {
     setSelectedJob(job);
@@ -161,71 +94,6 @@ const CareerPage = () => {
   const closeModal = () => {
     setShowModal(false);
     setSelectedJob(null);
-  };
-
-  const handleOpportunityInputChange = (field, value) => {
-    setOpportunityFormData(prev => ({ ...prev, [field]: value }));
-  };
-
-  const handleOpportunitySubmit = async (e) => {
-    e.preventDefault();
-    
-    if (!selectedFile) {
-      alert('Please upload your CV');
-      return;
-    }
-
-    if (!opportunityFormData.fullName || !opportunityFormData.desiredPosition || 
-        !opportunityFormData.experience || !opportunityFormData.currentCTC || 
-        !opportunityFormData.message) {
-      alert('Please fill in all required fields');
-      return;
-    }
-
-    setIsSubmitting(true);
-    
-    try {
-      const formDataToSend = new FormData();
-      formDataToSend.append('fullName', opportunityFormData.fullName);
-      formDataToSend.append('desiredPosition', opportunityFormData.desiredPosition);
-      formDataToSend.append('experience', opportunityFormData.experience);
-      formDataToSend.append('currentCTC', opportunityFormData.currentCTC);
-      formDataToSend.append('message', opportunityFormData.message);
-      formDataToSend.append('cv', selectedFile);
-      
-      console.log('Sending opportunity form data to backend');
-      
-      const response = await fetch('http://localhost:5000/api/opportunity/submit', {
-        method: 'POST',
-        body: formDataToSend
-      });
-      
-      const result = await response.json();
-      
-      if (result.success) {
-        console.log('Opportunity form submitted successfully:', result);
-        setSubmitted(true);
-        setOpportunityFormData({
-          fullName: '',
-          desiredPosition: '',
-          experience: '',
-          currentCTC: '',
-          message: ''
-        });
-        setSelectedFile(null);
-        setTimeout(() => {
-          setSubmitted(false);
-        }, 3000);
-      } else {
-        console.error('Opportunity form submission failed:', result);
-        alert('Form submission failed. Please try again.');
-      }
-    } catch (error) {
-      console.error('Error submitting opportunity form:', error);
-      alert('Error submitting form. Please try again.');
-    } finally {
-      setIsSubmitting(false);
-    }
   };
 
   return (
@@ -261,6 +129,7 @@ const CareerPage = () => {
             <div className="absolute top-0 right-0 w-40 h-40 bg-white/50 bg-opacity-5 rounded-full blur-3xl transform translate-x-16 -translate-y-16"></div>
             <div className="absolute bottom-0 left-0 w-40 h-40 bg-white/50 bg-opacity-5 rounded-full blur-3xl transform -translate-x-16 translate-y-16"></div>
             
+            
             <div className="relative z-10 ">
               <h2 className="text-2xl md:text-3xl text-gray font-bold mb-4">
                 Looking for the Best IT Job?
@@ -274,82 +143,59 @@ const CareerPage = () => {
         </div>
       </section>
 
-      {/* Job Listings */}
+      {/* SAP Career Information */}
       <section className="px-2 sm:px-4">
         <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {jobListings.map((job, idx) => (
-              <div 
-                key={job.id} 
-                className="bg-white rounded-xl p-6 border border-gray-200 hover:border-red-200 transition-all duration-300 hover:shadow-lg hover:shadow-red-100/50"
-              >
-                <div className="flex justify-between items-start mb-4">
-                  <h3 className="text-2xl font-bold text-gray-900">{job.title}</h3>
-                  <span className="bg-red-100 text-red-700 px-3 py-1 rounded-full text-xs font-medium">
-                    {job.type}
-                  </span>
-                </div>
-                
-                <div className="space-y-3 mb-4">
-                  <div className="flex items-center gap-2 text-gray-700">
-                    <MapPin size={16} className="text-black" />
-                    <span className="text-black text-md">{job.location}</span>
-                  </div>
-                  
-                  <div className="flex items-center gap-2 text-gray-700">
-                    <Briefcase size={16} className="text-black" />
-                    <span className="text-black text-md">{job.experience}</span>
-                  </div>
-                  
-                  <div className="flex items-center gap-2 text-gray-700">
-                    <DollarSign size={16} className="text-black" />
-                    <span className="text-black text-md">{job.salary}</span>
-                  </div>
-                  
-                  <div className="flex items-start gap-2 text-gray-700">
-                    <User size={16} className="text-black mt-1" />
-                    <div>
-                      <span className="font-medium text-sm text-gray-700">Skills</span>
-                      <div className="mt-1 flex flex-wrap gap-1">
-                        {job.skills.slice(0, 3).map((skill, index) => (
-                          <span key={index} className="bg-red-50 text-red-700 text-xs px-2 py-1 rounded border border-red-100">
-                            {skill}
-                          </span>
-                        ))}
-                        {job.skills.length > 3 && (
-                          <span className="text-gray-400 text-xs">+{job.skills.length - 3} more</span>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                </div>
+          {/* Main SAP Career Info */}
+          <div className="bg-white rounded-2xl p-8 mb-8 border border-red-200">
+            <div className="text-center mb-8">
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                {sapCareerInfo.title}
+              </h2>
+              <p className="text-lg text-gray-700 max-w-3xl mx-auto leading-relaxed">
+                {sapCareerInfo.description}
+              </p>
+            </div>
 
-                <p className="text-gray-600 text-sm mb-4 line-clamp-2">
-                  {job.description}
-                </p>
-
-                {/* Learn More Link */}
-                <div className="mb-4">
-                  <button 
-                    onClick={() => handleLearnMore(job)}
-                    className="text-red-500 hover:text-red-700 text-sm font-medium transition-colors duration-200 flex items-center gap-1"
-                  >
-                    Learn More →
-                  </button>
-                </div>
-
-                <div className="flex justify-center">
-                  <button
-                    className="bg-gradient-to-r from-red-600 to-red-700 text-white px-6 py-2.5 rounded-full hover:from-red-700 hover:to-red-800 transition-all duration-300 flex items-center justify-center gap-1 font-medium text-sm mx-auto min-w-[130px] shadow-sm hover:shadow-md"
-                    style={{ fontSize: '0.85rem', padding: '0.5rem 1.2rem' }}
-                    onClick={() => router.push('/career/apply')}
-                  >
-                    <span>Apply Now</span>
-                    <ArrowRight size={12} />
-                  </button>
-                </div>
+            {/* Requirements Section */}
+            <div className="bg-red-50 rounded-xl p-6 border border-gray-300 mb-6">
+              <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+                <Award size={20} className="text-red-600" />
+                Requirements
+              </h3>
+              <div className="space-y-2">
+                {sapCareerInfo.requirements.map((requirement, index) => (
+                  <div key={index} className="flex items-start gap-2 text-gray-700">
+                    <span className="w-2 h-2 bg-red-500 rounded-full mt-2 flex-shrink-0"></span>
+                    <span className="text-sm">{requirement}</span>
+                  </div>
+                ))}
               </div>
-            ))}
+            </div>
+
+            {/* Contact Section */}
+            <div className="bg-gradient-to-r from-gray-400 to-gray-500 rounded-xl p-6 text-center">
+              <h3 className="text-xl font-bold text-white mb-4">Ready to Join Our SAP Team?</h3>
+              <p className="text-white-100 mb-6">
+                Send your resume and cover letter to our HR team. We'll get back to you within 24 hours.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <button
+                  className="bg-white text-red-600 px-6 py-3 rounded-full hover:bg-red-100 transition-all duration-300 flex items-center gap-2 font-semibold"
+                  onClick={() => router.push('/career/apply')}
+                >
+                  <span>Apply Now</span>
+                  <ArrowRight size={16} />
+                </button>
+                <a
+                  href="mailto:info@critindia.com"
+                  className="text-white hover:text-red-300 transition-colors duration-200 flex items-center gap-2 font-medium"
+                >
+                  <span>Email: info@critindia.com</span>
+                  <ExternalLink size={16} />
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -470,22 +316,7 @@ const CareerPage = () => {
               </div>
 
               {/* Benefits */}
-              <div>
-                <h3 className="text-xl font-semibold text-red-400 mb-3 flex items-center gap-2">
-                  <span className="inline-flex items-center justify-center w-8 h-8 bg-red-100 rounded-lg">
-                    <Gift size={20} className="text-red-400" />
-                  </span>
-                  Benefits & Perks
-                </h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                  {selectedJob.benefits.map((benefit, index) => (
-                    <div key={index} className="flex items-center gap-2 text-gray-900">
-                        <span className="w-2 h-2 bg-red-400 rounded-full"></span>
-                      <span>{benefit}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
+             
 
               {/* Application Deadline */}
               <div className="bg-red-600/10 border border-red-600/20 rounded-lg p-4">
@@ -531,14 +362,14 @@ const CareerPage = () => {
               >
                 <path
                   d="M10 12 Q250 0 490 12"
-                  stroke="#EAB308"
+                  stroke="#FFD700"
                   strokeWidth="4"
                   strokeLinecap="round"
                   fill="none"
                 />
                 <path
                   d="M40 20 Q250 8 460 20"
-                  stroke="#EAB308"
+                  stroke="#FFD700"
                   strokeWidth="2.5"
                   strokeLinecap="round"
                   fill="none"
@@ -601,14 +432,7 @@ const CareerPage = () => {
 
             {/* Right Side - Form */}
             <div className="bg-gradient-to-b from-gray-200 to-gray-100 rounded-2xl p-4 sm:p-8 border border-gray-400 h-full">
-              {submitted ? (
-                <div className="text-center py-8">
-                  <div className="text-green-600 text-6xl mb-4">✓</div>
-                  <h3 className="text-2xl font-bold text-gray-900 mb-2">Thank You!</h3>
-                  <p className="text-gray-600">Your application has been submitted successfully. We'll contact you when a matching position becomes available.</p>
-                </div>
-              ) : (
-                <form className="space-y-4 sm:space-y-6" onSubmit={handleOpportunitySubmit}>
+              <form className="space-y-4 sm:space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-black font-medium mb-2">
@@ -616,9 +440,7 @@ const CareerPage = () => {
                     </label>
                     <input
                       type="text"
-                      value={opportunityFormData.fullName}
-                      onChange={(e) => handleOpportunityInputChange('fullName', e.target.value)}
-                      className="w-full bg-gray-200 border border-gray-600 rounded-lg px-4 py-3 text-black placeholder-gray-400 focus:border-purple-500 focus:outline-none transition-colors"
+                      className="w-full bg-gray-200 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none transition-colors"
                       placeholder="Enter your full name"
                     />
                   </div>
@@ -628,9 +450,7 @@ const CareerPage = () => {
                     </label>
                     <input
                       type="text"
-                      value={opportunityFormData.desiredPosition}
-                      onChange={(e) => handleOpportunityInputChange('desiredPosition', e.target.value)}
-                      className="w-full bg-gray-200 border border-gray-600 rounded-lg px-4 py-3 text-black placeholder-gray-400 focus:border-purple-500 focus:outline-none transition-colors"
+                      className="w-full bg-gray-200 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none transition-colors"
                       placeholder="e.g., React Developer"
                     />
                   </div>
@@ -643,9 +463,7 @@ const CareerPage = () => {
                     </label>
                     <input
                       type="text"
-                      value={opportunityFormData.experience}
-                      onChange={(e) => handleOpportunityInputChange('experience', e.target.value)}
-                      className="w-full bg-gray-200 border border-gray-600 rounded-lg px-4 py-3 text-black placeholder-gray-400 focus:border-purple-500 focus:outline-none transition-colors"
+                      className="w-full bg-gray-200 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none transition-colors"
                       placeholder="e.g., 3+ years"
                     />
                   </div>
@@ -655,9 +473,7 @@ const CareerPage = () => {
                     </label>
                     <input
                       type="text"
-                      value={opportunityFormData.currentCTC}
-                      onChange={(e) => handleOpportunityInputChange('currentCTC', e.target.value)}
-                      className="w-full bg-gray-200 border border-gray-600 rounded-lg px-4 py-3 text-black placeholder-gray-400 focus:border-purple-500 focus:outline-none transition-colors"
+                      className="w-full bg-gray-200 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none transition-colors"
                       placeholder="e.g., 10 LPA"
                     />
                   </div>
@@ -670,9 +486,7 @@ const CareerPage = () => {
                     </label>
                     <textarea
                       rows="4"
-                      value={opportunityFormData.message}
-                      onChange={(e) => handleOpportunityInputChange('message', e.target.value)}
-                      className="w-full bg-gray-200 border border-gray-600 rounded-lg px-4 py-3 text-black placeholder-gray-400 focus:border-purple-500 focus:outline-none transition-colors resize-none"
+                      className="w-full bg-gray-200 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none transition-colors resize-none"
                       placeholder="Tell us about yourself and your interests..."
                     ></textarea>
                   </div>
@@ -709,15 +523,13 @@ const CareerPage = () => {
                 <div className="flex justify-center pt-4">
                   <button
                     type="submit"
-                    disabled={isSubmitting}
-                    className="bg-red-600 hover:red-800 text-white font-semibold px-6 sm:px-8 py-3 rounded-full flex items-center gap-2 transition-all duration-300 hover:scale-105 w-full sm:w-auto disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="bg-red-600 hover:red-800 text-white font-semibold px-6 sm:px-8 py-3 rounded-full flex items-center gap-2 transition-all duration-300 hover:scale-105 w-full sm:w-auto"
                   >
-                    <span>{isSubmitting ? 'Submitting...' : 'Submit'}</span>
+                    <span>Submit</span>
                     <ArrowRight size={20} />
                   </button>
                 </div>
               </form>
-              )}
             </div>
           </div>
         </div>

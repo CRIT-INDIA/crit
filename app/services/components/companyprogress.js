@@ -34,7 +34,7 @@ const CompanyProgressSection = () => {
             </div>
             
             <p className="text-gray-600 text-lg leading-relaxed max-w-lg">
-              Started in the year of 2008 SAP Partner in India for one of
+              Started in the year of 2013 SAP Partner in India for one of
               the most valuable brand in manufacturing industry, we
               chose to move up for sustainable growth using narrow
               focus on enterprise software consulting, implementation
