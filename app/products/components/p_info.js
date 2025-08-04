@@ -330,7 +330,7 @@ const SAPProductsInfo = () => {
             <div className="flex items-center space-x-4">
               
               <div>
-                <span>Contact Us</span> font-bold text-black mb-2">
+                <h1 className="text-2xl font-bold text-black mb-2">
                   SAP Enterprise Solutions Portfolio
                 </h1>
                 <p className="text-lg text-gray-700">
