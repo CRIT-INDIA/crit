@@ -1,6 +1,6 @@
 'use client';
 
-import ServiceBlock from '../../../components/ui/ServiceBlock';
+import ServiceBlock from '@/components/ui/ServiceBlock';
 
 export default function SapImplementationPage() {
   return (
