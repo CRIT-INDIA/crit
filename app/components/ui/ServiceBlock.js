@@ -130,7 +130,7 @@ const getCategoryColor = (category) => {
   return colorMap[category] || 'text-red-600';
 };
 
-export default function SapS4HanaServicePage({ serviceName }) {
+export default function ServiceBlock({ serviceName }) {
   const [activeAccordion, setActiveAccordion] = useState(null);
   const [activeStep, setActiveStep] = useState(0);
   const [assessmentAnimation, setAssessmentAnimation] = useState(null);
