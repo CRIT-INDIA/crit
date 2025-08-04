@@ -1,6 +1,8 @@
 /** @type {import('next').NextConfig} */
+import path from 'path';
+
 const nextConfig = {
-   eslint: {
+  eslint: {
     ignoreDuringBuilds: true,
   },
   images: {
@@ -17,9 +19,14 @@ const nextConfig = {
         pathname: '/**'
       }
     ]
-  }
+  },
+  webpack: (config) => {
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      '@': path.resolve(__dirname),
+    };
+    return config;
+  },
 };
-
-
 
 export default nextConfig;
