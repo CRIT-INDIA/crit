@@ -1,5 +1,6 @@
 'use client'; 
 import React, { useState, useEffect, useMemo } from 'react';
+import PropTypes from 'prop-types';
 import { 
   ChevronDown, ChevronRight, CheckCircle, ArrowRight, Clock, Users, Shield, Zap, 
   Database, Cloud, BarChart3, Settings, Cpu, Globe, Lock, TrendingUp, 
@@ -7,12 +8,16 @@ import {
   Lightbulb, Rocket, Brain, Network, Server, Palette, Briefcase,
   Building, FileText, Mail, Phone, Calendar, MapPin, Award, Star
 } from 'lucide-react';
-import Lottie from 'lottie-react';
+import dynamic from 'next/dynamic';
 import { motion, AnimatePresence } from 'framer-motion';
-import FaqSection1 from '@/app/services/components/faq';
-import CompanyProgressSection from '@/app/services/components/companyprogress';
-import TestimonialCarousel from '@/app/services/components/testimonial';
-import BenefitsSection from '@/app/services/components/benefits';
+
+// Dynamically import components with no SSR to avoid hydration issues
+const Lottie = dynamic(() => import('lottie-react'), { ssr: false });
+const FaqSection1 = dynamic(() => import('@/app/services/components/faq'), { ssr: false });
+const CompanyProgressSection = dynamic(() => import('@/app/services/components/companyprogress'), { ssr: false });
+const TestimonialCarousel = dynamic(() => import('@/app/services/components/testimonial'), { ssr: false });
+const BenefitsSection = dynamic(() => import('@/app/services/components/benefits'), { ssr: false });
+const ErrorBoundary = dynamic(() => import('./ErrorBoundary'), { ssr: false });
 
 // Function to create URL-friendly slug from service name
 const createServiceSlug = (name) => {
@@ -498,10 +503,20 @@ export default function ServiceBlock({ serviceName }) {
             const icon = getIconForFeature(feature, index, availableIcons.length > 0 ? availableIcons : allUniqueIcons);
             const colorClass = getCategoryColor(feature.category || 'General');
             
+            // Ensure we have a valid React element for the icon
+            let iconElement;
+            if (React.isValidElement(icon)) {
+              iconElement = React.cloneElement(icon, { 
+                className: `w-8 h-8 ${colorClass}`, 
+                key: `feature-icon-${index}`,
+                'aria-hidden': 'true'
+              });
+            } else {
+              iconElement = <div className="w-8 h-8 bg-gray-200 rounded-full" aria-hidden="true" />;
+            }
+            
             return {
-              icon: React.isValidElement(icon) 
-                ? React.cloneElement(icon, { className: `w-8 h-8 ${colorClass}`, key: `feature-icon-${index}` })
-                : <div className="w-8 h-8 bg-gray-200 rounded-full" />,
+              icon: iconElement,
               title: feature.title || 'Feature',
               description: feature.description || '',
               category: feature.category || 'General'
@@ -511,18 +526,31 @@ export default function ServiceBlock({ serviceName }) {
       }
     } catch (error) {
       console.error('Error processing service features:', error);
+      // Return empty array instead of undefined to prevent map errors
+      return [];
     }
     
     // Fallback to default features if no service features available
-    return defaultKeyFeatures.map((feature, index) => ({
-      ...feature,
-      icon: React.isValidElement(feature?.icon) 
-        ? React.cloneElement(feature.icon, { 
-            className: `w-8 h-8 ${getCategoryColor(feature.category || 'General')}`,
-            key: `default-icon-${index}`
-          })
-        : <div className="w-8 h-8 bg-gray-200 rounded-full" />
-    }));
+    return (defaultKeyFeatures || []).map((feature, index) => {
+      let iconElement;
+      if (React.isValidElement(feature?.icon)) {
+        iconElement = React.cloneElement(feature.icon, { 
+          className: `w-8 h-8 ${getCategoryColor(feature.category || 'General')}`,
+          key: `default-icon-${index}`,
+          'aria-hidden': 'true'
+        });
+      } else {
+        iconElement = <div className="w-8 h-8 bg-gray-200 rounded-full" aria-hidden="true" />;
+      }
+      
+      return {
+        ...feature,
+        icon: iconElement,
+        title: feature?.title || 'Feature',
+        description: feature?.description || '',
+        category: feature?.category || 'General'
+      };
+    });
   }, [serviceSection, allUniqueIcons, defaultKeyFeatures]);
 
   // Format the service name for display
@@ -532,8 +560,12 @@ export default function ServiceBlock({ serviceName }) {
   const headline = formattedServiceName || 'SAP S/4 HANA';
   const subheading = serviceSection?.seo_description || servicesData?.subheading || 'Transform your business with intelligent ERP solutions powered by in-memory computing, real-time analytics, and modern user experiences.';
 
+  // Validate keyFeatures to ensure it's always an array
+  const safeKeyFeatures = Array.isArray(keyFeatures) ? keyFeatures : [];
+
   return (
-    <div className="min-h-*">
+    <ErrorBoundary>
+      <div className="min-h-*">
       {/* Preload the hero image in the document head */}
       <link 
         rel="preload" 
@@ -939,7 +971,18 @@ export default function ServiceBlock({ serviceName }) {
       {/* Testimonial Section */}
       <TestimonialCarousel />
       {/* FAQ Section */}
-      <FaqSection1 />
-    </div>
+        <FaqSection1 />
+      </div>
+    </ErrorBoundary>
   );
 }
+
+// Add PropTypes for better type checking
+ServiceBlock.propTypes = {
+  serviceName: PropTypes.string
+};
+
+// Default props
+ServiceBlock.defaultProps = {
+  serviceName: ''
+};
