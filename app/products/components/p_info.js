@@ -427,7 +427,29 @@ const SAPProductsInfo = () => {
                     {currentProduct.executiveSummary}
                   </p>
                 </div>
+
+                {/* Key Capabilities & Business Outcomes */}
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                  <div className="rounded-lg shadow-sm border border-red-200 p-8 bg-white hover:shadow-lg transition-all duration-300 transform hover:scale-102 animate-slide-in-up" style={{ animationDelay: '300ms' }}>
+                    <h3 className="text-xl font-semibold text-red-600 mb-6 flex items-center space-x-2">
+                      <Settings className="w-5 h-5 text-red-500" />
+                      <span>Key Capabilities</span>
+                    </h3>
+                    <div className="space-y-4">
+                      {currentProduct.keyCapabilities.map((capability, index) => (
+                        <div key={index} className="flex items-start space-x-3 animate-fade-in-up" style={{ animationDelay: `${400 + index * 100}ms` }}>
+                          <div className="w-2 h-2 bg-red-500 rounded-full mt-2 flex-shrink-0 animate-pulse"></div>
+                          <span className="text-gray-900 hover:text-red-600 transition-colors duration-200">{capability}</span>
                         </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="rounded-lg shadow-sm border border-red-200 p-8 bg-white hover:shadow-lg transition-all duration-300 transform hover:scale-102 animate-slide-in-up" style={{ animationDelay: '400ms' }}>
+                    <h3 className="text-xl font-semibold text-red-600 mb-6 flex items-center space-x-2">
+                      <TrendingUp className="w-5 h-5 text-red-500" />
+                      <span>Business Outcomes</span>
+                    </h3>
                     <div className="space-y-4">
                       {currentProduct.businessOutcomes.map((outcome, index) => (
                         <div key={index} className="flex items-start space-x-3 animate-fade-in-up" style={{ animationDelay: `${500 + index * 100}ms` }}>
