@@ -43,8 +43,12 @@ const resetIconTracker = () => {
   usedIcons.clear();
 };
 
-// Enhanced icon mapping function with duplicate prevention
-const getIconForFeature = (feature, index, availableIcons) => {
+// Enhanced icon mapping function with duplicate prevention and null checks
+const getIconForFeature = (feature, index = 0, availableIcons = []) => {
+  // Return a default icon if feature is invalid
+  if (!feature || typeof feature !== 'object') {
+    return <div className="w-8 h-8 bg-gray-200 rounded-full" />;
+  }
   const iconMap = {
     // Performance related
     'performance': <Cpu className="w-8 h-8" />,
@@ -93,13 +97,16 @@ const getIconForFeature = (feature, index, availableIcons) => {
     'streamlined': <Calendar className="w-8 h-8" />
   };
   
-  // Try to match feature title/description with keywords
-  const featureText = (feature.title + ' ' + feature.description).toLowerCase();
+  // Safely get feature text
+  const featureText = [
+    feature.title || '',
+    feature.description || ''
+  ].join(' ').toLowerCase();
   
   // First, try to find a contextually relevant icon that hasn't been used
   for (const [keyword, icon] of Object.entries(iconMap)) {
-    if (featureText.includes(keyword)) {
-      const iconKey = icon.type.displayName || icon.type.name || keyword;
+    if (featureText.includes(keyword) && React.isValidElement(icon)) {
+      const iconKey = icon.type?.displayName || icon.type?.name || keyword;
       if (!usedIcons.has(iconKey)) {
         usedIcons.add(iconKey);
         return icon;
@@ -108,9 +115,16 @@ const getIconForFeature = (feature, index, availableIcons) => {
   }
   
   // If no contextual match or all contextual icons are used, use available icons
-  const availableIcon = availableIcons[index % availableIcons.length];
-  const iconKey = availableIcon.type.displayName || availableIcon.type.name || `fallback-${index}`;
-  usedIcons.add(iconKey);
+  const safeIndex = Math.max(0, Math.min(index, availableIcons.length - 1)) || 0;
+  const availableIcon = availableIcons[safeIndex] || allUniqueIcons[0] || <div className="w-8 h-8 bg-gray-200 rounded-full" />;
+  
+  if (React.isValidElement(availableIcon)) {
+    const iconKey = availableIcon.type?.displayName || 
+                   availableIcon.type?.name || 
+                   `fallback-${safeIndex}`;
+    usedIcons.add(iconKey);
+  }
+  
   return availableIcon;
 };
 
@@ -140,6 +154,14 @@ export default function ServiceBlock({ serviceName }) {
   const [servicesData, setServicesData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  
+  // Implementation animations mapping
+  const implementationAnimations = useMemo(() => ({
+    'assessment': assessmentAnimation,
+    'planning': planningAnimation,
+    'implementation': implementationAnimation,
+    'support': supportAnimation
+  }), [assessmentAnimation, planningAnimation, implementationAnimation, supportAnimation]);
 
   // Reset icon tracker on component mount
   useEffect(() => {
@@ -188,7 +210,7 @@ export default function ServiceBlock({ serviceName }) {
       .finally(() => setLoading(false));
   }, []);
 
-  // Create a comprehensive list of unique icons for fallback
+  // Create a comprehensive list of unique icons for fallback with keys
   const allUniqueIcons = useMemo(() => [
     <Zap className="w-8 h-8" />,
     <Database className="w-8 h-8" />,
@@ -227,7 +249,7 @@ export default function ServiceBlock({ serviceName }) {
     <CheckCircle className="w-8 h-8" />,
     <ArrowRight className="w-8 h-8" />,
     <Clock className="w-8 h-8" />
-  ], []);
+  ].map((icon, i) => React.cloneElement(icon, { key: `icon-${i}` })), []);
 
   // Enhanced default key features with guaranteed unique icons
   const defaultKeyFeatures = useMemo(() => {
@@ -333,36 +355,173 @@ export default function ServiceBlock({ serviceName }) {
 
   const overviewText = serviceSection?.overview || 'Overview content not available.';
 
+  // Get the implementation process steps with Lottie animations
+  const implementationSteps = useMemo(() => {
+    try {
+      if (!Array.isArray(serviceSection?.implementationSteps)) return [];
+      
+      return serviceSection.implementationSteps
+        .filter(step => step && typeof step === 'object')
+        .map((step, index) => ({
+          title: step.title || `Step ${index + 1}`,
+          description: step.description || '',
+          animation: step.animation || '',
+          animationData: implementationAnimations?.[step.animation] || null,
+          key: `step-${index}`
+        }));
+    } catch (error) {
+      console.error('Error processing implementation steps:', error);
+      return [];
+    }
+  }, [serviceSection, implementationAnimations]);
+
+  // Get the FAQ items with validation
+  const faqItems = useMemo(() => {
+    try {
+      if (!Array.isArray(serviceSection?.faqs)) return [];
+      
+      return serviceSection.faqs
+        .filter(faq => faq && typeof faq === 'object' && (faq.question || faq.answer))
+        .map((faq, index) => ({
+          question: faq.question || 'Question',
+          answer: faq.answer || '',
+          key: `faq-${index}`
+        }));
+    } catch (error) {
+      console.error('Error processing FAQ items:', error);
+      return [];
+    }
+  }, [serviceSection]);
+  
+  // Get related services with validation
+  const relatedServices = useMemo(() => {
+    try {
+      if (!Array.isArray(serviceSection?.relatedServiceIds) || 
+          !Array.isArray(servicesData?.relatedServices)) {
+        return [];
+      }
+      
+      return serviceSection.relatedServiceIds
+        .filter(id => id && typeof id === 'string')
+        .map(id => {
+          const service = servicesData.relatedServices.find(svc => svc && svc.id === id);
+          return service ? {
+            id: service.id,
+            title: service.title || 'Service',
+            description: service.description || '',
+            icon: service.icon || <Briefcase className="w-6 h-6" />
+          } : null;
+        })
+        .filter(Boolean)
+        .slice(0, 3);
+    } catch (error) {
+      console.error('Error processing related services:', error);
+      return [];
+    }
+  }, [servicesData, serviceSection]);
+
+  // Get the hero content with validation
+  const heroContent = useMemo(() => {
+    try {
+      if (!serviceSection?.hero || typeof serviceSection.hero !== 'object') {
+        return {
+          title: serviceName || 'Our Service',
+          subtitle: 'Expert solutions for your business needs',
+          backgroundImage: '/images/service-hero-bg.jpg'
+        };
+      }
+      
+      return {
+        title: serviceSection.hero.title || serviceName || 'Our Service',
+        subtitle: serviceSection.hero.subtitle || 'Expert solutions for your business needs',
+        backgroundImage: serviceSection.hero.backgroundImage || '/images/service-hero-bg.jpg',
+        ctaText: serviceSection.hero.ctaText || 'Get Started',
+        ctaLink: serviceSection.hero.ctaLink || '/contact'
+      };
+    } catch (error) {
+      console.error('Error processing hero content:', error);
+      return {
+        title: serviceName || 'Our Service',
+        subtitle: 'Expert solutions for your business needs',
+        backgroundImage: '/images/service-hero-bg.jpg'
+      };
+    }
+  }, [serviceSection, serviceName]);
+
+  // Get the overview content with validation
+  const overviewContent = useMemo(() => {
+    try {
+      if (!serviceSection?.overview || typeof serviceSection.overview !== 'object') {
+        return {
+          title: `About ${serviceName || 'Our Service'}`,
+          description: 'Learn more about our comprehensive service offerings.',
+          image: '/images/service-overview.jpg'
+        };
+      }
+      
+      return {
+        title: serviceSection.overview.title || `About ${serviceName || 'Our Service'}`,
+        description: serviceSection.overview.description || 'Learn more about our comprehensive service offerings.',
+        image: serviceSection.overview.image || '/images/service-overview.jpg',
+        features: Array.isArray(serviceSection.overview.features) 
+          ? serviceSection.overview.features
+          : []
+      };
+    } catch (error) {
+      console.error('Error processing overview content:', error);
+      return {
+        title: `About ${serviceName || 'Our Service'}`,
+        description: 'Learn more about our comprehensive service offerings.',
+        image: '/images/service-overview.jpg'
+      };
+    }
+  }, [serviceSection, serviceName]);
+  
   // Get key features from the matched service section or use defaults with guaranteed unique icons
   const keyFeatures = useMemo(() => {
-    if (serviceSection?.features) {
-      // Reset used icons for service features
-      usedIcons.clear();
-      
-      return serviceSection.features.map((feature, index) => {
-        // Get remaining available icons that haven't been used
-        const availableIcons = allUniqueIcons.filter((icon, iconIndex) => {
-          const iconKey = icon.type.displayName || icon.type.name || `icon-${iconIndex}`;
-          return !usedIcons.has(iconKey);
-        });
-        
-        const icon = getIconForFeature(feature, index, availableIcons.length > 0 ? availableIcons : [allUniqueIcons[index % allUniqueIcons.length]]);
-        const colorClass = getCategoryColor(feature.category || 'General');
-        
-        return {
-          icon: React.cloneElement(icon, { className: `w-8 h-8 ${colorClass}` }),
-          title: feature.title,
-          description: feature.description,
-          category: feature.category || 'General'
-        };
-      });
+    // Reset used icons for features
+    usedIcons.clear();
+    
+    try {
+      if (serviceSection?.features?.length) {
+        return serviceSection.features
+          .filter(feature => feature && (feature.title || feature.description)) // Filter out invalid features
+          .map((feature, index) => {
+            if (!feature) return null;
+            
+            // Get remaining available icons that haven't been used
+            const availableIcons = allUniqueIcons.filter((icon, iconIndex) => {
+              const iconKey = icon?.type?.displayName || icon?.type?.name || `icon-${iconIndex}`;
+              return iconKey && !usedIcons.has(iconKey);
+            });
+            
+            const icon = getIconForFeature(feature, index, availableIcons.length > 0 ? availableIcons : allUniqueIcons);
+            const colorClass = getCategoryColor(feature.category || 'General');
+            
+            return {
+              icon: React.isValidElement(icon) 
+                ? React.cloneElement(icon, { className: `w-8 h-8 ${colorClass}`, key: `feature-icon-${index}` })
+                : <div className="w-8 h-8 bg-gray-200 rounded-full" />,
+              title: feature.title || 'Feature',
+              description: feature.description || '',
+              category: feature.category || 'General'
+            };
+          })
+          .filter(Boolean); // Remove any null entries
+      }
+    } catch (error) {
+      console.error('Error processing service features:', error);
     }
     
+    // Fallback to default features if no service features available
     return defaultKeyFeatures.map((feature, index) => ({
       ...feature,
-      icon: React.cloneElement(feature.icon, { 
-        className: `w-8 h-8 ${getCategoryColor(feature.category)}` 
-      })
+      icon: React.isValidElement(feature?.icon) 
+        ? React.cloneElement(feature.icon, { 
+            className: `w-8 h-8 ${getCategoryColor(feature.category || 'General')}`,
+            key: `default-icon-${index}`
+          })
+        : <div className="w-8 h-8 bg-gray-200 rounded-full" />
     }));
   }, [serviceSection, allUniqueIcons, defaultKeyFeatures]);
 

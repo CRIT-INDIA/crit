@@ -310,7 +310,7 @@ export default function ERPImplementationDiagram() {
           {/* Circular ERP Implementation Lifecycle */}
           <div className="px-4 py-6">
             <div className="text-center mb-6 -mt-8">
-              <h2 className="text-3xl font-bold text-gray-900 mb-3"> ERP Implementation </h2>
+              <h2 className="text-3xl font-bold text-white mb-3"> ERP Implementation </h2>
             </div>
             
                           {/* Circular Infographic Container */}
@@ -476,7 +476,7 @@ export default function ERPImplementationDiagram() {
                   const arrowEndY = cardCenterY;
                   const isHovered = hovered === i;
                   return (
-                    <g key={i}>
+                   <g key={i}>
                       <path
                         d={pathData}
                         fill={isHovered ? 'url(#pie3d)' : 'url(#pie3d)'}
@@ -484,10 +484,11 @@ export default function ERPImplementationDiagram() {
                         strokeWidth={isHovered ? 5 : 3}
                         opacity={isHovered ? 1 : 0.95}
                         style={{
-                          filter: isHovered ? "drop-shadow(0 0 16px #3b82f6)" : undefined,
+                          filter: isHovered ? "drop-shadow(0 0 16px #e53e3e)" : undefined,
                           cursor: "pointer",
                           transition: "all 0.2s cubic-bezier(.4,2,.6,1)",
                         }}
+                        
                         onMouseEnter={() => {
                           setHovered(i);
                           if (i >= 4) setLeftInfo(segment);
@@ -636,7 +637,7 @@ export default function ERPImplementationDiagram() {
                   height={size * 0.8}
                   style={{
                     position: 'absolute',
-                    left: size * 0.42,
+                    left: size * 0.35,
                     top: size * 0.01,
                     pointerEvents: 'none',
                     zIndex: 2,
@@ -701,7 +702,7 @@ export default function ERPImplementationDiagram() {
                 <div
                   className="absolute bg-[rgba(12,28,60,0.7)] text-white font-bold rounded-lg p-4 border-1 border-red-500 shadow-lg"
                   style={{
-                    left: size * 0.45 + size * 0.82,
+                    left: size * 0.35 + size * 0.85,
                     top: size * 0.01,
                     minWidth: size * 0.92,
                     height: size * 0.8,

@@ -721,46 +721,57 @@ const ServicesGrid1 = () => {
           </div>
 
           <div className="extensions-grid">
-            {filteredExtensions.map((extension, index) => (
-              <Link 
-                href={extension.link || '#'}
-                key={extension.id}
-                className="block hover:no-underline"
-              >
-                <div 
-                  className="extension-card"
-                  style={{
-                    '--card-color': extension.color,
-                    '--index': index
-                  }}
-                  onMouseEnter={() => setHoveredCard(extension.id)}
-                  onMouseLeave={() => setHoveredCard(null)}
+            {Array.isArray(filteredExtensions) && filteredExtensions.map((extension, index) => {
+              // Skip rendering if extension is not valid
+              if (!extension || typeof extension !== 'object') return null;
+              
+              return (
+                <Link 
+                  href={extension.link || '#'}
+                  key={extension.id || `extension-${index}`}
+                  className="block hover:no-underline"
                 >
-                  <div className="card-header">
-                    <div className="extension-icon">
-                      {extension.icon && typeof extension.icon === 'object' && extension.icon.type === 'img' ? (
-                        <img
-                          src={extension.icon.url}
-                          alt={extension.name + ' icon'}
-                          className="w-8 h-8 object-contain filter brightness-0 invert-[0.3] sepia-[0.8] saturate-[2.5] hue-rotate-[340deg]"
-                        />
-                      ) : (
-                        extension.icon
-                      )}
+                  <div 
+                    className="extension-card"
+                    style={{
+                      '--card-color': extension.color || '#dc2626',
+                      '--index': index
+                    }}
+                    onMouseEnter={() => setHoveredCard(extension.id)}
+                    onMouseLeave={() => setHoveredCard(null)}
+                  >
+                    <div className="card-header">
+                      <div className="extension-icon">
+                        {extension.icon && typeof extension.icon === 'object' && extension.icon.type === 'img' ? (
+                          <img
+                            src={extension.icon.url || ''}
+                            alt={(extension.name || 'Service') + ' icon'}
+                            className="w-8 h-8 object-contain filter brightness-0 invert-[0.3] sepia-[0.8] saturate-[2.5] hue-rotate-[340deg]"
+                            onError={(e) => {
+                              // Fallback if image fails to load
+                              e.target.style.display = 'none';
+                            }}
+                          />
+                        ) : (
+                          extension.icon || <div className="w-8 h-8 bg-gray-200 rounded-full"></div>
+                        )}
+                      </div>
+                      <div className="extension-info">
+                        <h3 className="extension-name">{extension.name || 'Service'}</h3>
+                      </div>
                     </div>
-                    <div className="extension-info">
-                      <h3 className="extension-name">{extension.name}</h3>
-                    </div>
+                    <p className="extension-description">{extension.description || 'No description available'}</p>
+                    {Array.isArray(extension.tags) && extension.tags.length > 0 && (
+                      <div className="extension-tags">
+                        {extension.tags.map((tag, tagIndex) => (
+                          <span key={tagIndex} className="tag">{tag}</span>
+                        ))}
+                      </div>
+                    )}
                   </div>
-                  <p className="extension-description">{extension.description}</p>
-                  <div className="extension-tags">
-                    {extension.tags.map((tag, index) => (
-                      <span key={index} className="tag">{tag}</span>
-                    ))}
-                  </div>
-                </div>
-              </Link>
-            ))}
+                </Link>
+              );
+            })}
           </div>
         </div>
         
