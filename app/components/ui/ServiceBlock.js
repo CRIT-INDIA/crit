@@ -2,13 +2,24 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { 
-  ChevronDown, ChevronRight, CheckCircle, ArrowRight, Clock, Users, Shield, Zap, 
+ CheckCircle, ArrowRight, Clock, Users, Shield, Zap, 
   Database, Cloud, BarChart3, Settings, Cpu, Globe, Lock, TrendingUp, 
   Layers, Smartphone, RefreshCw, Target, Workflow, Activity, Monitor,
   Lightbulb, Rocket, Brain, Network, Server, Palette, Briefcase,
   Building, FileText, Mail, Phone, Calendar, MapPin, Award, Star
 } from 'lucide-react';
 import dynamic from 'next/dynamic';
+
+// Import ImplementationProcess component
+const ImplementationProcess = dynamic(
+  () => import('@/app/services/components/ImplementationProcess').catch(() => ({
+    default: () => <div className="p-4 text-center text-gray-500">Failed to load implementation process</div>
+  })),
+  { 
+    ssr: false,
+    loading: () => <div className="h-64 bg-gray-50 rounded-lg animate-pulse"></div>
+  }
+);
 import { motion, AnimatePresence } from 'framer-motion';
 
 // Import ErrorBoundary directly since it's a client component
@@ -42,44 +53,45 @@ const Lottie = dynamic(
   }
 );
 
-// Helper function to safely import components
-const safeDynamicImport = (importFn, componentName) => {
-  return dynamic(
-    () => importFn()
-      .then(mod => {
-        if (!mod.default) throw new Error(`${componentName} component not found`);
-        return mod;
-      })
-      .catch(error => {
-        console.error(`Error loading ${componentName}:`, error);
-        return { default: () => null };
-      }),
-    { 
-      ssr: false,
-      loading: () => null
-    }
-  );
-};
-
-// Import components with error handling
-const FaqSection1 = safeDynamicImport(
-  () => import('@/app/services/components/faq'),
-  'FaqSection1'
+// Import components with error handling using Next.js dynamic imports directly
+const FaqSection1 = dynamic(
+  () => import('@/app/services/components/faq').catch(() => ({
+    default: () => <div className="p-4 text-center text-gray-500">Failed to load FAQ section</div>
+  })),
+  { 
+    ssr: false,
+    loading: () => <div className="h-64 bg-gray-50 rounded-lg animate-pulse"></div>
+  }
 );
 
-const CompanyProgressSection = safeDynamicImport(
-  () => import('@/app/services/components/companyprogress'),
-  'CompanyProgressSection'
+const CompanyProgressSection = dynamic(
+  () => import('@/app/services/components/companyprogress').catch(() => ({
+    default: () => <div className="p-4 text-center text-gray-500">Failed to load company progress</div>
+  })),
+  { 
+    ssr: false,
+    loading: () => <div className="h-64 bg-gray-50 rounded-lg animate-pulse"></div>
+  }
 );
 
-const TestimonialCarousel = safeDynamicImport(
-  () => import('@/app/services/components/testimonial'),
-  'TestimonialCarousel'
+const TestimonialCarousel = dynamic(
+  () => import('@/app/services/components/testimonial').catch(() => ({
+    default: () => <div className="p-4 text-center text-gray-500">Failed to load testimonials</div>
+  })),
+  { 
+    ssr: false,
+    loading: () => <div className="h-64 bg-gray-50 rounded-lg animate-pulse"></div>
+  }
 );
 
-const BenefitsSection = safeDynamicImport(
-  () => import('@/app/services/components/benefits'),
-  'BenefitsSection'
+const BenefitsSection = dynamic(
+  () => import('@/app/services/components/benefits').catch(() => ({
+    default: () => <div className="p-4 text-center text-gray-500">Failed to load benefits</div>
+  })),
+  { 
+    ssr: false,
+    loading: () => <div className="h-64 bg-gray-50 rounded-lg animate-pulse"></div>
+  }
 );
 
 // Function to create URL-friendly slug from service name
@@ -214,22 +226,9 @@ const getCategoryColor = (category) => {
 
 export default function ServiceBlock({ serviceName }) {
   const [activeAccordion, setActiveAccordion] = useState(null);
-  const [activeStep, setActiveStep] = useState(0);
-  const [assessmentAnimation, setAssessmentAnimation] = useState(null);
-  const [planningAnimation, setPlanningAnimation] = useState(null);
-  const [implementationAnimation, setImplementationAnimation] = useState(null);
-  const [supportAnimation, setSupportAnimation] = useState(null);
   const [servicesData, setServicesData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  
-  // Implementation animations mapping
-  const implementationAnimations = useMemo(() => ({
-    'assessment': assessmentAnimation,
-    'planning': planningAnimation,
-    'implementation': implementationAnimation,
-    'support': supportAnimation
-  }), [assessmentAnimation, planningAnimation, implementationAnimation, supportAnimation]);
 
   // Reset icon tracker on component mount
   useEffect(() => {
@@ -237,43 +236,18 @@ export default function ServiceBlock({ serviceName }) {
   }, []);
 
   useEffect(() => {
-    // Load animations
-    const animationPromises = [
-      fetch('https://res.cloudinary.com/dujw4np0d/raw/upload/v1753089355/Man_and_robot_with_computers_sitting_together_in_workplace_wqrfib.json')
-        .then(response => response.json())
-        .then(data => setAssessmentAnimation(data)),
-      
-      fetch('https://res.cloudinary.com/dujw4np0d/raw/upload/v1753091479/Business_team_c1xybu.json')
-        .then(response => response.json())
-        .then(data => setPlanningAnimation(data)),
-      
-      fetch('https://res.cloudinary.com/dujw4np0d/raw/upload/v1753092104/compliance_yrfpwo.json')
-        .then(response => response.json())
-        .then(data => setImplementationAnimation(data)),
-      
-      fetch('https://res.cloudinary.com/dujw4np0d/raw/upload/v1753094678/Customer_Support___Help___Support_Agent_pfq47o.json')
-        .then(response => response.json())
-        .then(data => setSupportAnimation(data)),
-      
-      // Load services data
-      fetch('/json/data/services.json')
-        .then(response => {
-          if (!response.ok) {
-            throw new Error('Failed to load services data');
-          }
-          return response.json();
-        })
-        .then(data => setServicesData(data.services))
-        .catch(err => {
-          console.error('Error loading services data:', err);
-          setError('Failed to load services data. Please try again later.');
-        })
-    ];
-
-    Promise.all(animationPromises)
+    // Load services data
+    fetch('/json/data/services.json')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Failed to load services data');
+        }
+        return response.json();
+      })
+      .then(data => setServicesData(data.services))
       .catch(err => {
-        console.error('Error loading resources:', err);
-        setError('Failed to load some resources. Some features may not work as expected.');
+        console.error('Error loading services data:', err);
+        setError('Failed to load services data. Please try again later.');
       })
       .finally(() => setLoading(false));
   }, []);
@@ -422,26 +396,6 @@ export default function ServiceBlock({ serviceName }) {
   })();
 
   const overviewText = serviceSection?.overview || 'Overview content not available.';
-
-  // Get the implementation process steps with Lottie animations
-  const implementationSteps = useMemo(() => {
-    try {
-      if (!Array.isArray(serviceSection?.implementationSteps)) return [];
-      
-      return serviceSection.implementationSteps
-        .filter(step => step && typeof step === 'object')
-        .map((step, index) => ({
-          title: step.title || `Step ${index + 1}`,
-          description: step.description || '',
-          animation: step.animation || '',
-          animationData: implementationAnimations?.[step.animation] || null,
-          key: `step-${index}`
-        }));
-    } catch (error) {
-      console.error('Error processing implementation steps:', error);
-      return [];
-    }
-  }, [serviceSection, implementationAnimations]);
 
   // Get the FAQ items with validation
   const faqItems = useMemo(() => {
@@ -781,89 +735,7 @@ export default function ServiceBlock({ serviceName }) {
       </section>
 
       {/* Implementation Process Section */}
-      <section className="py-16 md:py-20 bg-white">
-        <div className="max-w-6xl mx-auto px-4">
-          <div className="text-center mb-12 md:mb-16">
-            <h2 className="text-3xl sm:text-4xl font-extrabold mb-4 text-black">Our Implementation Process</h2>
-            <svg className="mx-auto my-0" style={{marginTop: '-18px'}} width="340" height="18" viewBox="0 0 360 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M5 18 Q 140 8, 275 14" stroke="#FFD700" strokeWidth="4" strokeLinecap="round" fill="none"/>
-              <path d="M15 21 Q 150 15, 260 18" stroke="#FFD700" strokeWidth="2" strokeLinecap="round" fill="none"/>
-            </svg>
-          </div>
-          <div className="flex flex-col md:flex-row items-center justify-center md:items-start md:justify-between gap-8 md:gap-0">
-            {/* Step 1 */}
-            <div className="flex-1 flex flex-col items-center text-center">
-              {assessmentAnimation ? (
-                <Lottie 
-                  animationData={assessmentAnimation} 
-                  loop={true} 
-                  className="w-40 h-40 md:w-56 md:h-56 mb-1"
-                />
-              ) : (
-                <div className="w-40 h-40 md:w-56 md:h-56 mb-1 bg-gray-200 rounded-lg flex items-center justify-center">
-                  <div className="text-gray-500">Loading...</div>
-                </div>
-              )}
-              <div className="font-bold text-lg text-black mb-1">Assessment</div>
-              <div className="text-gray-600 text-base">Current state analysis</div>
-            </div>
-            <div className="w-16 h-1 bg-red-600 rounded md:hidden"></div>
-            <div className="h-32 hidden md:flex items-center"><div className="w-16 h-1 bg-red-600 mx-2 rounded"></div></div>
-            {/* Step 2 */}
-            <div className="flex-1 flex flex-col items-center text-center">
-              {planningAnimation ? (
-                <Lottie 
-                  animationData={planningAnimation} 
-                  loop={true} 
-                  className="w-40 h-40 md:w-56 md:h-56 mb-1"
-                />
-              ) : (
-                <div className="w-40 h-40 md:w-56 md:h-56 mb-1 bg-gray-200 rounded-lg flex items-center justify-center">
-                  <div className="text-gray-500">Loading...</div>
-                </div>
-              )}
-              <div className="font-bold text-lg text-black mb-1">Planning</div>
-              <div className="text-gray-600 text-base">Strategy & roadmap</div>
-            </div>
-            <div className="w-16 h-1 bg-red-600 rounded md:hidden"></div>
-            <div className="h-32 hidden md:flex items-center"><div className="w-16 h-1 bg-red-600 mx-2 rounded"></div></div>
-            {/* Step 3 */}
-            <div className="flex-1 flex flex-col items-center text-center">
-              {implementationAnimation ? (
-                <Lottie 
-                  animationData={implementationAnimation} 
-                  loop={true} 
-                  className="w-40 h-40 md:w-56 md:h-56 mb-1"
-                />
-              ) : (
-                <div className="w-40 h-40 md:w-56 md:h-56 mb-1 bg-gray-200 rounded-lg flex items-center justify-center">
-                  <div className="text-gray-500">Loading...</div>
-                </div>
-              )}
-              <div className="font-bold text-lg text-black mb-1">Implementation</div>
-              <div className="text-gray-600 text-base">Deployment & testing</div>
-            </div>
-            <div className="w-16 h-1 bg-red-600 rounded md:hidden"></div>
-            <div className="h-32 hidden md:flex items-center"><div className="w-16 h-1 bg-red-600 mx-2 rounded"></div></div>
-            {/* Step 4 */}
-            <div className="flex-1 flex flex-col items-center text-center">
-              {supportAnimation ? (
-                <Lottie 
-                  animationData={supportAnimation} 
-                  loop={true} 
-                  className="w-40 h-40 md:w-56 md:h-56 mb-1"
-                />
-              ) : (
-                <div className="w-40 h-40 md:w-56 md:h-56 mb-1 bg-gray-200 rounded-lg flex items-center justify-center">
-                  <div className="text-gray-500">Loading...</div>
-                </div>
-              )}
-              <div className="font-bold text-lg text-black mb-1">Support</div>
-              <div className="text-gray-600 text-base">Ongoing optimization</div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <ImplementationProcess />
 
       {/* Enhanced Key Features Section with Unique Icons */}
       <section className="py-16 md:py-20 bg-[#fff5f5]">

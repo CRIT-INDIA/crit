@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -380,7 +382,7 @@ export default function FaqSection1() {
                     </div>
   
                     {/* Right Side - Answer Display */}
-                    <div className="lg:sticky lg:top-6 mt-8 lg:mt-0">
+                    <div className="lg:sticky lg:top-6 mt-8 lg:mt-26">
                         <AnimatePresence mode="wait">
                             {faqs.map((faq) => (
                                 activeId === faq.id && (

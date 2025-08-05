@@ -16,24 +16,24 @@ const CompanyProgressSection = () => {
     }, []);
   
     return (
-      <div className="min-h-* bg-white flex items-center justify-center p-15">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <div className="min-h-screen bg-white flex items-center justify-center px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-16">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-12 items-center">
           {/* Left Content */}
-          <div className="space-y-6">
-            <div className="space-y-4">
-              <p className="text-red-500 font-medium text-lg tracking-wide uppercase">
+          <div className="space-y-4 sm:space-y-6 order-2 lg:order-1">
+            <div className="space-y-3 sm:space-y-4">
+              <p className="text-red-500 font-medium text-sm sm:text-lg tracking-wide uppercase">
                 Company progress
               </p>
-              <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
+              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
                 A leading IT technology
-                <br />
+                <br className="hidden sm:block" />
                 services provider, enterprise
-                <br />
+                <br className="hidden sm:block" />
                 software makers
               </h1>
             </div>
             
-            <p className="text-gray-600 text-lg leading-relaxed max-w-lg">
+            <p className="text-gray-600 text-base sm:text-lg leading-relaxed max-w-lg">
               Started in the year of 2013 SAP Partner in India for one of
               the most valuable brand in manufacturing industry, we
               chose to move up for sustainable growth using narrow
@@ -41,38 +41,36 @@ const CompanyProgressSection = () => {
               and maintenance support.
             </p>
             
-           <a href="/about"><button className="bg-red-600 hover:bg-red-700 text-white px-5 py-2 rounded-full font-semibold text-lg transition-colors duration-300 shadow-lg hover:shadow-xl">
-              Read More
-            </button></a>
+            <a href="/about">
+              <button className="bg-red-600 hover:bg-red-700 text-white px-4 sm:px-5 py-2 sm:py-3 rounded-full font-semibold text-base sm:text-lg transition-colors duration-300 shadow-lg hover:shadow-xl w-full sm:w-auto">
+                Read More
+              </button>
+            </a>
           </div>
   
           {/* Right Side - Image with Decorative Elements */}
-          <div className="relative">
+          <div className="relative order-1 lg:order-2">
             {/* Background decorative stroke */}
             
-  
             {/* Lottie Animation placeholder */}
             <div className="relative">
-              <div className="bg-[#fff5f5] p-6 rounded-lg">
+              <div className="bg-[#fff5f5] p-4 sm:p-6 rounded-lg">
                 {businessAnimation ? (
                   <Lottie 
                     animationData={businessAnimation}
                     loop={true}
-                    className="w-full h-80 object-contain rounded-lg"
+                    className="w-full h-48 sm:h-64 md:h-80 object-contain rounded-lg"
                   />
                 ) : (
-                  <div className="w-full h-80 bg-gray-200 rounded-lg flex items-center justify-center">
-                    <div className="text-gray-500">Loading animation...</div>
+                  <div className="w-full h-48 sm:h-64 md:h-80 bg-gray-200 rounded-lg flex items-center justify-center">
+                    <div className="text-gray-500 text-sm sm:text-base">Loading animation...</div>
                   </div>
                 )}
               </div>
             </div>
-  
-            </div>
-  
           </div>
         </div>
-  
+      </div>
     );
   };
 

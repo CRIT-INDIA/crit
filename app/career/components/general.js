@@ -455,7 +455,7 @@ const CareerPage = () => {
                 />
               </svg>
             </h2>
-            <p className="text-gray-700 text-base sm:text-lg text-gray-300 max-w-3xl mx-auto">
+            <p className="text-gray-700 text-base sm:text-lg max-w-3xl mx-auto">
               Didn't find the right role? No worries! Submit your details, and we'll contact you when a matching position becomes available.
             </p>
           </div>

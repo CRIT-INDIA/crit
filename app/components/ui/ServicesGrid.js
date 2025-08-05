@@ -96,7 +96,7 @@ const ServicesGrid = () => {
         id: 4,
         icon: { type: 'img', url: 'https://res.cloudinary.com/duz9xipfm/image/upload/v1751005286/icons8-upgrade-96_ursgya.png' },
         name: "SAP Upgrade Services",
-        description: "Smart, secure SAP upgrades Services tailored to your business needs—enabling better insights and faster operations.",
+        description: "Secure SAP upgrades Services tailored to your business needs—enabling better insights and faster operations.",
         link: "/sap-upgrade-services",
         category: "upgrade",
         color: "#dc2626",
