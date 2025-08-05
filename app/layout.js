@@ -9,6 +9,13 @@ import ContactButton from "./components/ui/ContactButton";
 import { Toaster } from "sonner";
 import Script from "next/script";
 import { useEffect, useState } from "react";
+import dynamic from 'next/dynamic';
+
+// Dynamically import TawkToWidget with SSR disabled
+const TawkToWidget = dynamic(
+  () => import('./components/TawkToWidget'),
+  { ssr: false }
+);
 
 const geistSans = Geist({
   subsets: ["latin"],
@@ -187,41 +194,7 @@ export default function RootLayout({ children }) {
         </div>
         
         {/* Tawk.to Chat Widget - Positioned above contact button */}
-        <div className={`fixed bottom-24 right-8 z-40 transition-opacity duration-300 ${hideButtons ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
-          <style jsx global>{`
-            /* Target the Tawk.to iframe directly */
-            iframe[title*="Tawk"] {
-              transition: opacity 0.3s, transform 0.3s !important;
-            }
-            
-            /* Hide the Tawk.to launcher when needed */
-            .tawk-button-container {
-              transition: opacity 0.3s !important;
-            }
-            
-            .hide-tawk-widget .tawk-button-container {
-              opacity: 0 !important;
-              pointer-events: none !important;
-            }
-          `}</style>
-          <Script
-            id="tawk-to-script"
-            strategy="afterInteractive"
-            dangerouslySetInnerHTML={{
-              __html: `
-                var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-                (function(){
-                  var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-                  s1.async=true;
-                  s1.src='https://embed.tawk.to/6890795160925719231fc7d5/1j1q5jq00';
-                  s1.charset='UTF-8';
-                  s1.setAttribute('crossorigin','*');
-                  s0.parentNode.insertBefore(s1,s0);
-                })();
-              `,
-            }}
-          />
-        </div>        
+        <TawkToWidget hideButtons={hideButtons} />        
       </body>
     </html>
   );

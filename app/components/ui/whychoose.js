@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Check } from 'lucide-react';
 import Image from 'next/image';
+import Head from 'next/head';
 
 const WhyChooseUs = () => {
   const features = [
@@ -22,6 +23,25 @@ const WhyChooseUs = () => {
     }
   ];
 
+  // Preload the largest contentful image
+  useEffect(() => {
+    const link = document.createElement('link');
+    link.rel = 'preload';
+    link.as = 'image';
+    link.href = 'https://res.cloudinary.com/dujw4np0d/image/upload/f_auto,q_75,w_1000/v1750913233/DeWatermark.ai_1750851940290-_2__iyr1bg.avif';
+    link.imagesrcset = `
+      https://res.cloudinary.com/dujw4np0d/image/upload/f_auto,q_75,w_400/v1750913233/DeWatermark.ai_1750851940290-_2__iyr1bg.avif 400w,
+      https://res.cloudinary.com/dujw4np0d/image/upload/f_auto,q_75,w_600/v1750913233/DeWatermark.ai_1750851940290-_2__iyr1bg.avif 600w,
+      https://res.cloudinary.com/dujw4np0d/image/upload/f_auto,q_75,w_800/v1750913233/DeWatermark.ai_1750851940290-_2__iyr1bg.avif 800w,
+      https://res.cloudinary.com/dujw4np0d/image/upload/f_auto,q_75,w_1000/v1750913233/DeWatermark.ai_1750851940290-_2__iyr1bg.avif 1000w
+    `;
+    document.head.appendChild(link);
+    
+    return () => {
+      document.head.removeChild(link);
+    };
+  }, []);
+
   return (
     <section className="text-black flex items-center w-full px-2 py-8 sm:px-4 sm:py-12 lg:px-10 lg:py-20">
       <div className="max-w-7xl mx-auto w-full px-0 sm:px-4">
@@ -32,7 +52,13 @@ const WhyChooseUs = () => {
             <div className="rounded-none sm:rounded-xl overflow-hidden">
               <div className="relative w-full aspect-[16/9] sm:aspect-[4/3] md:aspect-[3/2] min-h-[180px] sm:min-h-[240px] md:min-h-[320px]">
                 <Image 
-                  src="https://res.cloudinary.com/dujw4np0d/image/upload/f_auto,q_auto,w_1200/v1750913233/DeWatermark.ai_1750851940290-_2__iyr1bg.avif" 
+                  src="https://res.cloudinary.com/dujw4np0d/image/upload/f_auto,q_75,w_800/v1750913233/DeWatermark.ai_1750851940290-_2__iyr1bg.avif" 
+                  srcSet="
+                    https://res.cloudinary.com/dujw4np0d/image/upload/f_auto,q_75,w_400/v1750913233/DeWatermark.ai_1750851940290-_2__iyr1bg.avif 400w,
+                    https://res.cloudinary.com/dujw4np0d/image/upload/f_auto,q_75,w_600/v1750913233/DeWatermark.ai_1750851940290-_2__iyr1bg.avif 600w,
+                    https://res.cloudinary.com/dujw4np0d/image/upload/f_auto,q_75,w_800/v1750913233/DeWatermark.ai_1750851940290-_2__iyr1bg.avif 800w,
+                    https://res.cloudinary.com/dujw4np0d/image/upload/f_auto,q_75,w_1000/v1750913233/DeWatermark.ai_1750851940290-_2__iyr1bg.avif 1000w
+                  "
                   alt="CRIT India Office showing team collaboration and modern workspace environment" 
                   fill
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 600px"
