@@ -21,6 +21,7 @@ const ImplementationProcess = dynamic(
   }
 );
 import { motion, AnimatePresence } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
 
 // Import ErrorBoundary directly since it's a client component
 import ErrorBoundary from './ErrorBoundary';
@@ -222,6 +223,184 @@ const getCategoryColor = (category) => {
   };
   
   return colorMap[category] || 'text-red-600';
+};
+
+// FeatureCard component that can use useInView hook
+const FeatureCard = ({ feature, index }) => {
+  const { ref, inView } = useInView({ 
+    threshold: 0.2, 
+    triggerOnce: true,
+    rootMargin: '0px 0px -50px 0px'
+  });
+
+  return (
+    <motion.div
+      key={index}
+      ref={ref}
+      initial={{ 
+        opacity: 0, 
+        rotateY: -90,
+        z: -100
+      }}
+      animate={inView ? { 
+        opacity: 1, 
+        rotateY: 0,
+        z: 0
+      } : { 
+        opacity: 0, 
+        rotateY: -90,
+        z: -100
+      }}
+      transition={{ 
+        duration: 0.8, 
+        delay: index * 0.15,
+        type: "spring",
+        stiffness: 80
+      }}
+      whileHover={{
+        rotateY: 5,
+        rotateX: 5,
+        z: 50,
+        transition: { duration: 0.4 }
+      }}
+      className="group h-full perspective-1000"
+      style={{ transformStyle: 'preserve-3d' }}
+    >
+      <motion.div 
+        className="relative flex flex-col h-full rounded-2xl p-8 bg-white min-h-[350px] overflow-hidden shadow-lg border-2 border-transparent"
+        whileHover={{
+          borderColor: "#ef4444",
+          boxShadow: "0 25px 50px rgba(239, 68, 68, 0.15)"
+        }}
+        transition={{ duration: 0.3 }}
+      >
+        {/* Enhanced Icon with Animation - Guaranteed Unique */}
+        <motion.div
+          className="relative mb-6"
+          whileHover={{ 
+            scale: 1.15,
+            rotate: [0, -5, 5, 0],
+            transition: { duration: 0.5 }
+          }}
+          initial={{ scale: 0, opacity: 0 }}
+          animate={inView ? { scale: 1, opacity: 1 } : { scale: 0, opacity: 0 }}
+          transition={{ 
+            duration: 0.6, 
+            delay: index * 0.1 + 0.3,
+            type: "spring",
+            stiffness: 100
+          }}
+        >
+          <div className="relative inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-gray-50 to-gray-100 group-hover:from-red-50 group-hover:to-pink-50 transition-all duration-300 shadow-lg">
+            <motion.div
+              className="relative z-10"
+              whileHover={{
+                scale: 1.1,
+                filter: "drop-shadow(0 0 8px rgba(239, 68, 68, 0.5))"
+              }}
+            >
+              {feature.icon}
+            </motion.div>
+          </div>
+        </motion.div>
+          
+        {/* Typewriter Effect Title */}
+        <motion.h3
+          className="relative text-xl font-bold mb-4 text-gray-800 z-10 overflow-hidden"
+          initial={{ width: 0 }}
+          animate={inView ? { width: "100%" } : { width: 0 }}
+          transition={{ duration: 1, delay: index * 0.2 + 0.5 }}
+        >
+          <motion.span
+            className="inline-block"
+            whileHover={{ 
+              color: "#dc2626",
+              textShadow: "0 0 8px rgba(220, 38, 38, 0.5)"
+            }}
+          >
+            {feature.title}
+          </motion.span>
+        </motion.h3>
+
+        {/* Reveal Animation for Description */}
+        <motion.div className="relative overflow-hidden flex-1">
+          <motion.p
+            className="leading-relaxed text-gray-600"
+            initial={{ y: 20, opacity: 0 }}
+            animate={inView ? { y: 0, opacity: 1 } : { y: 20, opacity: 0 }}
+            transition={{ duration: 0.6, delay: index * 0.2 + 0.8 }}
+            whileHover={{ 
+              y: -2,
+              transition: { duration: 0.2 }
+            }}
+          >
+            {feature.description}
+          </motion.p>
+        </motion.div>
+
+        {/* Interactive Progress Bar */}
+        <motion.div className="mt-6 relative">
+          <motion.div
+            className="h-1 bg-gray-200 rounded-full overflow-hidden"
+            whileHover={{ height: 4 }}
+            transition={{ duration: 0.2 }}
+          >
+            <motion.div
+              className="h-full bg-gradient-to-r from-red-500 to-pink-500 rounded-full"
+              initial={{ width: "0%" }}
+              animate={inView ? { width: "100%" } : { width: "0%" }}
+              transition={{ 
+                duration: 2, 
+                delay: index * 0.3 + 1,
+                type: "tween"
+              }}
+              whileHover={{
+                background: "linear-gradient(90deg, #ef4444, #f97316, #ef4444)",
+                transition: { duration: 0.3 }
+              }}
+            />
+          </motion.div>
+        </motion.div>
+
+        {/* Corner Accent Animation */}
+        <motion.div
+          className="absolute top-4 right-4 w-3 h-3 bg-red-400 rounded-full"
+          animate={inView ? {
+            scale: [1, 1.5, 1],
+            opacity: [0.5, 1, 0.5]
+          } : {
+            scale: 1,
+            opacity: 0.3
+          }}
+          transition={{
+            duration: 2,
+            repeat: inView ? Infinity : 0,
+            delay: index * 0.4,
+            type: "tween"
+          }}
+        />
+        
+        {/* Ripple Effect on Hover */}
+        <motion.div
+          className="absolute inset-0 rounded-2xl pointer-events-none"
+          whileHover={{
+            background: "radial-gradient(circle at center, rgba(239, 68, 68, 0.1) 0%, transparent 70%)"
+          }}
+          transition={{ duration: 0.4 }}
+        />
+      </motion.div>
+    </motion.div>
+  );
+};
+
+// Add PropTypes for FeatureCard
+FeatureCard.propTypes = {
+  feature: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    icon: PropTypes.node.isRequired
+  }).isRequired,
+  index: PropTypes.number.isRequired
 };
 
 export default function ServiceBlock({ serviceName }) {
@@ -752,160 +931,7 @@ export default function ServiceBlock({ serviceName }) {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {keyFeatures.map((feature, index) => (
-              <motion.div
-                key={index}
-                initial={{ 
-                  opacity: 0, 
-                  rotateY: -90,
-                  z: -100
-                }}
-                animate={{ 
-                  opacity: 1, 
-                  rotateY: 0,
-                  z: 0
-                }}
-                transition={{ 
-                  duration: 0.8, 
-                  delay: index * 0.15,
-                  type: "spring",
-                  stiffness: 80
-                }}
-                whileHover={{
-                  rotateY: 5,
-                  rotateX: 5,
-                  z: 50,
-                  transition: { duration: 0.4 }
-                }}
-                className="group h-full perspective-1000"
-                style={{ transformStyle: 'preserve-3d' }}
-              >
-                <motion.div 
-                  className="relative flex flex-col h-full rounded-2xl p-8 bg-white min-h-[350px] overflow-hidden shadow-lg border-2 border-transparent"
-                  whileHover={{
-                    borderColor: "#ef4444",
-                    boxShadow: "0 25px 50px rgba(239, 68, 68, 0.15)"
-                  }}
-                  transition={{ duration: 0.3 }}
-                >
-                
-
-                  {/* Enhanced Icon with Animation - Guaranteed Unique */}
-                  <motion.div
-                    className="relative mb-6"
-                    whileHover={{ 
-                      scale: 1.15,
-                      rotate: [0, -5, 5, 0],
-                      transition: { duration: 0.5 }
-                    }}
-                    initial={{ scale: 0, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    transition={{ 
-                      duration: 0.6, 
-                      delay: index * 0.1 + 0.3,
-                      type: "spring",
-                      stiffness: 100
-                    }}
-                  >
-                    <div className="relative inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-gray-50 to-gray-100 group-hover:from-red-50 group-hover:to-pink-50 transition-all duration-300 shadow-lg">
-                      <motion.div
-                        className="relative z-10"
-                        whileHover={{
-                          scale: 1.1,
-                          filter: "drop-shadow(0 0 8px rgba(239, 68, 68, 0.5))"
-                        }}
-                      >
-                        {feature.icon}
-                      </motion.div>
-                      
-                      
-                    </div>
-
-                    
-                  </motion.div>
-                    
-                  {/* Typewriter Effect Title */}
-                  <motion.h3
-                    className="relative text-xl font-bold mb-4 text-gray-800 z-10 overflow-hidden"
-                    initial={{ width: 0 }}
-                    animate={{ width: "100%" }}
-                    transition={{ duration: 1, delay: index * 0.2 + 0.5 }}
-                  >
-                    <motion.span
-                      className="inline-block"
-                      whileHover={{ 
-                        color: "#dc2626",
-                        textShadow: "0 0 8px rgba(220, 38, 38, 0.5)"
-                      }}
-                    >
-                      {feature.title}
-                    </motion.span>
-                  </motion.h3>
-
-                  {/* Reveal Animation for Description */}
-                  <motion.div className="relative overflow-hidden flex-1">
-                    <motion.p
-                      className="leading-relaxed text-gray-600"
-                      initial={{ y: 20, opacity: 0 }}
-                      animate={{ y: 0, opacity: 1 }}
-                      transition={{ duration: 0.6, delay: index * 0.2 + 0.8 }}
-                      whileHover={{ 
-                        y: -2,
-                        transition: { duration: 0.2 }
-                      }}
-                    >
-                      {feature.description}
-                    </motion.p>
-                  </motion.div>
-
-                  {/* Interactive Progress Bar */}
-                  <motion.div className="mt-6 relative">
-                    <motion.div
-                      className="h-1 bg-gray-200 rounded-full overflow-hidden"
-                      whileHover={{ height: 4 }}
-                      transition={{ duration: 0.2 }}
-                    >
-                      <motion.div
-                        className="h-full bg-gradient-to-r from-red-500 to-pink-500 rounded-full"
-                        initial={{ width: "0%" }}
-                        animate={{ width: "100%" }}
-                        transition={{ 
-                          duration: 2, 
-                          delay: index * 0.3 + 1,
-                          type: "tween"
-                        }}
-                        whileHover={{
-                          background: "linear-gradient(90deg, #ef4444, #f97316, #ef4444)",
-                          transition: { duration: 0.3 }
-                        }}
-                      />
-                    </motion.div>
-                  </motion.div>
-
-                  {/* Corner Accent Animation */}
-                  <motion.div
-                    className="absolute top-4 right-4 w-3 h-3 bg-red-400 rounded-full"
-                    animate={{
-                      scale: [1, 1.5, 1],
-                      opacity: [0.5, 1, 0.5]
-                    }}
-                    transition={{
-                      duration: 2,
-                      repeat: Infinity,
-                      delay: index * 0.4,
-                      type: "tween"
-                    }}
-                  />
-                  
-                  {/* Ripple Effect on Hover */}
-                  <motion.div
-                    className="absolute inset-0 rounded-2xl pointer-events-none"
-                    whileHover={{
-                      background: "radial-gradient(circle at center, rgba(239, 68, 68, 0.1) 0%, transparent 70%)"
-                    }}
-                    transition={{ duration: 0.4 }}
-                  />
-                </motion.div>
-              </motion.div>
+              <FeatureCard key={index} feature={feature} index={index} />
             ))}
           </div>
         </div>

@@ -230,9 +230,8 @@ export default function FaqSection1() {
                         transition={{ duration: 0.6 }}
                         className="mb-8"
                     >
-                        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
-                            <span className="text-black">Frequently Asked </span>
-                            <span className="text-red-500">Questions</span>
+                        <h2 className="text-3xl md:text-4xl font-extrabold text-center mb-12">
+                            <span className="text-black">Frequently Asked Questions</span>
                             <svg className="mx-auto my-0" style={{marginTop: '-4px'}} width="160" height="18" viewBox="0 0 220 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M5 18 Q 110 8, 215 14" stroke="#FFD700" strokeWidth="4" strokeLinecap="round" fill="none"/>
                                 <path d="M15 21 Q 120 15, 200 18" stroke="#FFD700" strokeWidth="2" strokeLinecap="round" fill="none"/>

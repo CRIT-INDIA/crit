@@ -6,6 +6,9 @@ import "./globals.css";
 import Navbar from "./components/ui/Navbar";
 import Footer from "./components/ui/Footer";
 import ContactButton from "./components/ui/ContactButton";
+import { Toaster } from "sonner";
+import Script from "next/script";
+import { useEffect, useState } from "react";
 
 const geistSans = Geist({
   subsets: ["latin"],
@@ -16,6 +19,57 @@ const geistMono = Geist_Mono({
 });
 
 export default function RootLayout({ children }) {
+  const [hideButtons, setHideButtons] = useState(false);
+
+  useEffect(() => {
+    let lastScrollTop = 0;
+    let scrollTimeout;
+    
+    const handleScroll = () => {
+      const footer = document.querySelector('footer');
+      if (!footer) return;
+      
+      const footerTop = footer.getBoundingClientRect().top;
+      const windowHeight = window.innerHeight;
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      
+      // Only update state if we've scrolled more than 10px
+      if (Math.abs(scrollTop - lastScrollTop) < 10) return;
+      lastScrollTop = scrollTop;
+      
+      // Hide buttons when footer is within 100px of viewport bottom
+      const shouldHide = footerTop < windowHeight - 100;
+      setHideButtons(shouldHide);
+      
+      // Clear any existing timeout
+      if (scrollTimeout) clearTimeout(scrollTimeout);
+      
+      // Use the Tawk API to show/hide the widget
+      if (window.Tawk_API) {
+        if (shouldHide) {
+          window.Tawk_API.hideWidget();
+        } else {
+          window.Tawk_API.showWidget();
+        }
+      }
+      
+      // Set a timeout to handle cases where Tawk API isn't loaded yet
+      scrollTimeout = setTimeout(() => {
+        const tawkIframe = document.querySelector('iframe[title*=Tawk]');
+        if (tawkIframe) {
+          tawkIframe.style.transition = 'opacity 0.3s, transform 0.3s';
+          tawkIframe.style.opacity = shouldHide ? '0' : '1';
+          tawkIframe.style.pointerEvents = shouldHide ? 'none' : 'auto';
+          tawkIframe.style.transform = shouldHide ? 'translateY(100%)' : 'translateY(0)';
+        }
+      }, 100);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Initial check
+    
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
   return (
     <html lang="en" className="h-screen" suppressHydrationWarning>
       <head>
@@ -126,10 +180,48 @@ export default function RootLayout({ children }) {
           <SpeedInsights/>
         </div>
         <Footer />
+        
         {/* Global Contact Button - Fixed Position */}
-        <div className="fixed bottom-8 right-8 z-50 hidden md:block">
+        <div className={`fixed bottom-8 right-8 z-50 hidden md:block transition-opacity duration-300 ${hideButtons ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
           <ContactButton variant="default" className="shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-200" />
         </div>
+        
+        {/* Tawk.to Chat Widget - Positioned above contact button */}
+        <div className={`fixed bottom-24 right-8 z-40 transition-opacity duration-300 ${hideButtons ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
+          <style jsx global>{`
+            /* Target the Tawk.to iframe directly */
+            iframe[title*="Tawk"] {
+              transition: opacity 0.3s, transform 0.3s !important;
+            }
+            
+            /* Hide the Tawk.to launcher when needed */
+            .tawk-button-container {
+              transition: opacity 0.3s !important;
+            }
+            
+            .hide-tawk-widget .tawk-button-container {
+              opacity: 0 !important;
+              pointer-events: none !important;
+            }
+          `}</style>
+          <Script
+            id="tawk-to-script"
+            strategy="afterInteractive"
+            dangerouslySetInnerHTML={{
+              __html: `
+                var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+                (function(){
+                  var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+                  s1.async=true;
+                  s1.src='https://embed.tawk.to/6890795160925719231fc7d5/1j1q5jq00';
+                  s1.charset='UTF-8';
+                  s1.setAttribute('crossorigin','*');
+                  s0.parentNode.insertBefore(s1,s0);
+                })();
+              `,
+            }}
+          />
+        </div>        
       </body>
     </html>
   );
