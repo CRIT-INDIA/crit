@@ -1,26 +1,43 @@
 "use client";
 
 import React, { useRef, useState, useEffect } from 'react';
-import { MapPin, Briefcase, Clock, User, ExternalLink, ArrowRight, X, DollarSign, Calendar, Users, Award, Zap, Gift, Star } from 'lucide-react';
-import Player from "lottie-react";
+import { useForm } from 'react-hook-form';
+import { MapPin, Briefcase, ExternalLink, ArrowRight, X, DollarSign, Calendar, Users, Award, Zap, Star, Loader2 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+
+const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
+const ACCEPTED_FILE_TYPES = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
 
 const CareerPage = () => {
   const router = useRouter();
   const [selectedFile, setSelectedFile] = useState(null);
   const [selectedJob, setSelectedJob] = useState(null);
   const [showModal, setShowModal] = useState(false);
-  const [opportunityFormData, setOpportunityFormData] = useState({
-    fullName: '',
-    desiredPosition: '',
-    experience: '',
-    currentCTC: '',
-    message: ''
-  });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState('');
   const fileInputRef = useRef(null);
   const vantaRef = useRef(null);
+  
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+    setValue,
+    trigger,
+    watch
+  } = useForm({
+    defaultValues: {
+      fullName: '',
+      position: '',
+      experience: '',
+      currentCtc: '',
+      message: '',
+      cv: null
+    }
+  });
+  
+  const cvFile = watch('cv');
   
   useEffect(() => {
     // Load Vanta.js scripts
@@ -82,76 +99,18 @@ const CareerPage = () => {
     };
   }, []);
 
-  const jobListings = [
-    {
-      id: 1,
-      title: "React Js Developer",
-      location: "Pune, Maharashtra",
-      experience: "3+ years",
-      type: "Part Time",
-      salary: "₹8-12 LPA",
-      skills: ["React.js", "JavaScript", "TypeScript", "Redux", "Node.js", "Git"],
-      description: "We are looking for a skilled React.js developer to join our dynamic team. You will be responsible for building user-facing features and reusable components.",
-      responsibilities: [
-        "Develop new user-facing features using React.js",
-        "Build reusable code and libraries for future use",
-        "Ensure the technical feasibility of UI/UX designs",
-        "Optimize applications for maximum speed and scalability",
-        "Collaborate with other team members and stakeholders"
-      ],
-      requirements: [
-        "Strong proficiency in JavaScript, including DOM manipulation",
-        "Thorough understanding of React.js and its core principles",
-        "Experience with popular React.js workflows (Redux, Context API)",
-        "Familiarity with newer specifications of EcmaScript",
-        "Experience with data structure libraries (e.g., Immutable.js)"
-      ],
-      benefits: [
-        "Flexible working hours",
-        "Remote work options",
-        "Health insurance coverage",
-        "Professional development opportunities",
-        "Performance-based bonuses"
-      ],
-      company: "CRIT",
-      postedDate: "2024-01-15",
-      applicationDeadline: "2024-02-15"
-    },
-    {
-      id: 2,
-      title: "Business Developer",
-      location: "Pune, Maharashtra",
-      experience: "1+ years",
-      type: "Full Time",
-      salary: "₹6-10 LPA",
-      skills: ["LinkedIn Sales Navigator", "Upwork", "Data Scraping Tools", "Negotiation", "Proposals Documentation", "CRM"],
-      description: "Join our business development team to drive growth and establish strategic partnerships. You will be responsible for identifying new business opportunities and building client relationships.",
-      responsibilities: [
-        "Identify and pursue new business opportunities",
-        "Build and maintain relationships with potential clients",
-        "Develop and implement sales strategies",
-        "Prepare and deliver presentations to clients",
-        "Negotiate contracts and close deals"
-      ],
-      requirements: [
-        "Proven experience in business development or sales",
-        "Strong communication and negotiation skills",
-        "Experience with CRM systems and sales tools",
-        "Ability to work independently and as part of a team",
-        "Bachelor's degree in Business or related field"
-      ],
-      benefits: [
-        "Competitive salary with commission structure",
-        "Comprehensive health benefits",
-        "Paid time off and holidays",
-        "Career advancement opportunities",
-        "Team building activities"
-      ],
-      company: "CRIT",
-      postedDate: "2024-01-10",
-      applicationDeadline: "2024-02-10"
-    }
-  ];
+  const sapCareerInfo = {
+    title: "SAP Career Opportunities at CRIT",
+    description: "Going beyond work, Life at Crit is brimming with a dynamic and fun environment; one where people not only ace at their field of expertise but also give meaning to their passion.\n\n  We provide opportunities for you to grow and excel in your career and beyond. Along with creating an impact on technology, you also have the chance to unleash your full potential at every stage of your career. Our expertise spans SAP implementation, customization, and comprehensive consulting services, ensuring our clients achieve maximum value from their SAP investments. ",
+    requirements: [
+      "Strong technical background in SAP technologies",
+      "Excellent communication and problem-solving skills",
+      "Ability to work in a fast-paced environment",
+      "Willingness to travel for client projects",
+      "Bachelor's degree in Computer Science or related field",
+      "SAP certifications are preferred"
+    ]
+  };
 
   const handleLearnMore = (job) => {
     setSelectedJob(job);
@@ -163,66 +122,54 @@ const CareerPage = () => {
     setSelectedJob(null);
   };
 
-  const handleOpportunityInputChange = (field, value) => {
-    setOpportunityFormData(prev => ({ ...prev, [field]: value }));
+  const handleFileChange = async (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    
+    // Validate file type
+    if (!ACCEPTED_FILE_TYPES.includes(file.type)) {
+      setSubmitError('Please upload a valid file type (PDF or Word document)');
+      return;
+    }
+    
+    // Validate file size
+    if (file.size > MAX_FILE_SIZE) {
+      setSubmitError('File size should be less than 5MB');
+      return;
+    }
+    
+    setSelectedFile(file);
+    setValue('cv', file);
+    await trigger('cv');
+    setSubmitError('');
   };
 
-  const handleOpportunitySubmit = async (e) => {
-    e.preventDefault();
-    
-    if (!selectedFile) {
-      alert('Please upload your CV');
-      return;
-    }
-
-    if (!opportunityFormData.fullName || !opportunityFormData.desiredPosition || 
-        !opportunityFormData.experience || !opportunityFormData.currentCTC || 
-        !opportunityFormData.message) {
-      alert('Please fill in all required fields');
-      return;
-    }
-
+  const onSubmit = async (data) => {
     setIsSubmitting(true);
+    setSubmitError('');
     
     try {
-      const formDataToSend = new FormData();
-      formDataToSend.append('fullName', opportunityFormData.fullName);
-      formDataToSend.append('desiredPosition', opportunityFormData.desiredPosition);
-      formDataToSend.append('experience', opportunityFormData.experience);
-      formDataToSend.append('currentCTC', opportunityFormData.currentCTC);
-      formDataToSend.append('message', opportunityFormData.message);
-      formDataToSend.append('cv', selectedFile);
-      
-      console.log('Sending opportunity form data to backend');
-      
-      const response = await fetch('http://localhost:5000/api/opportunity/submit', {
-        method: 'POST',
-        body: formDataToSend
+      // Create FormData object
+      const formData = new FormData();
+      Object.entries(data).forEach(([key, value]) => {
+        if (value) formData.append(key, value);
       });
       
-      const result = await response.json();
+      // Here you would typically send the form data to your API
+      console.log('Form submitted:', Object.fromEntries(formData));
       
-      if (result.success) {
-        console.log('Opportunity form submitted successfully:', result);
-        setSubmitted(true);
-        setOpportunityFormData({
-          fullName: '',
-          desiredPosition: '',
-          experience: '',
-          currentCTC: '',
-          message: ''
-        });
-        setSelectedFile(null);
-        setTimeout(() => {
-          setSubmitted(false);
-        }, 3000);
-      } else {
-        console.error('Opportunity form submission failed:', result);
-        alert('Form submission failed. Please try again.');
-      }
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      
+      // Reset form on success
+      reset();
+      setSelectedFile(null);
+      
+      // Show success message or redirect
+      alert('Thank you for your application! We will get back to you soon.');
     } catch (error) {
-      console.error('Error submitting opportunity form:', error);
-      alert('Error submitting form. Please try again.');
+      console.error('Form submission error:', error);
+      setSubmitError('Failed to submit the form. Please try again.');
     } finally {
       setIsSubmitting(false);
     }
@@ -261,6 +208,7 @@ const CareerPage = () => {
             <div className="absolute top-0 right-0 w-40 h-40 bg-white/50 bg-opacity-5 rounded-full blur-3xl transform translate-x-16 -translate-y-16"></div>
             <div className="absolute bottom-0 left-0 w-40 h-40 bg-white/50 bg-opacity-5 rounded-full blur-3xl transform -translate-x-16 translate-y-16"></div>
             
+            
             <div className="relative z-10 ">
               <h2 className="text-2xl md:text-3xl text-gray font-bold mb-4">
                 Looking for the Best IT Job?
@@ -274,82 +222,59 @@ const CareerPage = () => {
         </div>
       </section>
 
-      {/* Job Listings */}
+      {/* SAP Career Information */}
       <section className="px-2 sm:px-4">
         <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {jobListings.map((job, idx) => (
-              <div 
-                key={job.id} 
-                className="bg-white rounded-xl p-6 border border-gray-200 hover:border-red-200 transition-all duration-300 hover:shadow-lg hover:shadow-red-100/50"
-              >
-                <div className="flex justify-between items-start mb-4">
-                  <h3 className="text-2xl font-bold text-gray-900">{job.title}</h3>
-                  <span className="bg-red-100 text-red-700 px-3 py-1 rounded-full text-xs font-medium">
-                    {job.type}
-                  </span>
-                </div>
-                
-                <div className="space-y-3 mb-4">
-                  <div className="flex items-center gap-2 text-gray-700">
-                    <MapPin size={16} className="text-black" />
-                    <span className="text-black text-md">{job.location}</span>
-                  </div>
-                  
-                  <div className="flex items-center gap-2 text-gray-700">
-                    <Briefcase size={16} className="text-black" />
-                    <span className="text-black text-md">{job.experience}</span>
-                  </div>
-                  
-                  <div className="flex items-center gap-2 text-gray-700">
-                    <DollarSign size={16} className="text-black" />
-                    <span className="text-black text-md">{job.salary}</span>
-                  </div>
-                  
-                  <div className="flex items-start gap-2 text-gray-700">
-                    <User size={16} className="text-black mt-1" />
-                    <div>
-                      <span className="font-medium text-sm text-gray-700">Skills</span>
-                      <div className="mt-1 flex flex-wrap gap-1">
-                        {job.skills.slice(0, 3).map((skill, index) => (
-                          <span key={index} className="bg-red-50 text-red-700 text-xs px-2 py-1 rounded border border-red-100">
-                            {skill}
-                          </span>
-                        ))}
-                        {job.skills.length > 3 && (
-                          <span className="text-gray-400 text-xs">+{job.skills.length - 3} more</span>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                </div>
+          {/* Main SAP Career Info */}
+          <div className="bg-white rounded-2xl p-8 mb-8 border border-red-200">
+            <div className="text-center mb-8">
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                {sapCareerInfo.title}
+              </h2>
+              <p className="text-lg text-gray-700 max-w-3xl mx-auto leading-relaxed">
+                {sapCareerInfo.description}
+              </p>
+            </div>
 
-                <p className="text-gray-600 text-sm mb-4 line-clamp-2">
-                  {job.description}
-                </p>
-
-                {/* Learn More Link */}
-                <div className="mb-4">
-                  <button 
-                    onClick={() => handleLearnMore(job)}
-                    className="text-red-500 hover:text-red-700 text-sm font-medium transition-colors duration-200 flex items-center gap-1"
-                  >
-                    Learn More →
-                  </button>
-                </div>
-
-                <div className="flex justify-center">
-                  <button
-                    className="bg-gradient-to-r from-red-600 to-red-700 text-white px-6 py-2.5 rounded-full hover:from-red-700 hover:to-red-800 transition-all duration-300 flex items-center justify-center gap-1 font-medium text-sm mx-auto min-w-[130px] shadow-sm hover:shadow-md"
-                    style={{ fontSize: '0.85rem', padding: '0.5rem 1.2rem' }}
-                    onClick={() => router.push('/career/apply')}
-                  >
-                    <span>Apply Now</span>
-                    <ArrowRight size={12} />
-                  </button>
-                </div>
+            {/* Requirements Section */}
+            <div className="bg-red-50 rounded-xl p-6 border border-gray-300 mb-6">
+              <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+                <Award size={20} className="text-red-600" />
+                Requirements
+              </h3>
+              <div className="space-y-2">
+                {sapCareerInfo.requirements.map((requirement, index) => (
+                  <div key={index} className="flex items-start gap-2 text-gray-700">
+                    <span className="w-2 h-2 bg-red-500 rounded-full mt-2 flex-shrink-0"></span>
+                    <span className="text-sm">{requirement}</span>
+                  </div>
+                ))}
               </div>
-            ))}
+            </div>
+
+            {/* Contact Section */}
+            <div className="bg-gradient-to-r from-gray-400 to-gray-500 rounded-xl p-6 text-center">
+              <h3 className="text-xl font-bold text-white mb-4">Ready to Join Our SAP Team?</h3>
+              <p className="text-white-100 mb-6">
+                Send your resume and cover letter to our HR team. We'll get back to you within 24 hours.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <button
+                  className="bg-white text-red-600 px-6 py-3 rounded-full hover:bg-red-100 transition-all duration-300 flex items-center gap-2 font-semibold"
+                  onClick={() => router.push('/career/apply')}
+                >
+                  <span>Apply Now</span>
+                  <ArrowRight size={16} />
+                </button>
+                <a
+                  href="mailto:info@critindia.com"
+                  className="text-white hover:text-red-300 transition-colors duration-200 flex items-center gap-2 font-medium"
+                >
+                  <span>Email: info@critindia.com</span>
+                  <ExternalLink size={16} />
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -425,7 +350,7 @@ const CareerPage = () => {
                   Key Responsibilities
                 </h3>
                 <ul className="space-y-2">
-                  {selectedJob.responsibilities.map((responsibility, index) => (
+                  {(selectedJob.responsibilities || []).map((responsibility, index) => (
                     <li key={index} className="flex items-start gap-2 text-gray-900">
                       <span className="w-2 h-2 bg-red-400 rounded-full mt-2 flex-shrink-0"></span>
                       <span>{responsibility}</span>
@@ -443,7 +368,7 @@ const CareerPage = () => {
                   Requirements
                 </h3>
                 <ul className="space-y-2">
-                  {selectedJob.requirements.map((requirement, index) => (
+                  {(selectedJob.requirements || []).map((requirement, index) => (
                     <li key={index} className="flex items-start gap-2 text-gray-900">
                       <span className="w-2 h-2 bg-red-400 rounded-full mt-2 flex-shrink-0"></span>
                       <span>{requirement}</span>
@@ -470,22 +395,7 @@ const CareerPage = () => {
               </div>
 
               {/* Benefits */}
-              <div>
-                <h3 className="text-xl font-semibold text-red-400 mb-3 flex items-center gap-2">
-                  <span className="inline-flex items-center justify-center w-8 h-8 bg-red-100 rounded-lg">
-                    <Gift size={20} className="text-red-400" />
-                  </span>
-                  Benefits & Perks
-                </h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                  {selectedJob.benefits.map((benefit, index) => (
-                    <div key={index} className="flex items-center gap-2 text-gray-900">
-                        <span className="w-2 h-2 bg-red-400 rounded-full"></span>
-                      <span>{benefit}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
+              
 
               {/* Application Deadline */}
               <div className="bg-red-600/10 border border-red-600/20 rounded-lg p-4">
@@ -531,14 +441,14 @@ const CareerPage = () => {
               >
                 <path
                   d="M10 12 Q250 0 490 12"
-                  stroke="#EAB308"
+                  stroke="#FFD700"
                   strokeWidth="4"
                   strokeLinecap="round"
                   fill="none"
                 />
                 <path
                   d="M40 20 Q250 8 460 20"
-                  stroke="#EAB308"
+                  stroke="#FFD700"
                   strokeWidth="2.5"
                   strokeLinecap="round"
                   fill="none"
@@ -565,34 +475,23 @@ const CareerPage = () => {
                 {/* Dark overlay for text readability */}
                 <div className="absolute inset-0 bg-black/60 rounded-2xl"></div>
                 
-                {/* Animated SVG Blob Background */}
-                <svg
-                  className="absolute inset-0 w-full h-full z-0"
-                  viewBox="0 0 400 400"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  style={{ opacity: 0.98 }}
-                >
-                  <path>
-                    <animate attributeName="d" dur="8s" repeatCount="indefinite"
-                      values="M320,200Q320,280,240,320Q160,360,80,320Q0,280,0,200Q0,120,80,80Q160,40,240,80Q320,120,320,200Z;
-                              M340,200Q340,280,260,320Q180,360,100,320Q20,280,20,200Q20,120,100,80Q180,40,260,80Q340,120,340,200Z;
-                              M320,200Q320,280,240,320Q160,360,80,320Q0,280,0,200Q0,120,80,80Q160,40,240,80Q320,120,320,200Z" />
-                  </path>
-                </svg>
+                {/* Animated Blob Background */}
+                <div className="absolute inset-0 w-full h-full z-0 overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-blue-500/10 animate-blob animation-delay-2000"></div>
+                  <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-teal-500/10 animate-blob animation-delay-4000"></div>
+                  <div className="absolute inset-0 bg-gradient-to-br from-teal-500/10 to-purple-500/10 animate-blob"></div>
+                </div>
                 {/* Card overlay and content */}
-                <div className="absolute inset-0 bg-gradient-to-br from-gray-500/10 via-gray-700/10 to-gray-900/10 rounded-2xl z-10"></div>
-                <div className="relative z-20 text-center w-full">
-                  <Player
-                    autoplay
-                    loop
-                    src="https://assets10.lottiefiles.com/packages/lf20_tno6cg2w.json"
-                    style={{ height: 120, width: 120, margin: '0 auto 1rem auto' }}
-                  />
-                  <h3 className="text-3xl font-bold mb-6 text-white">
+                <div 
+                  className="absolute inset-0 bg-cover bg-center rounded-2xl z-0"
+                  style={{ backgroundImage: 'url(https://res.cloudinary.com/duz9xipfm/image/upload/v1754373214/hands-stack-business-people_nxnmw8.avif)' }}
+                ></div>
+                <div className="absolute inset-0 bg-gradient-to-br from-gray-900/70 via-gray-900/60 to-gray-900/80 rounded-2xl z-10"></div>
+                <div className="relative z-20 text-center w-full p-4 pt-26">
+                  <h3 className="text-4xl font-bold mb-6 text-white">
                     Discover Opportunities & Stay Connected
                   </h3>
-                  <p className="text-gray-300 text-lg leading-relaxed">
+                  <p className="text-gray-100 text-lg leading-relaxed">
                     We're always looking for talented individuals who share our vision. If you don't find the right opportunity today, submit your details, and we'll reach out when a suitable position opens up.
                   </p>
                 </div>
@@ -601,107 +500,171 @@ const CareerPage = () => {
 
             {/* Right Side - Form */}
             <div className="bg-gradient-to-b from-gray-200 to-gray-100 rounded-2xl p-4 sm:p-8 border border-gray-400 h-full">
-              {submitted ? (
-                <div className="text-center py-8">
-                  <div className="text-green-600 text-6xl mb-4">✓</div>
-                  <h3 className="text-2xl font-bold text-gray-900 mb-2">Thank You!</h3>
-                  <p className="text-gray-600">Your application has been submitted successfully. We'll contact you when a matching position becomes available.</p>
-                </div>
-              ) : (
-                <form className="space-y-4 sm:space-y-6" onSubmit={handleOpportunitySubmit}>
+              <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 sm:space-y-6">
+                {submitError && (
+                  <div className="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-4">
+                    <p>{submitError}</p>
+                  </div>
+                )}
+                
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-black font-medium mb-2">
+                    <label htmlFor="fullName" className="block text-black font-medium mb-2">
                       Full Name <span className="text-red-500">*</span>
                     </label>
                     <input
+                      id="fullName"
                       type="text"
-                      value={opportunityFormData.fullName}
-                      onChange={(e) => handleOpportunityInputChange('fullName', e.target.value)}
-                      className="w-full bg-gray-200 border border-gray-600 rounded-lg px-4 py-3 text-black placeholder-gray-400 focus:border-purple-500 focus:outline-none transition-colors"
+                      className={`w-full bg-gray-200 border ${
+                        errors.fullName ? 'border-red-500' : 'border-gray-600'
+                      } rounded-lg px-4 py-3 text-gray-900 placeholder-gray-500 focus:border-purple-500 focus:outline-none transition-colors`}
                       placeholder="Enter your full name"
+                      {...register('fullName', { 
+                        required: 'Full name is required',
+                        minLength: { value: 2, message: 'Name is too short' } 
+                      })}
                     />
+                    {errors.fullName && (
+                      <p className="mt-1 text-sm text-red-600">{errors.fullName.message}</p>
+                    )}
                   </div>
+                  
                   <div>
-                    <label className="block text-black font-medium mb-2">
+                    <label htmlFor="position" className="block text-black font-medium mb-2">
                       Desired Position <span className="text-red-500">*</span>
                     </label>
                     <input
+                      id="position"
                       type="text"
-                      value={opportunityFormData.desiredPosition}
-                      onChange={(e) => handleOpportunityInputChange('desiredPosition', e.target.value)}
-                      className="w-full bg-gray-200 border border-gray-600 rounded-lg px-4 py-3 text-black placeholder-gray-400 focus:border-purple-500 focus:outline-none transition-colors"
+                      className={`w-full bg-gray-200 border ${
+                        errors.position ? 'border-red-500' : 'border-gray-600'
+                      } rounded-lg px-4 py-3 text-gray-900 placeholder-gray-500 focus:border-purple-500 focus:outline-none transition-colors`}
                       placeholder="e.g., React Developer"
+                      {...register('position', { 
+                        required: 'Position is required' 
+                      })}
                     />
+                    {errors.position && (
+                      <p className="mt-1 text-sm text-red-600">{errors.position.message}</p>
+                    )}
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-black font-medium mb-2">
+                    <label htmlFor="experience" className="block text-black font-medium mb-2">
                       Experience <span className="text-red-500">*</span>
                     </label>
                     <input
+                      id="experience"
                       type="text"
-                      value={opportunityFormData.experience}
-                      onChange={(e) => handleOpportunityInputChange('experience', e.target.value)}
-                      className="w-full bg-gray-200 border border-gray-600 rounded-lg px-4 py-3 text-black placeholder-gray-400 focus:border-purple-500 focus:outline-none transition-colors"
+                      className={`w-full bg-gray-200 border ${
+                        errors.experience ? 'border-red-500' : 'border-gray-600'
+                      } rounded-lg px-4 py-3 text-gray-900 placeholder-gray-500 focus:border-purple-500 focus:outline-none transition-colors`}
                       placeholder="e.g., 3+ years"
+                      {...register('experience', { 
+                        required: 'Experience is required' 
+                      })}
                     />
+                    {errors.experience && (
+                      <p className="mt-1 text-sm text-red-600">{errors.experience.message}</p>
+                    )}
                   </div>
+                  
                   <div>
-                    <label className="block text-black font-medium mb-2">
+                    <label htmlFor="currentCtc" className="block text-black font-medium mb-2">
                       Current CTC <span className="text-red-500">*</span>
                     </label>
                     <input
+                      id="currentCtc"
                       type="text"
-                      value={opportunityFormData.currentCTC}
-                      onChange={(e) => handleOpportunityInputChange('currentCTC', e.target.value)}
-                      className="w-full bg-gray-200 border border-gray-600 rounded-lg px-4 py-3 text-black placeholder-gray-400 focus:border-purple-500 focus:outline-none transition-colors"
+                      className={`w-full bg-gray-200 border ${
+                        errors.currentCtc ? 'border-red-500' : 'border-gray-600'
+                      } rounded-lg px-4 py-3 text-gray-900 placeholder-gray-500 focus:border-purple-500 focus:outline-none transition-colors`}
                       placeholder="e.g., 10 LPA"
+                      {...register('currentCtc', { 
+                        required: 'Current CTC is required' 
+                      })}
                     />
+                    {errors.currentCtc && (
+                      <p className="mt-1 text-sm text-red-600">{errors.currentCtc.message}</p>
+                    )}
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-black font-medium mb-2">
+                    <label htmlFor="message" className="block text-black font-medium mb-2">
                       Write a message <span className="text-red-500">*</span>
                     </label>
                     <textarea
+                      id="message"
                       rows="4"
-                      value={opportunityFormData.message}
-                      onChange={(e) => handleOpportunityInputChange('message', e.target.value)}
-                      className="w-full bg-gray-200 border border-gray-600 rounded-lg px-4 py-3 text-black placeholder-gray-400 focus:border-purple-500 focus:outline-none transition-colors resize-none"
+                      className={`w-full bg-gray-200 border ${
+                        errors.message ? 'border-red-500' : 'border-gray-600'
+                      } rounded-lg px-4 py-3 text-gray-900 placeholder-gray-500 focus:border-purple-500 focus:outline-none transition-colors resize-none`}
                       placeholder="Tell us about yourself and your interests..."
+                      {...register('message', { 
+                        required: 'Message is required',
+                        minLength: { value: 10, message: 'Message should be at least 10 characters' } 
+                      })}
                     ></textarea>
+                    {errors.message && (
+                      <p className="mt-1 text-sm text-red-600">{errors.message.message}</p>
+                    )}
                   </div>
+                  
                   <div>
                     <label className="block text-black font-medium mb-2">
                       Upload Your CV <span className="text-red-500">*</span>
                     </label>
                     <div
-                      className="border-2 border-dashed border-gray-600 rounded-lg p-8 text-center hover:border-purple-500 transition-colors cursor-pointer"
-                      onClick={() => fileInputRef.current && fileInputRef.current.click()}
+                      className={`border-2 border-dashed ${
+                        errors.cv ? 'border-red-500' : 'border-gray-600 hover:border-purple-500'
+                      } rounded-lg p-6 text-center transition-colors cursor-pointer`}
+                      onClick={() => fileInputRef.current?.click()}
                     >
                       <input
                         type="file"
                         accept=".pdf,.doc,.docx"
                         ref={fileInputRef}
                         style={{ display: 'none' }}
-                        onChange={e => {
-                          if (e.target.files && e.target.files[0]) {
-                            setSelectedFile(e.target.files[0]);
+                        onChange={handleFileChange}
+                        {...register('cv', { 
+                          required: 'CV is required',
+                          validate: {
+                            fileType: files => 
+                              !files[0] || ACCEPTED_FILE_TYPES.includes(files[0]?.type) || 
+                              'Invalid file type. Only PDF and Word documents are allowed.',
+                            fileSize: files => 
+                              !files[0] || files[0]?.size <= MAX_FILE_SIZE || 
+                              'File size should be less than 5MB'
                           }
-                        }}
+                        })}
                       />
                       <div className="flex flex-col items-center">
-                        <svg className="w-12 h-12 text-gray-400 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                        <svg 
+                          className="w-12 h-12 text-gray-400 mb-2" 
+                          fill="none" 
+                          stroke="currentColor" 
+                          viewBox="0 0 24 24" 
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path 
+                            strokeLinecap="round" 
+                            strokeLinejoin="round" 
+                            strokeWidth="2" 
+                            d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
+                          ></path>
                         </svg>
-                        <p className="text-black font-medium">{selectedFile ? selectedFile.name : 'Upload file'}</p>
-                        <p className="text-gray-400 text-sm mt-1">PDF, DOC, DOCX (Max 5MB)</p>
+                        <p className="text-sm text-gray-900">
+                          {selectedFile ? selectedFile.name : 'Click to upload or drag and drop'}
+                        </p>
+                        <p className="text-xs text-gray-500 mt-1">PDF or Word (MAX. 5MB)</p>
                       </div>
+                      {errors.cv && (
+                        <p className="mt-2 text-sm text-red-600">{errors.cv.message}</p>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -710,14 +673,24 @@ const CareerPage = () => {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="bg-red-600 hover:red-800 text-white font-semibold px-6 sm:px-8 py-3 rounded-full flex items-center gap-2 transition-all duration-300 hover:scale-105 w-full sm:w-auto disabled:opacity-50 disabled:cursor-not-allowed"
+                    className={`bg-red-600 text-white px-6 py-3 rounded-full ${
+                      isSubmitting ? 'opacity-70 cursor-not-allowed' : 'hover:bg-red-700'
+                    } transition-all duration-300 flex items-center gap-2 font-semibold text-sm min-w-[180px] justify-center`}
                   >
-                    <span>{isSubmitting ? 'Submitting...' : 'Submit'}</span>
-                    <ArrowRight size={20} />
+                    {isSubmitting ? (
+                      <>
+                        <Loader2 className="w-5 h-5 animate-spin" />
+                        <span>Submitting...</span>
+                      </>
+                    ) : (
+                      <>
+                        <span>Submit Application</span>
+                        <ArrowRight size={20} />
+                      </>
+                    )}
                   </button>
                 </div>
               </form>
-              )}
             </div>
           </div>
         </div>

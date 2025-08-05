@@ -1,28 +1,48 @@
+/** @type {import('tailwindcss').Config} */
 module.exports = {
+  content: [
+    "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./components/**/*.{js,ts,jsx,tsx,mdx}",
+  ],
   theme: {
     extend: {
       animation: {
-        'blob': 'blob 12s infinite ease-in-out',
+        'blob': 'blob 8s infinite ease-in-out',
       },
       keyframes: {
         blob: {
           '0%': {
-            transform: 'translate(0px, 0px) scale(1) rotate(0deg)',
-          },
-          '25%': {
-            transform: 'translate(20px, -30px) scale(1.05) rotate(90deg)',
+            transform: 'translate(0px, 0px) scale(1)',
+            borderRadius: '60% 40% 30% 70%/60% 30% 70% 40%'
           },
           '50%': {
-            transform: 'translate(-15px, 20px) scale(0.95) rotate(180deg)',
-          },
-          '75%': {
-            transform: 'translate(25px, 15px) scale(1.02) rotate(270deg)',
+            transform: 'translate(30px, -20px) scale(1.1)',
+            borderRadius: '30% 60% 70% 40%/50% 60% 30% 60%'
           },
           '100%': {
-            transform: 'translate(0px, 0px) scale(1) rotate(360deg)',
+            transform: 'translate(0px, 0px) scale(1)',
+            borderRadius: '60% 40% 30% 70%/60% 30% 70% 40%'
           },
         }
-      }
+      },
+      animationDelay: {
+        '2000': '2s',
+        '4000': '4s',
+      },
     }
-  }
+  },
+  plugins: [
+    function({ addUtilities }) {
+      const newUtilities = {
+        '.animation-delay-2000': {
+          'animation-delay': '2s',
+        },
+        '.animation-delay-4000': {
+          'animation-delay': '4s',
+        },
+      }
+      addUtilities(newUtilities)
+    }
+  ]
 }
