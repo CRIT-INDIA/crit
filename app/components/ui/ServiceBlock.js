@@ -831,13 +831,13 @@ export default function ServiceBlock({ serviceName }) {
                 
                 {/* Subheadline */}
                 <p 
-                  className="text-md lg:text-lg leading-relaxed max-w-2xl text-gray-300">
+                  className="text-md lg:text-lg leading-relaxed max-w-2xl text-gray-300 dark:text-gray-300">
                   Are you ready to optimize you buisness processes? Expert consulting, customization, and support to transform your business operations
                 </p>
                 
                 {/* CTA Button */}
                 <div className="pt-2">
-                 <a href="/contact"> <button 
+                  <button 
                     className="group relative bg-[#dc2626] border-1 border-gray-500 text-white px-4 py-3 rounded-lg font-semibold text-md transition-all duration-300 hover:shadow-2xl whitespace-nowrap cursor-pointer"
                     style={{
                       boxShadow: '0 0 0 0 rgba(255, 0, 0, 0)'
@@ -848,10 +848,16 @@ export default function ServiceBlock({ serviceName }) {
                     onMouseLeave={(e) => {
                       e.currentTarget.style.boxShadow = '0 0 0 0 rgba(255, 0, 0, 0)';
                     }}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      // Dispatch custom event to open the consultation form
+                      window.dispatchEvent(new Event('openConsultationForm'));
+                      // Scroll to top to ensure the form is visible
+                      window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }}
                   >
                     Get Started Today
                   </button>
-                  </a>
                 </div>
               </div>
             </div>
@@ -930,7 +936,7 @@ export default function ServiceBlock({ serviceName }) {
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {keyFeatures.map((feature, index) => (
+            {safeKeyFeatures.map((feature, index) => (
               <FeatureCard key={index} feature={feature} index={index} />
             ))}
           </div>

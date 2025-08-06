@@ -7,7 +7,7 @@ import Link from 'next/link';
 // This component will only be rendered on the client side
 function ContactButtonClient() {
   return (
-    <div className={`fixed bottom-29 right-6 z-50`}>
+    <div className={`fixed bottom-5 left-3 z-500`}>
       <Link
         href="/contact"
         className="
@@ -19,7 +19,7 @@ function ContactButtonClient() {
         "
         aria-label="Contact Us"
       >
-        <Mail className="w-6 h-6 text-white" />
+        <Mail className="w-7 h-7 text-white" />
        </Link>
     </div>
   );

@@ -209,6 +209,23 @@ const Navbar = () => {
     setShowCtaForm(false); 
   }, [pathname]);
 
+  // Effect to listen for custom event to open consultation form
+  useEffect(() => {
+    const handleOpenConsultationForm = () => {
+      setShowCtaForm(true);
+      // Close mobile menu if open
+      setIsMobileMenuOpen(false);
+    };
+
+    // Add event listener
+    window.addEventListener('openConsultationForm', handleOpenConsultationForm);
+
+    // Cleanup
+    return () => {
+      window.removeEventListener('openConsultationForm', handleOpenConsultationForm);
+    };
+  }, []);
+
   // Effect for handling mobile menu state
   useEffect(() => { 
     console.log('Mobile menu state changed:', isMobileMenuOpen); 

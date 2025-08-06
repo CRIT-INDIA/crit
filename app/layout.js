@@ -81,7 +81,7 @@ export default function RootLayout({ children }) {
     <html lang="en" className="h-screen" suppressHydrationWarning>
       <head>
         <link rel="icon" href="https://res.cloudinary.com/duz9xipfm/image/upload/v1753937310/CRIT-3D_cpzr1n_1_efzl5o.avif" type="image/png" />
-      
+
       {/* Updated SEO Meta Tags */}
       <title> critindia - Connecting roots of SAP</title>
       <meta name="description" content="Crit India is in SAP implementation and support. Critindia provides SAP solution and services across entire SAP range of technology." />
@@ -100,7 +100,6 @@ export default function RootLayout({ children }) {
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content="critindia : Connecting roots of SAP" />
       <meta name="twitter:description" content="Critindia (Connecting Roots IT) is a Pune-based SAP consulting firm delivering end-to-end solutions across SAP S/4HANA, Ariba, SuccessFactors, Hybris, BusinessObjects, and Concur. With expertise in implementation, Rollout , integration, migration, automation, and testing, we streamline processes and drive real-time visibility. Our certified consultants design tailored roadmaps, execute seamless deployments, and provide comprehensive training and support. Committed to reliability, integrity, and innovation, Critindia helps businesses run simple, grow faster, and thrive in a data-driven world." />
-
 
       {/* Structured Data Schema */}
       <script
@@ -174,10 +173,37 @@ export default function RootLayout({ children }) {
             `
           }}
         />
+
+        {/* Add GTM script */}
+        {/* Google Tag Manager */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+              new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+              j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+              'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+              })(window,document,'script','dataLayer','GTM-WB25D87H');
+            `
+          }}
+        />
+        {/* End Google Tag Manager */}
+
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col bg-[#fff5f5]`}
       >
+        {/* GTM noscript */}
+        <noscript
+          dangerouslySetInnerHTML={{
+            __html: `
+              <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WB25D87H"
+              height="0" width="0" style="display:none;visibility:hidden"></iframe>
+            `
+          }}
+        />
+        {/* End Google Tag Manager (noscript) */}
+
         <div className="relative">
           <Navbar />
         </div>

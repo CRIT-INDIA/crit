@@ -404,21 +404,35 @@ export default function CritIndiaCtaForm({ onClose }) {
       <ModalPortal>
       <div className="fixed inset-0 z-50 flex justify-center items-center p-1 sm:p-3 bg-black/70 backdrop-blur-sm">
         <div className="cta-modal-content w-full max-w-[98vw] sm:max-w-2xl max-h-[95vh] overflow-y-auto h-fit bg-white rounded-2xl shadow-2xl border border-gray-200 animate-in slide-in-from-bottom-4 duration-500 ease-out relative">
-
+          
           {/* Header Section */}
-          <div className="sticky top-0 z-20 p-2 sm:p-4 text-white bg-gradient-to-r from-gray-600 to-gray-700 rounded-t-2xl">
-            <button
-              onClick={handleClose}
-              className="absolute top-2 right-2 sm:top-3 sm:right-3 text-white hover:text-red-100 transition-all duration-200 hover:scale-110 hover:rotate-90"
-              aria-label="Close consultation form"
-            >
-              <X size={20} />
-            </button>
-            <div className="flex justify-center">
-              <div className="flex items-center gap-2 sm:gap-3 mb-1">
-                <div>
-                  <h2 className="text-base sm:text-xl font-bold">Get Expert SAP Consultation</h2>
-                  <p className="text-gray-100 text-xs">Transform your business with CRIT India's SAP excellence</p>
+          <div 
+            className="sticky top-0 z-20 p-2 sm:p-4 text-white rounded-t-2xl relative overflow-hidden"
+            style={{
+              backgroundImage: "url('https://res.cloudinary.com/duz9xipfm/image/upload/v1754458242/Abstract_red_background_with_curve_on_white___Premium_Vector_ud8prg.jpg')",
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat',
+            }}
+          >
+            {/* Dark overlay for better text readability */}
+            <div className="absolute inset-0 bg-black/40"></div>
+            
+            {/* Content */}
+            <div className="relative z-10">
+              <button
+                onClick={handleClose}
+                className="absolute top-2 right-2 sm:top-3 sm:right-3 text-white hover:text-red-100 transition-all duration-200 hover:scale-110 hover:rotate-90"
+                aria-label="Close consultation form"
+              >
+                <X size={20} />
+              </button>
+              <div className="flex justify-center">
+                <div className="flex items-center gap-2 sm:gap-3 mb-1">
+                  <div>
+                    <h2 className="text-base sm:text-xl font-bold">Get Expert SAP Consultation</h2>
+                    <p className="text-gray-100 text-xs">Transform your business with CRIT India's SAP excellence</p>
+                  </div>
                 </div>
               </div>
             </div>

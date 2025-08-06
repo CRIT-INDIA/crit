@@ -162,17 +162,6 @@ const ConnectWithUs = () => {
             </div>
           </div>
         </div>
- 
-        {/* Bottom Text */}
-        <div className="text-center mt-12 font-bold text-black text-2xl">
-          <p className="text-lg sm:text-2xl">
-            Think{' '}
-            <span className="text-red-500 font-bold">SAP</span>
-            , Think{' '}
-            <span className="text-blue-400 font-bold">SoftCore Solutions</span>
-            ...
-          </p>
-        </div>
       </div>
     </div>
   );
