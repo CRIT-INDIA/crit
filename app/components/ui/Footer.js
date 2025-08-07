@@ -1,6 +1,16 @@
+'use client';
+
 import { ArrowRight, Linkedin, Twitter, Youtube, Facebook, MapPin, Phone, Mail } from "lucide-react";
+import Sitemap from "../Sitemap";
+import { useEffect, useState } from 'react';
 
 const ModernFooter = () => {
+  const [isMounted, setIsMounted] = useState(false);
+  
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+  
   const socialLinks = [
     { name: "Linkedin", icon: Linkedin, href: "https://www.linkedin.com/company/connecting-root/" },
     { name: "Twitter", icon: Twitter, href: "#" },
@@ -10,10 +20,10 @@ const ModernFooter = () => {
 
   const footerSections = [
     {
-      title: "SAP Services",
+      title: "SAP Services",  
       links: [
         { name: "SAP Implementation", href: "/sap-implementation-services" },
-        { name: "SAP Rollout ", href: "/sap-Rollout-services" },
+        { name: "SAP Rollout ", href: "/sap-rollout-services" },
         { name: "SAP Support", href: "/sap-support-services" },
         { name: "SAP Upgrade", href: "/sap-upgrade-services" },
         { name: "SAP Integration", href: "/sap-integration-services" },
@@ -87,12 +97,12 @@ const ModernFooter = () => {
               <div className="flex items-start space-x-3">
                 <img 
                   src="https://res.cloudinary.com/dujw4np0d/image/upload/v1753342468/CRIT-3D_cpzr1n_ggj84n.avif" 
-                  alt="CRIT Logo" 
+                  alt="Connecting Roots IT Logo" 
                   className="w-16 h-16 object-contain flex-shrink-0"
                 />
                 <div className="space-y-1">
-                  <h2 className="text-2xl font-bold text-footer-heading">Connecting Roots IT</h2>
-                  <p className="text-base text-gray-400 ">SAP Excellence Partner</p>
+                  <h2 className="text-2xl font-bold text-footer-heading">Connecting Roots</h2>
+                  <p className="text-base text-gray-400">SAP Excellence Partner</p>
                 </div>
               </div>
             </div>
@@ -147,6 +157,11 @@ const ModernFooter = () => {
                           </a>
                         </li>
                       ))}
+                      {section.title === "Company" && (
+                        <li>
+                          <Sitemap />
+                        </li>
+                      )}
                     </ul>
                   </>
                 )}
@@ -187,16 +202,16 @@ const ModernFooter = () => {
         </div>
 
         {/* Copyright */}
-        <div className="border-t border-border/20 pt-12">
+        <div className="border-t border-border/20 pt-12 text-white">
           <div className="flex flex-col items-center space-y-4">
-            <p className="text-footer-text text-xs text-center">
-              © 2025 CRIT India. All rights reserved. | Transforming Business Through SAP Excellence
+            <p className="text-xs text-center">
+              2025 Connecting Roots. All rights reserved. | Transforming Business Through SAP Excellence
             </p>
-            <div className="flex space-x-6">
-              <a href="#" className="text-footer-text hover:text-footer-link-hover text-xs transition-colors duration-300">
+            <div className="flex space-x-6 text-white">
+              <a href="#" className="text-white hover:text-footer-link-hover text-xs transition-colors duration-300">
                 Privacy Policy
               </a>
-              <a href="#" className="text-footer-text hover:text-footer-link-hover text-xs transition-colors duration-300">
+              <a href="#" className="text-white hover:text-footer-link-hover text-xs transition-colors duration-300">
                 Terms of Service
               </a>
               <a href="#" className="text-footer-text hover:text-footer-link-hover text-xs transition-colors duration-300">

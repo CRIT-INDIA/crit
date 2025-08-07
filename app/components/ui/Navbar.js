@@ -169,8 +169,8 @@ const HoveredLink = ({ children, ...rest }) => {
 const createServiceSlug = (name) => {
   // Map service names to their URL slugs
   const serviceSlugs = {
-    'SAP Implementation Services': 'sap-implementation-services',   // <-- NEW SLUG
-    'SAP Rollout Services': 'sap-Rollout-services',
+    'SAP Implementation Services': 'sap-implementation-services',   
+    'SAP Rollout Services': 'sap-rollout-services',
     'SAP Support Services': 'sap-support-services',
     'SAP Upgrade Services': 'sap-upgrade-services',
     'SAP Integration Services': 'sap-integration-services',

@@ -100,8 +100,8 @@ const CareerPage = () => {
   }, []);
 
   const sapCareerInfo = {
-    title: "SAP Career Opportunities at CRIT",
-    description: "Going beyond work, Life at Crit is brimming with a dynamic and fun environment; one where people not only ace at their field of expertise but also give meaning to their passion.\n\n  We provide opportunities for you to grow and excel in your career and beyond. Along with creating an impact on technology, you also have the chance to unleash your full potential at every stage of your career. Our expertise spans SAP implementation, customization, and comprehensive consulting services, ensuring our clients achieve maximum value from their SAP investments. ",
+    title: "SAP Career Opportunities at Connecting Roots IT",
+    description: "Going beyond work, Life at Connecting Roots IT is brimming with a dynamic and fun environment; one where people not only ace at their field of expertise but also give meaning to their passion.\n\n  We provide opportunities for you to grow and excel in your career and beyond. Along with creating an impact on technology, you also have the chance to unleash your full potential at every stage of your career. Our expertise spans SAP implementation, customization, and comprehensive consulting services, ensuring our clients achieve maximum value from their SAP investments. ",
     requirements: [
       "Strong technical background in SAP technologies",
       "Excellent communication and problem-solving skills",
@@ -176,7 +176,7 @@ const CareerPage = () => {
   };
 
   return (
-    <div className="min-h-screen p-2 sm:p-4 md:p-6">
+    <div className="min-h-* p-2 sm:p-4 md:p-6">
       {/* Hero Section */}
       <section className="relative w-full h-[400px] sm:h-[450px] md:h-[500px] px-2 sm:px-4 py-6 pt-20">
         
@@ -214,7 +214,7 @@ const CareerPage = () => {
                 Looking for the Best IT Job?
               </h2>
               <p className="text-base md:text-lg mb-4 text-gray-400 max-w-2xl mx-auto leading-relaxed">
-                Join a team that thrives on innovation, creativity, and collaboration. At CRIT, we empower individuals to grow while building solutions that make an impact. Discover your next big opportunity today!
+                Join a team that thrives on innovation, creativity, and collaboration. At Connecting Roots, we empower individuals to grow while building solutions that make an impact. Discover your next big opportunity today!
               </p>
               
             </div>
@@ -230,6 +230,10 @@ const CareerPage = () => {
             <div className="text-center mb-8">
               <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
                 {sapCareerInfo.title}
+                <svg className="mx-auto my-0" style={{marginTop: '-4px'}} width="290" height="24" viewBox="0 0 180 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M10 18 Q 70 8, 170 14" stroke="#FFD700" strokeWidth="4" strokeLinecap="round" fill="none"/>
+              <path d="M25 21 Q 100 15, 160 18" stroke="#FFD700" strokeWidth="2" strokeLinecap="round" fill="none"/>
+            </svg>
               </h2>
               <p className="text-lg text-gray-700 max-w-3xl mx-auto leading-relaxed">
                 {sapCareerInfo.description}
@@ -259,13 +263,7 @@ const CareerPage = () => {
                 Send your resume and cover letter to our HR team. We'll get back to you within 24 hours.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <button
-                  className="bg-white text-red-600 px-6 py-3 rounded-full hover:bg-red-100 transition-all duration-300 flex items-center gap-2 font-semibold"
-                  onClick={() => router.push('/career/apply')}
-                >
-                  <span>Apply Now</span>
-                  <ArrowRight size={16} />
-                </button>
+                
                 <a
                   href="mailto:info@critindia.com"
                   className="text-white hover:text-red-300 transition-colors duration-200 flex items-center gap-2 font-medium"
@@ -319,7 +317,7 @@ const CareerPage = () => {
                   <div className="w-16 h-16 rounded-lg flex items-center justify-center overflow-hidden">
                     <img
                       src="https://res.cloudinary.com/dujw4np0d/image/upload/v1753342468/CRIT-3D_cpzr1n_ggj84n.avif"
-                      alt="CRIT Logo"
+                      alt="Connecting Roots IT Logo"
                       className="w-full h-full object-cover"
                     />
                   </div>
@@ -429,31 +427,10 @@ const CareerPage = () => {
           <div className="text-center mb-8 sm:mb-12">
             <h2 className="text-black text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6 relative inline-block">
               Stay Ahead of Opportunities
-              <svg
-                className="absolute -bottom-5 left-0 w-full"
-                width="100%"
-                height="22"
-                viewBox="0 0 500 22"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                preserveAspectRatio="none"
-                style={{ display: 'block' }}
-              >
-                <path
-                  d="M10 12 Q250 0 490 12"
-                  stroke="#FFD700"
-                  strokeWidth="4"
-                  strokeLinecap="round"
-                  fill="none"
-                />
-                <path
-                  d="M40 20 Q250 8 460 20"
-                  stroke="#FFD700"
-                  strokeWidth="2.5"
-                  strokeLinecap="round"
-                  fill="none"
-                />
-              </svg>
+            <svg className="mx-auto my-0" style={{marginTop: '-6px'}} width="160" height="18" viewBox="0 0 220 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5 18 Q 110 8, 215 14" stroke="#FFD700" strokeWidth="4" strokeLinecap="round" fill="none"/>
+              <path d="M15 21 Q 120 15, 200 18" stroke="#FFD700" strokeWidth="2" strokeLinecap="round" fill="none"/>
+            </svg>
             </h2>
             <p className="text-gray-700 text-base sm:text-lg max-w-3xl mx-auto">
               Didn't find the right role? No worries! Submit your details, and we'll contact you when a matching position becomes available.

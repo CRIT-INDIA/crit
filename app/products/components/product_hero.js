@@ -128,7 +128,7 @@ const services = [
 
 export default function Home() {
   return (
-    <div className="min-h-* flex flex-col justify-center p-10">
+    <div className="min-h-* flex flex-col justify-center p-5">
       <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between px-4 py-16 gap-8">
         {/* Left: Heading */}
         <div className="flex flex-col items-center lg:items-start justify-center">
@@ -192,6 +192,8 @@ export default function Home() {
           })}
         </div>
       </div>
+      {/* Fade effect at the bottom */}
+      <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-white to-transparent pointer-events-none"></div>
       {/* Custom styling for hover transitions and icon color */}
       <style jsx global>{`
         .service-card .lucide {

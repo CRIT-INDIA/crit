@@ -22,7 +22,7 @@ const AboutUsHero = () => {
     {
       year: '2013',
       title: 'The Foundation',
-      description: 'Connecting Roots IT was founded with a vision to revolutionize enterprise software implementation and make SAP accessible to businesses of all sizes.',
+      description: 'Connecting Roots was founded with a vision to revolutionize enterprise software implementation and make SAP accessible to businesses of all sizes.',
       icon: <SparklesIcon className="w-6 h-6" />,
       color: 'from-red-400 to-orange-400'
     },
@@ -120,7 +120,7 @@ const AboutUsHero = () => {
       >
 
                     <span className="relative z-10 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 animate-gradient-x">
-                      Connecting Roots IT
+                      Connecting Roots
                     </span>
                   </PointerHighlight>
                   

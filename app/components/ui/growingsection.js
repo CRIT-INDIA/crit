@@ -127,7 +127,7 @@ function MetricsDesktopView() {
               </linearGradient>
             </defs>
             <path
-              d="M 0,120 Q 300,80 600,120 T 1200,160"
+              d="M 0,100 Q 300,80 600,120 T 1200,160"
               stroke="black"
               strokeWidth="3"
               fill="none"

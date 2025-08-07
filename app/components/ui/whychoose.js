@@ -59,7 +59,7 @@ const WhyChooseUs = () => {
                     https://res.cloudinary.com/dujw4np0d/image/upload/f_auto,q_75,w_800/v1750913233/DeWatermark.ai_1750851940290-_2__iyr1bg.avif 800w,
                     https://res.cloudinary.com/dujw4np0d/image/upload/f_auto,q_75,w_1000/v1750913233/DeWatermark.ai_1750851940290-_2__iyr1bg.avif 1000w
                   "
-                  alt="CRIT India Office showing team collaboration and modern workspace environment" 
+                  alt="Connecting Roots IT Office showing team collaboration and modern workspace environment" 
                   fill
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 600px"
                   priority

@@ -403,36 +403,36 @@ export default function CritIndiaCtaForm({ onClose }) {
     <>
       <ModalPortal>
       <div className="fixed inset-0 z-50 flex justify-center items-center p-1 sm:p-3 bg-black/70 backdrop-blur-sm">
-        <div className="cta-modal-content w-full max-w-[98vw] sm:max-w-2xl max-h-[95vh] overflow-y-auto h-fit bg-white rounded-2xl shadow-2xl border border-gray-200 animate-in slide-in-from-bottom-4 duration-500 ease-out relative">
+        <div className="cta-modal-content w-full max-w-[98vw] sm:max-w-2xl max-h-[95vh] overflow-y-auto h-fit bg-white rounded-xl shadow-2xl border border-gray-200 animate-in slide-in-from-bottom-4 duration-500 ease-out relative">
           
           {/* Header Section */}
           <div 
-            className="sticky top-0 z-20 p-2 sm:p-4 text-white rounded-t-2xl relative overflow-hidden"
+            className="sticky border-1 border-red-600 top-0 z-20 p-2 sm:p-2 text-white rounded-t-2xl relative overflow-hidden"
             style={{
-              backgroundImage: "url('https://res.cloudinary.com/duz9xipfm/image/upload/v1754458242/Abstract_red_background_with_curve_on_white___Premium_Vector_ud8prg.jpg')",
+              backgroundImage: "url('https://res.cloudinary.com/dujw4np0d/image/upload/v1754477803/DeWatermark.ai_1754477790161_kvdpcm.jpg')",
               backgroundSize: 'cover',
               backgroundPosition: 'center',
               backgroundRepeat: 'no-repeat',
             }}
           >
             {/* Dark overlay for better text readability */}
-            <div className="absolute inset-0 bg-black/40"></div>
+            <div className="absolute inset-0 bg-black/5"></div>
             
             {/* Content */}
             <div className="relative z-10">
               <button
                 onClick={handleClose}
-                className="absolute top-2 right-2 sm:top-3 sm:right-3 text-white hover:text-red-100 transition-all duration-200 hover:scale-110 hover:rotate-90"
+                className="absolute top-2 right-2 sm:top-3 sm:right-3 text-black hover:text-red-700 transition-all duration-200 hover:scale-110 hover:rotate-90"
                 aria-label="Close consultation form"
               >
                 <X size={20} />
               </button>
-              <div className="flex justify-center">
-                <div className="flex items-center gap-2 sm:gap-3 mb-1">
+              <div className="flex justify-start">
+                <div className="flex items-start gap-2 sm:gap-3 mb-1">
                   <div>
-                    <h2 className="text-base sm:text-xl font-bold">Get Expert SAP Consultation</h2>
-                    <p className="text-gray-100 text-xs">Transform your business with CRIT India's SAP excellence</p>
-                  </div>
+                    <h2 className="text-base text-black sm:text-2xl font-bold">Get Expert SAP Consultation</h2>
+                    <p className="text-gray-900 text-sm">Transform your business with<br></br> Connecting Roots SAP excellence</p>
+                   </div>
                 </div>
               </div>
             </div>
@@ -440,8 +440,8 @@ export default function CritIndiaCtaForm({ onClose }) {
 
           <div className="flex flex-col lg:flex-row">
             {/* Left Side - Benefits */}
-            <div className="w-full lg:w-2/5 p-2 sm:p-4 bg-gradient-to-b from-gray-200 to-gray-100">
-              <h3 className="text-xs sm:text-base font-semibold mb-2 sm:mb-3 text-black">Why Choose CRIT India?</h3>
+            <div className="w-full lg:w-2/6 p-2 sm:p-4 bg-gray-100">
+              <h3 className="text-xs sm:text-base font-semibold mb-2 sm:mb-3 text-black">Why Choose Connecting Roots?</h3>
               <div className="space-y-2 mb-2 sm:mb-3">
                 <div className="flex items-start gap-2">
                   <Users className="text-black mt-0.5 flex-shrink-0" size={14} />
@@ -476,7 +476,7 @@ export default function CritIndiaCtaForm({ onClose }) {
             </div>
 
             {/* Right Side - Form */}
-            <div className="w-full lg:w-3/5 p-2 sm:p-4 bg-gray-50">
+            <div className="w-full lg:w-3/5 p-2 sm:p-4 bg-white">
               {submitted ? (
                 <div className="text-center py-6">
                   <CheckCircle className="text-green-500 mx-auto mb-2" size={40} />
@@ -500,7 +500,7 @@ export default function CritIndiaCtaForm({ onClose }) {
                       />
                       {errors.name && <p className="text-red-600 text-xs mt-0.5">{errors.name}</p>}
                     </div>
-                    <div>
+                    <div className="pb-2">
                       <input
                         type="email"
                         name="email"
@@ -513,7 +513,7 @@ export default function CritIndiaCtaForm({ onClose }) {
                     </div>
                   </div>
                   {/* Company */}
-                  <div>
+                  <div className="pb-2">
                     <input
                       type="text"
                       name="company"
@@ -524,7 +524,7 @@ export default function CritIndiaCtaForm({ onClose }) {
                     />
                   </div>
                   {/* Phone with Country */}
-                  <div className="space-y-1">
+                  <div className="space-y-1 pb-2">
                     <div className="flex flex-col sm:flex-row gap-2">
                       <select
                         name="countryCode"
@@ -538,7 +538,7 @@ export default function CritIndiaCtaForm({ onClose }) {
                           </option>
                         ))}
                       </select>
-                      <div className="flex-1 relative">
+                      <div className="flex-1 relative pb-2">
                         <input
                           type="tel"
                           name="phone"
@@ -560,7 +560,7 @@ export default function CritIndiaCtaForm({ onClose }) {
                     {errors.phone && <p className="text-red-600 text-xs">{errors.phone}</p>}
                   </div>
                   {/* Service Selection */}
-                  <div>
+                  <div className="pb-2">
                     <select
                       name="service"
                       value={formData.service}
@@ -577,7 +577,7 @@ export default function CritIndiaCtaForm({ onClose }) {
                     {errors.service && <p className="text-red-600 text-xs mt-0.5">{errors.service}</p>}
                   </div>
                   {/* Message */}
-                  <div>
+                  <div className="pb-2">
                     <textarea
                       name="message"
                       placeholder="Tell us about your business requirements and challenges *"
@@ -591,7 +591,7 @@ export default function CritIndiaCtaForm({ onClose }) {
                   {/* Submit Button */}
                   <button
                     type="submit"
-                    className="w-full bg-gray-600 hover:bg-gray-800 text-white font-semibold py-2.5 rounded-lg transition-all duration-200 transform hover:scale-[1.01] shadow-lg hover:shadow-xl text-sm"
+                    className="w-full bg-[#dc2626] hover:bg-red-700 text-white font-semibold py-2.5 rounded-lg transition-all duration-200 transform hover:scale-[1.01] shadow-lg hover:shadow-xl text-sm"
                   >
                     Get Your Free SAP Consultation
                   </button>

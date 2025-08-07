@@ -188,7 +188,7 @@ export default function RootLayout({ children }) {
           }}
         />
         {/* End Google Tag Manager */}
-
+        <meta name="google-site-verification" content="h3ixGy5uCzHHiLl_VtBJSeORuIZAaFgdd8ftiPT5Rn4" />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col bg-[#fff5f5]`}

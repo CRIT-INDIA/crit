@@ -13,11 +13,6 @@ body {
   min-height: 100vh;
 }
 
-
-p {
-  color: black;
-}
-
 /* 🌟 Top Hero Section */
 .hero-section {
   background: linear-gradient(to right, var(--accent), var(--background));

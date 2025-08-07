@@ -107,9 +107,7 @@ const SAPProductsInfo = () => {
       animation: fadeInUp 0.5s ease-out forwards;
       opacity: 0;
     }
-    .hover\:scale-102:hover {
-      transform: scale(1.02);
-    }
+    
     
     /* Educational animation classes */
     .knowledge-glow {
@@ -137,48 +135,14 @@ const SAPProductsInfo = () => {
       transition: all 0.3s ease;
     }
     
-    .learning-highlight:hover {
-      background: linear-gradient(135deg, rgba(220, 38, 38, 0.1), rgba(239, 68, 68, 0.1));
-      transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(220, 38, 38, 0.15);
-    }
-    
     .capability-item {
       transition: all 0.4s ease;
       position: relative;
     }
     
-    .capability-item:hover {
-      transform: translateX(8px);
-      color: #dc2626;
-    }
-    
-    .capability-item:hover::before {
-      content: "→";
-      position: absolute;
-      left: -15px;
-      color: #dc2626;
-      font-weight: bold;
-      animation: strategicThinking 1s ease-in-out;
-    }
-    
     .outcome-item {
       transition: all 0.4s ease;
       position: relative;
-    }
-    
-    .outcome-item:hover {
-      transform: translateX(8px);
-      color: #dc2626;
-    }
-    
-    .outcome-item:hover::after {
-      content: "✓";
-      position: absolute;
-      right: -15px;
-      color: #dc2626;
-      font-weight: bold;
-      animation: insightPulse 1s ease-in-out;
     }
   `;
 
@@ -457,7 +421,7 @@ const SAPProductsInfo = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8 overflow-x-auto">
           {/* Product Navigation */}
-          <div className="lg:col-span-1 sticky top-8">
+          <div className="relative lg:col-span-1 lg:sticky top-8">
             <div className="rounded-lg shadow-sm border border-red-200 p-6 bg-white hover:shadow-lg transition-all duration-300 ease-out" >
               <h3 className="text-lg font-semibold text-red-600 mb-4">Solutions Portfolio</h3>
               <nav className="space-y-2">
@@ -468,7 +432,7 @@ const SAPProductsInfo = () => {
                     className={`w-full flex items-center space-x-3 p-3 rounded-lg text-left transition-all duration-300 transform hover:translate-x-2 hover:shadow-md ${
                       selectedProduct === product.id
                         ? 'bg-red-100 text-red-600 border border-red-300 scale-105 shadow-md'
-                        : 'hover:bg-red-50 hover:text-gray-900 text-gray-900 hover:scale-102'
+                        : 'hover:bg-red-50 hover:text-gray-900 text-gray-900'
                     }`}
                   >
                     <div className={`${selectedProduct === product.id ? 'text-red-600' : 'text-red-400'}`}>
@@ -490,7 +454,7 @@ const SAPProductsInfo = () => {
             {currentProduct && (
               <div className="space-y-8" key={selectedProduct}>
                 {/* Product Header */}
-                <div className="rounded-lg shadow-sm border border-red-200 p-8 bg-red-100 hover:shadow-lg transition-all duration-300 transform hover:scale-102 knowledge-glow">
+                <div className="rounded-lg mt-10 mr-10 shadow-sm border border-red-200 p-8 bg-red-100 hover:shadow-lg transition-all duration-300 transform knowledge-glow">
                   <div className="flex items-start space-x-4">
                     <div className="text-red-600">
                       {React.cloneElement(currentProduct.icon, { className: 'w-8 h-8', color: '#dc2626' })}
@@ -521,7 +485,7 @@ const SAPProductsInfo = () => {
                 </div>
 
                 {/* Executive Summary */}
-                <div className="rounded-lg shadow-sm border border-red-200 p-8 bg-white hover:shadow-lg transition-all duration-300 transform hover:scale-102">
+                <div className="rounded-lg shadow-sm border border-red-200 p-8 bg-white hover:shadow-lg transition-all duration-300 transform ">
                   <h3 className="text-xl font-semibold text-red-600 mb-4 flex items-center space-x-2">
                     <FileText className="w-5 h-5 text-red-500 learning-flow" />
                     <span>Executive Summary</span>
@@ -533,7 +497,7 @@ const SAPProductsInfo = () => {
 
                 {/* Key Capabilities & Business Outcomes */}
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                  <div className="rounded-lg shadow-sm border border-red-200 p-8 bg-white hover:shadow-lg transition-all duration-300 transform hover:scale-102">
+                  <div className="rounded-lg shadow-sm border border-red-200 p-8 bg-white hover:shadow-lg transition-all duration-300 transform ">
                     <h3 className="text-xl font-semibold text-red-600 mb-6 flex items-center space-x-2">
                       <Settings className="w-5 h-5 text-red-500" />
                       <span>Key Capabilities</span>
@@ -542,13 +506,13 @@ const SAPProductsInfo = () => {
                       {currentProduct.keyCapabilities.map((capability, index) => (
                         <div key={index} className="flex items-start space-x-3">
                           <div className="w-2 h-2 bg-red-500 rounded-full mt-2 flex-shrink-0 insight-pulse"></div>
-                          <span className="text-gray-900 hover:text-red-600 transition-colors duration-200 capability-item">{capability}</span>
+                          <span className="text-gray-900 transition-colors duration-200 capability-item">{capability}</span>
                         </div>
                       ))}
                     </div>
                   </div>
 
-                  <div className="rounded-lg shadow-sm border border-red-200 p-8 bg-white hover:shadow-lg transition-all duration-300 transform hover:scale-102">
+                  <div className="rounded-lg shadow-sm border border-red-200 p-8 bg-white hover:shadow-lg transition-all duration-300 transform">
                     <h3 className="text-xl font-semibold text-red-600 mb-6 flex items-center space-x-2">
                       <TrendingUp className="w-5 h-5 text-red-500" />
                       <span>Business Outcomes</span>
@@ -557,7 +521,7 @@ const SAPProductsInfo = () => {
                       {currentProduct.businessOutcomes.map((outcome, index) => (
                         <div key={index} className="flex items-start space-x-3">
                           <div className="w-2 h-2 bg-red-500 rounded-full mt-2 flex-shrink-0 insight-pulse"></div>
-                          <span className="text-gray-900 hover:text-red-600 transition-colors duration-200 outcome-item">{outcome}</span>
+                          <span className="text-gray-900 transition-colors duration-200 outcome-item">{outcome}</span>
                         </div>
                       ))}
                     </div>
@@ -565,7 +529,7 @@ const SAPProductsInfo = () => {
                 </div>
 
                 {/* Investment Metrics */}
-                <div className="rounded-lg shadow-sm border border-red-200 p-8 sm:block hidden bg-white hover:shadow-lg transition-all duration-300 transform hover:scale-102 data-visualization">
+                <div className="rounded-lg shadow-sm border border-red-200 p-8 sm:block hidden bg-white hover:shadow-lg transition-all duration-300 transform data-visualization">
                   <h3 className="text-xl font-semibold text-red-600 mb-6 flex items-center space-x-2 flex-row">
                     <DollarSign className="w-5 h-5 text-red-500 strategic-thinking" />
                     <span>Investment Analysis</span>
@@ -602,7 +566,7 @@ const SAPProductsInfo = () => {
 
                 {/* Technical Specifications & Industries */}
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                  <div className="rounded-lg shadow-sm border border-red-200 p-8 bg-white hover:shadow-lg transition-all duration-300 transform hover:scale-102">
+                  <div className="rounded-lg shadow-sm border border-red-200 p-8 bg-white hover:shadow-lg transition-all duration-300 transform ">
                     <h3 className="text-xl font-semibold text-red-600 mb-6 flex items-center space-x-2">
                       <Shield className="w-5 h-5 text-red-500" />
                       <span>Technical Specifications</span>
@@ -627,7 +591,7 @@ const SAPProductsInfo = () => {
                     </div>
                   </div>
 
-                  <div className="rounded-lg shadow-sm border border-red-200 p-8 sm:block hidden bg-white hover:shadow-lg transition-all duration-300 transform hover:scale-102">
+                  <div className="rounded-lg shadow-sm border border-red-200 p-8 sm:block hidden bg-white hover:shadow-lg transition-all duration-300 transform ">
                     <h3 className="text-xl font-semibold text-red-600 mb-6 flex items-center space-x-2">
                       <Building2 className="w-5 h-5 text-red-500" />
                       <span>Industry Applications</span>
@@ -682,7 +646,7 @@ const SAPProductsInfo = () => {
             </div>
             
             <div className="rounded-lg p-4 sm:p-8 text-center break-words group bg-white border border-red-200 shadow-sm learning-highlight">
-              <div className="w-16 h-16 bg-red-500 rounded-full flex items-center justify-center mx-auto mb-6 transition-transform duration-300 group-hover:scale-110 group-hover:bg-red-600">
+              <div className="w-16 h-16 bg-red-500 rounded-full flex items-center justify-center mx-auto mb-6 transition-transform duration-300 group-hover:bg-red-600">
                 <Award className="w-8 h-8 text-white insight-pulse" />
               </div>
               <h3 className="text-xl font-semibold mb-4 text-red-600">Proof of Concept</h3>
