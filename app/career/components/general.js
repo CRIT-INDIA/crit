@@ -100,8 +100,8 @@ const CareerPage = () => {
   }, []);
 
   const sapCareerInfo = {
-    title: "SAP Career Opportunities at Connecting Roots IT",
-    description: "Going beyond work, Life at Connecting Roots IT is brimming with a dynamic and fun environment; one where people not only ace at their field of expertise but also give meaning to their passion.\n\n  We provide opportunities for you to grow and excel in your career and beyond. Along with creating an impact on technology, you also have the chance to unleash your full potential at every stage of your career. Our expertise spans SAP implementation, customization, and comprehensive consulting services, ensuring our clients achieve maximum value from their SAP investments. ",
+    title: "SAP Career Opportunities at Connecting Roots",
+    description: "Going beyond work, Life at Connecting Roots is brimming with a dynamic and fun environment; one where people not only ace at their field of expertise but also give meaning to their passion.\n\n  We provide opportunities for you to grow and excel in your career and beyond. Along with creating an impact on technology, you also have the chance to unleash your full potential at every stage of your career. Our expertise spans SAP implementation, customization, and comprehensive consulting services, ensuring our clients achieve maximum value from their SAP investments. ",
     requirements: [
       "Strong technical background in SAP technologies",
       "Excellent communication and problem-solving skills",
@@ -111,7 +111,7 @@ const CareerPage = () => {
       "SAP certifications are preferred"
     ]
   };
-
+   
   const handleLearnMore = (job) => {
     setSelectedJob(job);
     setShowModal(true);
@@ -176,7 +176,7 @@ const CareerPage = () => {
   };
 
   return (
-    <div className="min-h-* p-2 sm:p-4 md:p-6">
+    <div className="min-h-screen p-2 sm:p-4 md:p-6">
       {/* Hero Section */}
       <section className="relative w-full h-[400px] sm:h-[450px] md:h-[500px] px-2 sm:px-4 py-6 pt-20">
         
@@ -214,7 +214,7 @@ const CareerPage = () => {
                 Looking for the Best IT Job?
               </h2>
               <p className="text-base md:text-lg mb-4 text-gray-400 max-w-2xl mx-auto leading-relaxed">
-                Join a team that thrives on innovation, creativity, and collaboration. At Connecting Roots, we empower individuals to grow while building solutions that make an impact. Discover your next big opportunity today!
+                Join a team that thrives on innovation, creativity, and collaboration. At CRIT, we empower individuals to grow while building solutions that make an impact. Discover your next big opportunity today!
               </p>
               
             </div>
@@ -230,10 +230,10 @@ const CareerPage = () => {
             <div className="text-center mb-8">
               <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
                 {sapCareerInfo.title}
-                <svg className="mx-auto my-0" style={{marginTop: '-4px'}} width="290" height="24" viewBox="0 0 180 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M10 18 Q 70 8, 170 14" stroke="#FFD700" strokeWidth="4" strokeLinecap="round" fill="none"/>
-              <path d="M25 21 Q 100 15, 160 18" stroke="#FFD700" strokeWidth="2" strokeLinecap="round" fill="none"/>
-            </svg>
+              <svg className="mx-auto my-0" style={{marginTop: '-4px'}} width="160" height="18" viewBox="0 0 220 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5 18 Q 110 8, 215 14" stroke="#FFD700" strokeWidth="4" strokeLinecap="round" fill="none"/>
+                <path d="M15 21 Q 120 15, 200 18" stroke="#FFD700" strokeWidth="2" strokeLinecap="round" fill="none"/>
+              </svg>
               </h2>
               <p className="text-lg text-gray-700 max-w-3xl mx-auto leading-relaxed">
                 {sapCareerInfo.description}
@@ -317,7 +317,7 @@ const CareerPage = () => {
                   <div className="w-16 h-16 rounded-lg flex items-center justify-center overflow-hidden">
                     <img
                       src="https://res.cloudinary.com/dujw4np0d/image/upload/v1753342468/CRIT-3D_cpzr1n_ggj84n.avif"
-                      alt="Connecting Roots IT Logo"
+                      alt="CRIT Logo"
                       className="w-full h-full object-cover"
                     />
                   </div>
@@ -427,9 +427,9 @@ const CareerPage = () => {
           <div className="text-center mb-8 sm:mb-12">
             <h2 className="text-black text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6 relative inline-block">
               Stay Ahead of Opportunities
-            <svg className="mx-auto my-0" style={{marginTop: '-6px'}} width="160" height="18" viewBox="0 0 220 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M5 18 Q 110 8, 215 14" stroke="#FFD700" strokeWidth="4" strokeLinecap="round" fill="none"/>
-              <path d="M15 21 Q 120 15, 200 18" stroke="#FFD700" strokeWidth="2" strokeLinecap="round" fill="none"/>
+            <svg className="mx-auto my-0" style={{marginTop: '-3px'}} width="160" height="18" viewBox="0 0 220 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5 18 Q 110 8, 215 14" stroke="#FFD700" strokeWidth="4" strokeLinecap="round" fill="none"/>
+                <path d="M15 21 Q 120 15, 200 18" stroke="#FFD700" strokeWidth="2" strokeLinecap="round" fill="none"/>
             </svg>
             </h2>
             <p className="text-gray-700 text-base sm:text-lg max-w-3xl mx-auto">
